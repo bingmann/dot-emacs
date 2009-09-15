@@ -28,6 +28,13 @@
 
 (global-set-key "\M-g" 'goto-line)
 
+; set keys f9-f12 to insert german umlauts and sz
+(load-library "iso-insert")
+(global-set-key (kbd "<f9>") 'insert-a-umlaut)
+(global-set-key (kbd "<f10>") 'insert-o-umlaut)
+(global-set-key (kbd "<f11>") 'insert-u-umlaut)
+(global-set-key (kbd "<f12>") 'insert-ss)
+
 ;; -----------------------------------
 ;; --- Load some custom extensions ---
 ;; -----------------------------------
@@ -43,9 +50,21 @@
 (add-to-list 'auto-mode-alist '("\\.ily$" . LilyPond-mode))
 (add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
 
+;; --- autoload actionscript mode ---
+
+(autoload 'actionscript-mode "actionscript-mode-connors" "ActionScript Mode" t)
+(add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
+
+;; --- autoload template toolkit mode ---
+
+(autoload 'tt-mode "tt-mode" "Template Toolkit Mode" t)
+
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
+
+; cperl-mode is preferred to perl-mode
+(defalias 'perl-mode 'cperl-mode)
 
 ; special web site scripts
 (add-to-list 'auto-mode-alist '("\\.htt\\'" . html-mode))
