@@ -28,10 +28,13 @@
 
 (global-set-key "\M-g" 'goto-line)
 
-; set keys f9-f12 to insert german umlauts and sz
+; set keys f9-f12 to insert German umlauts and sz
 (load-library "iso-insert")
+(global-set-key (kbd "<S-f9>") 'insert-A-umlaut)
 (global-set-key (kbd "<f9>") 'insert-a-umlaut)
+(global-set-key (kbd "<S-f10>") 'insert-O-umlaut)
 (global-set-key (kbd "<f10>") 'insert-o-umlaut)
+(global-set-key (kbd "<S-f11>") 'insert-U-umlaut)
 (global-set-key (kbd "<f11>") 'insert-u-umlaut)
 (global-set-key (kbd "<f12>") 'insert-ss)
 
