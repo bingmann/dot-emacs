@@ -1,3 +1,3 @@
 #!/bin/sh
 
-emacs -batch -l ~/.emacs -f batch-byte-compile $@
+exec emacs -batch -f batch-byte-compile $@
