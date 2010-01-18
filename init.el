@@ -85,6 +85,9 @@
 ; hook for cperl-mode to automatically set my default style
 (add-hook 'cperl-mode-hook (lambda () (cperl-set-style "C++")))
 
+; "filename [mode]" in title bar
+(setq frame-title-format '("%f [mode: %m]"))
+
 ;; --------------------------------
 ;; --- Some custom key bindings ---
 ;; --------------------------------
@@ -106,7 +109,10 @@
 	  (lambda ()
 	    (local-set-key "\C-\M-z" (lambda () (interactive) (insert "\\mathbb{Z}")))
 	    (local-set-key "\C-\M-n" (lambda () (interactive) (insert "\\mathbb{N}")))
+	    (local-set-key "\C-\M-q" (lambda () (interactive) (insert "\\mathbb{Q}")))
+	    (local-set-key "\C-\M-f" (lambda () (interactive) (insert "\\mathbb{F}")))
 	    (local-set-key "\C-\M-r" (lambda () (interactive) (insert "\\mathbb{R}")))
+	    (local-set-key "\C-\M-c" (lambda () (interactive) (insert "\\mathbb{C}")))
 	    ))
 
 ;; ---------------------------
