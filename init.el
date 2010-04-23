@@ -95,14 +95,13 @@
 (global-set-key "\M-g" 'goto-line)
 
 ; set keys f9-f12 to insert German umlauts and sz
-(load-library "iso-insert")
-(global-set-key (kbd "<S-f9>") 'insert-A-umlaut)
-(global-set-key (kbd "<f9>") 'insert-a-umlaut)
-(global-set-key (kbd "<S-f10>") 'insert-O-umlaut)
-(global-set-key (kbd "<f10>") 'insert-o-umlaut)
-(global-set-key (kbd "<S-f11>") 'insert-U-umlaut)
-(global-set-key (kbd "<f11>") 'insert-u-umlaut)
-(global-set-key (kbd "<f12>") 'insert-ss)
+(global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
+(global-set-key (kbd "<S-f9>") (lambda() (interactive) (insert ?\Ä)))
+(global-set-key (kbd "<f10>") (lambda() (interactive) (insert ?\ö)))
+(global-set-key (kbd "<S-f10>") (lambda() (interactive) (insert ?\Ö)))
+(global-set-key (kbd "<f11>") (lambda() (interactive) (insert ?\ü)))
+(global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
+(global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
 
 ; special bindings for latex quickies
 (add-hook 'latex-mode-hook
@@ -112,6 +111,7 @@
 	    (local-set-key "\C-\M-q" (lambda () (interactive) (insert "\\mathbb{Q}")))
 	    (local-set-key "\C-\M-f" (lambda () (interactive) (insert "\\mathbb{F}")))
 	    (local-set-key "\C-\M-r" (lambda () (interactive) (insert "\\mathbb{R}")))
+	    (local-set-key "\C-\M-k" (lambda () (interactive) (insert "\\mathbb{K}")))
 	    (local-set-key "\C-\M-c" (lambda () (interactive) (insert "\\mathbb{C}")))
 	    ))
 
@@ -119,7 +119,7 @@
 ;; --- CEDET Configuration ---
 ;; ---------------------------
 
-(load "/usr/share/emacs/site-lisp/cedet/common/cedet" nil t)
+;(load "/usr/share/emacs/site-lisp/cedet/common/cedet" nil t)
 (add-to-list 'image-load-path "/usr/share/emacs/etc/cedet/common/icons" t)
 
 (global-ede-mode 1)
