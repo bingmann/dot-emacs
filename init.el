@@ -24,7 +24,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 122 :width normal :foundry "misc" :family "fixed"))))
+ '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 117 :width normal :foundry "Misc" :family "Fixed"))))
  '(cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
  '(cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
  '(semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0")))))
@@ -58,6 +58,10 @@
 
 (autoload 'tt-mode "tt-mode" "Template Toolkit Mode" t)
 
+;; --- autoload protocol buffers mode ---
+
+(autoload 'protobuf-mode "protobuf-mode" "Protocol Buffers Mode" t)
+
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
@@ -77,6 +81,9 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tcc\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.dox\\'" . c++-mode))
+
+; protocol buffer files
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
 ;; -----------------------------
 ;; --- General Customization ---
