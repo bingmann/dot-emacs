@@ -17,6 +17,8 @@
  '(make-backup-files nil)
  '(scroll-bar-mode (quote right))
  '(size-indication-mode t)
+ '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
+ '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(vc-handled-backends nil))
 
 (custom-set-faces
@@ -25,9 +27,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 117 :width normal :foundry "Misc" :family "Fixed"))))
- '(cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
- '(cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
- '(semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0")))))
+)
 
 ;; -----------------------------------
 ;; --- Load some custom extensions ---
@@ -42,6 +42,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
 (add-to-list 'auto-mode-alist '("\\.ily$" . LilyPond-mode))
+(add-to-list 'auto-mode-alist '("\\.lytex$" . latex-mode))
 (add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
 
 ;; --- autoload actionscript mode ---
@@ -95,6 +96,34 @@
 ; "filename [mode]" in title bar
 (setq frame-title-format '("%f [mode: %m]"))
 
+(require 'color-theme)
+
+(defun color-theme-tb-dark ()
+  "Dark color theme created by Timo, Aug 2010"
+  (interactive)
+  (color-theme-install
+   '(color-theme-tb-dark
+     ((foreground-color . "white")
+      (background-color . "black") 
+      (background-mode . dark))
+     (default ((t (:height 117 :width normal :foundry "Misc" :family "Fixed"))))
+     (bold ((t (:bold t))))
+     (bold-italic ((t (:italic t :bold t))))
+
+     ; override some unbareable defaults with dark background
+     (cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
+     (cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
+     (semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0"))))
+
+     ; dark mode-line
+     (hl-line ((t (:background "#112233"))))
+     (mode-line ((t (:foreground "#ffffff" :background "#333333"))))
+     )
+   )
+  )
+
+(color-theme-tb-dark)
+
 ;; --------------------------------
 ;; --- Some custom key bindings ---
 ;; --------------------------------
@@ -110,6 +139,33 @@
 (global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
 (global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
 
+; bind Backspace and Delete keys with M- and C- to special kill functions
+
+(defun dove-backward-kill-word (&optional arg)
+  "Backward kill word, but do not insert it into kill-ring"
+  (interactive "P")
+  (let (( end (point) )
+	( beg (progn (backward-word arg) (point)))
+	)
+    (delete-region beg end)
+    )
+  )
+
+(defun dove-forward-kill-word (&optional arg)
+  "Backward kill word, but do not insert it into kill-ring"
+  (interactive "P")
+  (let (( beg (point) )
+	( end (progn (forward-word arg) (point)))
+	)
+    (delete-region beg end)
+    )
+  )
+
+(global-set-key [(meta backspace)] 'backward-kill-word)
+(global-set-key [(control backspace)] 'dove-backward-kill-word)
+(global-set-key [(meta delete)] 'kill-word)
+(global-set-key [(control delete)] 'dove-forward-kill-word)
+
 ; special bindings for latex quickies
 (add-hook 'latex-mode-hook
 	  (lambda ()
@@ -120,14 +176,23 @@
 	    (local-set-key "\C-\M-r" (lambda () (interactive) (insert "\\mathbb{R}")))
 	    (local-set-key "\C-\M-k" (lambda () (interactive) (insert "\\mathbb{K}")))
 	    (local-set-key "\C-\M-c" (lambda () (interactive) (insert "\\mathbb{C}")))
+	    (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
+	    (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
 	    ))
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
 ;; ---------------------------
 
-;(load "/usr/share/emacs/site-lisp/cedet/common/cedet" nil t)
-(add-to-list 'image-load-path "/usr/share/emacs/etc/cedet/common/icons" t)
+(defun list-all-subfolders (folder)
+  (let ((folder-list (list folder)))
+    (dolist (subfolder (directory-files folder))
+      (let ((name (concat folder "/" subfolder)))
+	(when (and (file-directory-p name)
+		   (not (equal subfolder ".."))
+		   (not (equal subfolder ".")))
+	  (set 'folder-list (append folder-list (list name))))))
+    folder-list))
 
 (global-ede-mode 1)
 (semantic-load-enable-excessive-code-helpers)
@@ -141,27 +206,35 @@
 (semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/" 'c++-mode)
 (semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/g++-v4/" 'c++-mode)
 
-(defun list-all-subfolders (folder)
-  (let ((folder-list (list folder)))
-    (dolist (subfolder (directory-files folder))
-      (let ((name (concat folder "/" subfolder)))
-	(when (and (file-directory-p name)
-		   (not (equal subfolder ".."))
-		   (not (equal subfolder ".")))
-	  (set 'folder-list (append folder-list (list name))))))
-    folder-list))
-
 (setq qt4-base-dir "/usr/include/qt4/")
 (dolist (folder (list-all-subfolders qt4-base-dir))
   (semantic-add-system-include folder 'c++-mode)
   (add-to-list 'auto-mode-alist (cons folder 'c++-mode)))
+(semanticdb-enable-gnu-global-databases 'c++-mode)
+(semanticdb-enable-gnu-global-databases 'c-mode)
+
+(defun semantic-symref-no-prompt ()
+  "Copy of semantic-symref without prompt"
+  (interactive)
+  (require 'semantic/symref/list)
+  (semantic-fetch-tags)
+  (let ((ct (semantic-current-tag))
+	(res nil)
+	)
+    (when (not ct) (error "Place cursor inside tag to be searched for"))
+    (message "Gathering References...")
+    (setq res (semantic-symref-find-references-by-name (semantic-tag-name ct)))
+    (semantic-symref-produce-list-on-results res (semantic-tag-name ct)))
+  )
 
 (add-hook 'c-mode-common-hook
 	  (lambda ()
 	    (local-set-key [(control return)] 'semantic-ia-complete-symbol)
 	    (local-set-key [(meta return)] 'semantic-ia-complete-symbol-menu)
+	    (local-set-key "\C-c<" 'semantic-ia-fast-jump)
 	    (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
 	    (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+	    (local-set-key "\C-c?" 'semantic-symref-no-prompt)
 	    ))
 
 ;; -----------------------------------------
@@ -199,4 +272,3 @@
         (t
          (setq toggle-ispell-english-deutsch t)
          (ispell-set-english))))
-
