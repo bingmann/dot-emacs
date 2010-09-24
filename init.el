@@ -10,15 +10,17 @@
  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "k&r"))))
  '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
  '(c-tab-always-indent nil)
+ '(column-number-mode t)
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
+ '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
  '(scroll-bar-mode (quote right))
+ '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
- '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(vc-handled-backends nil))
 
 (custom-set-faces
@@ -27,7 +29,9 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 117 :width normal :foundry "Misc" :family "Fixed"))))
-)
+ '(font-latex-sectioning-5-face ((((class color) (background dark)) (:foreground "#00c000"))))
+ '(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold))))
+ '(font-latex-warning-face ((((class color) (background dark)) (:foreground "#c00000")))))
 
 ;; -----------------------------------
 ;; --- Load some custom extensions ---
@@ -90,12 +94,23 @@
 ;; --- General Customization ---
 ;; -----------------------------
 
-; hook for cperl-mode to automatically set my default style
+; turn on paren matching
+(show-paren-mode t)
+(setq show-paren-style 'mixed)
+
+; disable toolbar
+(tool-bar-mode -1)
+
+; make all "yes or no" prompts show "y or n" instead
+(fset 'yes-or-no-p 'y-or-n-p)
+
+; hook for cperl-mode to automatically set my favorite style
 (add-hook 'cperl-mode-hook (lambda () (cperl-set-style "C++")))
 
 ; "filename [mode]" in title bar
-(setq frame-title-format '("%f [mode: %m]"))
+(setq frame-title-format '("%f [mode: %m] @ " (getenv "HOSTNAME")))
 
+; nice new color-theme package
 (require 'color-theme)
 
 (defun color-theme-tb-dark ()
@@ -118,11 +133,21 @@
      ; dark mode-line
      (hl-line ((t (:background "#112233"))))
      (mode-line ((t (:foreground "#ffffff" :background "#333333"))))
+     (show-paren-match-face ((t (:foreground "#0090FF" :background "black"))))
+     (show-paren-mismatch-face ((t (:foreground "white" :background "purple"))))
      )
    )
   )
 
 (color-theme-tb-dark)
+
+; kills all them buffers except scratch.
+(defun nuke-all-buffers ()
+  "kill all buffers, leaving *scratch* only"
+  (interactive)
+  (mapcar (lambda (x) (kill-buffer x))
+	  (buffer-list))
+  (delete-other-windows))
 
 ;; --------------------------------
 ;; --- Some custom key bindings ---
@@ -138,6 +163,10 @@
 (global-set-key (kbd "<f11>") (lambda() (interactive) (insert ?\ü)))
 (global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
 (global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
+
+; go to last edit point
+(require 'goto-last-change)
+(global-set-key [(meta l)] 'goto-last-change);
 
 ; bind Backspace and Delete keys with M- and C- to special kill functions
 
@@ -167,18 +196,24 @@
 (global-set-key [(control delete)] 'dove-forward-kill-word)
 
 ; special bindings for latex quickies
-(add-hook 'latex-mode-hook
-	  (lambda ()
-	    (local-set-key "\C-\M-z" (lambda () (interactive) (insert "\\mathbb{Z}")))
-	    (local-set-key "\C-\M-n" (lambda () (interactive) (insert "\\mathbb{N}")))
-	    (local-set-key "\C-\M-q" (lambda () (interactive) (insert "\\mathbb{Q}")))
-	    (local-set-key "\C-\M-f" (lambda () (interactive) (insert "\\mathbb{F}")))
-	    (local-set-key "\C-\M-r" (lambda () (interactive) (insert "\\mathbb{R}")))
-	    (local-set-key "\C-\M-k" (lambda () (interactive) (insert "\\mathbb{K}")))
-	    (local-set-key "\C-\M-c" (lambda () (interactive) (insert "\\mathbb{C}")))
-	    (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
-	    (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
-	    ))
+
+(defun my-latex-key-bindings ()
+  "Add some latex macro keys"
+  (interactive)
+  (local-set-key "\C-\M-z" (lambda () (interactive) (insert "\\mathbb{Z}")))
+  (local-set-key "\C-\M-n" (lambda () (interactive) (insert "\\mathbb{N}")))
+  (local-set-key "\C-\M-q" (lambda () (interactive) (insert "\\mathbb{Q}")))
+  (local-set-key "\C-\M-f" (lambda () (interactive) (insert "\\mathbb{F}")))
+  (local-set-key "\C-\M-r" (lambda () (interactive) (insert "\\mathbb{R}")))
+  (local-set-key "\C-b" (lambda () (interactive) (insert "\\mathbb{")))
+  (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
+  (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
+)
+
+(add-hook 'tex-mode-hook 'my-latex-key-bindings)
+(add-hook 'latex-mode-hook 'my-latex-key-bindings)
+(add-hook 'TeX-mode-hook 'my-latex-key-bindings)
+(add-hook 'LaTeX-mode-hook 'my-latex-key-bindings)
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
