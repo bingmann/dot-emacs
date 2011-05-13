@@ -165,7 +165,10 @@
    '(color-theme-tb-dark
      ((foreground-color . "white")
       (background-color . "black") 
-      (background-mode . dark))
+      (background-mode . dark)
+      (cursor-color . "palegoldenrod")
+      (mouse-color . "white")
+     )
      (default ((t (:height 117 :width normal :foundry "Misc" :family "Fixed"))))
      (bold ((t (:bold t))))
      (bold-italic ((t (:italic t :bold t))))
