@@ -11,6 +11,8 @@
  '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
+ '(cperl-extra-newline-before-brace nil)
+ '(cperl-extra-newline-before-brace-multiline nil)
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(font-latex-fontify-sectioning 1.0)
@@ -66,6 +68,49 @@
 ;; --- autoload protocol buffers mode ---
 
 (autoload 'protobuf-mode "protobuf-mode" "Protocol Buffers Mode" t)
+
+;; --- autoload auto-dictionary-mode ---
+
+(autoload 'auto-dictionary-mode "auto-dictionary" "Flyspell Dictionary Guesser" t)
+
+;; --- autoload mediawiki editing mode ---
+
+(add-to-list 'load-path "~/.emacs.d/mediawiki-el/")
+(autoload 'mediawiki-site "mediawiki" "MediaWikiMode" t)
+(autoload 'mediawiki-open "mediawiki" "MediaWikiMode" t)
+
+(add-hook 'mediawiki-mode-hook (lambda ()
+				 (flyspell-mode)
+				 (auto-dictionary-mode)
+				 ))
+
+(add-hook 'outline-minor-mode-hook (lambda ()
+				     (local-unset-key [(meta left)])
+				     (local-unset-key [(meta right)])
+				     (local-unset-key [(control left)])
+				     (local-unset-key [(control right)])
+				     (local-unset-key [(control up)])
+				     (local-unset-key [(control down)])
+				     ))
+
+;; --- autoload pmwiki editing mode ---
+
+(autoload 'pmwiki-open "pmwiki-mode" "PmWikiMode" t)
+
+(setq pmwiki-main-wiki-base-uri
+      "http://localhost:100/pmwiki.php")
+(setq pmwiki-main-homepage-uri
+      (concat pmwiki-main-wiki-base-uri "?n=Main.HomePage"))
+
+(set 'pmwiki-author "Timo")
+
+(defvar pmwiki-mode-hooks)
+(add-hook 'pmwiki-mode-hooks 'turn-off-auto-fill)
+
+(add-hook 'pmwiki-mode-hooks
+	  'pmwiki-delayed-hook-longlines-mode-showing-hard-newlines)
+
+(add-hook 'pmwiki-save-before-hooks 'longlines-mode-off)
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
@@ -166,7 +211,7 @@
 
 ; go to last edit point
 (require 'goto-last-change)
-(global-set-key [(meta l)] 'goto-last-change);
+(global-set-key [(ctrl meta l)] 'goto-last-change);
 
 ; bind Backspace and Delete keys with M- and C- to special kill functions
 
@@ -202,9 +247,11 @@
   (interactive)
   (local-set-key "\C-\M-z" (lambda () (interactive) (insert "\\mathbb{Z}")))
   (local-set-key "\C-\M-n" (lambda () (interactive) (insert "\\mathbb{N}")))
+  (local-set-key (kbd "C-M-S-n") (lambda () (interactive) (insert "\\!{}_1\\mathbb{N}_")))
   (local-set-key "\C-\M-q" (lambda () (interactive) (insert "\\mathbb{Q}")))
   (local-set-key "\C-\M-f" (lambda () (interactive) (insert "\\mathbb{F}")))
   (local-set-key "\C-\M-r" (lambda () (interactive) (insert "\\mathbb{R}")))
+  (local-set-key "\C-\M-c" (lambda () (interactive) (insert "\\mathbb{C}")))
   (local-set-key "\C-b" (lambda () (interactive) (insert "\\mathbb{")))
   (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
   (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
