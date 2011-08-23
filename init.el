@@ -279,6 +279,7 @@
 	  (set 'folder-list (append folder-list (list name))))))
     folder-list))
 
+(load-file "~/.emacs.d/cedet-1.0/common/cedet.el")
 (global-ede-mode 1)
 (semantic-load-enable-excessive-code-helpers)
 
@@ -320,6 +321,7 @@
 	    (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
 	    (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
 	    (local-set-key "\C-c?" 'semantic-symref-no-prompt)
+	    (local-set-key "\C-cr" 'semantic-symref-rename-local-variable)
 	    ))
 
 ;; -----------------------------------------
@@ -332,17 +334,17 @@
 (defun ispell-set-deutsch ()
   "switch ispell language to deutsch"
   (interactive)
-  (ispell-change-dictionary "deutsch8"))
+  (ispell-change-dictionary "de_DE"))
 
 (defun ispell-set-english ()
   "switch ispell language to english"
   (interactive)
-  (ispell-change-dictionary "american"))
+  (ispell-change-dictionary "en_US"))
 
 (defun ispell-set-british ()
   "switch ispell language to british"
   (interactive)
-  (ispell-change-dictionary "british"))
+  (ispell-change-dictionary "en_GB"))
 
 (defvar toggle-ispell-english-deutsch t
   "state of english/deutsch8 toggle. t means english, nil means deutsch8")
@@ -357,3 +359,24 @@
         (t
          (setq toggle-ispell-english-deutsch t)
          (ispell-set-english))))
+
+;; ------------------------------------------
+;; --- Tools for compilation within emacs ---
+;; ------------------------------------------
+
+(global-set-key [(control c) (c)] 'compile-again)
+
+(setq compilation-last-buffer nil)
+(defun compile-again (pfx)
+  """Run the same compile as the last time.
+
+If there was no last time, or there is a prefix argument, this acts like
+M-x compile.
+"""
+(interactive "p")
+(if (and (eq pfx 1)
+	 compilation-last-buffer)
+    (progn
+      (set-buffer compilation-last-buffer)
+      (revert-buffer t t))
+  (call-interactively 'compile)))
