@@ -279,7 +279,9 @@
 	  (set 'folder-list (append folder-list (list name))))))
     folder-list))
 
-(load-file "~/.emacs.d/cedet-1.0/common/cedet.el")
+(unless (featurep 'cedet)
+  (load-file "~/.emacs.d/cedet-1.0/common/cedet.el")
+)
 (global-ede-mode 1)
 (semantic-load-enable-excessive-code-helpers)
 
