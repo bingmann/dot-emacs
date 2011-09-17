@@ -796,7 +796,7 @@ Interactive functions:
   (set 'TeX-trailer-start "^[^%\n]*\\\\end *{document}")
   (set 'TeX-master (concat pmwiki-TeX-master-directory
 			   pmwiki-TeX-master-file))
-  (cd pmwiki-TeX-master-directory)
+  ;(cd pmwiki-TeX-master-directory)
   (unless pmwiki-not-pmwiki-mode-buffer
     (run-hooks 'pmwiki-mode-hooks)))
 

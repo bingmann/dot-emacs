@@ -106,11 +106,21 @@
 
 (defvar pmwiki-mode-hooks)
 (add-hook 'pmwiki-mode-hooks 'turn-off-auto-fill)
+(add-hook 'pmwiki-mode-hooks 'visual-line-mode)
 
-(add-hook 'pmwiki-mode-hooks
-	  'pmwiki-delayed-hook-longlines-mode-showing-hard-newlines)
+(defun pmwiki-decode-utf8 ()
+  "Decode the utf-8 characters in the retrieved buffer text."
+  (decode-coding-region (point-min) (point-max) 'utf-8))
 
-(add-hook 'pmwiki-save-before-hooks 'longlines-mode-off)
+(set 'pmwiki-decode 'pmwiki-decode-utf8)
+
+(add-hook 'pmwiki-mode-hook (lambda ()
+			      (flyspell-mode)
+			      (auto-dictionary-mode)
+			      (local-set-key (kbd "C-x C-s") 'pmwiki-save)
+			      (local-set-key (kbd "C-<return>") 'pmwiki-follow)
+			      )
+	  )
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
