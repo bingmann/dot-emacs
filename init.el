@@ -98,9 +98,9 @@
 (autoload 'pmwiki-open "pmwiki-mode" "PmWikiMode" t)
 
 (setq pmwiki-main-wiki-base-uri
-      "http://localhost:100/pmwiki.php")
+      "http://taekwondo-wiki.de/")
 (setq pmwiki-main-homepage-uri
-      (concat pmwiki-main-wiki-base-uri "?n=Main.HomePage"))
+      (concat pmwiki-main-wiki-base-uri "Main/HomePage"))
 
 (set 'pmwiki-author "Timo")
 
