@@ -1,18 +1,18 @@
 ;;; mediawiki.el --- mediawiki frontend
 
-;; Copyright (C) 2008, 2009, 2010 Mark A. Hershberger
+;; Copyright (C) 2008, 2009, 2010, 2011 Mark A. Hershberger
 
 ;; Original Authors: Jerry <unidevel@yahoo.com.cn>,
 ;;      Chong Yidong <cyd at stupidchicken com> for wikipedia.el,
 ;;      Uwe Brauer <oub at mat.ucm.es> for wikimedia.el
 ;; Author: Mark A. Hershberger <mah@everybody.org>
-;; Version: 2.2.2
+;; Version: 2.2.3
 ;; Created: Sep 17 2004
 ;; Keywords: mediawiki wikipedia network wiki
 ;; URL: http://launchpad.net/mediawiki-el
-;; Last Modified: <2010-11-25 03:23:26 mah>
+;; Last Modified: <2011-09-05 11:59:55 mah>
 
-(defconst mediawiki-version "2.2.2"
+(defconst mediawiki-version "2.2.3"
   "Current version of mediawiki.el")
 
 ;; This file is NOT (yet) part of GNU Emacs.
@@ -503,6 +503,9 @@ be used to to open the whole buffer."
   :type 'hook
   :group 'mediawiki)
 
+(defvar mediawiki-page-history '()
+  "Assoc list of visited pages on this MW site.")
+
 (defvar mediawiki-enumerate-with-terminate-paragraph nil
 "*Before insert enumerate/itemize do \\[mediawiki-terminate-paragraph].")
 
@@ -872,7 +875,9 @@ the base URI of the wiki engine as well as group and page name.")
 (defun mediawiki-translate-pagename (name)
   "Given NAME, returns the typical name that MediaWiki would use.
 Right now, this only means replacing \"_\" with \" \"."
-  (mapconcat 'identity (split-string name "_" t) " "))
+  (if (not name)
+      "Main Page"
+    (mapconcat 'identity (split-string name "_" t) " ")))
 
 (defun mediawiki-make-api-url (&optional sitename)
   (format (concat (mediawiki-site-url (or sitename mediawiki-site))
@@ -918,7 +923,9 @@ Right now, this only means replacing \"_\" with \" \"."
 
 (defun mediawiki-open (name)
   "Open a wiki page specified by NAME from the mediawiki engine"
-  (interactive "sWiki Page: ")
+  (interactive
+   (let ((hist (cdr (assoc-string mediawiki-site mediawiki-page-history))))
+     (list (read-string "Wiki Page: " nil 'hist))))
   (when (or (not (stringp name))
             (string-equal "" name))
     (error "Need to specify a name"))
@@ -931,14 +938,25 @@ Right now, this only means replacing \"_\" with \" \"."
 	(mediawiki-open title)
       (error "Error: %s is not a mediawiki document" (buffer-name)))))
 
+(defun mediawiki-add-page-history (site title)
+  (let ((hist (cdr (assoc-string site mediawiki-page-history))))
+    (unless hist
+      (add-to-list 'mediawiki-page-history (cons site "")))
+    (setcdr (assoc-string site mediawiki-page-history) (append (list title) hist))))
+
 (defun mediawiki-edit (site title)
   "Edit wiki file with the name of title"
   (when (not (ring-p mediawiki-page-ring))
     (setq mediawiki-page-ring (make-ring 30)))
 
   (let ((pagetitle (mediawiki-translate-pagename title)))
+
+    (mediawiki-add-page-history site title)
     (with-current-buffer (get-buffer-create
                           (concat site ": " pagetitle))
+      (unless (mediawiki-logged-in-p site)
+        (mediawiki-do-login site)
+        (setq mediawiki-site site))
       (ring-insert mediawiki-page-ring (current-buffer))
       (delete-region (point-min) (point-max))
       (mediawiki-mode)
@@ -950,7 +968,8 @@ Right now, this only means replacing \"_\" with \" \"."
       (buffer-enable-undo)
       (mediawiki-pop-to-buffer (current-buffer))
       (setq mediawiki-page-title pagetitle)
-      (goto-char (point-min)))))
+      (goto-char (point-min))
+      (current-buffer))))
 
 (defun mediawiki-get-edit-form-vars (str bufname)
   "Extract the form variables from a page.  This should only be
@@ -1009,9 +1028,14 @@ there will be local to that buffer."
                form start)))
       vars)))
 
-(defun mediawiki-logged-in-p ()
-  "Returns t if we are logged in already."
-  (not (eq nil mediawiki-site)))         ; FIXME should check cookies
+(defun mediawiki-logged-in-p (&optional site)
+  "Returns t if we are we have cookies for the site."
+  (let ((urlobj (url-generic-parse-url
+                 (mediawiki-site-url (or site mediawiki-site)))))
+    (url-cookie-retrieve
+     (url-host urlobj)
+     (url-filename urlobj)
+     nil))) ; FIXME need to say if it is secure
 
 (defun mediawiki-pop-to-buffer (bufname)
   "Pop to buffer and then execute a hook."
@@ -2060,8 +2084,8 @@ Some simple editing commands.
     (define-key mediawiki-mode-map "\C-\\" 'mediawiki-insert-itemize)
     (define-key mediawiki-mode-map [(control return)] 'mediawiki-insert-itemize)
     (define-key mediawiki-mode-map "\C-ca" 'auto-capitalize-mode)
-    (define-key mediawiki-mode-map "\C-ci" 'set-input-method)
-    (define-key mediawiki-mode-map "\C-ct" 'toggle-input-method)
+;    (define-key mediawiki-mode-map "\C-ci" 'set-input-method)
+;    (define-key mediawiki-mode-map "\C-ct" 'toggle-input-method)
 
     (define-key mediawiki-mode-map [(backtab)] 'mediawiki-goto-prev-link)
     (define-key mediawiki-mode-map [(tab)]     'mediawiki-goto-next-link)

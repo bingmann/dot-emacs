@@ -93,35 +93,6 @@
 				     (local-unset-key [(control down)])
 				     ))
 
-;; --- autoload pmwiki editing mode ---
-
-(autoload 'pmwiki-open "pmwiki-mode" "PmWikiMode" t)
-
-(setq pmwiki-main-wiki-base-uri
-      "http://localhost:100/pmwiki.php")
-(setq pmwiki-main-homepage-uri
-      (concat pmwiki-main-wiki-base-uri "?n=Main.HomePage"))
-
-(set 'pmwiki-author "Timo")
-
-(defvar pmwiki-mode-hooks)
-(add-hook 'pmwiki-mode-hooks 'turn-off-auto-fill)
-(add-hook 'pmwiki-mode-hooks 'visual-line-mode)
-
-(defun pmwiki-decode-utf8 ()
-  "Decode the utf-8 characters in the retrieved buffer text."
-  (decode-coding-region (point-min) (point-max) 'utf-8))
-
-(set 'pmwiki-decode 'pmwiki-decode-utf8)
-
-(add-hook 'pmwiki-mode-hook (lambda ()
-			      (flyspell-mode)
-			      (auto-dictionary-mode)
-			      (local-set-key (kbd "C-x C-s") 'pmwiki-save)
-			      (local-set-key (kbd "C-<return>") 'pmwiki-follow)
-			      )
-	  )
-
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
