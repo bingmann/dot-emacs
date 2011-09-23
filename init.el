@@ -239,12 +239,15 @@
   (local-set-key "\C-b" (lambda () (interactive) (insert "\\mathbb{")))
   (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
   (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
+  (turn-on-reftex)
 )
 
 (add-hook 'tex-mode-hook 'my-latex-key-bindings)
 (add-hook 'latex-mode-hook 'my-latex-key-bindings)
 (add-hook 'TeX-mode-hook 'my-latex-key-bindings)
 (add-hook 'LaTeX-mode-hook 'my-latex-key-bindings)
+
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
@@ -363,3 +366,4 @@ M-x compile.
       (set-buffer compilation-last-buffer)
       (revert-buffer t t))
   (call-interactively 'compile)))
+
