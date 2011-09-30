@@ -15,6 +15,7 @@
  '(cperl-extra-newline-before-brace-multiline nil)
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
+ '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(inhibit-startup-screen t)
@@ -92,6 +93,22 @@
 				     (local-unset-key [(control up)])
 				     (local-unset-key [(control down)])
 				     ))
+
+;; --- set up hunspell for flyspell-mode ---
+
+(setq ispell-program-name "/usr/bin/hunspell")
+
+(setq ispell-local-dictionary-alist
+      '((nil ; default
+	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
+	("en_US" ; Yankee English
+	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
+	("en_GB" ; British English
+         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
+	("de_DE"
+	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "[']" t ("-d" "de_DE_frami") nil utf-8)
+	)
+      )
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
@@ -309,42 +326,6 @@
 	    (local-set-key "\C-c?" 'semantic-symref-no-prompt)
 	    (local-set-key "\C-cr" 'semantic-symref-rename-local-variable)
 	    ))
-
-;; -----------------------------------------
-;; --- FlySpell fuer Deutsch und English ---
-;; -----------------------------------------
-
-(setq flyspell-issue-welcome-flag nil)
-(setq flyspell-default-dictionary "american")
-
-(defun ispell-set-deutsch ()
-  "switch ispell language to deutsch"
-  (interactive)
-  (ispell-change-dictionary "de_DE"))
-
-(defun ispell-set-english ()
-  "switch ispell language to english"
-  (interactive)
-  (ispell-change-dictionary "en_US"))
-
-(defun ispell-set-british ()
-  "switch ispell language to british"
-  (interactive)
-  (ispell-change-dictionary "en_GB"))
-
-(defvar toggle-ispell-english-deutsch t
-  "state of english/deutsch8 toggle. t means english, nil means deutsch8")
-(make-variable-buffer-local 'toggle-ispell-english-deutsch)
-
-(defun toggle-ispell-language ()
-  "Toggle ispell-language between english and deutsch8"
-  (interactive)
-  (cond (toggle-ispell-english-deutsch
-         (setq toggle-ispell-english-deutsch nil)
-         (ispell-set-deutsch))
-        (t
-         (setq toggle-ispell-english-deutsch t)
-         (ispell-set-english))))
 
 ;; ------------------------------------------
 ;; --- Tools for compilation within emacs ---
