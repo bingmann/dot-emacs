@@ -1,5 +1,3 @@
-;(require 'site-gentoo)
-
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -36,6 +34,15 @@
  '(font-latex-sectioning-5-face ((((class color) (background dark)) (:foreground "#00c000"))))
  '(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold))))
  '(font-latex-warning-face ((((class color) (background dark)) (:foreground "#c00000")))))
+
+;; ---------------------------------
+;; --- Distinction between hosts ---
+;; ---------------------------------
+
+(defun system-host-is-iti ()
+  "true if system host is at ITI"
+  (string-match "iti\.kit\.edu$" system-name)
+)
 
 ;; -----------------------------------
 ;; --- Load some custom extensions ---
@@ -100,12 +107,10 @@
 (setq ispell-program-name "/usr/bin/hunspell")
 
 (setq ispell-local-dictionary-alist
-      '((nil ; default
-	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
-	("en_US" ; Yankee English
+      '(("en_US" ; Yankee English
 	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
 	("en_GB" ; British English
-         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
+	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
 	("de_DE"
 	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "[']" t ("-d" "de_DE_frami") nil utf-8)
 	)
