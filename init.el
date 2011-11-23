@@ -112,7 +112,7 @@
 	("en_GB" ; British English
 	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
 	("de_DE"
-	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "[']" t ("-d" "de_DE_frami") nil utf-8)
+	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "[']" t ("-d" "de_DE") nil utf-8)
 	)
       )
 
@@ -263,14 +263,13 @@
   (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
   (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
   (turn-on-reftex)
+  (visual-line-mode 1)
 )
 
 (add-hook 'tex-mode-hook 'my-latex-key-bindings)
 (add-hook 'latex-mode-hook 'my-latex-key-bindings)
 (add-hook 'TeX-mode-hook 'my-latex-key-bindings)
 (add-hook 'LaTeX-mode-hook 'my-latex-key-bindings)
-
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
