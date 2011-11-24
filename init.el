@@ -271,6 +271,11 @@
 (add-hook 'TeX-mode-hook 'my-latex-key-bindings)
 (add-hook 'LaTeX-mode-hook 'my-latex-key-bindings)
 
+(require 'flymake)
+
+(defun flymake-get-tex-args (file-name)
+  (list "pdflatex" (list "-file-line-error" "-interaction=nonstopmode" file-name)))
+
 ;; ---------------------------
 ;; --- CEDET Configuration ---
 ;; ---------------------------
@@ -300,10 +305,10 @@
 (semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/" 'c++-mode)
 (semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/g++-v4/" 'c++-mode)
 
-(setq qt4-base-dir "/usr/include/qt4/")
-(dolist (folder (list-all-subfolders qt4-base-dir))
-  (semantic-add-system-include folder 'c++-mode)
-  (add-to-list 'auto-mode-alist (cons folder 'c++-mode)))
+;(setq qt4-base-dir "/usr/include/qt4/")
+;(dolist (folder (list-all-subfolders qt4-base-dir))
+;  (semantic-add-system-include folder 'c++-mode)
+;  (add-to-list 'auto-mode-alist (cons folder 'c++-mode)))
 (semanticdb-enable-gnu-global-databases 'c++-mode)
 (semanticdb-enable-gnu-global-databases 'c-mode)
 
