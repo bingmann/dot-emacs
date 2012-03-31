@@ -13,6 +13,7 @@
  '(cperl-extra-newline-before-brace-multiline nil)
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
+ '(flymake-no-changes-timeout 5)
  '(flyspell-issue-welcome-flag nil)
  '(flyspell-large-region nil)
  '(font-latex-fontify-sectioning 1.0)
@@ -274,7 +275,7 @@
 (require 'flymake)
 
 (defun flymake-get-tex-args (file-name)
-  (list "pdflatex" (list "-file-line-error" "-interaction=nonstopmode" file-name)))
+  (list "pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
