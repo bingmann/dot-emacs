@@ -90,8 +90,8 @@
 (autoload 'mediawiki-open "mediawiki" "MediaWikiMode" t)
 
 (add-hook 'mediawiki-mode-hook (lambda ()
-				 (flyspell-mode)
-				 (auto-dictionary-mode)
+				 (flyspell-mode 1)
+				 (auto-dictionary-mode 1)
 				 ))
 
 (add-hook 'outline-minor-mode-hook (lambda ()
@@ -116,6 +116,15 @@
 	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "[']" t ("-d" "de_DE") nil utf-8)
 	)
       )
+
+;; --- folding mode ---
+
+(autoload 'folding-mode          "folding" "Folding mode" t)
+(autoload 'turn-off-folding-mode "folding" "Folding mode" t)
+(autoload 'turn-on-folding-mode  "folding" "Folding mode" t)
+
+;(add-hook 'c-mode-hook (lambda () (folding-mode 1)))
+;(add-hook 'c++-mode-hook (lambda () (folding-mode 1)))
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
