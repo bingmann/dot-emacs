@@ -9,16 +9,17 @@
  '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
+ '(fill-column 80)
+ '(flymake-no-changes-timeout 5)
+ '(indent-tabs-mode nil)
  '(cperl-extra-newline-before-brace nil)
  '(cperl-extra-newline-before-brace-multiline nil)
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
- '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
  '(flyspell-large-region nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
- '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
  '(scroll-bar-mode (quote right))
@@ -35,7 +36,8 @@
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 117 :width normal :foundry "Misc" :family "Fixed"))))
  '(font-latex-sectioning-5-face ((((class color) (background dark)) (:foreground "#00c000"))))
  '(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold))))
- '(font-latex-warning-face ((((class color) (background dark)) (:foreground "#c00000")))))
+ '(font-latex-warning-face ((((class color) (background dark)) (:foreground "#c00000"))))
+ '(font-lock-warning-face ((((class color) (min-colors 88) (background dark)) (:foreground "Red" :weight bold)))))
 
 ;; ---------------------------------
 ;; --- Distinction between hosts ---
@@ -126,6 +128,21 @@
 
 ;(add-hook 'c-mode-hook (lambda () (folding-mode 1)))
 ;(add-hook 'c++-mode-hook (lambda () (folding-mode 1)))
+
+;; --- simple generic-mode for structures wiki notes ---
+
+(require 'generic-x)
+
+(define-generic-mode 'notes-mode
+  '("#")                            ; comments start with '#'
+  '()                               ; keywords
+  '(("^\\(Title\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'font-lock-warning-face))
+    ("^\\(.*\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'font-lock-variable-name-face))
+    )
+  '("\\.txw$")                        ;; files for which to activate this mode 
+  nil                                 ;; other functions to call
+  "A mode for structured wiki-like notes"
+)
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
