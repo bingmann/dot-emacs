@@ -9,7 +9,7 @@
  '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
- '(fill-column 80)
+ '(fill-column 79)
  '(flymake-no-changes-timeout 5)
  '(indent-tabs-mode nil)
  '(cperl-extra-newline-before-brace nil)
@@ -133,14 +133,18 @@
 
 (require 'generic-x)
 
+(defface my-title-text-face
+  '((t (:foreground "Cyan1" :weight bold)))
+  "My custom face for wiki note titles")
+
 (define-generic-mode 'notes-mode
   '("#")                            ; comments start with '#'
   '()                               ; keywords
-  '(("^\\(Title\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'font-lock-warning-face))
+  '(("^\\(Titel\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'my-title-text-face))
     ("^\\(.*\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'font-lock-variable-name-face))
     )
   '("\\.txw$")                        ;; files for which to activate this mode 
-  nil                                 ;; other functions to call
+  ()                                 ;; other functions to call
   "A mode for structured wiki-like notes"
 )
 
