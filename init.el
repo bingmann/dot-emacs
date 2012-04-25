@@ -323,7 +323,7 @@
     folder-list))
 
 (unless (featurep 'cedet)
-  (load-file "~/.emacs.d/cedet-1.0/common/cedet.el")
+  (load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
 )
 (global-ede-mode 1)
 (semantic-load-enable-excessive-code-helpers)
