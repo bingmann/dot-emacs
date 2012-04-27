@@ -151,7 +151,20 @@
 
 ;; --- autoload rebox2 mode ---
 
-(autoload 'rebox-mode "rebox2" "Rebox2 Mode Mode" t)
+(autoload 'rebox-mode "rebox2" "Rebox2 Mode" t)
+
+;; --- autoload dokuwiki editing mode ---
+
+(global-unset-key [(control v)])
+
+(autoload 'dokuwiki-mode "dokuwiki" "DokuWiki Mode" t)
+(autoload 'dokuwiki-get-page "dokuwiki" "DokuWiki Mode" t)
+
+(global-set-key [(control v)(control d)] 'dokuwiki-get-page)
+
+(setq dokuwiki-username "Timo"
+      dokuwiki-password "test"
+      dokuwiki-base-url "idlebox.net/dw") 
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
