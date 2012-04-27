@@ -9,19 +9,20 @@
  '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
- '(fill-column 79)
- '(flymake-no-changes-timeout 5)
- '(indent-tabs-mode nil)
  '(cperl-extra-newline-before-brace nil)
  '(cperl-extra-newline-before-brace-multiline nil)
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
+ '(fill-column 79)
+ '(flymake-no-changes-timeout 5)
  '(flyspell-issue-welcome-flag nil)
  '(flyspell-large-region nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
+ '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
+ '(rebox-style-loop (quote (370 243)))
  '(scroll-bar-mode (quote right))
  '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(size-indication-mode t)
@@ -147,6 +148,10 @@
   ()                                 ;; other functions to call
   "A mode for structured wiki-like notes"
 )
+
+;; --- autoload rebox2 mode ---
+
+(autoload 'rebox-mode "rebox2" "Rebox2 Mode Mode" t)
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
