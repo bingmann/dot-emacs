@@ -117,7 +117,7 @@
 	("en_GB" ; British English
 	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
 	("de_DE"
-	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "[']" t ("-d" "de_DE") nil utf-8)
+	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "['-]" t ("-d" "de_DE") nil utf-8)
 	)
       )
 
