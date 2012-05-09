@@ -23,6 +23,7 @@
  '(inhibit-startup-screen t)
  '(make-backup-files nil)
  '(rebox-style-loop (quote (370 243)))
+ '(safe-local-variable-values (quote ((rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
  '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(size-indication-mode t)
