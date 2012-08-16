@@ -167,6 +167,11 @@
       dokuwiki-password "test"
       dokuwiki-base-url "idlebox.net/dw") 
 
+;; --- autoload evil-numbers mode ---
+
+(autoload 'evil-numbers/inc-at-pt "evil-numbers" "Evil Numbers Tools" t)
+(autoload 'evil-numbers/dec-at-pt "evil-numbers" "Evil Numbers Tools" t)
+
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
@@ -228,16 +233,57 @@
      (bold ((t (:bold t))))
      (bold-italic ((t (:italic t :bold t))))
 
+     ; emacs base faces
+     (link ((t (:underline t :foreground "cyan1"))))
+     (link-visited ((t (:underline t :foreground "violet"))))
+     (highlight ((t (:background "darkolivegreen"))))
+     (region ((t (:background "blue3"))))
+     (secondary-selection ((t (:background "SkyBlue4"))))
+     (trailing-whitespace ((t (:background "red1"))))
+     (mode-line ((t (:foreground "#ffffff" :background "#333333"))))
+     (minibuffer-prompt ((t (:foreground "cyan"))))
+     (isearch ((t (:foreground "brown4" :background "palevioletred2"))))
+     (lazy-highlight ((t (:background "paleturquoise4"))))
+     (hl-line ((t (:background "#112233"))))
+     (fringe ((t (:background "grey10"))))
+
      ; override some unbareable defaults with dark background
      (cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
      (cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
-     (semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0"))))
 
      ; dark mode-line
-     (hl-line ((t (:background "#112233"))))
-     (mode-line ((t (:foreground "#ffffff" :background "#333333"))))
      (show-paren-match-face ((t (:foreground "#0090FF" :background "black"))))
      (show-paren-mismatch-face ((t (:foreground "white" :background "purple"))))
+
+     ; default colors
+     (font-lock-comment-face ((t (:foreground "chocolate1"))))
+     (font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face))))
+     (font-lock-string-face ((t (:foreground "LightSalmon"))))
+     (font-lock-doc-face ((t (:inherit font-lock-string-face))))
+     (font-lock-keyword-face ((t (:foreground "Cyan1"))))
+     (font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
+     (font-lock-function-name-face ((t (:foreground "LightSkyBlue"))))
+     (font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
+     (font-lock-type-face ((t (:foreground "PaleGreen"))))
+     (font-lock-constant-face ((t (:foreground "Aquamarine"))))
+     (font-lock-warning-face ((t (:foreground "Red" :bold t))))
+     (font-lock-preprocessor-face ((t (:foreground "MediumOrchid"))))
+     
+     ; cedet semantic faces
+     (semantic-highlight-func-current-tag-face ((t (:background "gray20"))))
+     (semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0"))))
+     (semantic-decoration-on-private-members-face ((t (:background "#200000"))))
+     (semantic-decoration-on-protected-members-face ((t (:background "#000020"))))
+     (semantic-decoration-on-unknown-includes ((t (:background "#900000"))))
+     (semantic-decoration-on-fileless-includes ((t (:background "#009000"))))
+     (semantic-decoration-on-unparsed-includes ((t (:background "#555500"))))
+     (semantic-regtest-test-button-face ((t (:forground "blue" :bold t))))
+     (semantic-regtest-reference-button-face ((t (:forground "ForestGreen" :bold t))))
+     (semantic-complete-inline-face ((t (:underline "yellow"))))
+     (semantic-highlight-edits-face ((t (:background "gray20"))))
+     (semantic-unmatched-syntax-face ((t (:underline "red"))))
+     (semantic-highlight-func-current-tag-face ((t (:background "gray20"))))
+     (senator-momentary-highlight-face ((t (:background "gray30"))))
      )
    )
   )
