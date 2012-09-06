@@ -305,6 +305,9 @@
 
 (global-set-key "\M-g" 'goto-line)
 
+(global-set-key [M-S-left] 'previous-buffer)
+(global-set-key [M-S-right] 'next-buffer)
+
 ; set keys f9-f12 to insert German umlauts and sz
 (global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
 (global-set-key (kbd "<S-f9>") (lambda() (interactive) (insert ?\Ä)))
