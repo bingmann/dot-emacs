@@ -123,6 +123,13 @@
 	)
       )
 
+;; --- pmwiki mode ---
+
+(setq pmwiki-main-wiki-base-uri
+      "http://taekwondo-wiki.de/")
+(setq pmwiki-main-homepage-uri
+      (concat pmwiki-main-wiki-base-uri "Main/HomePage"))
+
 ;; --- folding mode ---
 
 (autoload 'folding-mode          "folding" "Folding mode" t)
