@@ -24,7 +24,7 @@
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(rebox-style-loop (quote (370 243)))
- '(safe-local-variable-values (quote ((rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
+ '(safe-local-variable-values (quote ((rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
  '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(size-indication-mode t)
@@ -241,7 +241,10 @@
      (region ((t (:background "blue3"))))
      (secondary-selection ((t (:background "SkyBlue4"))))
      (trailing-whitespace ((t (:background "red1"))))
-     (mode-line ((t (:foreground "#ffffff" :background "#333333"))))
+     (modeline ((t (:foreground "white" :background "gray10"))))
+     (modeline-buffer-id ((t (:foreground "white" :background "gray10"))))
+     (modeline-mousable ((t (:foreground "white" :background "gray10"))))
+     (modeline-mousable-minor-mode ((t (:foreground "white" :background "gray10"))))
      (minibuffer-prompt ((t (:foreground "cyan"))))
      (isearch ((t (:foreground "brown4" :background "palevioletred2"))))
      (lazy-highlight ((t (:background "paleturquoise4"))))
@@ -305,6 +308,9 @@
 
 (global-set-key "\M-g" 'goto-line)
 
+(global-set-key [C-x C-b] 'buffer-menu)
+(global-set-key [M-S-up] 'buffer-menu)
+
 (global-set-key [M-S-left] 'previous-buffer)
 (global-set-key [M-S-right] 'next-buffer)
 
@@ -317,7 +323,12 @@
 (global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
 (global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
 
+; quick recompilation
+
+(global-set-key [f5] 'recompile)
+
 ; go to last edit point
+
 (require 'goto-last-change)
 (global-set-key [(ctrl meta l)] 'goto-last-change);
 
