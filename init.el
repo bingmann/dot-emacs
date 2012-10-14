@@ -372,6 +372,8 @@
 (defun my-latex-key-bindings ()
   "Add some latex macro keys"
   (interactive)
+  (turn-on-reftex)
+  (visual-line-mode 1)
   (local-set-key "\C-\M-z" (lambda () (interactive) (insert "\\mathbb{Z}")))
   (local-set-key "\C-\M-n" (lambda () (interactive) (insert "\\mathbb{N}")))
   (local-set-key (kbd "C-M-S-n") (lambda () (interactive) (insert "\\!{}_1\\mathbb{N}_")))
@@ -382,8 +384,7 @@
   (local-set-key "\C-b" (lambda () (interactive) (insert "\\mathbb{")))
   (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
   (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
-  (turn-on-reftex)
-  (visual-line-mode 1)
+  (local-set-key [M-S-down] (lambda () (interactive) (reftex-toc)))
 )
 
 (add-hook 'tex-mode-hook 'my-latex-key-bindings)
