@@ -252,11 +252,12 @@
      (modeline-buffer-id ((t (:foreground "white" :background "gray10"))))
      (modeline-mousable ((t (:foreground "white" :background "gray10"))))
      (modeline-mousable-minor-mode ((t (:foreground "white" :background "gray10"))))
+     (modeline-inactive ((t (:foreground "white" :background "gray10"))))
      (minibuffer-prompt ((t (:foreground "cyan"))))
      (isearch ((t (:foreground "brown4" :background "palevioletred2"))))
      (lazy-highlight ((t (:background "paleturquoise4"))))
      (hl-line ((t (:background "#112233"))))
-     (fringe ((t (:background "grey10"))))
+     (fringe ((t (:background "gray10"))))
 
      ; override some unbareable defaults with dark background
      (cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
