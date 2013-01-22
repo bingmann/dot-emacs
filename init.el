@@ -51,6 +51,8 @@
   (string-match "iti\.kit\.edu$" system-name)
 )
 
+(scroll-bar-mode -1)
+
 ;; -----------------------------------
 ;; --- Load some custom extensions ---
 ;; -----------------------------------
