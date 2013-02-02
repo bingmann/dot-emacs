@@ -182,6 +182,10 @@
 (autoload 'evil-numbers/inc-at-pt "evil-numbers" "Evil Numbers Tools" t)
 (autoload 'evil-numbers/dec-at-pt "evil-numbers" "Evil Numbers Tools" t)
 
+;; --- autoload color-browser, a color theme editor ---
+
+(autoload 'color-browser "color-browser" "Color Browser Mode" t)
+
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
