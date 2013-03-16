@@ -186,6 +186,11 @@
 
 (autoload 'color-browser "color-browser" "Color Browser Mode" t)
 
+;; --- autoload markdown-mode ---
+
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
