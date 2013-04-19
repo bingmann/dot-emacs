@@ -396,6 +396,7 @@
   (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
   (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
   (local-set-key [M-S-down] (lambda () (interactive) (reftex-toc)))
+  (local-set-key "\C-\M-r" (lambda () (interactive) (reftex-reference)))
 )
 
 (add-hook 'tex-mode-hook 'my-latex-key-bindings)
