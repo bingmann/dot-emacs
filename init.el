@@ -338,6 +338,11 @@
 (global-set-key [M-S-left] 'previous-buffer)
 (global-set-key [M-S-right] 'next-buffer)
 
+; window handling
+(global-set-key "\M-1" 'delete-other-windows)
+(global-set-key "\M-2" 'new-frame)
+(global-set-key "\M-3" 'delete-frame)
+
 ; set keys f9-f12 to insert German umlauts and sz
 (global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
 (global-set-key (kbd "<S-f9>") (lambda() (interactive) (insert ?\Ä)))
