@@ -29,7 +29,9 @@
  '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
- '(vc-handled-backends nil))
+ '(vc-handled-backends nil)
+ '(wl-init-file "~/.emacs.d/wl-init.el")
+ )
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -98,18 +100,18 @@
 (autoload 'mediawiki-open "mediawiki" "MediaWikiMode" t)
 
 (add-hook 'mediawiki-mode-hook (lambda ()
-				 (flyspell-mode 1)
-				 (auto-dictionary-mode 1)
-				 ))
+                                 (flyspell-mode 1)
+                                 (auto-dictionary-mode 1)
+                                 ))
 
 (add-hook 'outline-minor-mode-hook (lambda ()
-				     (local-unset-key [(meta left)])
-				     (local-unset-key [(meta right)])
-				     (local-unset-key [(control left)])
-				     (local-unset-key [(control right)])
-				     (local-unset-key [(control up)])
-				     (local-unset-key [(control down)])
-				     ))
+                                     (local-unset-key [(meta left)])
+                                     (local-unset-key [(meta right)])
+                                     (local-unset-key [(control left)])
+                                     (local-unset-key [(control right)])
+                                     (local-unset-key [(control up)])
+                                     (local-unset-key [(control down)])
+                                     ))
 
 ;; --- set up hunspell for flyspell-mode ---
 
@@ -117,12 +119,12 @@
 
 (setq ispell-local-dictionary-alist
       '(("en_US" ; Yankee English
-	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
-	("en_GB" ; British English
-	 "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
-	("de_DE"
-	 "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "['-]" t ("-d" "de_DE") nil utf-8)
-	)
+         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
+        ("en_GB" ; British English
+         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
+        ("de_DE"
+         "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "['-]" t ("-d" "de_DE") nil utf-8)
+        )
       )
 
 ;; --- pmwiki mode ---
@@ -155,7 +157,7 @@
   '(("^\\(Titel\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'my-title-text-face))
     ("^\\(.*\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'font-lock-variable-name-face))
     )
-  '("\\.txw$")                        ;; files for which to activate this mode 
+  '("\\.txw$")                        ;; files for which to activate this mode
   ()                                 ;; other functions to call
   "A mode for structured wiki-like notes"
 )
@@ -175,7 +177,7 @@
 
 (setq dokuwiki-username "Timo"
       dokuwiki-password "test"
-      dokuwiki-base-url "idlebox.net/dw") 
+      dokuwiki-base-url "idlebox.net/dw")
 
 ;; --- autoload evil-numbers mode ---
 
@@ -243,7 +245,7 @@
   (color-theme-install
    '(color-theme-tb-dark
      ((foreground-color . "white")
-      (background-color . "black") 
+      (background-color . "black")
       (background-mode . dark)
       (cursor-color . "palegoldenrod")
       (mouse-color . "white")
@@ -296,7 +298,7 @@
      (font-lock-constant-face ((t (:foreground "Aquamarine"))))
      (font-lock-warning-face ((t (:foreground "Red" :bold t))))
      (font-lock-preprocessor-face ((t (:foreground "Orchid"))))
-     
+
      ; cedet semantic faces
      (semantic-highlight-func-current-tag-face ((t (:background "gray20"))))
      (semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0"))))
@@ -323,7 +325,7 @@
   "kill all buffers, leaving *scratch* only"
   (interactive)
   (mapcar (lambda (x) (kill-buffer x))
-	  (buffer-list))
+          (buffer-list))
   (delete-other-windows))
 
 ;; --------------------------------
@@ -367,8 +369,8 @@
   "Backward kill word, but do not insert it into kill-ring"
   (interactive "P")
   (let (( end (point) )
-	( beg (progn (backward-word arg) (point)))
-	)
+        ( beg (progn (backward-word arg) (point)))
+        )
     (delete-region beg end)
     )
   )
@@ -377,8 +379,8 @@
   "Backward kill word, but do not insert it into kill-ring"
   (interactive "P")
   (let (( beg (point) )
-	( end (progn (forward-word arg) (point)))
-	)
+        ( end (progn (forward-word arg) (point)))
+        )
     (delete-region beg end)
     )
   )
@@ -427,10 +429,10 @@
   (let ((folder-list (list folder)))
     (dolist (subfolder (directory-files folder))
       (let ((name (concat folder "/" subfolder)))
-	(when (and (file-directory-p name)
-		   (not (equal subfolder ".."))
-		   (not (equal subfolder ".")))
-	  (set 'folder-list (append folder-list (list name))))))
+        (when (and (file-directory-p name)
+                   (not (equal subfolder ".."))
+                   (not (equal subfolder ".")))
+          (set 'folder-list (append folder-list (list name))))))
     folder-list))
 
 (unless (featurep 'cedet)
@@ -443,7 +445,7 @@
 (setq semanticdb-default-save-directory "~/.emacs.d/semanticdb")
 
 (semantic-add-system-include "/usr/include/" 'c-mode)
-(semantic-add-system-include "/usr/include/" 'c++-mode) 
+(semantic-add-system-include "/usr/include/" 'c++-mode)
 (semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/" 'c-mode)
 (semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/" 'c++-mode)
 (semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/g++-v4/" 'c++-mode)
@@ -452,8 +454,6 @@
 ;(dolist (folder (list-all-subfolders qt4-base-dir))
 ;  (semantic-add-system-include folder 'c++-mode)
 ;  (add-to-list 'auto-mode-alist (cons folder 'c++-mode)))
-(semanticdb-enable-gnu-global-databases 'c++-mode)
-(semanticdb-enable-gnu-global-databases 'c-mode)
 
 (defun semantic-symref-no-prompt ()
   "Copy of semantic-symref without prompt"
@@ -461,8 +461,8 @@
   (require 'semantic/symref/list)
   (semantic-fetch-tags)
   (let ((ct (semantic-current-tag))
-	(res nil)
-	)
+        (res nil)
+        )
     (when (not ct) (error "Place cursor inside tag to be searched for"))
     (message "Gathering References...")
     (setq res (semantic-symref-find-references-by-name (semantic-tag-name ct)))
@@ -470,15 +470,38 @@
   )
 
 (add-hook 'c-mode-common-hook
-	  (lambda ()
-	    (local-set-key [(control return)] 'semantic-ia-complete-symbol)
-	    (local-set-key [(meta return)] 'semantic-ia-complete-symbol-menu)
-	    (local-set-key "\C-c<" 'semantic-ia-fast-jump)
-	    (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-	    (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-	    (local-set-key "\C-c?" 'semantic-symref-no-prompt)
-	    (local-set-key "\C-cr" 'semantic-symref-rename-local-variable)
-	    ))
+          (lambda ()
+            (local-set-key [(control return)] 'semantic-ia-complete-symbol)
+            (local-set-key [(meta return)] 'semantic-ia-complete-symbol-menu)
+            (local-set-key "\C-c<" 'semantic-ia-fast-jump)
+            (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+            (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+            (local-set-key "\C-c?" 'semantic-symref-no-prompt)
+            (local-set-key "\C-cr" 'semantic-symref-rename-local-variable)
+            (font-lock-add-keywords nil '(("\\<TODO" 1 font-lock-warning-face t)))
+            (require 'gtags)
+            (gtags-mode t)
+            (djcb-gtags-create-or-update)
+            ))
+
+(add-hook 'gtags-mode-hook
+          (lambda()
+            (local-set-key (kbd "M-.") 'gtags-find-tag)     ; find a tag, also M-.
+            (local-set-key (kbd "M-,") 'gtags-find-rtag))   ; reverse tag
+          )
+
+(defun djcb-gtags-create-or-update ()
+  "create or update the GNU global tag file"
+  (interactive)
+  (if (not (= 0 (call-process "global" nil nil nil " -p"))) ; tagfile doesn't exist?
+      (let ((olddir default-directory)
+            (topdir (read-directory-name
+                     "gtags: top of source tree:" default-directory)))
+        (cd topdir)
+        (shell-command "gtags && echo 'created tagfile'")
+        (cd olddir)) ; restore
+    ;;  tagfile already exists; update it
+    (shell-command "global -u && echo 'updated tagfile'")))
 
 ;; ------------------------------------------
 ;; --- Tools for compilation within emacs ---
@@ -495,9 +518,16 @@ M-x compile.
 """
 (interactive "p")
 (if (and (eq pfx 1)
-	 compilation-last-buffer)
+         compilation-last-buffer)
     (progn
       (set-buffer compilation-last-buffer)
       (revert-buffer t t))
   (call-interactively 'compile)))
 
+;; --------------------------------
+;; --- Wanderlust E-Mail Client ---
+;; --------------------------------
+
+(autoload 'wl "wl" "Wanderlust" t)
+(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
