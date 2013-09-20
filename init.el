@@ -421,6 +421,13 @@
 (defun flymake-get-tex-args (file-name)
   (list "pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
 
+; doxymacs: automatically activate font-lock overlay mode for C/C++ files
+
+(defun my-doxymacs-font-lock-hook ()
+  (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+      (doxymacs-font-lock)))
+(add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
 ;; ---------------------------
 ;; --- CEDET Configuration ---
 ;; ---------------------------
@@ -481,7 +488,7 @@
             (font-lock-add-keywords nil '(("\\<TODO" 1 font-lock-warning-face t)))
             (require 'gtags)
             (gtags-mode t)
-            (djcb-gtags-create-or-update)
+            ;(djcb-gtags-create-or-update)
             ))
 
 (add-hook 'gtags-mode-hook
