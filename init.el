@@ -354,6 +354,10 @@
 (global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
 (global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
 
+; more insertion macros associated with f9-f12
+(global-set-key (kbd "<M-f12>") (lambda() (interactive)
+  (insert " *  Copyright (C) 2013 Timo Bingmann <tb@panthema.net>")))
+
 ; quick recompilation
 
 (global-set-key [f5] 'recompile)
