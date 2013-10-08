@@ -211,10 +211,20 @@
 ; some more c++ files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tcc\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.dox\\'" . c++-mode))
 
 ; protocol buffer files
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+
+; doxygen mode
+(defun my-dox-mode ()
+  "Add some latex macro keys"
+  (interactive)
+  (c++-mode)
+  (visual-line-mode 1)
+  (flyspell-mode)
+  (set-variable 'fill-column 100000)
+)
+(add-to-list 'auto-mode-alist '("\\.dox\\'" . my-dox-mode))
 
 ;; -----------------------------
 ;; --- General Customization ---
@@ -362,6 +372,11 @@
 
 (global-set-key [f5] 'recompile)
 
+; magit status
+
+(global-set-key (kbd "C-x C-g") 'magit-status)
+(global-set-key (kbd "C-c C-g") 'magit-status)
+
 ; go to last edit point
 
 (require 'goto-last-change)
@@ -457,9 +472,9 @@
 
 (semantic-add-system-include "/usr/include/" 'c-mode)
 (semantic-add-system-include "/usr/include/" 'c++-mode)
-(semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/" 'c-mode)
-(semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/" 'c++-mode)
-(semantic-add-system-include "/usr/lib/gcc/i686-pc-linux-gnu/4.3.4/include/g++-v4/" 'c++-mode)
+(semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/4.7.3/include/" 'c-mode)
+(semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/4.7.3/include/" 'c++-mode)
+(semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/4.7.3/include/g++-v4/" 'c++-mode)
 
 ;(setq qt4-base-dir "/usr/include/qt4/")
 ;(dolist (folder (list-all-subfolders qt4-base-dir))
