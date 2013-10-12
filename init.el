@@ -11,6 +11,8 @@
  '(column-number-mode t)
  '(cperl-extra-newline-before-brace nil)
  '(cperl-extra-newline-before-brace-multiline nil)
+ '(ecb-options-version "2.40")
+ '(ede-project-directories (quote ("/home/tb/stxxl")))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(fill-column 79)
@@ -21,6 +23,7 @@
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(ispell-highlight-face (quote flyspell-incorrect))
  '(make-backup-files nil)
  '(menu-bar-mode nil)
  '(rebox-style-loop (quote (370 243)))
@@ -30,8 +33,7 @@
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(vc-handled-backends nil)
- '(wl-init-file "~/.emacs.d/wl-init.el")
- )
+ '(wl-init-file "~/.emacs.d/wl-init.el"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -39,10 +41,18 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 117 :width normal :foundry "Misc" :family "Fixed"))))
+ '(diff-added ((t (:inherit diff-changed :foreground "#33ff33"))))
+ '(diff-changed-face ((t nil)) t)
+ '(diff-file-header ((t (:background "grey20" :weight bold))))
+ '(diff-file-header-face ((t (:background "grey60" :weight bold))) t)
+ '(diff-header ((t (:background "grey10"))))
+ '(diff-removed ((t (:inherit diff-changed :foreground "#ff3333"))))
+ '(diff-removed-face ((t (:inherit diff-changed :background "#553333"))) t)
  '(font-latex-sectioning-5-face ((((class color) (background dark)) (:foreground "#00c000"))))
  '(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold))))
  '(font-latex-warning-face ((((class color) (background dark)) (:foreground "#c00000"))))
- '(font-lock-warning-face ((((class color) (min-colors 88) (background dark)) (:foreground "Red" :weight bold)))))
+ '(font-lock-warning-face ((((class color) (min-colors 88) (background dark)) (:foreground "Red" :weight bold))))
+ '(highlight ((t (:background "#222277")))))
 
 ;; ---------------------------------
 ;; --- Distinction between hosts ---
@@ -451,83 +461,152 @@
 ;; --- CEDET Configuration ---
 ;; ---------------------------
 
-(defun list-all-subfolders (folder)
-  (let ((folder-list (list folder)))
-    (dolist (subfolder (directory-files folder))
-      (let ((name (concat folder "/" subfolder)))
-        (when (and (file-directory-p name)
-                   (not (equal subfolder ".."))
-                   (not (equal subfolder ".")))
-          (set 'folder-list (append folder-list (list name))))))
-    folder-list))
+(setq cedet-root-path (file-name-as-directory "~/.emacs.d/cedet-bzr/"))
 
-(unless (featurep 'cedet)
-  (load-file "~/.emacs.d/cedet-1.1/common/cedet.el")
-)
-(global-ede-mode 1)
-(semantic-load-enable-excessive-code-helpers)
+(load-file (concat cedet-root-path "cedet-devel-load.el"))
+(add-to-list 'load-path (concat cedet-root-path "contrib"))
 
-(require 'semantic-ia)
+;; select which submodes we want to activate
+(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
+
 (setq semanticdb-default-save-directory "~/.emacs.d/semanticdb")
 
-(semantic-add-system-include "/usr/include/" 'c-mode)
-(semantic-add-system-include "/usr/include/" 'c++-mode)
-(semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/4.7.3/include/" 'c-mode)
-(semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/4.7.3/include/" 'c++-mode)
-(semantic-add-system-include "/usr/lib/gcc/x86_64-pc-linux-gnu/4.7.3/include/g++-v4/" 'c++-mode)
+;; Activate semantic
+(semantic-mode 1)
 
-;(setq qt4-base-dir "/usr/include/qt4/")
-;(dolist (folder (list-all-subfolders qt4-base-dir))
-;  (semantic-add-system-include folder 'c++-mode)
-;  (add-to-list 'auto-mode-alist (cons folder 'c++-mode)))
+; load semantic databases
+(require 'semantic/ia)
+(require 'semantic/bovine/gcc) ; or depending on you compiler
 
-(defun semantic-symref-no-prompt ()
-  "Copy of semantic-symref without prompt"
-  (interactive)
-  (require 'semantic/symref/list)
-  (semantic-fetch-tags)
-  (let ((ct (semantic-current-tag))
-        (res nil)
-        )
-    (when (not ct) (error "Place cursor inside tag to be searched for"))
-    (message "Gathering References...")
-    (setq res (semantic-symref-find-references-by-name (semantic-tag-name ct)))
-    (semantic-symref-produce-list-on-results res (semantic-tag-name ct)))
+;; if you want to enable support for gnu global
+(semanticdb-enable-gnu-global-databases 'c-mode)
+(semanticdb-enable-gnu-global-databases 'c++-mode)
+
+(when (cedet-ectag-version-check t)
+  (semantic-load-enable-primary-ectags-support))
+
+;; enable ctags for some languages:
+;;  Unix Shell, Perl, Pascal, Tcl, Fortran, Asm
+(when (cedet-ectag-version-check)
+  (semantic-load-enable-primary-exuberent-ctags-support))
+
+(setq-mode-local c-mode semanticdb-find-default-throttle
+                 '(project unloaded system recursive))
+;(setq-mode-local cpp-mode semanticdb-find-default-throttle
+;                 '(project local unloaded system recursive))
+;(setq-mode-local c++-mode semanticdb-find-default-throttle
+;                 '(project local unloaded system recursive))
+
+;; load contrib library
+(require 'eassist)
+
+;; customisation of modes
+(defun my-cedet-hook ()
+  (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
+  (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
+  ;;
+  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+  (local-set-key "\C-c=" 'semantic-decoration-include-visit)
+  ;;
+  ;;(local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  ;;(local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ce" 'eassist-list-methods)
+  ;;
+  (local-set-key "\C-cr" 'semantic-symref)
+  ;;
+  (local-set-key "\C-c<" 'semantic-ia-fast-jump)
+  (local-set-key "\C-cq" 'semantic-ia-show-doc)
+  (local-set-key "\C-cs" 'semantic-ia-show-summary)
+  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+  (local-set-key "\C-c\C-r" 'semantic-symref-rename-local-variable)
+
+  (local-set-key "\C-cb" 'ecb-activate)
+
+  (gtags-mode t)
+  (local-set-key "\C-cf" 'gtags-find-tag)
   )
+(add-hook 'c-mode-common-hook 'my-cedet-hook)
+(add-hook 'lisp-mode-hook 'my-cedet-hook)
+(add-hook 'scheme-mode-hook 'my-cedet-hook)
+(add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
+(add-hook 'erlang-mode-hook 'my-cedet-hook)
 
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (local-set-key [(control return)] 'semantic-ia-complete-symbol)
-            (local-set-key [(meta return)] 'semantic-ia-complete-symbol-menu)
-            (local-set-key "\C-c<" 'semantic-ia-fast-jump)
-            (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-            (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-            (local-set-key "\C-c?" 'semantic-symref-no-prompt)
-            (local-set-key "\C-cr" 'semantic-symref-rename-local-variable)
-            (font-lock-add-keywords nil '(("\\<TODO" 1 font-lock-warning-face t)))
-            (require 'gtags)
-            (gtags-mode t)
-            ;(djcb-gtags-create-or-update)
-            ))
+;; SRecode
+(global-srecode-minor-mode 1)
 
-(add-hook 'gtags-mode-hook
-          (lambda()
-            (local-set-key (kbd "M-.") 'gtags-find-tag)     ; find a tag, also M-.
-            (local-set-key (kbd "M-,") 'gtags-find-rtag))   ; reverse tag
-          )
+;; EDE
+(global-ede-mode 1)
+(ede-enable-generic-projects)
 
-(defun djcb-gtags-create-or-update ()
-  "create or update the GNU global tag file"
-  (interactive)
-  (if (not (= 0 (call-process "global" nil nil nil " -p"))) ; tagfile doesn't exist?
-      (let ((olddir default-directory)
-            (topdir (read-directory-name
-                     "gtags: top of source tree:" default-directory)))
-        (cd topdir)
-        (shell-command "gtags && echo 'created tagfile'")
-        (cd olddir)) ; restore
-    ;;  tagfile already exists; update it
-    (shell-command "global -u && echo 'updated tagfile'")))
+;; ECB
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb-alexott/"))
+(require 'ecb)
+;(require 'ecb-autoloads)
+
+;; CMake Projects
+(ede-cpp-root-project "stxxl"
+                      :file "~/stxxl/CMakeLists.txt"
+                      :include-path '("/include/")
+                      :spp-table '(("__STXXL_BEGIN_NAMESPACE" . "namespace stxxl {")
+                                   ("__STXXL_END_NAMESPACE" . "}"))
+                      )
+
+(ede-cpp-root-project "bispanning"
+                      :file "~/Dropbox/bispanning/CMakeLists.txt"
+                      )
+
+;; (defun semantic-symref-no-prompt ()
+;;   "Copy of semantic-symref without prompt"
+;;   (interactive)
+;;   (require 'semantic/symref/list)
+;;   (semantic-fetch-tags)
+;;   (let ((ct (semantic-current-tag))
+;;         (res nil)
+;;         )
+;;     (when (not ct) (error "Place cursor inside tag to be searched for"))
+;;     (message "Gathering References...")
+;;     (setq res (semantic-symref-find-references-by-name (semantic-tag-name ct)))
+;;     (semantic-symref-produce-list-on-results res (semantic-tag-name ct)))
+;;   )
+
+;; (add-hook 'c-mode-common-hook
+;;           (lambda ()
+;;             (local-set-key "\C-c?" 'semantic-symref-no-prompt)
+;;             (require 'gtags)
+;;             (gtags-mode t)
+;;             ;(djcb-gtags-create-or-update)
+;;             ))
+
+;; (add-hook 'gtags-mode-hook
+;;           (lambda()
+;;             (local-set-key (kbd "M-.") 'gtags-find-tag)     ; find a tag, also M-.
+;;             (local-set-key (kbd "M-,") 'gtags-find-rtag))   ; reverse tag
+;;           )
+
+;; (defun djcb-gtags-create-or-update ()
+;;   "create or update the GNU global tag file"
+;;   (interactive)
+;;   (if (not (= 0 (call-process "global" nil nil nil " -p"))) ; tagfile doesn't exist?
+;;       (let ((olddir default-directory)
+;;             (topdir (read-directory-name
+;;                      "gtags: top of source tree:" default-directory)))
+;;         (cd topdir)
+;;         (shell-command "gtags && echo 'created tagfile'")
+;;         (cd olddir)) ; restore
+;;     ;;  tagfile already exists; update it
+;;     (shell-command "global -u && echo 'updated tagfile'")))
 
 ;; ------------------------------------------
 ;; --- Tools for compilation within emacs ---
