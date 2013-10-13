@@ -135,26 +135,6 @@
 
 (autoload 'auto-dictionary-mode "auto-dictionary" "Flyspell Dictionary Guesser" t)
 
-;; --- autoload mediawiki editing mode ---
-
-(add-to-list 'load-path "~/.emacs.d/mediawiki-el/")
-(autoload 'mediawiki-site "mediawiki" "MediaWikiMode" t)
-(autoload 'mediawiki-open "mediawiki" "MediaWikiMode" t)
-
-(add-hook 'mediawiki-mode-hook (lambda ()
-                                 (flyspell-mode 1)
-                                 (auto-dictionary-mode 1)
-                                 ))
-
-(add-hook 'outline-minor-mode-hook (lambda ()
-                                     (local-unset-key [(meta left)])
-                                     (local-unset-key [(meta right)])
-                                     (local-unset-key [(control left)])
-                                     (local-unset-key [(control right)])
-                                     (local-unset-key [(control up)])
-                                     (local-unset-key [(control down)])
-                                     ))
-
 ;; --- set up hunspell for flyspell-mode ---
 
 (setq ispell-program-name "/usr/bin/hunspell")
@@ -203,10 +183,6 @@
   ()                                 ;; other functions to call
   "A mode for structured wiki-like notes"
 )
-
-;; --- autoload rebox2 mode ---
-
-(autoload 'rebox-mode "rebox2" "Rebox2 Mode" t)
 
 ;; --- autoload dokuwiki editing mode ---
 
@@ -320,13 +296,11 @@
 
 ; magit status
 
-(global-set-key (kbd "C-x C-g") 'magit-status)
-(global-set-key (kbd "C-c C-g") 'magit-status)
+(global-set-key (kbd "<C-f12>") 'magit-status)
 (setq magit-omit-untracked-dir-contents t)
 
 ; go to last edit point
 
-(require 'goto-last-change)
 (global-set-key [(ctrl meta l)] 'goto-last-change);
 
 ; bind Backspace and Delete keys with M- and C- to special kill functions
