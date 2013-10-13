@@ -9,6 +9,7 @@
  '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
+ '(compilation-always-kill t)
  '(cperl-extra-newline-before-brace nil)
  '(cperl-extra-newline-before-brace-multiline nil)
  '(ecb-options-version "2.40")
@@ -24,6 +25,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
+ '(magit-status-verbose-untracked nil)
  '(make-backup-files nil)
  '(rebox-style-loop (quote (370 243)))
  '(safe-local-variable-values (quote ((rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
@@ -275,14 +277,9 @@
 (global-set-key (kbd "<M-f9>") (lambda() (interactive)
   (insert " *  Copyright (C) 2013 Timo Bingmann <tb@panthema.net>")))
 
-; quick recompilation
-
-(global-set-key [f5] 'recompile)
-
 ; magit status
 
 (global-set-key (kbd "<C-f12>") 'magit-status)
-(setq magit-omit-untracked-dir-contents t)
 
 ; go to last edit point
 
@@ -505,9 +502,38 @@
 ;;     (shell-command "global -u && echo 'updated tagfile'")))
 
 ;; --------------------------------
+;; --- Recompile Same Directory ---
+;; --------------------------------
+
+(global-set-key [f5] 'compile-again)
+
+(setq compilation-last-buffer nil)
+
+(defun compile-again (pfx)
+  """Run the same compile as the last time.
+If there was no last time, or there is a prefix argument, this acts like
+M-x compile.
+"""
+ (interactive "p")
+ (if (and (eq pfx 1)
+	  compilation-last-buffer)
+     (progn
+       (set-buffer compilation-last-buffer)
+       (revert-buffer t t))
+   (call-interactively 'compile)))
+
+;; --------------------------------
 ;; --- Wanderlust E-Mail Client ---
 ;; --------------------------------
 
 (autoload 'wl "wl" "Wanderlust" t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
+
+;; ----------------------------------------------
+;; --- Initialization after ELPA Package Load ---
+;; ----------------------------------------------
+
+(setq package-enable-at-startup nil)
+(package-initialize)
+
