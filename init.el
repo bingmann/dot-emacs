@@ -109,10 +109,9 @@
 ;; --- Distinction between hosts ---
 ;; ---------------------------------
 
-(defun system-host-is-iti ()
-  "true if system host is at ITI"
-  (string-match "iti\.kit\.edu$" system-name)
-)
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
 
 (scroll-bar-mode -1)
 
