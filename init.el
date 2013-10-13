@@ -12,6 +12,7 @@
  '(cperl-extra-newline-before-brace nil)
  '(cperl-extra-newline-before-brace-multiline nil)
  '(ecb-options-version "2.40")
+ '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ede-project-directories (quote ("/home/tb/stxxl")))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
@@ -41,6 +42,11 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 117 :width normal :foundry "Misc" :family "Fixed"))))
+ '(bold ((t (:bold t))))
+ '(bold-italic ((t (:italic t :bold t))))
+ '(cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
+ '(cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
+ '(cursor ((t (:background "palegoldenrod"))))
  '(diff-added ((t (:inherit diff-changed :foreground "#33ff33"))))
  '(diff-changed-face ((t nil)) t)
  '(diff-file-header ((t (:background "grey20" :weight bold))))
@@ -48,11 +54,56 @@
  '(diff-header ((t (:background "grey10"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "#ff3333"))))
  '(diff-removed-face ((t (:inherit diff-changed :background "#553333"))) t)
+ '(ecb-default-highlight-face ((t (:background "RoyalBlue4"))))
  '(font-latex-sectioning-5-face ((((class color) (background dark)) (:foreground "#00c000"))))
  '(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold))))
  '(font-latex-warning-face ((((class color) (background dark)) (:foreground "#c00000"))))
+ '(font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
+ '(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face))))
+ '(font-lock-comment-face ((t (:foreground "chocolate1"))))
+ '(font-lock-constant-face ((t (:foreground "Aquamarine"))))
+ '(font-lock-doc-face ((t (:inherit font-lock-string-face))))
+ '(font-lock-function-name-face ((t (:foreground "LightSkyBlue"))))
+ '(font-lock-keyword-face ((t (:foreground "Cyan1"))))
+ '(font-lock-preprocessor-face ((t (:foreground "Orchid"))))
+ '(font-lock-string-face ((t (:foreground "LightSalmon"))))
+ '(font-lock-type-face ((t (:foreground "PaleGreen"))))
+ '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
  '(font-lock-warning-face ((((class color) (min-colors 88) (background dark)) (:foreground "Red" :weight bold))))
- '(highlight ((t (:background "#222277")))))
+ '(fringe ((t (:background "gray10"))))
+ '(highlight ((t (:background "#222277"))))
+ '(hl-line ((t (:background "#112233"))))
+ '(isearch ((t (:foreground "brown4" :background "palevioletred2"))))
+ '(lazy-highlight ((t (:background "paleturquoise4"))))
+ '(link ((t (:underline t :foreground "cyan1"))))
+ '(link-visited ((t (:underline t :foreground "violet"))))
+ '(minibuffer-prompt ((t (:foreground "cyan"))))
+ '(mode-line ((t (:foreground "white" :background "gray10"))))
+ '(mode-line-buffer-id ((t (:foreground "white" :background "gray10"))))
+ '(mode-line-inactive ((t (:foreground "white" :background "gray10"))))
+ '(mode-line-mousable ((t (:foreground "white" :background "gray10"))))
+ '(mode-line-mousable-minor-mode ((t (:foreground "white" :background "gray10"))))
+ '(modeline ((t (:foreground "white" :background "gray10"))))
+ '(modeline-mousable ((t (:foreground "white" :background "gray10"))))
+ '(modeline-mousable-minor-mode ((t (:foreground "white" :background "gray10"))))
+ '(region ((t (:background "blue3"))))
+ '(secondary-selection ((t (:background "SkyBlue4"))))
+ '(semantic-complete-inline-face ((t (:underline "yellow"))))
+ '(semantic-decoration-on-fileless-includes ((t (:background "#009000"))))
+ '(semantic-decoration-on-private-members-face ((t (:background "#200000"))))
+ '(semantic-decoration-on-protected-members-face ((t (:background "#000020"))))
+ '(semantic-decoration-on-unknown-includes ((t (:background "#900000"))))
+ '(semantic-decoration-on-unparsed-includes ((t (:background "#555500"))))
+ '(semantic-highlight-edits-face ((t (:background "gray20"))))
+ '(semantic-highlight-func-current-tag-face ((t (:background "gray20"))))
+ '(semantic-regtest-reference-button-face ((t (:forground "ForestGreen" :bold t))))
+ '(semantic-regtest-test-button-face ((t (:forground "blue" :bold t))))
+ '(semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0"))))
+ '(semantic-unmatched-syntax-face ((t (:underline "red"))))
+ '(senator-momentary-highlight-face ((t (:background "gray30"))))
+ '(show-paren-match-face ((t (:foreground "#0090FF" :background "black"))) t)
+ '(show-paren-mismatch-face ((t (:foreground "white" :background "purple"))) t)
+ '(trailing-whitespace ((t (:background "red1")))))
 
 ;; ---------------------------------
 ;; --- Distinction between hosts ---
@@ -203,6 +254,11 @@
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
+;; --- org-mode customizations ---
+
+(add-hook 'org-mode-hook (lambda ()
+                           (local-unset-key [(meta shift up)])))
+
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
@@ -256,90 +312,6 @@
 ; "filename [mode]" in title bar
 (setq frame-title-format '("%f [mode: %m] @ " (getenv "HOSTNAME")))
 
-; nice new color-theme package
-(require 'color-theme)
-
-(defun color-theme-tb-dark ()
-  "Dark color theme created by Timo, Aug 2010"
-  (interactive)
-  (color-theme-install
-   '(color-theme-tb-dark
-     ((foreground-color . "white")
-      (background-color . "black")
-      (background-mode . dark)
-      (cursor-color . "palegoldenrod")
-      (mouse-color . "white")
-     )
-     (default ((t (:height 117 :width normal :foundry "Misc" :family "Fixed"))))
-     (bold ((t (:bold t))))
-     (bold-italic ((t (:italic t :bold t))))
-
-     ; emacs base faces
-     (link ((t (:underline t :foreground "cyan1"))))
-     (link-visited ((t (:underline t :foreground "violet"))))
-     (highlight ((t (:background "darkolivegreen"))))
-     (region ((t (:background "blue3"))))
-     (secondary-selection ((t (:background "SkyBlue4"))))
-     (trailing-whitespace ((t (:background "red1"))))
-     (modeline ((t (:foreground "white" :background "gray10"))))
-     (modeline-buffer-id ((t (:foreground "white" :background "gray10"))))
-     (modeline-mousable ((t (:foreground "white" :background "gray10"))))
-     (modeline-mousable-minor-mode ((t (:foreground "white" :background "gray10"))))
-     (modeline-inactive ((t (:foreground "white" :background "gray10"))))
-     (mode-line ((t (:foreground "white" :background "gray10"))))
-     (mode-line-buffer-id ((t (:foreground "white" :background "gray10"))))
-     (mode-line-mousable ((t (:foreground "white" :background "gray10"))))
-     (mode-line-mousable-minor-mode ((t (:foreground "white" :background "gray10"))))
-     (mode-line-inactive ((t (:foreground "white" :background "gray10"))))
-     (minibuffer-prompt ((t (:foreground "cyan"))))
-     (isearch ((t (:foreground "brown4" :background "palevioletred2"))))
-     (lazy-highlight ((t (:background "paleturquoise4"))))
-     (hl-line ((t (:background "#112233"))))
-     (fringe ((t (:background "gray10"))))
-
-     ; override some unbareable defaults with dark background
-     (cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
-     (cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
-
-     ; dark mode-line
-     (show-paren-match-face ((t (:foreground "#0090FF" :background "black"))))
-     (show-paren-mismatch-face ((t (:foreground "white" :background "purple"))))
-
-     ; default colors
-     (font-lock-comment-face ((t (:foreground "chocolate1"))))
-     (font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face))))
-     (font-lock-string-face ((t (:foreground "LightSalmon"))))
-     (font-lock-doc-face ((t (:inherit font-lock-string-face))))
-     (font-lock-keyword-face ((t (:foreground "Cyan1"))))
-     (font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
-     (font-lock-function-name-face ((t (:foreground "LightSkyBlue"))))
-     (font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
-     (font-lock-type-face ((t (:foreground "PaleGreen"))))
-     (font-lock-constant-face ((t (:foreground "Aquamarine"))))
-     (font-lock-warning-face ((t (:foreground "Red" :bold t))))
-     (font-lock-preprocessor-face ((t (:foreground "Orchid"))))
-
-     ; cedet semantic faces
-     (semantic-highlight-func-current-tag-face ((t (:background "gray20"))))
-     (semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0"))))
-     (semantic-decoration-on-private-members-face ((t (:background "#200000"))))
-     (semantic-decoration-on-protected-members-face ((t (:background "#000020"))))
-     (semantic-decoration-on-unknown-includes ((t (:background "#900000"))))
-     (semantic-decoration-on-fileless-includes ((t (:background "#009000"))))
-     (semantic-decoration-on-unparsed-includes ((t (:background "#555500"))))
-     (semantic-regtest-test-button-face ((t (:forground "blue" :bold t))))
-     (semantic-regtest-reference-button-face ((t (:forground "ForestGreen" :bold t))))
-     (semantic-complete-inline-face ((t (:underline "yellow"))))
-     (semantic-highlight-edits-face ((t (:background "gray20"))))
-     (semantic-unmatched-syntax-face ((t (:underline "red"))))
-     (semantic-highlight-func-current-tag-face ((t (:background "gray20"))))
-     (senator-momentary-highlight-face ((t (:background "gray30"))))
-     )
-   )
-  )
-
-(color-theme-tb-dark)
-
 ; kills all them buffers except scratch.
 (defun nuke-all-buffers ()
   "kill all buffers, leaving *scratch* only"
@@ -386,6 +358,7 @@
 
 (global-set-key (kbd "C-x C-g") 'magit-status)
 (global-set-key (kbd "C-c C-g") 'magit-status)
+(setq magit-omit-untracked-dir-contents t)
 
 ; go to last edit point
 
@@ -607,27 +580,6 @@
 ;;         (cd olddir)) ; restore
 ;;     ;;  tagfile already exists; update it
 ;;     (shell-command "global -u && echo 'updated tagfile'")))
-
-;; ------------------------------------------
-;; --- Tools for compilation within emacs ---
-;; ------------------------------------------
-
-(global-set-key [(control c) (c)] 'compile-again)
-
-(setq compilation-last-buffer nil)
-(defun compile-again (pfx)
-  """Run the same compile as the last time.
-
-If there was no last time, or there is a prefix argument, this acts like
-M-x compile.
-"""
-(interactive "p")
-(if (and (eq pfx 1)
-         compilation-last-buffer)
-    (progn
-      (set-buffer compilation-last-buffer)
-      (revert-buffer t t))
-  (call-interactively 'compile)))
 
 ;; --------------------------------
 ;; --- Wanderlust E-Mail Client ---
