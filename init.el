@@ -131,24 +131,6 @@
 (add-to-list 'auto-mode-alist '("\\.lytex$" . latex-mode))
 (add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
 
-;; --- autoload actionscript mode ---
-
-(autoload 'actionscript-mode "actionscript-mode-connors" "ActionScript Mode" t)
-(add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
-
-;; --- autoload haxe mode ---
-
-(autoload 'haxe-mode "haxe-mode" "haXe Mode" t)
-(add-to-list 'auto-mode-alist '("\\.haxe$" . haxe-mode))
-
-;; --- autoload template toolkit mode ---
-
-(autoload 'tt-mode "tt-mode" "Template Toolkit Mode" t)
-
-;; --- autoload protocol buffers mode ---
-
-(autoload 'protobuf-mode "protobuf-mode" "Protocol Buffers Mode" t)
-
 ;; --- autoload auto-dictionary-mode ---
 
 (autoload 'auto-dictionary-mode "auto-dictionary" "Flyspell Dictionary Guesser" t)
@@ -239,20 +221,6 @@
       dokuwiki-password "test"
       dokuwiki-base-url "idlebox.net/dw")
 
-;; --- autoload evil-numbers mode ---
-
-(autoload 'evil-numbers/inc-at-pt "evil-numbers" "Evil Numbers Tools" t)
-(autoload 'evil-numbers/dec-at-pt "evil-numbers" "Evil Numbers Tools" t)
-
-;; --- autoload color-browser, a color theme editor ---
-
-(autoload 'color-browser "color-browser" "Color Browser Mode" t)
-
-;; --- autoload markdown-mode ---
-
-(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
 ;; --- org-mode customizations ---
 
 (add-hook 'org-mode-hook (lambda ()
@@ -276,9 +244,6 @@
 ; some more c++ files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tcc\\'" . c++-mode))
-
-; protocol buffer files
-(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
 ; doxygen mode
 (defun my-dox-mode ()
