@@ -13,7 +13,6 @@
  '(cperl-extra-newline-before-brace-multiline nil)
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
- '(ede-project-directories (quote ("/home/tb/stxxl")))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(fill-column 79)
@@ -26,7 +25,6 @@
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
  '(make-backup-files nil)
- '(menu-bar-mode nil)
  '(rebox-style-loop (quote (370 243)))
  '(safe-local-variable-values (quote ((rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
@@ -106,14 +104,12 @@
  '(trailing-whitespace ((t (:background "red1")))))
 
 ;; ---------------------------------
-;; --- Distinction between hosts ---
+;; --- ELPA package repositories ---
 ;; ---------------------------------
 
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-(scroll-bar-mode -1)
 
 ;; -----------------------------------
 ;; --- Load some custom extensions ---
@@ -130,10 +126,6 @@
 (add-to-list 'auto-mode-alist '("\\.ily$" . LilyPond-mode))
 (add-to-list 'auto-mode-alist '("\\.lytex$" . latex-mode))
 (add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
-
-;; --- autoload auto-dictionary-mode ---
-
-(autoload 'auto-dictionary-mode "auto-dictionary" "Flyspell Dictionary Guesser" t)
 
 ;; --- set up hunspell for flyspell-mode ---
 
@@ -155,15 +147,6 @@
       "http://taekwondo-wiki.de/")
 (setq pmwiki-main-homepage-uri
       (concat pmwiki-main-wiki-base-uri "Main/HomePage"))
-
-;; --- folding mode ---
-
-(autoload 'folding-mode          "folding" "Folding mode" t)
-(autoload 'turn-off-folding-mode "folding" "Folding mode" t)
-(autoload 'turn-on-folding-mode  "folding" "Folding mode" t)
-
-;(add-hook 'c-mode-hook (lambda () (folding-mode 1)))
-;(add-hook 'c++-mode-hook (lambda () (folding-mode 1)))
 
 ;; --- simple generic-mode for structures wiki notes ---
 
@@ -242,6 +225,8 @@
 
 ; disable toolbar
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
 
 ; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -287,7 +272,7 @@
 (global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
 
 ; more insertion macros associated with f9-f12
-(global-set-key (kbd "<M-f12>") (lambda() (interactive)
+(global-set-key (kbd "<M-f9>") (lambda() (interactive)
   (insert " *  Copyright (C) 2013 Timo Bingmann <tb@panthema.net>")))
 
 ; quick recompilation
