@@ -25,7 +25,10 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
+ '(magit-item-highlight-face nil)
+ '(magit-stage-all-confirm nil)
  '(magit-status-verbose-untracked nil)
+ '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
  '(rebox-style-loop (quote (370 243)))
  '(safe-local-variable-values (quote ((rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
@@ -185,7 +188,14 @@
 ;; --- org-mode customizations ---
 
 (add-hook 'org-mode-hook (lambda ()
-                           (local-unset-key [(meta shift up)])))
+                           (local-unset-key [(meta shift up)])
+                           (local-unset-key [(meta shift down)])
+                           (local-set-key [(control shift up)] 'org-shiftmetaup)
+                           (local-set-key [(control shift down)] 'org-shiftmetadown)
+                           ))
+
+(setq org-default-notes-file "~/Dropbox/0-Work/org-mode/TODO.org")
+(define-key global-map "\C-cc" 'org-capture)
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
