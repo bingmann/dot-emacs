@@ -30,6 +30,7 @@
  '(magit-status-verbose-untracked nil)
  '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
+ '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
  '(safe-local-variable-values (quote ((rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
@@ -37,7 +38,33 @@
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(vc-handled-backends nil)
- '(wl-init-file "~/.emacs.d/wl-init.el"))
+ '(wl-address-file "~/.emacs.d/wl-addresses")
+ '(wl-biff-check-interval 60)
+ '(wl-default-folder "%INBOX")
+ '(wl-draft-folder "%Drafts")
+ '(wl-fcc "%Sent")
+ '(wl-fcc-force-as-read t)
+ '(wl-folder-window-width 25)
+ '(wl-folders-file "~/.emacs.d/wl-folders")
+ '(wl-forward-subject-prefix "Fwd: ")
+ '(wl-from "Timo Bingmann <timo@tbingmann.de>")
+ '(wl-icon-directory "/usr/share/emacs/etc/wl/icons" t)
+ '(wl-init-file "~/.emacs.d/wl-init.el")
+ '(wl-interactive-exit nil)
+ '(wl-local-domain "hmtg.de")
+ '(wl-message-buffer-prefetch-depth 0)
+ '(wl-message-id-domain "mail.hmtg.de")
+ '(wl-prefetch-threshold 10000000)
+ '(wl-queue-folder "%Queue")
+ '(wl-smtp-authenticate-type "plain")
+ '(wl-smtp-connection-type (quote ssl))
+ '(wl-smtp-posting-port 2401)
+ '(wl-smtp-posting-server "mail.hmtg.de")
+ '(wl-smtp-posting-user "timo@bingmann.com")
+ '(wl-stay-folder-window t)
+ '(wl-summary-line-format "%n%T%P%D/%M (%W) %h:%m %t%[%25(%c %f%) %] %s")
+ '(wl-summary-width 150)
+ '(wl-trash-folder "%Trash"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -102,7 +129,7 @@
  '(semantic-regtest-reference-button-face ((t (:forground "ForestGreen" :bold t))))
  '(semantic-regtest-test-button-face ((t (:forground "blue" :bold t))))
  '(semantic-tag-boundary-face ((((class color) (background dark)) (:overline "#0000a0"))))
- '(semantic-unmatched-syntax-face ((t (:underline "red"))))
+ '(semantic-unmatched-syntax-face ((t (:underline "darkred"))))
  '(senator-momentary-highlight-face ((t (:background "gray30"))))
  '(show-paren-match-face ((t (:foreground "#0090FF" :background "black"))) t)
  '(show-paren-mismatch-face ((t (:foreground "white" :background "purple"))) t)
@@ -194,7 +221,7 @@
                            (local-set-key [(control shift down)] 'org-shiftmetadown)
                            ))
 
-(setq org-default-notes-file "~/Dropbox/0-Work/org-mode/TODO.org")
+(setq org-default-notes-file "~/Dropbox/0-Work/TODO.org")
 (define-key global-map "\C-cc" 'org-capture)
 
 ;; -------------------------------
@@ -227,6 +254,17 @@
 )
 (add-to-list 'auto-mode-alist '("\\.dox\\'" . my-dox-mode))
 
+; customize markdown mode
+; doxygen mode
+(defun my-markdown-mode ()
+  "Customize markdown mode"
+  (interactive)
+  (visual-line-mode 1)
+  (flyspell-mode)
+  (set-variable 'fill-column 100000)
+)
+(add-hook 'markdown-mode-hook 'my-markdown-mode)
+
 ;; -----------------------------
 ;; --- General Customization ---
 ;; -----------------------------
@@ -253,9 +291,10 @@
 (defun nuke-all-buffers ()
   "kill all buffers, leaving *scratch* only"
   (interactive)
-  (mapcar (lambda (x) (kill-buffer x))
-          (buffer-list))
+  (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
   (delete-other-windows))
+
+(global-set-key (kbd "C-x K") 'nuke-all-buffers)
 
 ;; --------------------------------
 ;; --- Some custom key bindings ---
@@ -290,6 +329,8 @@
 ; magit status
 
 (global-set-key (kbd "<C-f12>") 'magit-status)
+
+
 
 ; go to last edit point
 
