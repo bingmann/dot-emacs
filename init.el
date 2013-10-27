@@ -143,6 +143,12 @@
                          ("marmalade" . "http://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
+;; --------------------------
+;; --- Start emacs server ---
+;; --------------------------
+
+(server-start)
+
 ;; -----------------------------------
 ;; --- Load some custom extensions ---
 ;; -----------------------------------
