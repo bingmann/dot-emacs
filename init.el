@@ -12,6 +12,7 @@
  '(compilation-always-kill t)
  '(cperl-extra-newline-before-brace nil)
  '(cperl-extra-newline-before-brace-multiline nil)
+ '(dired-use-ls-dired t)
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
@@ -32,39 +33,13 @@
  '(make-backup-files nil)
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
+ '(reftex-default-bibliography (quote ("~/Dropbox/0-Work/library.bib")))
  '(safe-local-variable-values (quote ((rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
  '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
- '(vc-handled-backends nil)
- '(wl-address-file "~/.emacs.d/wl-addresses")
- '(wl-biff-check-interval 60)
- '(wl-default-folder "%INBOX")
- '(wl-draft-folder "%Drafts")
- '(wl-fcc "%Sent")
- '(wl-fcc-force-as-read t)
- '(wl-folder-window-width 25)
- '(wl-folders-file "~/.emacs.d/wl-folders")
- '(wl-forward-subject-prefix "Fwd: ")
- '(wl-from "Timo Bingmann <timo@tbingmann.de>")
- '(wl-icon-directory "/usr/share/emacs/etc/wl/icons" t)
- '(wl-init-file "~/.emacs.d/wl-init.el")
- '(wl-interactive-exit nil)
- '(wl-local-domain "hmtg.de")
- '(wl-message-buffer-prefetch-depth 0)
- '(wl-message-id-domain "mail.hmtg.de")
- '(wl-prefetch-threshold 10000000)
- '(wl-queue-folder "%Queue")
- '(wl-smtp-authenticate-type "plain")
- '(wl-smtp-connection-type (quote ssl))
- '(wl-smtp-posting-port 2401)
- '(wl-smtp-posting-server "mail.hmtg.de")
- '(wl-smtp-posting-user "timo@bingmann.com")
- '(wl-stay-folder-window t)
- '(wl-summary-line-format "%n%T%P%D/%M (%W) %h:%m %t%[%25(%c %f%) %] %s")
- '(wl-summary-width 150)
- '(wl-trash-folder "%Trash"))
+ '(vc-handled-backends nil))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -84,6 +59,11 @@
  '(diff-header ((t (:background "grey10"))))
  '(diff-removed ((t (:inherit diff-changed :foreground "#ff3333"))))
  '(diff-removed-face ((t (:inherit diff-changed :background "#553333"))) t)
+ '(diredp-dir-priv ((t (:foreground "#7474FFFFFFFF"))))
+ '(diredp-exec-priv ((t nil)))
+ '(diredp-no-priv ((t nil)))
+ '(diredp-read-priv ((t nil)))
+ '(diredp-write-priv ((t nil)))
  '(ecb-default-highlight-face ((t (:background "RoyalBlue4"))))
  '(font-latex-sectioning-5-face ((((class color) (background dark)) (:foreground "#00c000"))))
  '(font-latex-slide-title-face ((t (:inherit (variable-pitch font-lock-type-face) :weight bold))))
@@ -229,6 +209,42 @@
 
 (setq org-default-notes-file "~/Dropbox/0-Work/TODO.org")
 (define-key global-map "\C-cc" 'org-capture)
+
+;; -- load Dired+ when dired is loaded
+
+(add-hook 'dired-load-hook (lambda () (require 'dired+)))
+
+(defun my-dired-mouse-find-file (event)
+  "In dired, visit the file or directory name you click on."
+  (interactive "e")
+  (let (window pos file)
+    (save-excursion
+      (setq window (posn-window (event-end event))
+	    pos (posn-point (event-end event)))
+      (if (not (windowp window))
+	  (error "No file chosen"))
+      (set-buffer (window-buffer window))
+      (goto-char pos)
+      (setq file (dired-get-file-for-visit)))
+    (if (file-directory-p file)
+	(or (and (cdr dired-subdir-alist)
+		 (dired-goto-subdir file))
+	    (progn
+	      (select-window window)
+	      (dired file)))
+      (select-window window)
+      (find-file (file-name-sans-versions file t)))))
+
+(defun set-my-dired-keys-hook ()
+  "My favorite dired keys."
+  ; for some reason mouse-2 = left click (mouse-1)
+  (define-key dired-mode-map [mouse-2] 'my-dired-mouse-find-file)
+  (define-key dired-mode-map [M-mouse-2] 'diredp-mouse-find-file-other-frame)
+  ; backspace
+  (define-key dired-mode-map [backspace] 'dired-up-directory)
+)
+
+(add-hook 'dired-mode-hook 'set-my-dired-keys-hook)
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
