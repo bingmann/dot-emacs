@@ -23,6 +23,7 @@
  '(flyspell-large-region nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
+ '(git-commit-fill-column 100000)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
@@ -39,6 +40,7 @@
  '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
+ '(tramp-auto-save-directory "/tmp/")
  '(vc-handled-backends nil))
 
 (custom-set-faces
