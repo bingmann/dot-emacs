@@ -41,7 +41,7 @@
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-auto-save-directory "/tmp/")
- '(vc-handled-backends nil))
+ '(vc-handled-backends (quote (svn))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -538,10 +538,14 @@
 
 ;; CMake Projects
 (ede-cpp-root-project "stxxl"
-                      :file "~/stxxl/CMakeLists.txt"
+                      :file "~/Dropbox/stxxl/CMakeLists.txt"
                       :include-path '("/include/")
                       :spp-table '(("__STXXL_BEGIN_NAMESPACE" . "namespace stxxl {")
                                    ("__STXXL_END_NAMESPACE" . "}"))
+                      )
+
+(ede-cpp-root-project "parallel-string-sorting"
+                      :file "~/Dropbox/parallel-string-sorting/CMakeLists.txt"
                       )
 
 (ede-cpp-root-project "bispanning"
