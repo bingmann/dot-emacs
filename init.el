@@ -12,6 +12,7 @@
  '(compilation-always-kill t)
  '(cperl-extra-newline-before-brace nil)
  '(cperl-extra-newline-before-brace-multiline nil)
+ '(dired-dwim-target t)
  '(dired-use-ls-dired t)
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
@@ -24,6 +25,7 @@
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-commit-fill-column 100000)
+ '(grep-command "grep -nH ")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
@@ -559,6 +561,10 @@
                       :file "~/Dropbox/bispanning/CMakeLists.txt"
                       )
 
+(ede-cpp-root-project "panthema"
+                      :file "~/DropboxA/Web/panthema.net/panthema/src/CMakeLists.txt"
+                      )
+
 ;; (defun semantic-symref-no-prompt ()
 ;;   "Copy of semantic-symref without prompt"
 ;;   (interactive)
@@ -665,3 +671,4 @@ M-x compile.
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+(require 'dired-copy-paste)
