@@ -363,7 +363,12 @@
 
 (global-set-key (kbd "<C-f12>") 'magit-status)
 
+; svn integration
 
+(autoload 'svn-status "dsvn" "Run `svn status'." t)
+(autoload 'svn-update "dsvn" "Run `svn update'." t)
+
+(global-set-key (kbd "<C-f11>") 'svn-status)
 
 ; go to last edit point
 
