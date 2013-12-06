@@ -51,6 +51,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 117 :width normal :foundry "Misc" :family "Fixed"))))
+ '(bm-face ((t (:background "#604000"))))
+ '(bm-fringe-face ((t (:background "DarkOrange1"))))
  '(bold ((t (:bold t))))
  '(bold-italic ((t (:italic t :bold t))))
  '(cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
@@ -223,7 +225,12 @@
 
 ;; -- load Dired+ when dired is loaded
 
-(add-hook 'dired-load-hook (lambda () (require 'dired+)))
+(add-hook 'dired-load-hook
+          (lambda ()
+            (require 'dired+)
+            (require 'dired-copy-paste)
+            )
+          )
 
 (defun my-dired-mouse-find-file (event)
   "In dired, visit the file or directory name you click on."
@@ -438,6 +445,16 @@
   (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
       (doxymacs-font-lock)))
 (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
+;; bm line bookmark mode
+
+(global-set-key (kbd "<C-f2>") 'bm-toggle)
+(global-set-key (kbd "<f2>")   'bm-next)
+(global-set-key (kbd "<S-f2>") 'bm-previous)
+
+(global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
+(global-set-key (kbd "<left-fringe> <mouse-4>") 'bm-previous-mouse)
+(global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
@@ -675,5 +692,3 @@ M-x compile.
 
 (setq package-enable-at-startup nil)
 (package-initialize)
-
-(require 'dired-copy-paste)
