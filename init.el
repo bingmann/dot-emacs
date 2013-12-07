@@ -571,8 +571,8 @@
 (ede-cpp-root-project "stxxl"
                       :file "~/Dropbox/stxxl/CMakeLists.txt"
                       :include-path '("/include/")
-                      :spp-table '(("STXXL_BEGIN_NAMESPACE" . "namespace stxxl {")
-                                   ("STXXL_END_NAMESPACE" . "}"))
+                      :spp-table '(("__STXXL_BEGIN_NAMESPACE" . "namespace stxxl {")
+                                   ("__STXXL_END_NAMESPACE" . "}"))
                       )
 
 (ede-cpp-root-project "parallel-string-sorting"
