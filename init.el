@@ -32,9 +32,11 @@
  '(magit-item-highlight-face nil)
  '(magit-save-some-buffers (quote dontask))
  '(magit-stage-all-confirm nil)
+ '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(magit-status-verbose-untracked nil)
  '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
+ '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
  '(reftex-default-bibliography (quote ("~/Dropbox/0-Work/library.bib")))
@@ -44,8 +46,8 @@
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-auto-save-directory "/tmp/")
- '(wl-init-file "~/.emacs.d/wl-init.el")
- '(vc-handled-backends (quote (svn))))
+ '(vc-handled-backends (quote (svn)))
+ '(wl-init-file "~/.emacs.d/wl-init.el"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
