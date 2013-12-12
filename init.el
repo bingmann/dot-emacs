@@ -30,6 +30,7 @@
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
  '(magit-item-highlight-face nil)
+ '(magit-save-some-buffers (quote dontask))
  '(magit-stage-all-confirm nil)
  '(magit-status-verbose-untracked nil)
  '(magit-unstage-all-confirm nil)
@@ -43,6 +44,7 @@
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-auto-save-directory "/tmp/")
+ '(wl-init-file "~/.emacs.d/wl-init.el")
  '(vc-handled-backends (quote (svn))))
 
 (custom-set-faces
@@ -349,7 +351,7 @@
 (global-set-key [M-S-right] 'next-buffer)
 
 ; window handling
-(global-set-key "\M-1" 'delete-other-windows)
+(global-set-key "\M-`" 'delete-other-windows)
 (global-set-key "\M-2" 'new-frame)
 (global-set-key "\M-3" 'delete-frame)
 
@@ -448,13 +450,9 @@
 
 ;; bm line bookmark mode
 
-(global-set-key (kbd "<C-f2>") 'bm-toggle)
+(global-set-key (kbd "<M-f2>") 'bm-toggle)
 (global-set-key (kbd "<f2>")   'bm-next)
 (global-set-key (kbd "<S-f2>") 'bm-previous)
-
-(global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
-(global-set-key (kbd "<left-fringe> <mouse-4>") 'bm-previous-mouse)
-(global-set-key (kbd "<left-fringe> <mouse-1>") 'bm-toggle-mouse)
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---

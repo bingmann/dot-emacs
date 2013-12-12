@@ -55,6 +55,11 @@
 
       elmo-message-fetch-confirm t
       elmo-message-fetch-threshold 2500000
+
+      wl-summary-width nil
+      wl-summary-weekday-name-lang "en"
+      ;;wl-summary-line-format "%n%T%P%M/%D(%W)%h:%m %t%[%17(%c %f%) %] %s"
+      wl-summary-line-format "%T%P%M/%D(%W)%h:%m %[ %17f %]%[%1@%] %t%C%s"
       )
 
 ;; message:
