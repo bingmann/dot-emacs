@@ -47,7 +47,8 @@
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-auto-save-directory "/tmp/")
  '(vc-handled-backends (quote (svn)))
- '(wl-init-file "~/.emacs.d/wl-init.el"))
+ '(wl-init-file "~/.emacs.d/wl-init.el")
+ '(wl-message-scroll-amount 6))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -585,47 +586,6 @@
                       :file "~/DropboxA/Web/panthema.net/panthema/src/CMakeLists.txt"
                       )
 
-;; (defun semantic-symref-no-prompt ()
-;;   "Copy of semantic-symref without prompt"
-;;   (interactive)
-;;   (require 'semantic/symref/list)
-;;   (semantic-fetch-tags)
-;;   (let ((ct (semantic-current-tag))
-;;         (res nil)
-;;         )
-;;     (when (not ct) (error "Place cursor inside tag to be searched for"))
-;;     (message "Gathering References...")
-;;     (setq res (semantic-symref-find-references-by-name (semantic-tag-name ct)))
-;;     (semantic-symref-produce-list-on-results res (semantic-tag-name ct)))
-;;   )
-
-;; (add-hook 'c-mode-common-hook
-;;           (lambda ()
-;;             (local-set-key "\C-c?" 'semantic-symref-no-prompt)
-;;             (require 'gtags)
-;;             (gtags-mode t)
-;;             ;(djcb-gtags-create-or-update)
-;;             ))
-
-;; (add-hook 'gtags-mode-hook
-;;           (lambda()
-;;             (local-set-key (kbd "M-.") 'gtags-find-tag)     ; find a tag, also M-.
-;;             (local-set-key (kbd "M-,") 'gtags-find-rtag))   ; reverse tag
-;;           )
-
-;; (defun djcb-gtags-create-or-update ()
-;;   "create or update the GNU global tag file"
-;;   (interactive)
-;;   (if (not (= 0 (call-process "global" nil nil nil " -p"))) ; tagfile doesn't exist?
-;;       (let ((olddir default-directory)
-;;             (topdir (read-directory-name
-;;                      "gtags: top of source tree:" default-directory)))
-;;         (cd topdir)
-;;         (shell-command "gtags && echo 'created tagfile'")
-;;         (cd olddir)) ; restore
-;;     ;;  tagfile already exists; update it
-;;     (shell-command "global -u && echo 'updated tagfile'")))
-
 (defun qt-cedet-setup ()
   "Set up c-mode and related modes. Includes support for Qt code (signal, slots and alikes)."
 
@@ -683,10 +643,3 @@ M-x compile.
 (autoload 'wl "wl" "Wanderlust" t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
-
-;; ----------------------------------------------
-;; --- Initialization after ELPA Package Load ---
-;; ----------------------------------------------
-
-(setq package-enable-at-startup nil)
-(package-initialize)
