@@ -18,6 +18,9 @@
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
+ '(el-get-git-shallow-clone t)
+ '(el-get-recipe-path-elpa "~/.emacs.d/el-get-recipes/elpa/")
+ '(el-get-recipe-path-emacswiki "~/.emacs.d/el-get-recipes/emacswiki/")
  '(fill-column 79)
  '(flymake-no-changes-timeout 5)
  '(flyspell-issue-welcome-flag nil)
@@ -140,7 +143,6 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 (require 'el-get nil 'noerror)
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
 
 ;; --------------------------
