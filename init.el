@@ -134,12 +134,14 @@
  '(trailing-whitespace ((t (:background "red1")))))
 
 ;; ---------------------------------
-;; --- ELPA package repositories ---
+;; --- el-get package management ---
 ;; ---------------------------------
 
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(require 'el-get nil 'noerror)
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
 
 ;; --------------------------
 ;; --- Start emacs server ---
