@@ -3,6 +3,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bbdb-file "~/Dropbox/0-Work/bbdb.el")
+ '(bbdb-north-american-phone-numbers-p nil)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "k&r"))))
@@ -50,8 +52,7 @@
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-auto-save-directory "/tmp/")
  '(vc-handled-backends (quote (svn)))
- '(wl-init-file "~/.emacs.d/wl-init.el")
- '(wl-message-scroll-amount 6))
+ '(wl-init-file "~/.emacs.d/wl-init.el"))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -134,14 +135,24 @@
  '(senator-momentary-highlight-face ((t (:background "gray30"))))
  '(show-paren-match-face ((t (:foreground "#0090FF" :background "black"))) t)
  '(show-paren-mismatch-face ((t (:foreground "white" :background "purple"))) t)
- '(trailing-whitespace ((t (:background "red1")))))
+ '(trailing-whitespace ((t (:background "red1"))))
+ '(wl-highlight-summary-prefetch-face ((t (:foreground "medium spring green"))))
+ '(wl-highlight-summary-refiled-face ((t (:foreground "DeepSkyBlue")))))
+
+;; ------------------------------
+;; --- overlay cedet packages ---
+;; ------------------------------
+
+(setq cedet-root-path (file-name-as-directory "~/.emacs.d/cedet-bzr/"))
+
+(load-file (concat cedet-root-path "cedet-devel-load.el"))
+(add-to-list 'load-path (concat cedet-root-path "contrib"))
 
 ;; ---------------------------------
 ;; --- el-get package management ---
 ;; ---------------------------------
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
 (require 'el-get nil 'noerror)
 (el-get 'sync)
 
@@ -465,11 +476,6 @@
 ;; --- CEDET Configuration ---
 ;; ---------------------------
 
-(setq cedet-root-path (file-name-as-directory "~/.emacs.d/cedet-bzr/"))
-
-(load-file (concat cedet-root-path "cedet-devel-load.el"))
-(add-to-list 'load-path (concat cedet-root-path "contrib"))
-
 ;; select which submodes we want to activate
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
@@ -644,6 +650,6 @@ M-x compile.
 ;; --- Wanderlust E-Mail Client ---
 ;; --------------------------------
 
-(autoload 'wl "wl" "Wanderlust" t)
-(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
+;(autoload 'wl "wl" "Wanderlust" t)
+;(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+;(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
