@@ -48,18 +48,18 @@
       wl-biff-check-folder-list '("%INBOX")
 
       ;; interval to check for new messages
-      wl-biff-check-interval 5
+      wl-biff-check-interval 30
 
       ;; check folders
-      wl-folder-check-async  t
+      ;wl-folder-check-async  t
       wl-auto-check-folder-name 'none
       wl-auto-check-folder-list '("^\\.")
       wl-auto-uncheck-folder-list nil
 
       wl-folder-notify-deleted t
       wl-fldmgr-add-complete-with-current-folder-list t
-      wl-folder-info-save t
-      wl-folder-many-unsync-threshold  100
+      ;wl-folder-info-save t
+      ;wl-folder-many-unsync-threshold  100
       wl-highlight-folder-by-numbers 1
 
       ;; fetching large messages
@@ -162,14 +162,25 @@ a sound to be played"
     (message (concat title ": " msg))))
 
 ;; my mail notification
-(defun my-mail-notify ()
+(defun my-mail-notify (message &optional header)
   "Notify through that new mail has arrived."
-  (djcb-popup "Wanderlust" "You have new mail!"
+  (djcb-popup "Wanderlust"
+              (format "New mail: %s. %s"
+                      header
+                      (substring message 0 (min 30 (length message))))
               "/usr/share/icons/gnome/32x32/status/mail-unread.png"
               "/usr/share/sounds/ubuntu/stereo/phone-incoming-call.ogg")
   (wl-summary-sync-update))
 
 (add-hook 'wl-biff-notify-hook 'my-mail-notify)
+
+;; Set mail-icon to be shown universally in the modeline.
+(setq global-mode-string
+      (cons
+       '(wl-modeline-biff-status
+         wl-modeline-biff-state-on
+         wl-modeline-biff-state-off)
+       global-mode-string))
 
 ;; prefer plain text display
 (setq mime-view-type-subtype-score-alist
@@ -210,20 +221,19 @@ a sound to be played"
       wl-smtp-authenticate-type "plain"
       wl-smtp-posting-user "timo@bingmann.com"
       wl-message-id-domain "mail.hmtg.de")
-
-(setq wl-smtp-posting-server "smtp.rz.uni-karlsruhe.de"
-      wl-smtp-posting-port 587
-      wl-smtp-connection-type 'starttls
-      wl-smtp-authenticate-type "plain"
-      wl-smtp-posting-user "timo.bingmann@kit.edu"
-      wl-message-id-domain "kit.edu")
-         
+      
 ;; config from From: header
 (setq wl-draft-config-matchone t)
 (setq wl-draft-config-alist
       '(("^From: .*timo@tbingmann\\.de"
          )
         ("^From: .*bingmann@kit\\.edu"
+         (wl-smtp-posting-server . "smtp.rz.uni-karlsruhe.de")
+         (wl-smtp-posting-port . 587)
+         (wl-smtp-connection-type . 'starttls)
+         (wl-smtp-authenticate-type . "plain")
+         (wl-smtp-posting-user . "timo.bingmann@kit.edu")
+         (wl-message-id-domain . "kit.edu")
 ;         (smtp-use-gnutls . t)
 ;         (ssl-program-name . "gnutls-cli")
 ;         (ssl-program-arguments . '("--port" service
@@ -241,9 +251,5 @@ a sound to be played"
 (define-key wl-summary-mode-map (kbd "a") 'wl-summary-reply-with-citation)
 
 ;; more modes in when editing mail
-(add-hook 'mime-edit-mode-hook 'turn-on-flyspell)
-(add-hook 'mime-edit-mode-hook 'turn-on-auto-fill)
-
-;; BBDB
-(require 'bbdb-wl)
-(bbdb-wl-setup)
+;(add-hook 'mime-edit-mode-hook 'turn-on-flyspell)
+;(add-hook 'mime-edit-mode-hook 'turn-on-auto-fill)

@@ -3,8 +3,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(bbdb-file "~/Dropbox/0-Work/bbdb.el")
- '(bbdb-north-american-phone-numbers-p nil)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "k&r"))))
@@ -30,6 +28,7 @@
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-commit-fill-column 100000)
+ '(gnus-init-file "~/.emacs.d/gnus.el")
  '(grep-command "grep -nH ")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -41,6 +40,7 @@
  '(magit-status-verbose-untracked nil)
  '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
+ '(nntp-authinfo-file "~/.emacs.d/authinfo")
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
@@ -646,10 +646,3 @@ M-x compile.
        (revert-buffer t t))
    (call-interactively 'compile)))
 
-;; --------------------------------
-;; --- Wanderlust E-Mail Client ---
-;; --------------------------------
-
-;(autoload 'wl "wl" "Wanderlust" t)
-;(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
-;(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
