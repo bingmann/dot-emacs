@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(auth-sources (quote ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "k&r"))))
@@ -28,7 +29,7 @@
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-commit-fill-column 100000)
- '(gnus-init-file "~/.emacs.d/gnus.el")
+ '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
@@ -96,6 +97,31 @@
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
  '(font-lock-warning-face ((((class color) (min-colors 88) (background dark)) (:foreground "Red" :weight bold))))
  '(fringe ((t (:background "gray10"))))
+ '(gnus-button ((t (:underline t))))
+ '(gnus-group-mail-1 ((t (:foreground "#e1ffe1" :weight bold :height 140 :family "Courier"))))
+ '(gnus-group-mail-1-empty ((t (:inherit gnus-group-mail-1 :weight normal))))
+ '(gnus-group-mail-1-empty-face ((t (:inherit gnus-group-mail-1 :weight normal))) t)
+ '(gnus-group-mail-1-face ((t (:inherit gnus-group-mail-1 :weight bold))) t)
+ '(gnus-group-mail-2 ((t (:foreground "DarkSeaGreen1" :weight bold :height 140 :family "Courier"))))
+ '(gnus-group-mail-2-empty ((t (:inherit gnus-group-mail-2 :weight normal))))
+ '(gnus-group-mail-2-empty-face ((t (:inherit gnus-group-mail-2 :weight normal))) t)
+ '(gnus-group-mail-2-face ((t (:inherit gnus-group-mail-2 :weight bold))) t)
+ '(gnus-group-mail-3 ((t (:foreground "aquamarine1" :weight bold :height 140 :family "Courier"))))
+ '(gnus-group-mail-3-empty ((t (:inherit gnus-group-mail-3 :weight normal))))
+ '(gnus-group-mail-3-empty-face ((t (:inherit gnus-group-mail-3 :weight normal))) t)
+ '(gnus-group-mail-3-face ((t (:inherit gnus-group-mail-3 :weight bold))) t)
+ '(gnus-header-content ((t (:foreground "SpringGreen1" :height 140 :family "Courier"))))
+ '(gnus-header-from ((t (:foreground "PaleGreen1" :height 140 :family "Courier"))))
+ '(gnus-header-name ((t (:foreground "SpringGreen2" :height 140 :family "Courier"))))
+ '(gnus-header-newsgroups ((t (:foreground "yellow" :height 140 :family "Courier"))))
+ '(gnus-header-subject ((t (:foreground "DeepSkyBlue" :height 140 :family "Courier"))))
+ '(gnus-summary-cancelled ((t (:background "black" :foreground "yellow" :height 140 :family "Courier"))))
+ '(gnus-summary-high-ancient ((t (:foreground "SkyBlue" :weight bold :height 140 :family "Courier"))))
+ '(gnus-summary-low-ancient ((t (:foreground "SkyBlue" :slant italic :height 140 :family "Courier"))))
+ '(gnus-summary-normal-ancient ((t (:foreground "SkyBlue" :height 140 :family "Courier"))))
+ '(gnus-summary-normal-read ((t (:foreground "PaleGreen" :height 140 :family "Courier"))))
+ '(gnus-summary-normal-unread ((t (:weight bold :height 140 :family "Courier"))))
+ '(gnus-summary-selected ((t (:underline t :height 140 :family "Courier"))))
  '(highlight ((t (:background "#222277"))))
  '(hl-line ((t (:background "#112233"))))
  '(isearch ((t (:foreground "brown4" :background "palevioletred2"))))
@@ -136,6 +162,7 @@
  '(show-paren-match-face ((t (:foreground "#0090FF" :background "black"))) t)
  '(show-paren-mismatch-face ((t (:foreground "white" :background "purple"))) t)
  '(trailing-whitespace ((t (:background "red1"))))
+ '(widget-button ((t (:underline t))))
  '(wl-highlight-summary-prefetch-face ((t (:foreground "medium spring green"))))
  '(wl-highlight-summary-refiled-face ((t (:foreground "DeepSkyBlue")))))
 
@@ -151,6 +178,8 @@
 ;; ---------------------------------
 ;; --- el-get package management ---
 ;; ---------------------------------
+
+(push "~/.emacs.d/el-get/gnus/lisp/" load-path)
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 (require 'el-get nil 'noerror)
@@ -183,7 +212,9 @@
 (setq ispell-program-name "/usr/bin/hunspell")
 
 (setq ispell-local-dictionary-alist
-      '(("en_US" ; Yankee English
+      '((nil     ; default
+         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
+        ("en_US" ; Yankee English
          "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
         ("en_GB" ; British English
          "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
