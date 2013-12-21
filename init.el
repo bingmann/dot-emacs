@@ -19,9 +19,6 @@
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
- '(el-get-git-shallow-clone t)
- '(el-get-recipe-path-elpa "~/.emacs.d/el-get-recipes/elpa/")
- '(el-get-recipe-path-emacswiki "~/.emacs.d/el-get-recipes/emacswiki/")
  '(fill-column 79)
  '(flymake-no-changes-timeout 5)
  '(flyspell-issue-welcome-flag nil)
@@ -178,11 +175,67 @@
 ;; --- el-get package management ---
 ;; ---------------------------------
 
+;; overlay newer gnus packages over emacs defaults
 (push "~/.emacs.d/el-get/gnus/lisp/" load-path)
 
+;; load el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-(require 'el-get nil 'noerror)
-(el-get 'sync)
+
+;; configure el-get
+(setq el-get-recipe-path-elpa "~/.emacs.d/el-get-recipes/elpa/"
+      el-get-recipe-path-emacswiki "~/.emacs.d/el-get-recipes/emacswiki/"
+      el-get-git-shallow-clone t
+      )
+
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+   (lambda (s) (end-of-buffer) (eval-print-last-sexp))))
+
+;; BEGIN package list to el-get
+(setq my-el-get-packages '(el-get))
+
+;; general emacs behaviour extensions
+(add-to-list 'my-el-get-packages 'goto-last-change)
+(add-to-list 'my-el-get-packages 'smooth-scrolling)
+(add-to-list 'my-el-get-packages 'bm)
+(add-to-list 'my-el-get-packages 'dired+)
+(add-to-list 'my-el-get-packages 'flymake)
+(add-to-list 'my-el-get-packages 'rainbow-delimiters)
+(add-to-list 'my-el-get-packages 'rebox2)
+
+;; text editing modes
+(add-to-list 'my-el-get-packages 'markdown-mode)
+(add-to-list 'my-el-get-packages 'org-mode)
+(add-to-list 'my-el-get-packages 'yaml-mode)
+(add-to-list 'my-el-get-packages 'auctex)
+
+;; programming modes
+(add-to-list 'my-el-get-packages 'apache-mode)
+(add-to-list 'my-el-get-packages 'cmake-mode)
+(add-to-list 'my-el-get-packages 'cperl-mode)
+(add-to-list 'my-el-get-packages 'php-mode)
+(add-to-list 'my-el-get-packages 'python-mode)
+(add-to-list 'my-el-get-packages 'protobuf-mode)
+(add-to-list 'my-el-get-packages 'lua-mode)
+(add-to-list 'my-el-get-packages 'doxymacs)
+
+;; version control
+(add-to-list 'my-el-get-packages 'magit)
+(add-to-list 'my-el-get-packages 'dsvn)
+
+;; email and news reader
+(add-to-list 'my-el-get-packages 'gnus)
+(add-to-list 'my-el-get-packages 'bbdb)
+(add-to-list 'my-el-get-packages 'tc) ;; trivial cite
+(add-to-list 'my-el-get-packages 'gnus-notify)
+
+;; END package list to el-get
+
+;; install missing packages from list above
+(el-get 'sync my-el-get-packages)
+;; remove everything not in the list above
+(el-get-cleanup my-el-get-packages)
 
 ;; --------------------------
 ;; --- Start emacs server ---
