@@ -52,8 +52,7 @@
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-auto-save-directory "/tmp/")
- '(vc-handled-backends (quote (svn)))
- '(wl-init-file "~/.emacs.d/wl-init.el"))
+ '(vc-handled-backends (quote (svn))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -360,32 +359,28 @@
 ;; --- General Customization ---
 ;; -----------------------------
 
-; turn on paren matching
+;; turn on paren matching
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
 
-; disable toolbar
+;; disable toolbar
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
 
-; make all "yes or no" prompts show "y or n" instead
+;; make all "yes or no" prompts show "y or n" instead
 (fset 'yes-or-no-p 'y-or-n-p)
 
-; hook for cperl-mode to automatically set my favorite style
+;; hook for cperl-mode to automatically set my favorite style
 (add-hook 'cperl-mode-hook (lambda () (cperl-set-style "C++")))
 
-; "filename [mode]" in title bar
-(setq frame-title-format '("%f [mode: %m] @ " (getenv "HOSTNAME")))
+;; "filename [mode]" in title bar
+(setq frame-title-format '("%f [mode: %m]"))
 
-; kills all them buffers except scratch.
-(defun nuke-all-buffers ()
-  "kill all buffers, leaving *scratch* only"
-  (interactive)
-  (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
-  (delete-other-windows))
-
-(global-set-key (kbd "C-x K") 'nuke-all-buffers)
+;; in every buffer, the line which contains the cursor will be fully highlighted
+;(global-hl-line-mode 1)
+;; enable inline images:
+;(iimage-mode)
 
 ;; --------------------------------
 ;; --- Some custom key bindings ---
@@ -403,6 +398,16 @@
 (global-set-key "\M-`" 'delete-other-windows)
 (global-set-key "\M-2" 'new-frame)
 (global-set-key "\M-3" 'delete-frame)
+
+
+; kills all them buffers except scratch.
+(defun nuke-all-buffers ()
+  "kill all buffers, leaving *scratch* only"
+  (interactive)
+  (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
+  (delete-other-windows))
+
+(global-set-key (kbd "C-x K") 'nuke-all-buffers)
 
 ; set keys f9-f12 to insert German umlauts and sz
 (global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
@@ -497,30 +502,80 @@
       (doxymacs-font-lock)))
 (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
 
-;; bm line bookmark mode
+;; -----------------------------
+;; --- bm line bookmark mode ---
+;; -----------------------------
 
 (global-set-key (kbd "<M-f2>") 'bm-toggle)
 (global-set-key (kbd "<f2>")   'bm-next)
 (global-set-key (kbd "<S-f2>") 'bm-previous)
+
+;; ------------------------
+;; --- Smooth Scrolling ---
+;; ------------------------
+
+;; Scroll line by line
+(setq redisplay-dont-pause t
+  scroll-margin 1
+  scroll-conservatively 10000
+  scroll-preserve-screen-position 1)
+
+(require 'smooth-scrolling)
+(setq mouse-wheel-scroll-amount '(4 ((shift) . 4))) ;; one line at a time    
+(setq mouse-wheel-progressive-speed 't) ;; don't accelerate scrolling    
+(setq mouse-wheel-follow-mouse nil) ;; scroll window under mouse
+(setq scroll-step 4) ;; keyboard scroll one line at a time
+
+;; ---------------------------------
+;; --- Window Movement Shortcuts ---
+;; ---------------------------------
+
+(require 'windmove)
+(windmove-default-keybindings)
+
+(global-set-key [M-left] 'windmove-left)          ; move to left windnow
+(global-set-key [M-right] 'windmove-right)        ; move to right window
+(global-set-key [M-up] 'windmove-up)              ; move to upper window
+(global-set-key [M-down] 'windmove-down)          ; move to downer window
+
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 ;; ---------------------------
 ;; --- CEDET Configuration ---
 ;; ---------------------------
 
 ;; select which submodes we want to activate
+
+; activates CEDET's context menu that is bound to right mouse button;
 (add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
+; activates use of separate styles for tags decoration
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
-;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
+; activates highlighting of first line for current tag (function, class, etc.);
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+; activates displaying of possible name completions in the idle time
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
+; activates highlighting of local names that are the same as name of tag under cursor
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
+; activates automatic parsing of source code in the idle time
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+; enables automatic bookmarking of tags that you edited
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
+; shows which elements weren't processed by current parser's rules;
 (add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
+; activates mode when name of current tag will be shown in top line of buffer;
 (add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+; enables global support for Semanticdb
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
+; activates displaying of information about current tag in the idle time.
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode) 
+; shows changes in the text that weren't processed by incremental parser yet.
+;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
+
 
 ;; add knowledge of qt to emacs
 (setq qt4-base-dir "/usr/include/qt4")
@@ -561,29 +616,60 @@
 (setq-mode-local c-mode semanticdb-find-default-throttle
                  '(project unloaded system recursive))
 
+;; Integration with imenu
+(defun semantic-imenu-hook ()
+  (imenu-add-to-menubar "TAGS"))
+(add-hook 'semantic-init-hooks 'semantic-imenu-hook)
+
+;; auto-complete intrgration
+(defun c-mode-autocomplete-cedet-hook ()
+  (add-to-list 'ac-sources 'ac-source-gtags)
+  (add-to-list 'ac-sources 'ac-source-semantic))
+(add-hook 'c-mode-common-hook 'c-mode-autocomplete-cedet-hook)
+
 ;; load contrib library
 (require 'eassist)
 
 ;; customisation of modes
 (defun my-cedet-hook ()
+  ;; whatever the symbol you are typing, this hot key automatically complete it for you.
   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
+  ;; another way to complete the symbol you are typing
   (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
-  ;;
+
+  ;; when you typed . or -> after an object name, use this key to show possible public member functions or data members.
   (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+  ;; visit the header file under cursor
   (local-set-key "\C-c=" 'semantic-decoration-include-visit)
+
   ;;
-  ;;(local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  ;;(local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
   (local-set-key "\C-ce" 'eassist-list-methods)
   ;;
   (local-set-key "\C-cr" 'semantic-symref)
-  ;;
-  (local-set-key "\C-c<" 'semantic-ia-fast-jump)
-  (local-set-key "\C-cq" 'semantic-ia-show-doc)
-  (local-set-key "\C-cs" 'semantic-ia-show-summary)
-  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+  ;; rename local variable under cursor
   (local-set-key "\C-c\C-r" 'semantic-symref-rename-local-variable)
 
+  ;; jump to the definition of the symbol under cursor 
+  (local-set-key "\C-c<" 'semantic-ia-fast-jump)
+  ;;  show the document of the symbol under cursor
+  (local-set-key "\C-cq" 'semantic-ia-show-doc)
+  ;; show a summary about the symbol under cursor
+  (local-set-key "\C-cs" 'semantic-ia-show-summary)
+  ;; toggle between the implementation and a prototype of symbol under cursor
+  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+
+  ;; unfold the block under cursor
+  (local-set-key "\C-c+" 'semantic-tag-folding-show-block)
+  ;; fold the block under cursor
+  (local-set-key "\C-c-" 'semantic-tag-folding-fold-block)
+  ;; unfold all
+  (local-set-key "\C-c\C-c+" 'semantic-tag-folding-show-all)
+  ;; fold all
+  (local-set-key "\C-c\C-c-" 'semantic-tag-folding-fold-all)
+
+  ;; show emacs code browser
   (local-set-key "\C-cb" 'ecb-activate)
 
   (gtags-mode t)
@@ -591,6 +677,7 @@
 
   (qt-cedet-setup)
   )
+
 (add-hook 'c-mode-common-hook 'my-cedet-hook)
 (add-hook 'lisp-mode-hook 'my-cedet-hook)
 (add-hook 'scheme-mode-hook 'my-cedet-hook)
@@ -603,11 +690,6 @@
 ;; EDE
 (global-ede-mode 1)
 (ede-enable-generic-projects)
-
-;; ECB
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb-alexott/"))
-(require 'ecb)
-;(require 'ecb-autoloads)
 
 ;; CMake Projects
 (ede-cpp-root-project "stxxl"
@@ -655,6 +737,16 @@
   ;(setq c-macro-names-with-semicolon '("Q_OBJECT" "Q_PROPERTY" "Q_DECLARE" "Q_ENUMS"))
   ;(c-make-macro-with-semi-re)
   )
+
+;; --------------------------------
+;; --- ECB - Emacs Code Browser ---
+;; --------------------------------
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb-alexott/"))
+;(require 'ecb)
+(require 'ecb-autoloads)
+(setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
+(setq stack-trace-on-error t)
 
 ;; --------------------------------
 ;; --- Recompile Same Directory ---

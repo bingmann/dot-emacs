@@ -24,9 +24,6 @@
       smtpmail-smtp-server "mail.hmtg.de"
       smtpmail-smtp-service 2401
       smtpmail-stream-type 'ssl
-      ;smtpmail-auth-credentials '(("mail.hmtg.de" 2401 "timo@bingmann.com" nil))
-      ;smtpmail-local-domain "deka.local"
-      ;smtpmail-sendto-domain "deka.local"
       smtpmail-debug-info t ; to debug problems
       )
 
@@ -35,7 +32,7 @@
 
 ;; Summary customizations
 (setq-default
-  gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%s%)\n"
+  gnus-summary-line-format "%U%R%z %(%&user-date;  %-15,15f  %B%S%)\n"
   gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
   gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
   gnus-sum-thread-tree-false-root ""
@@ -52,7 +49,7 @@
         ))
 
 ;; Caching
-(setq gnus-use-cache t
+(setq gnus-use-cache nil
       gnus-cache-directory "~/.gnus.d/cache/"
       gnus-cache-enter-articles '(ticked dormant read unread)
       gnus-cache-remove-articles nil
@@ -72,7 +69,7 @@
 ;(setq gnus-permanently-visible-groups ".*.*")
 (setq gnus-permanently-visible-groups "^INBOX$")
 ;(setq gnus-group-line-format "%P%M%S%5y:%B%(%G%)\n")
-        
+
 
 ;; don't ask how many emails to download
 (setq gnus-large-newsgroup 'nil)
@@ -95,7 +92,7 @@
 
       mail-source-directory "~/.gnus.d/mail/"
       message-directory "~/.gnus.d/mail/"
- 
+
       gnus-treat-display-smileys nil
 
       gnus-message-archive-group "Sent")
@@ -105,7 +102,7 @@
           ;; list all the subscribed groups even they contain zero un-read messages
           (lambda ()
             ;(local-set-key "o" 'my-gnus-group-list-subscribed-groups )
-            (menu-bar-mode)
+            ;(menu-bar-mode)
             )
           )
 
@@ -146,7 +143,7 @@
   ;; [a]rchive and [d]elete
   (define-key gnus-summary-mode-map [?d] 'gnus-summary-move-to-trash)
   (define-key gnus-summary-mode-map [?a] 'gnus-summary-move-to-archive)
-  ;; switch meaning of N and n, P and p            
+  ;; switch meaning of N and n, P and p
   (define-key gnus-summary-mode-map [?n] 'gnus-summary-next-article)
   (define-key gnus-summary-mode-map [?p] 'gnus-summary-prev-article)
   (define-key gnus-summary-mode-map [?N] 'gnus-summary-next-unread-article)
@@ -177,44 +174,6 @@
   (gnus-summary-next-article)
 )
 
-;(defvar bbdb-time-internal-format "%Y-%m-%d"
-;  "The internal date format.");
-;
-;(defun bbdb-timestamp-hook (record)
-;  "For use as a `bbdb-change-hook'; maintains a notes-field called `timestamp'
-;    for the given record which contains the time when it was last modified.  If
-;    there is such a field there already, it is changed, otherwise it is added."
-;  (bbdb-record-putprop record 'timestamp (format-time-string
-;                                          bbdb-time-internal-format
-;                                          (current-time))))
-;)
-
-;; Posting style
-;(setq gnus-posting-styles 
-;      '((".*"
-;         (name "Morten Leander Petersen")
-;         (from "Morten Leander Petersen <mortenlp2@gmail.com>")
-;         (signature "/Morten")))
-;      )
-
-
-;; tells gnus to get new mail and also display all old mail
-;(define-key gnus-summary-mode-map (kbd "C-c C-c")
-;  (lambda ()
-;    (interactive)
-;    (gnus-summary-rescan-group 'all)))
-
-;(defun my-gnus-group-list-subscribed-groups ()
-;  "List all subscribed groups with or without un-read messages"
-;  (interactive)
-;  (gnus-group-list-all-groups 5)
-;  )
-
-;(add-hook 'gnus-group-mode-hook
-;          ;; list all the subscribed groups even they contain zero un-read messages
-;          (lambda () (local-set-key "o" 'my-gnus-group-list-subscribed-groups ))
-;          )
-
 ;; Trivial-Cite configuration
 (setq message-cite-function 'trivial-cite
       tc-mouse-overlays t
@@ -225,13 +184,13 @@
 (defun my-tc-simple-attribution ()
   "Produce the standard attribution string, using the real name."
   (let ((date (assoc "date" tc-strings-list))
-	(email (assoc "email-addr" tc-strings-list))
+        (email (assoc "email-addr" tc-strings-list))
         (name (assoc "real-name" tc-strings-list)))
     (if (and (null name) (null email))
-	"An unnamed person wrote:\n\n"
+        "An unnamed person wrote:\n\n"
       (if (null date)
-	  (concat (cdr (or name email)) " wrote:\n\n")
-	(concat "On " (cdr date) ", "
+          (concat (cdr (or name email)) " wrote:\n\n")
+        (concat "On " (cdr date) ", "
                 (or (concat (cdr name) " <" (cdr email) ">") (cdr email)) " wrote:\n")))))
 
 (setq tc-make-attribution 'my-tc-simple-attribution)
