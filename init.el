@@ -182,15 +182,18 @@
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
 
 ;; configure el-get
-(setq el-get-recipe-path-elpa "~/.emacs.d/el-get-recipes/elpa/"
-      el-get-recipe-path-emacswiki "~/.emacs.d/el-get-recipes/emacswiki/"
+(setq el-get-install-branch "master"
+      el-get-install-skip-emacswiki-recipes t
       el-get-git-shallow-clone t
       )
 
 (unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s) (end-of-buffer) (eval-print-last-sexp))))
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max)) (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
 
 ;; BEGIN package list to el-get
 (setq my-el-get-packages '(el-get))
@@ -228,7 +231,7 @@
 (add-to-list 'my-el-get-packages 'gnus)
 (add-to-list 'my-el-get-packages 'bbdb)
 (add-to-list 'my-el-get-packages 'tc) ;; trivial cite
-(add-to-list 'my-el-get-packages 'gnus-notify)
+;(add-to-list 'my-el-get-packages 'gnus-notify)
 
 ;; END package list to el-get
 
