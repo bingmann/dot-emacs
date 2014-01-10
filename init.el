@@ -31,6 +31,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
+ '(lua-indent-level 4)
  '(magit-item-highlight-face nil)
  '(magit-save-some-buffers (quote dontask))
  '(magit-stage-all-confirm nil)
@@ -56,11 +57,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "black" :foreground "white" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 117 :width normal :foundry "Misc" :family "Fixed"))))
+ '(default ((t (:background "black" :foreground "white"))))
  '(bm-face ((t (:background "#604000"))))
  '(bm-fringe-face ((t (:background "DarkOrange1"))))
  '(bold ((t (:bold t))))
  '(bold-italic ((t (:italic t :bold t))))
+ '(column-marker-1 ((t (:background "dark red" :weight bold))))
  '(cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
  '(cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
  '(cursor ((t (:background "palegoldenrod"))))
@@ -158,9 +160,13 @@
  '(show-paren-match-face ((t (:foreground "#0090FF" :background "black"))) t)
  '(show-paren-mismatch-face ((t (:foreground "white" :background "purple"))) t)
  '(trailing-whitespace ((t (:background "red1"))))
- '(widget-button ((t (:underline t))))
- '(wl-highlight-summary-prefetch-face ((t (:foreground "medium spring green"))))
- '(wl-highlight-summary-refiled-face ((t (:foreground "DeepSkyBlue")))))
+ '(widget-button ((t (:underline t)))))
+
+;; ---------------------------
+;; --- change default font ---
+;; ---------------------------
+
+(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
 
 ;; ------------------------------
 ;; --- overlay cedet packages ---
@@ -206,6 +212,9 @@
 (add-to-list 'my-el-get-packages 'flymake)
 (add-to-list 'my-el-get-packages 'rainbow-delimiters)
 (add-to-list 'my-el-get-packages 'rebox2)
+(add-to-list 'my-el-get-packages 'gtags)
+(add-to-list 'my-el-get-packages 'folding)
+(add-to-list 'my-el-get-packages 'column-marker)
 
 ;; text editing modes
 (add-to-list 'my-el-get-packages 'markdown-mode)
@@ -222,6 +231,7 @@
 (add-to-list 'my-el-get-packages 'protobuf-mode)
 (add-to-list 'my-el-get-packages 'lua-mode)
 (add-to-list 'my-el-get-packages 'doxymacs)
+(add-to-list 'my-el-get-packages 'tt-mode)
 
 ;; version control
 (add-to-list 'my-el-get-packages 'magit)
@@ -344,18 +354,18 @@
   (let (window pos file)
     (save-excursion
       (setq window (posn-window (event-end event))
-	    pos (posn-point (event-end event)))
+            pos (posn-point (event-end event)))
       (if (not (windowp window))
-	  (error "No file chosen"))
+          (error "No file chosen"))
       (set-buffer (window-buffer window))
       (goto-char pos)
       (setq file (dired-get-file-for-visit)))
     (if (file-directory-p file)
-	(or (and (cdr dired-subdir-alist)
-		 (dired-goto-subdir file))
-	    (progn
-	      (select-window window)
-	      (dired file)))
+        (or (and (cdr dired-subdir-alist)
+                 (dired-goto-subdir file))
+            (progn
+              (select-window window)
+              (dired file)))
       (select-window window)
       (find-file (file-name-sans-versions file t)))))
 
@@ -411,6 +421,8 @@
 )
 (add-hook 'markdown-mode-hook 'my-markdown-mode)
 
+(folding-add-to-marks-list 'lua-mode "-- {{{" "-- }}}" nil t)
+
 ;; -----------------------------
 ;; --- General Customization ---
 ;; -----------------------------
@@ -455,6 +467,8 @@
 (global-set-key "\M-2" 'new-frame)
 (global-set-key "\M-3" 'delete-frame)
 
+; quick comment and uncommenting
+(global-set-key (kbd "C-c SPC") 'comment-or-uncomment-region)
 
 ; kills all them buffers except scratch.
 (defun nuke-all-buffers ()
@@ -476,7 +490,7 @@
 
 ; more insertion macros associated with f9-f12
 (global-set-key (kbd "<M-f9>") (lambda() (interactive)
-  (insert " *  Copyright (C) 2013 Timo Bingmann <tb@panthema.net>")))
+  (insert " *  Copyright (C) 2014 Timo Bingmann <tb@panthema.net>")))
 
 ; magit status
 
@@ -571,16 +585,24 @@
 ;; ------------------------
 
 ;; Scroll line by line
-(setq redisplay-dont-pause t
-  scroll-margin 1
-  scroll-conservatively 10000
-  scroll-preserve-screen-position 1)
+(setq redisplay-dont-pause t)
+;; number of lines at the top and bottom of a window.
+(setq scroll-margin 2)
+;; Controls if scroll commands move point to keep its screen position unchanged.
+(setq scroll-preserve-screen-position nil)
 
 (require 'smooth-scrolling)
-(setq mouse-wheel-scroll-amount '(4 ((shift) . 4))) ;; one line at a time    
-(setq mouse-wheel-progressive-speed 't) ;; don't accelerate scrolling    
-(setq mouse-wheel-follow-mouse nil) ;; scroll window under mouse
-(setq scroll-step 4) ;; keyboard scroll one line at a time
+ ;; four line at a time
+(setq mouse-wheel-scroll-amount '(4 ((shift) . 4)))
+ ;; accelerate scrolling
+(setq mouse-wheel-progressive-speed 't)
+ ;; scroll window under mouse
+(setq mouse-wheel-follow-mouse 't)
+;; keyboard scroll four line at a time
+(setq scroll-step 4)
+;; number of lines at the top and bottom of a window.
+(setq smooth-scroll-margin 3)
+(setq smooth-scroll-strict-margins 't)
 
 ;; ---------------------------------
 ;; --- Window Movement Shortcuts ---
@@ -628,7 +650,7 @@
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
 ; activates displaying of information about current tag in the idle time.
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode) 
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 ; shows changes in the text that weren't processed by incremental parser yet.
 ;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
 
@@ -707,7 +729,7 @@
   ;; rename local variable under cursor
   (local-set-key "\C-c\C-r" 'semantic-symref-rename-local-variable)
 
-  ;; jump to the definition of the symbol under cursor 
+  ;; jump to the definition of the symbol under cursor
   (local-set-key "\C-c<" 'semantic-ia-fast-jump)
   ;;  show the document of the symbol under cursor
   (local-set-key "\C-cq" 'semantic-ia-show-doc)
@@ -794,6 +816,11 @@
   ;(c-make-macro-with-semi-re)
   )
 
+;; mark 80th column on some modes
+
+(add-hook 'c-mode-common-hook (lambda () (column-marker-1 80)))
+(add-hook 'cmake-mode-hook (lambda () (column-marker-1 80)))
+
 ;; --------------------------------
 ;; --- ECB - Emacs Code Browser ---
 ;; --------------------------------
@@ -819,9 +846,8 @@ M-x compile.
 """
  (interactive "p")
  (if (and (eq pfx 1)
-	  compilation-last-buffer)
+          compilation-last-buffer)
      (progn
        (set-buffer compilation-last-buffer)
        (revert-buffer t t))
    (call-interactively 'compile)))
-

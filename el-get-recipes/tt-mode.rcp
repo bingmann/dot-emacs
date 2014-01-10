@@ -1,0 +1,6 @@
+(:name tt-mode
+       :description "Template Toolkit Mode for Emacs"
+       :type git
+       :url "https://github.com/davorg/tt-mode.git"
+       :pkgname "tt-mode")
+

@@ -204,3 +204,14 @@
 (require 'gnus-desktop-notify)
 (gnus-desktop-notify-mode)
 (gnus-demon-add-scanmail)
+
+;; Change fonts in Article buffer
+(defun tb-message-buffer-faces ()
+  "Changes faces in Message and Article buffers"
+  (interactive)
+  (set (make-local-variable 'face-remapping-alist)
+       '((default :family "Courier" :height 140)
+         )))
+
+(add-hook 'gnus-article-mode-hook 'tb-message-buffer-faces)
+(add-hook 'message-mode-hook 'tb-message-buffer-faces)
