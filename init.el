@@ -15,12 +15,12 @@
  '(cperl-extra-newline-before-brace-multiline nil)
  '(dired-dwim-target t)
  '(dired-use-ls-dired t)
+ '(doc-view-continuous t)
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(fill-column 79)
- '(flymake-no-changes-timeout 5)
  '(flyspell-issue-welcome-flag nil)
  '(flyspell-large-region nil)
  '(font-latex-fontify-sectioning 1.0)
@@ -46,7 +46,6 @@
  '(reftex-default-bibliography (quote ("~/Dropbox/0-Work/library.bib")))
  '(safe-local-variable-values (quote ((rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
- '(semanticdb-default-save-directory "~/.emacs.d/semanticdb")
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-auto-save-directory "/tmp/")
@@ -560,17 +559,48 @@
 (add-hook 'TeX-mode-hook 'my-latex-key-bindings)
 (add-hook 'LaTeX-mode-hook 'my-latex-key-bindings)
 
-(require 'flymake)
-
-(defun flymake-get-tex-args (file-name)
-  (list "pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
-
 ; doxymacs: automatically activate font-lock overlay mode for C/C++ files
 
 (defun my-doxymacs-font-lock-hook ()
   (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
       (doxymacs-font-lock)))
 (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
+;; --------------------
+;; --- flymake mode ---
+;; --------------------
+
+(eval-after-load "flymake"
+  '(progn
+     ;; compile tex using pdflatex
+     (defun flymake-get-tex-args (file-name)
+       (list "flymake-pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
+
+     ;; severe logging
+     ;(setq flymake-log-level 9)
+
+     ;; changes timeout
+     (setq flymake-no-changes-timeout 5)
+
+     ;; dont run on enters
+     (setq flymake-start-syntax-check-on-newline nil)
+
+     ;; scan complete files for matching include lines
+     (setq flymake-check-file-limit nil)
+
+     ;; fixes unbalanced braces in LaTeX files
+     (push '("^\\(.*?\.tex\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
+     (push '("Runaway argument?" nil nil nil) flymake-err-line-patterns)
+
+     ;; disable master search for numeric endings
+     (setq flymake-allowed-file-name-masks
+           (delete '("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
+                   flymake-allowed-file-name-masks)) ; don't use multipart tex files
+
+     ;; enable master search for -fig.tex endings
+     (add-to-list 'flymake-allowed-file-name-masks
+                  '("fig\\.tex\\'" flymake-master-tex-init flymake-master-cleanup))
+     ))
 
 ;; -----------------------------
 ;; --- bm line bookmark mode ---
@@ -672,7 +702,7 @@
 (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
 
 ;; Activate semantic
-(setq semanticdb-default-save-directory "~/.emacs.d/semanticdb")
+(setq semanticdb-default-save-directory "~/.emacs.d/semanticdb/")
 (semantic-mode 1)
 
 ; load semantic databases
@@ -699,11 +729,11 @@
   (imenu-add-to-menubar "TAGS"))
 (add-hook 'semantic-init-hooks 'semantic-imenu-hook)
 
-;; auto-complete intrgration
-(defun c-mode-autocomplete-cedet-hook ()
-  (add-to-list 'ac-sources 'ac-source-gtags)
-  (add-to-list 'ac-sources 'ac-source-semantic))
-(add-hook 'c-mode-common-hook 'c-mode-autocomplete-cedet-hook)
+;; auto-complete integration
+;(defun c-mode-autocomplete-cedet-hook ()
+;  (add-to-list 'ac-sources 'ac-source-gtags)
+;  (add-to-list 'ac-sources 'ac-source-semantic))
+;(add-hook 'c-mode-common-hook 'c-mode-autocomplete-cedet-hook)
 
 ;; load contrib library
 (require 'eassist)
