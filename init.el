@@ -204,43 +204,46 @@
 (setq my-el-get-packages '(el-get))
 
 ;; general emacs behaviour extensions
-(add-to-list 'my-el-get-packages 'goto-last-change)
-(add-to-list 'my-el-get-packages 'smooth-scrolling)
-(add-to-list 'my-el-get-packages 'bm)
-(add-to-list 'my-el-get-packages 'dired+)
-(add-to-list 'my-el-get-packages 'flymake)
-(add-to-list 'my-el-get-packages 'rainbow-delimiters)
-(add-to-list 'my-el-get-packages 'rebox2)
-(add-to-list 'my-el-get-packages 'gtags)
-(add-to-list 'my-el-get-packages 'folding)
-(add-to-list 'my-el-get-packages 'column-marker)
+(push 'bm my-el-get-packages)
+(push 'column-marker my-el-get-packages)
+(push 'folding my-el-get-packages)
+(push 'goto-last-change my-el-get-packages)
+(push 'gtags my-el-get-packages)
+(push 'rainbow-delimiters my-el-get-packages)
+(push 'rebox2 my-el-get-packages)
+(push 'smooth-scrolling my-el-get-packages )
+(push 'yasnippet my-el-get-packages )
 
-;; text editing modes
-(add-to-list 'my-el-get-packages 'markdown-mode)
-(add-to-list 'my-el-get-packages 'org-mode)
-(add-to-list 'my-el-get-packages 'yaml-mode)
-(add-to-list 'my-el-get-packages 'auctex)
+;; system naviation modes
+(push 'dired+ my-el-get-packages)
+(push 'flymake my-el-get-packages)
+
+;; text modes
+(push 'auctex my-el-get-packages)
+(push 'markdown-mode my-el-get-packages)
+(push 'org-mode my-el-get-packages)
+(push 'yaml-mode my-el-get-packages)
 
 ;; programming modes
-(add-to-list 'my-el-get-packages 'apache-mode)
-(add-to-list 'my-el-get-packages 'cmake-mode)
-(add-to-list 'my-el-get-packages 'cperl-mode)
-(add-to-list 'my-el-get-packages 'php-mode)
-(add-to-list 'my-el-get-packages 'python-mode)
-(add-to-list 'my-el-get-packages 'protobuf-mode)
-(add-to-list 'my-el-get-packages 'lua-mode)
-(add-to-list 'my-el-get-packages 'doxymacs)
-(add-to-list 'my-el-get-packages 'tt-mode)
+(push 'apache-mode my-el-get-packages)
+(push 'cmake-mode my-el-get-packages)
+(push 'cperl-mode my-el-get-packages)
+(push 'doxymacs my-el-get-packages)
+(push 'lua-mode my-el-get-packages)
+(push 'php-mode my-el-get-packages)
+(push 'protobuf-mode my-el-get-packages)
+(push 'python-mode my-el-get-packages)
+(push 'tt-mode my-el-get-packages)
 
 ;; version control
-(add-to-list 'my-el-get-packages 'magit)
-(add-to-list 'my-el-get-packages 'dsvn)
+(push 'magit my-el-get-packages)
+(push 'dsvn my-el-get-packages)
 
 ;; email and news reader
-(add-to-list 'my-el-get-packages 'gnus)
-(add-to-list 'my-el-get-packages 'bbdb)
-(add-to-list 'my-el-get-packages 'tc) ;; trivial cite
-;(add-to-list 'my-el-get-packages 'gnus-notify)
+(push 'gnus my-el-get-packages)
+(push 'bbdb my-el-get-packages)
+(push 'tc my-el-get-packages ) ;; trivial cite
+;(push 'gnus-notify my-el-get-packages)
 
 ;; END package list to el-get
 
@@ -860,6 +863,19 @@
 (require 'ecb-autoloads)
 (setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
 (setq stack-trace-on-error t)
+
+;; -----------------
+;; --- yasnippet ---
+;; -----------------
+
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets/"              ;; personal snippets
+        ))
+
+(yas-reload-all)
+
+(add-hook 'c-mode-common-hook '(lambda () (yas-minor-mode)))
+(add-hook 'cperl-mode-hook '(lambda () (yas-minor-mode)))
 
 ;; --------------------------------
 ;; --- Recompile Same Directory ---
