@@ -48,7 +48,6 @@
  '(scroll-bar-mode (quote right))
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
- '(tramp-auto-save-directory "/tmp/")
  '(vc-handled-backends (quote (svn))))
 
 (custom-set-faces
@@ -165,7 +164,17 @@
 ;; --- change default font ---
 ;; ---------------------------
 
-(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
+;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
+
+(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
+
+(create-fontset-from-fontset-spec "-misc-fixed-medium-r-normal--15-*-*-*-c-90-fontset-Fixed")
+(create-fontset-from-fontset-spec "-*-Droid Sans Mono-medium-r-normal-*-14-*-*-*-m-*-fontset-Droid")
+(create-fontset-from-fontset-spec "-*-Terminus-medium-r-normal-*-16-*-*-*-m-*-fontset-Terminus")
+(create-fontset-from-fontset-spec "-zevv-peep-medium-r-normal--16-*-*-*-c-*-fontset-Zevv")
+
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-increase)
 
 ;; ------------------------------
 ;; --- overlay cedet packages ---
@@ -343,12 +352,11 @@
 
 ;; -- load Dired+ when dired is loaded
 
-(add-hook 'dired-load-hook
-          (lambda ()
-            (require 'dired+)
-            (require 'dired-copy-paste)
-            )
-          )
+(require 'dired-copy-paste)
+
+(define-key dired-mode-map "\C-w" 'dired-copy-paste-do-cut)
+(define-key dired-mode-map "\M-w" 'dired-copy-paste-do-copy)
+(define-key dired-mode-map "\C-y" 'dired-copy-paste-do-paste)
 
 (defun my-dired-mouse-find-file (event)
   "In dired, visit the file or directory name you click on."
@@ -428,6 +436,14 @@
 ;; -----------------------------
 ;; --- General Customization ---
 ;; -----------------------------
+
+;; put all temporary files into /tmp
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+(setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix emacs-tmp-dir)
+(setq tramp-auto-save-directory emacs-tmp-dir)
+(setq tramp-persistency-file-name (format "%s/tramp" emacs-tmp-dir))
 
 ;; turn on paren matching
 (show-paren-mode t)
@@ -549,12 +565,12 @@
   (local-set-key "\C-\M-q" (lambda () (interactive) (insert "\\mathbb{Q}")))
   (local-set-key "\C-\M-f" (lambda () (interactive) (insert "\\mathbb{F}")))
   (local-set-key "\C-\M-r" (lambda () (interactive) (insert "\\mathbb{R}")))
-  (local-set-key "\C-\M-c" (lambda () (interactive) (insert "\\mathbb{C}")))
   (local-set-key "\C-b" (lambda () (interactive) (insert "\\mathbb{")))
   (local-set-key "\C-f" (lambda () (interactive) (insert "\\mathfrak{")))
   (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
   (local-set-key [M-S-down] (lambda () (interactive) (reftex-toc)))
   (local-set-key "\C-\M-r" (lambda () (interactive) (reftex-reference)))
+  (local-set-key "\C-\M-c" (lambda () (interactive) (reftex-citation)))
 )
 
 (add-hook 'tex-mode-hook 'my-latex-key-bindings)
@@ -568,6 +584,20 @@
   (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
       (doxymacs-font-lock)))
 (add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+
+;; -----------------------------
+;; --- reftex customizations ---
+;; -----------------------------
+
+;; disable query for \ref or \pageref style
+(setq reftex-ref-macro-prompt nil)
+
+;; additional label styles
+(setq reftex-label-alist
+      '(
+        ("theorem" ?t "thm:" "~\\ref{%s}" t   ("theorem" "th.") -2)
+        ("lemma"   ?t "lem:" "~\\ref{%s}" t   ("lemma"   "lem") -2)
+        ))
 
 ;; --------------------
 ;; --- flymake mode ---
@@ -594,6 +624,8 @@
      ;; fixes unbalanced braces in LaTeX files
      (push '("^\\(.*?\.tex\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
      (push '("Runaway argument?" nil nil nil) flymake-err-line-patterns)
+     (push '("Emergency stop." nil nil nil) flymake-err-line-patterns)
+     (push '("Package tikz Error:" nil nil nil) flymake-err-line-patterns)
 
      ;; disable master search for numeric endings
      (setq flymake-allowed-file-name-masks
@@ -716,13 +748,10 @@
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
 
-(when (cedet-ectag-version-check t)
-  (semantic-load-enable-primary-ectags-support))
-
 ;; enable ctags for some languages:
 ;;  Unix Shell, Perl, Pascal, Tcl, Fortran, Asm
-(when (cedet-ectag-version-check)
-  (semantic-load-enable-primary-exuberent-ctags-support))
+;(when (cedet-ectag-version-check)
+;  (semantic-load-enable-primary-exuberent-ctags-support))
 
 (setq-mode-local c-mode semanticdb-find-default-throttle
                  '(project unloaded system recursive))
