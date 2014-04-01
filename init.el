@@ -31,6 +31,8 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
+ '(jde-jdk (quote ("1.7.0.51")))
+ '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
  '(lua-indent-level 4)
  '(magit-item-highlight-face nil)
  '(magit-save-some-buffers (quote dontask))
@@ -97,7 +99,7 @@
  '(gnus-group-mail-1 ((t (:foreground "#e1ffe1" :weight bold :height 140 :family "Courier"))))
  '(gnus-group-mail-1-empty ((t (:inherit gnus-group-mail-1 :weight normal))))
  '(gnus-group-mail-1-empty-face ((t (:inherit gnus-group-mail-1 :weight normal))) t)
- '(gnus-group-mail-1-face ((t (:inherit gnus-group-mail-1 :weight bold))) t)
+ '(gnus-group-mail-1-face ((t (:in2herit gnus-group-mail-1 :weight bold))) t)
  '(gnus-group-mail-2 ((t (:foreground "DarkSeaGreen1" :weight bold :height 140 :family "Courier"))))
  '(gnus-group-mail-2-empty ((t (:inherit gnus-group-mail-2 :weight normal))))
  '(gnus-group-mail-2-empty-face ((t (:inherit gnus-group-mail-2 :weight normal))) t)
@@ -166,7 +168,10 @@
 
 ;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
 
-(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
+;(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
+(set-face-font 'default "-*-terminus-medium-r-*-*-18-*-*-*-*-*-*-*")
+
+;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
 
 (create-fontset-from-fontset-spec "-misc-fixed-medium-r-normal--15-*-*-*-c-90-fontset-Fixed")
 (create-fontset-from-fontset-spec "-*-Droid Sans Mono-medium-r-normal-*-14-*-*-*-m-*-fontset-Droid")
@@ -901,10 +906,17 @@
       '("~/.emacs.d/snippets/"              ;; personal snippets
         ))
 
+(require 'yasnippet)
 (yas-reload-all)
 
 (add-hook 'c-mode-common-hook '(lambda () (yas-minor-mode)))
 (add-hook 'cperl-mode-hook '(lambda () (yas-minor-mode)))
+
+;; --------------------
+;; --- Java support ---
+;; --------------------
+
+(add-hook 'java-mode-hook '(lambda () (setq tab-width 4)))
 
 ;; --------------------------------
 ;; --- Recompile Same Directory ---
