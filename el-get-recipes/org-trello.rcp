@@ -1,0 +1,6 @@
+(:name org-trello
+       :description "org <-> trello 2-way sync"
+       :type git
+       :url "https://github.com/ardumont/org-trello.git"
+       :depends (dash request elnode cl-lib json elnode esxml)
+       :pkgname "org-trello")
