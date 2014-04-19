@@ -22,7 +22,6 @@
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(fill-column 79)
  '(flyspell-issue-welcome-flag nil)
- '(flyspell-large-region nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(git-commit-fill-column 100000)
@@ -46,7 +45,7 @@
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
  '(reftex-default-bibliography (quote ("~/Dropbox/0-Work/library.bib")))
- '(safe-local-variable-values (quote ((rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
+ '(safe-local-variable-values (quote ((c-tab-always-indent . t) (nxml-child-indent . 4) (rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
@@ -911,6 +910,7 @@
 
 (add-hook 'c-mode-common-hook '(lambda () (yas-minor-mode)))
 (add-hook 'cperl-mode-hook '(lambda () (yas-minor-mode)))
+(add-hook 'latex-mode-hook '(lambda () (yas-minor-mode)))
 
 ;; --------------------
 ;; --- Java support ---
