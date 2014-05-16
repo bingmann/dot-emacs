@@ -11,8 +11,13 @@
  '(c-tab-always-indent nil)
  '(column-number-mode t)
  '(compilation-always-kill t)
- '(cperl-extra-newline-before-brace nil)
+ '(cperl-continued-brace-offset -4)
+ '(cperl-continued-statement-offset 4)
+ '(cperl-extra-newline-before-brace t)
  '(cperl-extra-newline-before-brace-multiline nil)
+ '(cperl-indent-level 4)
+ '(cperl-label-offset -4)
+ '(cperl-merge-trailing-else nil)
  '(dired-dwim-target t)
  '(dired-use-ls-dired t)
  '(doc-view-continuous t)
@@ -49,6 +54,7 @@
  '(scroll-bar-mode (quote right))
  '(size-indication-mode t)
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
+ '(tramp-remote-process-environment (quote ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "INSIDE_EMACS='24.3.1,tramp:2.2.6-24.3'" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
  '(vc-handled-backends (quote (svn))))
 
 (custom-set-faces
@@ -60,7 +66,7 @@
  '(bm-face ((t (:background "#604000"))))
  '(bm-fringe-face ((t (:background "DarkOrange1"))))
  '(bold ((t (:bold t))))
- '(bold-italic ((t (:italic t :bold t))))
+ '(bold-sitalic ((t (:italic t :bold t))))
  '(column-marker-1 ((t (:background "dark red" :weight bold))))
  '(cperl-array-face ((t (:foreground "#5555ff" :weight bold))))
  '(cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
@@ -177,8 +183,8 @@
 (create-fontset-from-fontset-spec "-*-Terminus-medium-r-normal-*-16-*-*-*-m-*-fontset-Terminus")
 (create-fontset-from-fontset-spec "-zevv-peep-medium-r-normal--16-*-*-*-c-*-fontset-Zevv")
 
-(global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)
-(global-set-key (kbd "<C-mouse-5>") 'text-scale-increase)
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
 ;; ------------------------------
 ;; --- overlay cedet packages ---
@@ -241,7 +247,8 @@
 (push 'apache-mode my-el-get-packages)
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
-(push 'doxymacs my-el-get-packages)
+(push 'csharp-mode my-el-get-packages)
+;(push 'doxymacs my-el-get-packages)
 (push 'lua-mode my-el-get-packages)
 (push 'php-mode my-el-get-packages)
 (push 'protobuf-mode my-el-get-packages)
@@ -462,7 +469,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; hook for cperl-mode to automatically set my favorite style
-(add-hook 'cperl-mode-hook (lambda () (cperl-set-style "C++")))
+;;(add-hook 'cperl-mode-hook (lambda () (cperl-set-style "C++")))
 
 ;; "filename [mode]" in title bar
 (setq frame-title-format '("%f [mode: %m]"))
@@ -582,12 +589,14 @@
 (add-hook 'TeX-mode-hook 'my-latex-key-bindings)
 (add-hook 'LaTeX-mode-hook 'my-latex-key-bindings)
 
+(add-to-list 'auto-mode-alist '("\\.tikz$" . latex-mode))
+
 ; doxymacs: automatically activate font-lock overlay mode for C/C++ files
 
-(defun my-doxymacs-font-lock-hook ()
-  (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
-      (doxymacs-font-lock)))
-(add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+;(defun my-doxymacs-font-lock-hook ()
+;  (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
+;      (doxymacs-font-lock)))
+;(add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
 
 ;; -----------------------------
 ;; --- reftex customizations ---
@@ -627,6 +636,7 @@
 
      ;; fixes unbalanced braces in LaTeX files
      (push '("^\\(.*?\.tex\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
+     (push '("^\\(.*?\.tikz\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
      (push '("Runaway argument?" nil nil nil) flymake-err-line-patterns)
      (push '("Emergency stop." nil nil nil) flymake-err-line-patterns)
      (push '("Package tikz Error:" nil nil nil) flymake-err-line-patterns)
@@ -639,6 +649,9 @@
      ;; enable master search for -fig.tex endings
      (add-to-list 'flymake-allowed-file-name-masks
                   '("fig\\.tex\\'" flymake-master-tex-init flymake-master-cleanup))
+
+     (add-to-list 'flymake-allowed-file-name-masks
+                  '("\\.tikz\\'" flymake-master-tex-init flymake-master-cleanup))
      ))
 
 ;; -----------------------------
@@ -741,7 +754,7 @@
 (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
 
 ;; Activate semantic
-(setq semanticdb-default-save-directory "~/.emacs.d/semanticdb/")
+(setq semanticdb-default-save-directory "~/.cache/emacs/semanticdb/")
 (semantic-mode 1)
 
 ; load semantic databases
