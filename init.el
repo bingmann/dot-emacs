@@ -3,6 +3,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(TeX-command-list (quote (("LaTeX" "%`flymake-pdflatex -shell-escape %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber") ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
  '(auth-sources (quote ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
@@ -46,6 +47,7 @@
  '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
+ '(openwith-associations (quote (("\\.pdf\\'" "evince" (file)) ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)) ("\\.\\(?:jp?g\\|png\\)\\'" "display" (file)))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
@@ -236,6 +238,7 @@
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
 (push 'flymake my-el-get-packages)
+(push 'openwith my-el-get-packages)
 
 ;; text modes
 (push 'auctex my-el-get-packages)
@@ -254,6 +257,7 @@
 (push 'protobuf-mode my-el-get-packages)
 (push 'python-mode my-el-get-packages)
 (push 'tt-mode my-el-get-packages)
+(push 'thrift-mode my-el-get-packages)
 
 ;; version control
 (push 'magit my-el-get-packages)
@@ -390,6 +394,13 @@
       (select-window window)
       (find-file (file-name-sans-versions file t)))))
 
+(defun my-dired-terminal (&optional arg)
+  "Launch terminal in current directory."
+  (interactive)
+  ;(start-process "terminal" "*scratch*" "/usr/bin/urxvt")
+  (start-process "terminal" nil "/usr/bin/urxvt")
+)
+
 (defun set-my-dired-keys-hook ()
   "My favorite dired keys."
   ; for some reason mouse-2 = left click (mouse-1)
@@ -397,6 +408,8 @@
   (define-key dired-mode-map [M-mouse-2] 'diredp-mouse-find-file-other-frame)
   ; backspace
   (define-key dired-mode-map [backspace] 'dired-up-directory)
+  ; F4 -> launch terminal
+  (define-key dired-mode-map [f4] 'my-dired-terminal)
 )
 
 (add-hook 'dired-mode-hook 'set-my-dired-keys-hook)
@@ -570,6 +583,7 @@
   (interactive)
   (turn-on-reftex)
   (visual-line-mode 1)
+  (yas-minor-mode)
   (local-set-key "\C-\M-z" (lambda () (interactive) (insert "\\mathbb{Z}")))
   (local-set-key "\C-\M-n" (lambda () (interactive) (insert "\\mathbb{N}")))
   (local-set-key (kbd "C-M-S-n") (lambda () (interactive) (insert "\\!{}_1\\mathbb{N}_")))
@@ -923,7 +937,6 @@
 
 (add-hook 'c-mode-common-hook '(lambda () (yas-minor-mode)))
 (add-hook 'cperl-mode-hook '(lambda () (yas-minor-mode)))
-(add-hook 'latex-mode-hook '(lambda () (yas-minor-mode)))
 
 ;; --------------------
 ;; --- Java support ---

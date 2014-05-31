@@ -1,0 +1,6 @@
+(:name thrift-mode
+       :description "Major mode for editing Thrift definitions"
+       :type github
+       :pkgname "davidmiller/thrift-mode"
+       :features thrift-mode
+       :post-init (add-to-list 'auto-mode-alist '("\\.thrift$" . thrift-mode)))
