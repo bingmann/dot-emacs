@@ -192,10 +192,10 @@
 ;; --- overlay cedet packages ---
 ;; ------------------------------
 
-(setq cedet-root-path (file-name-as-directory "~/.emacs.d/cedet-bzr/"))
+;(setq cedet-root-path (file-name-as-directory "~/.emacs.d/cedet-bzr/"))
 
-(load-file (concat cedet-root-path "cedet-devel-load.el"))
-(add-to-list 'load-path (concat cedet-root-path "contrib"))
+;(load-file (concat cedet-root-path "cedet-devel-load.el"))
+;(add-to-list 'load-path (concat cedet-root-path "contrib"))
 
 ;; ---------------------------------
 ;; --- el-get package management ---
@@ -251,6 +251,8 @@
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
 (push 'csharp-mode my-el-get-packages)
+(push 'cedet my-el-get-packages)
+(push 'ecb my-el-get-packages)
 ;(push 'doxymacs my-el-get-packages)
 (push 'lua-mode my-el-get-packages)
 (push 'php-mode my-el-get-packages)
@@ -799,7 +801,7 @@
 ;(add-hook 'c-mode-common-hook 'c-mode-autocomplete-cedet-hook)
 
 ;; load contrib library
-(require 'eassist)
+;(require 'eassist)
 
 ;; customisation of modes
 (defun my-cedet-hook ()
@@ -814,9 +816,9 @@
   (local-set-key "\C-c=" 'semantic-decoration-include-visit)
 
   ;;
-  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-  (local-set-key "\C-ce" 'eassist-list-methods)
+  ;(local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  ;(local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  ;(local-set-key "\C-ce" 'eassist-list-methods)
   ;;
   (local-set-key "\C-cr" 'semantic-symref)
   ;; rename local variable under cursor
@@ -918,9 +920,6 @@
 ;; --- ECB - Emacs Code Browser ---
 ;; --------------------------------
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/ecb-alexott/"))
-;(require 'ecb)
-(require 'ecb-autoloads)
 (setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
 (setq stack-trace-on-error t)
 
