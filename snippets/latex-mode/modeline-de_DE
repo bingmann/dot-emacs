@@ -2,4 +2,4 @@
 # name: emacs modeline de_DE dictionary
 # key: modeline
 # --
-% -*- mode: text; mode: flyspell; ispell-local-dictionary: "de_DE"; coding: utf-8 -*-
+% -*- mode: latex; mode: flyspell; ispell-local-dictionary: "de_DE"; coding: utf-8 -*-

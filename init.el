@@ -21,6 +21,7 @@
  '(cperl-merge-trailing-else nil)
  '(dired-dwim-target t)
  '(dired-use-ls-dired t)
+ '(diredp-image-preview-in-tooltip nil)
  '(doc-view-continuous t)
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
@@ -33,6 +34,8 @@
  '(git-commit-fill-column 100000)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
+ '(ido-auto-merge-delay-time 0.4)
+ '(ido-show-dot-for-dired t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
@@ -47,7 +50,7 @@
  '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
- '(openwith-associations (quote (("\\.pdf\\'" "evince" (file)) ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)) ("\\.\\(?:jp?g\\|png\\)\\'" "display" (file)))))
+ '(openwith-associations (quote (("\\.pdf\\'" "evince" (file)) ("\\.pdf\\'" "evince" (file)) ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
@@ -129,6 +132,9 @@
  '(gnus-summary-selected ((t (:underline t :height 140 :family "Courier"))))
  '(highlight ((t (:background "#222277"))))
  '(hl-line ((t (:background "#112233"))))
+ '(ido-first-match ((t (:foreground "gold" :weight bold))))
+ '(ido-only-match ((t (:foreground "green"))))
+ '(ido-subdir ((t (:foreground "yellow"))))
  '(isearch ((t (:foreground "brown4" :background "palevioletred2"))))
  '(lazy-highlight ((t (:background "paleturquoise4"))))
  '(link ((t (:underline t :foreground "cyan1"))))
@@ -221,7 +227,7 @@
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
 
-;; BEGIN package list to el-get
+;; BEGIN PACKAGE LIST to el-get
 (setq my-el-get-packages '(el-get))
 
 ;; general emacs behaviour extensions
@@ -232,12 +238,18 @@
 (push 'gtags my-el-get-packages)
 (push 'rainbow-delimiters my-el-get-packages)
 (push 'rebox2 my-el-get-packages)
+(push 'smex my-el-get-packages)
 (push 'smooth-scrolling my-el-get-packages )
 (push 'yasnippet my-el-get-packages )
+(push 'flymake my-el-get-packages)
+
+(push 'auto-complete my-el-get-packages)
+(push 'auto-complete-auctex my-el-get-packages)
+(push 'auto-complete-css my-el-get-packages)
+(push 'auto-complete-yasnippet my-el-get-packages)
 
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
-(push 'flymake my-el-get-packages)
 (push 'openwith my-el-get-packages)
 
 ;; text modes
@@ -251,9 +263,9 @@
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
 (push 'csharp-mode my-el-get-packages)
+(push 'css-mode my-el-get-packages)
 (push 'cedet my-el-get-packages)
 (push 'ecb my-el-get-packages)
-;(push 'doxymacs my-el-get-packages)
 (push 'lua-mode my-el-get-packages)
 (push 'php-mode my-el-get-packages)
 (push 'protobuf-mode my-el-get-packages)
@@ -262,16 +274,16 @@
 (push 'thrift-mode my-el-get-packages)
 
 ;; version control
-(push 'magit my-el-get-packages)
 (push 'dsvn my-el-get-packages)
+(push 'magit my-el-get-packages)
 
 ;; email and news reader
-(push 'gnus my-el-get-packages)
-(push 'bbdb my-el-get-packages)
-(push 'tc my-el-get-packages ) ;; trivial cite
+;(push 'gnus my-el-get-packages)
+;(push 'bbdb my-el-get-packages)
+;(push 'tc my-el-get-packages ) ;; trivial cite
 ;(push 'gnus-notify my-el-get-packages)
 
-;; END package list to el-get
+;; END PACKAGE LIST for el-get
 
 ;; install missing packages from list above
 (el-get 'sync my-el-get-packages)
@@ -794,12 +806,6 @@
   (imenu-add-to-menubar "TAGS"))
 (add-hook 'semantic-init-hooks 'semantic-imenu-hook)
 
-;; auto-complete integration
-;(defun c-mode-autocomplete-cedet-hook ()
-;  (add-to-list 'ac-sources 'ac-source-gtags)
-;  (add-to-list 'ac-sources 'ac-source-semantic))
-;(add-hook 'c-mode-common-hook 'c-mode-autocomplete-cedet-hook)
-
 ;; load contrib library
 ;(require 'eassist)
 
@@ -847,6 +853,10 @@
 
   (gtags-mode t)
   (local-set-key "\C-cf" 'gtags-find-tag)
+
+  ;; auto-complete integration
+  ;(add-to-list 'ac-sources 'ac-source-gtags)
+  ;(add-to-list 'ac-sources 'ac-source-semantic)
 
   (qt-cedet-setup)
   )
@@ -922,6 +932,24 @@
 
 (setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
 (setq stack-trace-on-error t)
+
+;; --------------------
+;; --- ido and smex ---
+;; --------------------
+
+(require 'ido)
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+
+(global-set-key (kbd "M-x") 'smex)
+
+;; ---------------------
+;; --- auto-complete ---
+;; ---------------------
+
+(require 'auto-complete-config)
+(ac-config-default)
 
 ;; -----------------
 ;; --- yasnippet ---

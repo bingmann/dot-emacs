@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: emacs modeline en_US dictionary
+# key: modeline
+# --
+% -*- mode: text; mode: flyspell; ispell-local-dictionary: "en_US"; coding: utf-8 -*-
