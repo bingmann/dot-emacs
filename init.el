@@ -610,6 +610,9 @@
   (local-set-key [M-S-down] (lambda () (interactive) (reftex-toc)))
   (local-set-key "\C-\M-r" (lambda () (interactive) (reftex-reference)))
   (local-set-key "\C-\M-c" (lambda () (interactive) (reftex-citation)))
+  ;; show frames in section list -> very useful for beamer presentations
+  (setq reftex-section-levels
+        (cons '("begin{frame}" . 3) reftex-section-levels))
 )
 
 (add-hook 'tex-mode-hook 'my-latex-key-bindings)
