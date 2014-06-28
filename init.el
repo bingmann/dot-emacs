@@ -482,6 +482,7 @@
 (setq auto-save-list-file-prefix emacs-tmp-dir)
 (setq tramp-auto-save-directory emacs-tmp-dir)
 (setq tramp-persistency-file-name (format "%s/tramp" emacs-tmp-dir))
+(setq image-dired-dir (format "%s/image-dired" emacs-tmp-dir))
 
 ;; turn on paren matching
 (show-paren-mode t)
