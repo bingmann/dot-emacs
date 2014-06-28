@@ -862,6 +862,9 @@
   ;(add-to-list 'ac-sources 'ac-source-gtags)
   ;(add-to-list 'ac-sources 'ac-source-semantic)
 
+  ;; flyspell mode for comments
+  (flyspell-prog-mode)
+
   (qt-cedet-setup)
   )
 
