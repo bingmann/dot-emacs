@@ -1,3 +1,4 @@
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -54,7 +55,7 @@
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
- '(reftex-default-bibliography (quote ("~/Dropbox/0-Work/library.bib")))
+ '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
  '(safe-local-variable-values (quote ((c-tab-always-indent . t) (nxml-child-indent . 4) (rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
  '(size-indication-mode t)
@@ -376,7 +377,7 @@
                            (local-set-key [(control shift down)] 'org-shiftmetadown)
                            ))
 
-(setq org-default-notes-file "~/Dropbox/0-Work/TODO.org")
+(setq org-default-notes-file "~/btsync/0-Work/TODO.org")
 (define-key global-map "\C-cc" 'org-capture)
 
 ;; -- load Dired+ when dired is loaded
@@ -883,20 +884,20 @@
 
 ;; CMake Projects
 (ede-cpp-root-project "stxxl"
-                      :file "~/Dropbox/stxxl/CMakeLists.txt"
+                      :file "~/sync/stxxl/CMakeLists.txt"
                       :include-path '("/include/")
                       )
 
 (ede-cpp-root-project "parallel-string-sorting"
-                      :file "~/Dropbox/parallel-string-sorting/CMakeLists.txt"
+                      :file "~/sync/parallel-string-sorting/CMakeLists.txt"
                       )
 
 (ede-cpp-root-project "bispanning"
-                      :file "~/Dropbox/bispanning/CMakeLists.txt"
+                      :file "~/sync/bispanning/CMakeLists.txt"
                       )
 
 (ede-cpp-root-project "panthema"
-                      :file "~/DropboxA/Web/panthema.net/panthema/src/CMakeLists.txt"
+                      :file "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt"
                       )
 
 (defun qt-cedet-setup ()
