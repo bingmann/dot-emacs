@@ -972,6 +972,7 @@
 
 (add-hook 'c-mode-common-hook '(lambda () (yas-minor-mode)))
 (add-hook 'cperl-mode-hook '(lambda () (yas-minor-mode)))
+(add-hook 'text-mode-hook '(lambda () (yas-minor-mode)))
 
 ;; --------------------
 ;; --- Java support ---
