@@ -862,7 +862,7 @@
 
   ;; auto-complete integration
   ;(add-to-list 'ac-sources 'ac-source-gtags)
-  ;(add-to-list 'ac-sources 'ac-source-semantic)
+  (add-to-list 'ac-sources 'ac-source-semantic)
 
   ;; flyspell mode for comments
   (flyspell-prog-mode)
@@ -959,6 +959,11 @@
 
 (require 'auto-complete-config)
 (ac-config-default)
+
+;; never start automatically
+(setq ac-auto-start nil)
+;; trigger auto-complete on TAB
+(ac-set-trigger-key "TAB")
 
 ;; -----------------
 ;; --- yasnippet ---
