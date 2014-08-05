@@ -52,7 +52,6 @@
  '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
- '(openwith-associations (quote (("\\.pdf\\'" "evince" (file)) ("\\.pdf\\'" "evince" (file)) ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)))))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
@@ -981,6 +980,19 @@
 ;; --------------------
 
 (add-hook 'java-mode-hook '(lambda () (setq tab-width 4)))
+
+;; -------------------------------------
+;; --- OpenWith program associations ---
+;; -------------------------------------
+
+(setq openwith-associations '())
+
+(add-to-list 'openwith-associations '("\\.pdf\\'" "evince" (file)))
+(add-to-list 'openwith-associations '("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)))
+(add-to-list 'openwith-associations '("\\.ods\\'" "libreoffice" (file)))
+(add-to-list 'openwith-associations '("\\.xls\\'" "libreoffice" (file)))
+(add-to-list 'openwith-associations '("\\.odt\\'" "libreoffice" (file)))
+(add-to-list 'openwith-associations '("\\.doc\\'" "libreoffice" (file)))
 
 ;; --------------------------------
 ;; --- Recompile Same Directory ---
