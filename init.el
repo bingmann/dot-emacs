@@ -56,6 +56,7 @@
  '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
+ '(org-agenda-files (quote ("~/Dropbox/0-Work/TODO.org")))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
@@ -382,8 +383,10 @@
                            (local-set-key [(control shift down)] 'org-shiftmetadown)
                            ))
 
-(setq org-default-notes-file "~/btsync/0-Work/TODO.org")
-(define-key global-map "\C-cc" 'org-capture)
+(setq org-default-notes-file "~/Dropbox/0-Work/TODO.org")
+
+(global-set-key (kbd "<f1>") 'org-todo-list)
+(global-set-key (kbd "\C-cc") 'org-capture)
 
 ;; -- load Dired+ when dired is loaded
 
