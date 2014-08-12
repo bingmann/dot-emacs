@@ -30,6 +30,8 @@
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
+ '(ediff-autostore-merges t)
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain))
  '(fill-column 79)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
