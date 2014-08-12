@@ -4,7 +4,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(TeX-command-list (quote (("LaTeX" "%`flymake-pdflatex -shell-escape %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber") ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(TeX-command-list (quote (("LaTeX" "%`flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber") ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(TeX-save-query nil)
+ '(TeX-source-correlate-mode t)
  '(auth-sources (quote ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
@@ -616,6 +618,11 @@
   ;; show frames in section list -> very useful for beamer presentations
   (setq reftex-section-levels
         (cons '("begin{frame}" . 3) reftex-section-levels))
+  ;; The following makes \C-c\C-c not ask, just do the default action. Adds C-c-a for asking
+  (setq TeX-command-force "LaTeX")
+  ;; 'a' for ask, change to anything you want
+  (local-set-key "\C-c\C-a" (lambda (arg) (interactive "P")
+                            (let ((TeX-command-force nil)) (TeX-command-master arg))))
 )
 
 (add-hook 'tex-mode-hook 'my-latex-key-bindings)
