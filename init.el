@@ -396,6 +396,8 @@
 (define-key dired-mode-map "\M-w" 'dired-copy-paste-do-copy)
 (define-key dired-mode-map "\C-y" 'dired-copy-paste-do-paste)
 
+(require 'dired-fixups)
+
 (defun my-dired-mouse-find-file (event)
   "In dired, visit the file or directory name you click on."
   (interactive "e")
