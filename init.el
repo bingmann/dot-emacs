@@ -1033,3 +1033,52 @@ M-x compile.
        (set-buffer compilation-last-buffer)
        (revert-buffer t t))
    (call-interactively 'compile)))
+
+;; ------------------------------------------------
+;; --- Increment and Decrement Numbers at Point ---
+;; ------------------------------------------------
+;; from http://www.emacswiki.org/emacs/IncrementNumber
+
+(defun increment-number-decimal (&optional arg)
+  "Increment the number forward from point by 'arg'."
+  (interactive "p*")
+  (save-excursion
+    (save-match-data
+      (let (inc-by field-width answer)
+        (setq inc-by (if arg arg 1))
+        (skip-chars-backward "0123456789")
+        (when (re-search-forward "[0-9]+" nil t)
+          (setq field-width (- (match-end 0) (match-beginning 0)))
+          (setq answer (+ (string-to-number (match-string 0) 10) inc-by))
+          (when (< answer 0)
+            (setq answer (+ (expt 10 field-width) answer)))
+          (replace-match (format (concat "%0" (int-to-string field-width) "d")
+                                 answer)))))))
+
+(defun decrement-number-decimal (&optional arg)
+  (interactive "p*")
+  (increment-number-decimal (if arg (- arg) -1)))
+
+(defun increment-number-hexadecimal (&optional arg)
+  "Increment the number forward from point by 'arg'."
+  (interactive "p*")
+  (save-excursion
+    (save-match-data
+      (let (inc-by field-width answer hex-format)
+        (setq inc-by (if arg arg 1))
+        (skip-chars-backward "0123456789abcdefABCDEF")
+        (when (re-search-forward "[0-9a-fA-F]+" nil t)
+          (setq field-width (- (match-end 0) (match-beginning 0)))
+          (setq answer (+ (string-to-number (match-string 0) 16) inc-by))
+          (when (< answer 0)
+            (setq answer (+ (expt 16 field-width) answer)))
+          (if (equal (match-string 0) (upcase (match-string 0)))
+              (setq hex-format "X")
+            (setq hex-format "x"))
+          (replace-match (format (concat "%0" (int-to-string field-width)
+                                         hex-format)
+                                 answer)))))))
+
+(defun decrement-number-hexadecimal (&optional arg)
+  (interactive "p*")
+  (increment-number-hexadecimal (if arg (- arg) -1)))
