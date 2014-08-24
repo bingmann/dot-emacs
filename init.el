@@ -1,10 +1,15 @@
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(LaTeX-fold-env-spec-list (quote (("[tikzpicture]" ("tikzpicture")) ("[algorithm]" ("algorithm")) ("[algorithm2e]" ("algorithm2e")))))
+ '(LaTeX-fold-macro-spec-list nil)
+ '(LaTeX-fold-math-spec-list nil)
  '(TeX-command-list (quote (("LaTeX" "%`flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber") ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(TeX-fold-env-spec-list nil)
+ '(TeX-fold-macro-spec-list nil)
+ '(TeX-fold-math-spec-list nil)
  '(TeX-save-query nil)
  '(TeX-source-correlate-mode t)
  '(auth-sources (quote ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
@@ -75,6 +80,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background "black" :foreground "white"))))
+ '(TeX-fold-unfolded-face ((t (:background "#080a1d"))))
  '(bm-face ((t (:background "#604000"))))
  '(bm-fringe-face ((t (:background "DarkOrange1"))))
  '(bold ((t (:bold t))))
@@ -630,6 +636,9 @@
   ;; 'a' for ask, change to anything you want
   (local-set-key "\C-c\C-a" (lambda (arg) (interactive "P")
                             (let ((TeX-command-force nil)) (TeX-command-master arg))))
+  ;; auto folding of tikzpicture and algorithm environments in tex files
+  (TeX-fold-mode 1)
+  (add-hook 'find-file-hook 'TeX-fold-buffer t)
 )
 
 (add-hook 'tex-mode-hook 'my-latex-key-bindings)
