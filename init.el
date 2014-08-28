@@ -570,6 +570,12 @@
 
 (global-set-key (kbd "<C-f12>") 'magit-status)
 
+; auto-load magit-svn-mode if git-svn repo is detected.
+(add-hook 'magit-mode-hook (lambda()
+                             (require 'magit-svn)
+                             (if (magit-svn-get-ref-info)
+                                 (magit-svn-mode))))
+
 ; svn integration
 
 (autoload 'svn-status "dsvn" "Run `svn status'." t)
