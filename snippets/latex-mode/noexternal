@@ -1,0 +1,6 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: noexternal
+# key: noexternal
+# binding: direct-keybinding
+# --
+\tikzset{external/export=false}
