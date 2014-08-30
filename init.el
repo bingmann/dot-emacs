@@ -915,16 +915,16 @@
 
 ;; CMake Projects
 (ede-cpp-root-project "stxxl"
-                      :file "~/sync/stxxl/CMakeLists.txt"
+                      :file "~/Dropbox/stxxl/CMakeLists.txt"
                       :include-path '("/include/")
                       )
 
 (ede-cpp-root-project "parallel-string-sorting"
-                      :file "~/sync/parallel-string-sorting/CMakeLists.txt"
+                      :file "~/Dropbox/parallel-string-sorting/CMakeLists.txt"
                       )
 
 (ede-cpp-root-project "bispanning"
-                      :file "~/sync/bispanning/CMakeLists.txt"
+                      :file "~/Dropbox/bispanning/CMakeLists.txt"
                       )
 
 (ede-cpp-root-project "panthema"
