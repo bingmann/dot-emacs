@@ -66,6 +66,7 @@
  '(org-tab-follows-link t)
  '(rebox-style-loop (quote (370 243)))
  '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
+ '(reftex-label-alist (quote (("theorem" 116 "thm:" nil t ("theorem" "th.") -2) ("lemma" 116 "lem:" nil t ("lemma" "lem") -2) ("definition" 100 "def:" nil t ("definition" "def") -2))) t)
  '(safe-local-variable-values (quote ((c-tab-always-indent . t) (nxml-child-indent . 4) (rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
  '(size-indication-mode t)
