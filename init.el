@@ -64,6 +64,8 @@
  '(org-agenda-files (quote ("~/Dropbox/0-Work/TODO.org")))
  '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
  '(org-tab-follows-link t)
+ '(processing-location "~/.bin-sync/processing-java")
+ '(processing-sketchbook-dir "~/Dropbox/sketchbook")
  '(rebox-style-loop (quote (370 243)))
  '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
  '(reftex-label-alist (quote (("theorem" 116 "thm:" nil t ("theorem" "th.") -2) ("lemma" 116 "lem:" nil t ("lemma" "lem") -2) ("definition" 100 "def:" nil t ("definition" "def") -2))) t)
@@ -175,6 +177,7 @@
 (push 'python-mode my-el-get-packages)
 (push 'tt-mode my-el-get-packages)
 (push 'thrift-mode my-el-get-packages)
+(push 'processing-mode my-el-get-packages)
 
 ;; version control
 (push 'dsvn my-el-get-packages)
@@ -1057,6 +1060,16 @@ M-x compile.
        (set-buffer compilation-last-buffer)
        (revert-buffer t t))
    (call-interactively 'compile)))
+
+;; --------------------------
+;; --- Processing Hotkeys ---
+;; --------------------------
+
+(defun processing-mode-init ()
+  (local-set-key [f5] 'processing-sketch-run)
+  )
+
+(add-hook 'processing-mode-hook 'processing-mode-init)
 
 ;; ------------------------------------------------
 ;; --- Increment and Decrement Numbers at Point ---
