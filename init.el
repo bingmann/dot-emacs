@@ -911,6 +911,10 @@
   ;; flyspell mode for comments
   (flyspell-prog-mode)
 
+  ;; change paragraph definition to correctly wrap doxygen \param and \tparam
+  ;; lines.
+  (setq paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|\\\\param\\|\\\\tparam\\|\\\\return\\)\\|^\f")
+
   (qt-cedet-setup)
   )
 
