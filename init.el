@@ -41,6 +41,7 @@
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
+ '(gdb-many-windows t)
  '(git-commit-fill-column 100000)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
@@ -1068,6 +1069,19 @@ M-x compile.
        (set-buffer compilation-last-buffer)
        (revert-buffer t t))
    (call-interactively 'compile)))
+
+;; -----------------------------------
+;; --- Grand Unified Debugger mode ---
+;; -----------------------------------
+
+(add-hook 'gud-mode-hook
+          (lambda ()
+            (define-key gud-mode-map [f4] 'gud-run)
+            (define-key gud-mode-map [f5] 'gud-step)
+            (define-key gud-mode-map [f6] 'gud-next)
+            (define-key gud-mode-map [f7] 'gud-until)
+            (define-key gud-mode-map [f8] 'gud-finish)
+            ))
 
 ;; --------------------------
 ;; --- Processing Hotkeys ---
