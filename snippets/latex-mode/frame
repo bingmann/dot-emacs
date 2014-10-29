@@ -1,0 +1,10 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: frame
+# key: frame
+# binding: direct-keybinding
+# --
+% ------------------------------------------------------------------------------
+
+\begin{frame}{${1:title}}
+
+\end{frame}

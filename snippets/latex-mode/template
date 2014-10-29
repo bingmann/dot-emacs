@@ -1,0 +1,71 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: template
+# key: template
+# binding: direct-keybinding
+# --
+% -*- mode: latex; mode: flyspell; ispell-local-dictionary: "en_US"; coding: utf-8 -*-
+
+\documentclass[draft,a4paper,12pt,twoside]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{lmodern}
+\usepackage[english]{babel}
+
+\title{${1:title}}
+\author{${2:Timo Bingmann}}
+
+% small margin
+\usepackage[tmargin=20mm,bmargin=20mm,lmargin=20mm,rmargin=20mm]{geometry}
+
+% set default paragraph skip and indention
+\setlength\parskip{\smallskipamount}
+\setlength\parindent{0pt}
+
+% math support
+\usepackage{amsmath,amssymb,array,mathtools}
+
+% smaller enumerations
+\usepackage{enumitem}
+\setlist[enumerate]{topsep=\smallskipamount,parsep=0pt}
+\setlist[itemize]{topsep=\smallskipamount,parsep=0pt}
+\setlist[enumerate,1]{topsep=\smallskipamount,parsep=0pt,label=(\roman*)}
+
+% for graphics
+\usepackage{graphicx}
+
+% for nice graphics
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+% Hyperref
+\usepackage{xcolor,hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  pdfborder={0 0 0},
+  bookmarksopen=true,
+  bookmarksopenlevel=1,
+  bookmarksnumbered=true,
+  linkcolor=blue!60!black,
+  %linkcolor=black,
+  urlcolor=blue!60!black,
+  filecolor=green!60!black,
+  citecolor=blue!60!black,
+  pdfpagemode=UseNone,
+  unicode=true,
+  setpagesize=false,
+  bookmarksdepth=subsection,
+  pdftitle={$1},
+  pdfauthor={$2},
+  pdfsubject={},
+}
+
+\begin{document}
+
+\maketitle
+
+$0
+
+\end{document}

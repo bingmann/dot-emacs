@@ -1,0 +1,21 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: package
+# key: package
+# binding: direct-keybinding
+# --
+#!/usr/bin/perl -w
+
+package ${1:package};
+
+use strict;
+use warnings;
+use diagnostics;
+use utf8;
+
+use Exporter;
+
+our @ISA  = qw(Exporter);
+our @EXPORT = qw();
+our @EXPORT_OK = qw();
+
+1;
