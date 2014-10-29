@@ -788,7 +788,7 @@
 ;; select which submodes we want to activate
 
 ; activates CEDET's context menu that is bound to right mouse button;
-(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
+;(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
 ; activates use of separate styles for tags decoration
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 ; activates highlighting of first line for current tag (function, class, etc.);
@@ -814,17 +814,7 @@
 ; shows changes in the text that weren't processed by incremental parser yet.
 ;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
 
-
-;; add knowledge of qt to emacs
 (setq qt4-base-dir "/usr/include/qt4")
-(semantic-add-system-include qt4-base-dir 'c++-mode)
-(semantic-add-system-include (concat qt4-base-dir "/Qt") 'c++-mode)
-(semantic-add-system-include (concat qt4-base-dir "/QtGui") 'c++-mode)
-(semantic-add-system-include (concat qt4-base-dir "/QtCore") 'c++-mode)
-(semantic-add-system-include (concat qt4-base-dir "/QtTest") 'c++-mode)
-(semantic-add-system-include (concat qt4-base-dir "/QtNetwork") 'c++-mode)
-(semantic-add-system-include (concat qt4-base-dir "/QtSvg") 'c++-mode)
-(add-to-list 'auto-mode-alist (cons qt4-base-dir 'c++-mode))
 
 (defvar semantic-lex-c-preprocessor-symbol-file '())
 (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
@@ -843,6 +833,10 @@
 (semanticdb-enable-gnu-global-databases 'c-mode)
 (semanticdb-enable-gnu-global-databases 'c++-mode)
 
+; load eassist
+(add-to-list 'load-path "~/.emacs.d/el-get/cedet/contrib")
+(require 'eassist)
+
 ;; enable ctags for some languages:
 ;;  Unix Shell, Perl, Pascal, Tcl, Fortran, Asm
 ;(when (cedet-ectag-version-check)
@@ -856,11 +850,20 @@
   (imenu-add-to-menubar "TAGS"))
 (add-hook 'semantic-init-hooks 'semantic-imenu-hook)
 
-;; load contrib library
-;(require 'eassist)
-
 ;; customisation of modes
 (defun my-cedet-hook ()
+  ;; SRecode
+  ;(global-srecode-minor-mode 1)
+
+  ;; add knowledge of qt to emacs
+  (semantic-add-system-include qt4-base-dir 'c++-mode)
+  (semantic-add-system-include (concat qt4-base-dir "/Qt") 'c++-mode)
+  (semantic-add-system-include (concat qt4-base-dir "/QtGui") 'c++-mode)
+  (semantic-add-system-include (concat qt4-base-dir "/QtCore") 'c++-mode)
+  (semantic-add-system-include (concat qt4-base-dir "/QtTest") 'c++-mode)
+  (semantic-add-system-include (concat qt4-base-dir "/QtNetwork") 'c++-mode)
+  (semantic-add-system-include (concat qt4-base-dir "/QtSvg") 'c++-mode)
+
   ;; whatever the symbol you are typing, this hot key automatically complete it for you.
   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
   ;; another way to complete the symbol you are typing
@@ -872,9 +875,10 @@
   (local-set-key "\C-c=" 'semantic-decoration-include-visit)
 
   ;;
-  ;(local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  ;(local-set-key "\C-xt" 'eassist-switch-h-cpp)
-  ;(local-set-key "\C-ce" 'eassist-list-methods)
+  ;; load eassist contrib library
+  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ce" 'eassist-list-methods)
   ;;
   (local-set-key "\C-cr" 'semantic-symref)
   ;; rename local variable under cursor
@@ -913,7 +917,7 @@
 
   ;; change paragraph definition to correctly wrap doxygen \param and \tparam
   ;; lines.
-  (setq paragraph-start "^[ ]*\\(//+\\|\\**\\)[ ]*\\([ ]*$\\|\\\\param\\|\\\\tparam\\|\\\\return\\)\\|^\f")
+  (setq paragraph-start "\\(//+[!]?\\|\\**\\)[ ]*\\([ ]*$\\|[@\\\\]\\(param\\|tparam\\|return\\|pre\\)\\)\\|\f")
 
   (qt-cedet-setup)
   )
@@ -923,9 +927,6 @@
 (add-hook 'scheme-mode-hook 'my-cedet-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
 (add-hook 'erlang-mode-hook 'my-cedet-hook)
-
-;; SRecode
-(global-srecode-minor-mode 1)
 
 ;; EDE
 (global-ede-mode 1)
