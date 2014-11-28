@@ -233,6 +233,7 @@
  '(diff-removed ((t (:inherit diff-changed :foreground "#ff3333"))))
  '(diff-removed-face ((t (:inherit diff-changed :background "#553333"))) t)
  '(diredp-dir-priv ((t (:foreground "#74FFFF"))))
+ '(diredp-file-name ((t (:foreground "white"))))
  '(font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
  '(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face :foreground "chocolate1"))))
  '(font-lock-comment-face ((t (:foreground "chocolate1"))))
