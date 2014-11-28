@@ -3,19 +3,45 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(LaTeX-fold-env-spec-list (quote (("[tikzpicture]" ("tikzpicture")) ("[algorithm]" ("algorithm")) ("[algorithm2e]" ("algorithm2e")))))
+ '(LaTeX-fold-env-spec-list
+   (quote
+    (("[tikzpicture]"
+      ("tikzpicture"))
+     ("[algorithm]"
+      ("algorithm"))
+     ("[algorithm2e]"
+      ("algorithm2e")))))
  '(LaTeX-fold-macro-spec-list nil)
  '(LaTeX-fold-math-spec-list nil)
- '(TeX-command-list (quote (("LaTeX" "%`flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil (latex-mode doctex-mode) :help "Run LaTeX") ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil (texinfo-mode) :help "Run Makeinfo with Info output") ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX") ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber") ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer") ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files") ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files") ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+ '(TeX-command-list
+   (quote
+    (("LaTeX" "%`flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil
+      (latex-mode doctex-mode)
+      :help "Run LaTeX")
+     ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
+      (texinfo-mode)
+      :help "Run Makeinfo with Info output")
+     ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX")
+     ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber")
+     ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer")
+     ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
+     ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
+     ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
  '(TeX-fold-env-spec-list nil)
  '(TeX-fold-macro-spec-list nil)
  '(TeX-fold-math-spec-list nil)
  '(TeX-save-query nil)
  '(TeX-source-correlate-mode t)
- '(auth-sources (quote ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
+ '(auth-sources
+   (quote
+    ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
- '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "k&r"))))
+ '(c-default-style
+   (quote
+    ((java-mode . "java")
+     (awk-mode . "awk")
+     (other . "k&r"))))
  '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
@@ -25,10 +51,11 @@
  '(cperl-extra-newline-before-brace t)
  '(cperl-extra-newline-before-brace-multiline nil)
  '(cperl-indent-level 4)
+ '(cperl-indent-parens-as-block t)
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
  '(dired-dwim-target t)
- '(dired-use-ls-dired t)
+ '(diredp-hide-details-initially-flag nil)
  '(diredp-image-preview-in-tooltip nil)
  '(doc-view-continuous t)
  '(ecb-options-version "2.40")
@@ -63,19 +90,44 @@
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
  '(org-agenda-files (quote ("~/Dropbox/0-Work/TODO.org")))
- '(org-link-frame-setup (quote ((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame) (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame))))
+ '(org-confirm-shell-link-function nil)
+ '(org-link-frame-setup
+   (quote
+    ((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file)
+     (wl . wl-other-frame))))
  '(org-tab-follows-link t)
  '(processing-location "~/.bin-sync/processing-java")
  '(processing-sketchbook-dir "~/Dropbox/sketchbook")
- '(rebox-style-loop (quote (370 243)))
  '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
- '(reftex-label-alist (quote (("theorem" 116 "thm:" nil t ("theorem" "th.") -2) ("lemma" 116 "lem:" nil t ("lemma" "lem") -2) ("definition" 100 "def:" nil t ("definition" "def") -2))) t)
- '(safe-local-variable-values (quote ((c-tab-always-indent . t) (nxml-child-indent . 4) (rebox-min-fill-column . 100) (rebox-min-fill-column . 110) (rebox-min-fill-column . 120))))
+ '(reftex-label-alist
+   (quote
+    (("theorem" 116 "thm:" nil t
+      ("theorem" "th.")
+      -2)
+     ("lemma" 116 "lem:" nil t
+      ("lemma" "lem")
+      -2)
+     ("definition" 100 "def:" nil t
+      ("definition" "def")
+      -2))) t)
+ '(safe-local-variable-values
+   (quote
+    ((c-tab-always-indent . t)
+     (nxml-child-indent . 4)
+     (rebox-min-fill-column . 100)
+     (rebox-min-fill-column . 110)
+     (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
- '(tramp-remote-process-environment (quote ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "INSIDE_EMACS='24.3.1,tramp:2.2.6-24.3'" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
+ '(tramp-default-method "ssh")
+ '(tramp-remote-process-environment
+   (quote
+    ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "INSIDE_EMACS='24.3.1,tramp:2.2.6-24.3'" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
  '(vc-handled-backends (quote (svn))))
 
 ;; ---------------------------
