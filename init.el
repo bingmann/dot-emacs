@@ -329,7 +329,7 @@
 ;; --- Load some custom extensions ---
 ;; -----------------------------------
 
-(add-to-list 'load-path "~/.emacs.d/")
+(add-to-list 'load-path "~/.emacs.d/lisp/")
 
 ;; --- autoload lilypond major mode ---
 
