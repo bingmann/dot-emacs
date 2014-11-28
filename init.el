@@ -265,6 +265,7 @@
  '(modeline-mousable ((t (:foreground "white" :background "gray10"))))
  '(modeline-mousable-minor-mode ((t (:foreground "white" :background "gray10"))))
  '(org-link ((t (:inherit link :foreground "cyan1" :underline t))))
+ '(org-table ((t (:foreground "deep sky blue"))))
  '(region ((t (:background "blue3"))))
  '(secondary-selection ((t (:background "SkyBlue4"))))
  '(semantic-complete-inline-face ((t (:underline "yellow"))))
