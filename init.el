@@ -782,6 +782,25 @@
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
+;; -------------------
+;; --- rebox2 mode ---
+;; -------------------
+
+(require 'rebox2)
+
+;; customisation of rebox
+(rebox-register-template
+ 71 999 '("??! box123456"))
+
+(rebox-register-template
+ 272 999
+ '("/*!"
+   " * box123456"
+   " */"))
+
+;; set styles
+(setq rebox-style-loop '(71 272))
+
 ;; ---------------------------
 ;; --- CEDET Configuration ---
 ;; ---------------------------
@@ -912,6 +931,9 @@
   ;; auto-complete integration
   ;(add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-semantic)
+
+  ;; use rebox2 mode
+  (local-set-key [(shift meta q)] 'rebox-cycle)
 
   ;; flyspell mode for comments
   (flyspell-prog-mode)
