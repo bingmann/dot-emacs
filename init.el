@@ -399,6 +399,7 @@
 
 (setq ispell-program-name "/usr/bin/hunspell")
 
+(setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist
       '((nil     ; default
          "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
