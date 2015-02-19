@@ -696,7 +696,6 @@
   (interactive)
   (turn-on-reftex)
   (visual-line-mode 1)
-  (yas-minor-mode)
   (local-set-key "\C-\M-z" (lambda () (interactive) (insert "\\mathbb{Z}")))
   (local-set-key "\C-\M-n" (lambda () (interactive) (insert "\\mathbb{N}")))
   (local-set-key (kbd "C-M-S-n") (lambda () (interactive) (insert "\\!{}_1\\mathbb{N}_")))
@@ -718,7 +717,7 @@
   (local-set-key "\C-c\C-a" (lambda (arg) (interactive "P")
                             (let ((TeX-command-force nil)) (TeX-command-master arg))))
   ;; auto folding of tikzpicture and algorithm environments in tex files
-  (TeX-fold-mode 1)
+  (TeX-fold-mode 0)
   (add-hook 'find-file-hook 'TeX-fold-buffer t)
 )
 
@@ -1106,10 +1105,7 @@
 
 (require 'yasnippet)
 (yas-reload-all)
-
-(add-hook 'c-mode-common-hook '(lambda () (yas-minor-mode)))
-(add-hook 'cperl-mode-hook '(lambda () (yas-minor-mode)))
-(add-hook 'text-mode-hook '(lambda () (yas-minor-mode)))
+(yas-global-mode 1)
 
 ;; --------------------
 ;; --- Java support ---
