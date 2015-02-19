@@ -455,8 +455,8 @@
 (add-hook 'org-mode-hook (lambda ()
                            (local-unset-key [(meta shift up)])
                            (local-unset-key [(meta shift down)])
-                           (local-set-key [(control shift up)] 'org-shiftmetaup)
-                           (local-set-key [(control shift down)] 'org-shiftmetadown)
+                           (local-set-key [(control shift up)] 'org-move-subtree-up)
+                           (local-set-key [(control shift down)] 'org-move-subtree-down)
                            ))
 
 (setq org-default-notes-file "~/Dropbox/0-Work/TODO.org")
