@@ -464,6 +464,11 @@
 (global-set-key (kbd "<f1>") 'org-todo-list)
 (global-set-key (kbd "\C-cc") 'org-capture)
 
+;; active Babel languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sql . t) (sh . t)))
+
 ;; -- load Dired+ when dired is loaded
 
 (require 'dired-copy-paste)
