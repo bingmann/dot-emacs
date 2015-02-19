@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: bash
+# key: bash
+# binding: direct-keybinding
+# --
+#!/bin/bash -x
+
+set -e
