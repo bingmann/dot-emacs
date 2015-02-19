@@ -953,6 +953,9 @@
   ;; visit the header file under cursor
   (local-set-key "\C-c=" 'semantic-decoration-include-visit)
 
+  ;; switch between files
+  (local-set-key [f4] 'ff-find-other-file)
+
   ;;
   ;; load eassist contrib library
   (local-set-key "\C-ct" 'eassist-switch-h-cpp)
