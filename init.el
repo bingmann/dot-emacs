@@ -943,6 +943,12 @@
                       :file "~/Dropbox/bispanning/CMakeLists.txt"
                       )
 
+(ede-cpp-root-project "tbtrader"
+                      :file "~/0/boerse/tbtrader/CMakeLists.txt"
+                      :include-path '("/extlib/cereal/include/" "/extlib/asio/asio/include/")
+                      :compile-command "cd b && make -j4 && ctest && cd .. && doxygen"
+                      )
+
 (ede-cpp-root-project "panthema"
                       :file "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt"
                       )
@@ -1042,26 +1048,34 @@
 (add-to-list 'openwith-associations '("\\.odt\\'" "libreoffice" (file)))
 (add-to-list 'openwith-associations '("\\.doc\\'" "libreoffice" (file)))
 
-;; --------------------------------
-;; --- Recompile Same Directory ---
-;; --------------------------------
+;; ------------------------------
+;; --- Compile CMake Projects ---
+;; ------------------------------
 
-(global-set-key [f5] 'compile-again)
-
+(require 'compile)
+(setq compilation-disable-input nil)
 (setq compilation-last-buffer nil)
+(setq compilation-scroll-output t)
+(setq mode-compile-always-save-buffer-p t)
 
-(defun compile-again (pfx)
-  """Run the same compile as the last time.
-If there was no last time, or there is a prefix argument, this acts like
-M-x compile.
-"""
- (interactive "p")
- (if (and (eq pfx 1)
-          compilation-last-buffer)
-     (progn
-       (set-buffer compilation-last-buffer)
-       (revert-buffer t t))
-   (call-interactively 'compile)))
+(defun my-compile (pfx)
+  "Saves all unsaved buffers, and runs 'compile' with optional ede project customization."
+  (interactive "p")
+  ;; save buffers
+  (save-some-buffers t)
+  ;; if a compilation buffer already exists: switch and recompile
+  (if (buffer-live-p compilation-last-buffer)
+      (recompile)
+    ;; else figure out whether the current directory has an ede-project
+    (let* ((fname (or (buffer-file-name (current-buffer)) default-directory))
+           (current-dir (file-name-directory fname))
+           (proj (ede-current-project current-dir)))
+      (if proj
+          (project-compile-project proj)
+        (call-interactively 'compile)))
+    ))
+
+(global-set-key [f5] 'my-compile)
 
 ;; -----------------------------------
 ;; --- Grand Unified Debugger mode ---
