@@ -64,7 +64,7 @@
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
- '(fill-column 79)
+ '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
@@ -908,6 +908,9 @@
 
   ;; flyspell mode for comments
   (flyspell-prog-mode)
+
+  ;; org-table mode support for comments
+  (orgtbl-mode)
 
   ;; change paragraph definition to correctly wrap doxygen \param and \tparam
   ;; lines.
