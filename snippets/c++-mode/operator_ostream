@@ -2,8 +2,7 @@
 # name: operator<<
 # key: op<<
 # --
-std::ostream& operator<<(std::ostream& s, const ${1:type}& ${2:c})
+friend std::ostream& operator << (std::ostream& os, const ${1:type}& ${2:c})
 {
-         $0
-         return s;
+         return os << $0;
 }
