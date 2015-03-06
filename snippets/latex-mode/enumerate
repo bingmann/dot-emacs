@@ -1,0 +1,8 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: enumerate
+# key: enumerate
+# binding: direct-keybinding
+# --
+\begin{enumerate}
+\item $0
+\end{enumerate}
