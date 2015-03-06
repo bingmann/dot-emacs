@@ -556,10 +556,14 @@
 (global-set-key (kbd "<C-f12>") 'magit-status)
 
 ; auto-load magit-svn-mode if git-svn repo is detected.
-(add-hook 'magit-mode-hook (lambda()
-                             (require 'magit-svn)
-                             (if (magit-svn-get-ref-info)
-                                 (magit-svn-mode))))
+(add-hook 'magit-mode-hook
+          (lambda()
+            (require 'magit-svn)
+            (if (magit-svn-get-ref-info)
+                (magit-svn-mode))
+            ;; F4 -> launch terminal
+            (local-set-key [f4] 'my-dired-terminal)
+            ))
 
 ; svn integration
 
