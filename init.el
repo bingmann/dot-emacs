@@ -197,8 +197,9 @@
 (push 'rainbow-delimiters my-el-get-packages)
 (push 'rebox2 my-el-get-packages)
 (push 'smex my-el-get-packages)
-(push 'smooth-scrolling my-el-get-packages )
+(push 'smooth-scrolling my-el-get-packages)
 (push 'yasnippet my-el-get-packages )
+(push 'multiple-cursors my-el-get-packages)
 (push 'flymake my-el-get-packages)
 (push 'grandshell my-el-get-packages)
 
@@ -1103,6 +1104,16 @@
   )
 
 (add-hook 'processing-mode-hook 'processing-mode-init)
+
+;; ------------------------
+;; --- Multiple Cursors ---
+;; ------------------------
+
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+(add-hook 'multiple-cursors-mode-hook
+          (lambda ()
+            (define-key mc/keymap (kbd "<return>") nil)
+            ))
 
 ;; ------------------------------------------------
 ;; --- Increment and Decrement Numbers at Point ---
