@@ -5,7 +5,9 @@
 # --
 % -*- mode: latex; mode: flyspell; ispell-local-dictionary: "en_US"; coding: utf-8 -*-
 
-\documentclass[draft,a4paper,12pt,twoside]{article}
+\documentclass[a4paper,12pt,twoside]{scrartcl}
+
+\setlength\overfullrule{14pt} % this enables big black bars on overlong lines.
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
