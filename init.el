@@ -233,10 +233,12 @@
 (push 'tt-mode my-el-get-packages)
 (push 'thrift-mode my-el-get-packages)
 (push 'processing-mode my-el-get-packages)
+(push 'scala-mode2 my-el-get-packages)
 
 ;; version control
 (push 'dsvn my-el-get-packages)
 (push 'magit my-el-get-packages)
+(push 'magit-svn my-el-get-packages)
 
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
@@ -565,6 +567,8 @@
             ;; F4 -> launch terminal
             (local-set-key [f4] 'my-dired-terminal)
             ))
+
+(setq magit-last-seen-setup-instructions "1.4.0")
 
 ; svn integration
 
