@@ -1,0 +1,9 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: noncopyable
+# key: noncopyable
+# binding: direct-keybinding
+# --
+//! non-copyable: delete copy-constructor
+${1:class}(const $1 &) = delete;
+//! non-copyable: delete assignment operator
+$1 & operator = (const $1 &) = delete;
