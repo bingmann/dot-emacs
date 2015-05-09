@@ -948,20 +948,42 @@
 
 (ede-cpp-root-project "parallel-string-sorting"
                       :file "~/Dropbox/parallel-string-sorting/CMakeLists.txt"
+                      :compile-command "cd b && make -j4 && ctest && cd .."
                       )
 
 (ede-cpp-root-project "bispanning"
                       :file "~/Dropbox/bispanning/CMakeLists.txt"
                       )
 
+(ede-cpp-root-project "dsort"
+                      :file "~/Dropbox/dsort/CMakeLists.txt"
+                      )
+
+(ede-cpp-root-project "divsufsort-lcp-pss"
+                      :file "~/Dropbox/divsufsort-lcp-pss/CMakeLists.txt"
+                      :compile-command "cd b && make -j4 && cd .."
+                      )
+
+(ede-cpp-root-project "c7a"
+                      :file "~/c7a/CMakeLists.txt"
+                      :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
+                      )
+
 (ede-cpp-root-project "tbtrader"
                       :file "~/0/boerse/tbtrader/CMakeLists.txt"
-                      :include-path '("/extlib/cereal/include/" "/extlib/asio/asio/include/")
+                      :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
                       :compile-command "cd b && make -j4 && ctest && cd .. && doxygen"
+                      )
+
+(ede-cpp-root-project "charter"
+                      :file "~/0/boerse/tbtrader/charter/CMakeLists.txt"
+                      :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
+                      :compile-command "cd ../b && make -j4 && ctest && cd charter/app && ./charter"
                       )
 
 (ede-cpp-root-project "panthema"
                       :file "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt"
+                      :compile-command "cd ../build && make"
                       )
 
 (defun qt-cedet-setup ()
