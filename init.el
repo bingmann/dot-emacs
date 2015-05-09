@@ -90,6 +90,8 @@
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
  '(org-agenda-files (quote ("~/Dropbox/0-Work/TODO.org")))
+ '(org-clock-mode-line-total (quote today))
+ '(org-clock-persist t)
  '(org-confirm-shell-link-function nil)
  '(org-link-frame-setup
    (quote
@@ -99,6 +101,9 @@
      (file . find-file)
      (wl . wl-other-frame))))
  '(org-tab-follows-link t)
+ '(org-time-clocksum-format
+   (quote
+    (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
  '(processing-location "~/.bin-sync/processing-java")
  '(processing-sketchbook-dir "~/Dropbox/sketchbook")
  '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
@@ -381,6 +386,9 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((sql . t) (sh . t)))
+
+;; save the clock history across Emacs sessions
+(org-clock-persistence-insinuate)
 
 ;; -- load Dired+ when dired is loaded
 
