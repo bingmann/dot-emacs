@@ -212,6 +212,7 @@
 (push 'auto-complete-auctex my-el-get-packages)
 (push 'auto-complete-css my-el-get-packages)
 (push 'auto-complete-yasnippet my-el-get-packages)
+(push 'auto-complete-c-headers my-el-get-packages)
 
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
@@ -610,6 +611,20 @@
 (global-set-key [(meta delete)] 'kill-word)
 (global-set-key [(control delete)] 'dove-forward-kill-word)
 
+;; hippie-expand is dabbrev expand on steroids
+
+(global-set-key "\M-/" 'hippie-expand)
+
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev
+        try-expand-dabbrev-all-buffers
+        try-expand-dabbrev-from-kill
+        try-complete-file-name-partially
+        try-complete-file-name
+        try-expand-all-abbrevs
+        try-expand-list
+        try-expand-line))
+
 ; special bindings for latex quickies
 
 (defun my-latex-key-bindings ()
@@ -913,6 +928,7 @@
   ;; auto-complete integration
   ;(add-to-list 'ac-sources 'ac-source-gtags)
   (add-to-list 'ac-sources 'ac-source-semantic)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
 
   ;; use rebox2 mode
   (local-set-key [(shift meta q)] 'rebox-cycle)
