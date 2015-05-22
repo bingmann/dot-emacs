@@ -943,6 +943,12 @@
   ;; lines.
   (setq paragraph-start "\\(//+[!]?\\|\\**\\)[ ]*\\([ ]*$\\|[@\\\\]\\(param\\|tparam\\|return\\|pre\\)\\)\\|\f")
 
+  ;; add C++11 keywords
+  (font-lock-add-keywords
+   'c++-mode '(
+               ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . 'font-lock-keyword-face)
+               ("\\<\\(char[0-9]+_t\\)\\>" . 'font-lock-keyword-face)))
+
   (qt-cedet-setup)
   )
 
