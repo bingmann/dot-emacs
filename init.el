@@ -963,50 +963,59 @@
 (ede-enable-generic-projects)
 
 ;; CMake Projects
-(ede-cpp-root-project "stxxl"
-                      :file "~/Dropbox/stxxl/CMakeLists.txt"
-                      :include-path '("/include/")
-                      )
+(if (file-exists-p "~/Dropbox/stxxl/CMakeLists.txt")
+    (ede-cpp-root-project "stxxl"
+                          :file "~/Dropbox/stxxl/CMakeLists.txt"
+                          :include-path '("/include/")
+                          ))
 
-(ede-cpp-root-project "parallel-string-sorting"
-                      :file "~/Dropbox/parallel-string-sorting/CMakeLists.txt"
-                      :compile-command "cd b && make -j4 && ctest && cd .."
-                      )
+(if (file-exists-p "~/Dropbox/parallel-string-sorting/CMakeLists.txt")
+    (ede-cpp-root-project "parallel-string-sorting"
+                          :file "~/Dropbox/parallel-string-sorting/CMakeLists.txt"
+                          :compile-command "cd b && make -j4 && ctest && cd .."
+                          ))
 
-(ede-cpp-root-project "bispanning"
-                      :file "~/Dropbox/bispanning/CMakeLists.txt"
-                      )
+(if (file-exists-p "~/Dropbox/bispanning/CMakeLists.txt")
+    (ede-cpp-root-project "bispanning"
+                          :file "~/Dropbox/bispanning/CMakeLists.txt"
+                          ))
 
-(ede-cpp-root-project "dsort"
-                      :file "~/Dropbox/dsort/CMakeLists.txt"
-                      )
+(if (file-exists-p "~/Dropbox/dsort/CMakeLists.txt")
+    (ede-cpp-root-project "dsort"
+                          :file "~/Dropbox/dsort/CMakeLists.txt"
+                          ))
 
-(ede-cpp-root-project "divsufsort-lcp-pss"
-                      :file "~/Dropbox/divsufsort-lcp-pss/CMakeLists.txt"
-                      :compile-command "cd b && make -j4 && cd .."
-                      )
+(if (file-exists-p "~/Dropbox/divsufsort-lcp-pss/CMakeLists.txt")
+    (ede-cpp-root-project "divsufsort-lcp-pss"
+                          :file "~/Dropbox/divsufsort-lcp-pss/CMakeLists.txt"
+                          :compile-command "cd b && make -j4 && cd .."
+                          ))
 
-(ede-cpp-root-project "c7a"
-                      :file "~/c7a/CMakeLists.txt"
-                      :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
-                      )
+(if (file-exists-p "~/c7a/CMakeLists.txt")
+    (ede-cpp-root-project "c7a"
+                          :file "~/c7a/CMakeLists.txt"
+                          :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
+                          ))
 
-(ede-cpp-root-project "tbtrader"
-                      :file "~/0/boerse/tbtrader/CMakeLists.txt"
-                      :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
-                      :compile-command "cd b && make -j4 && ctest && cd .. && doxygen"
-                      )
+(if (file-exists-p "~/0/boerse/tbtrader/CMakeLists.txt")
+    (ede-cpp-root-project "tbtrader"
+                          :file "~/0/boerse/tbtrader/CMakeLists.txt"
+                          :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
+                          :compile-command "cd b && make -j4 && ctest && cd .. && doxygen"
+                          ))
 
-(ede-cpp-root-project "charter"
-                      :file "~/0/boerse/tbtrader/charter/CMakeLists.txt"
-                      :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
-                      :compile-command "cd ../b && make -j4 && ctest && cd charter/app && ./charter"
-                      )
+(if (file-exists-p "~/0/boerse/tbtrader/charter/CMakeLists.txt")
+    (ede-cpp-root-project "charter"
+                          :file "~/0/boerse/tbtrader/charter/CMakeLists.txt"
+                          :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
+                          :compile-command "cd ../b && make -j4 && ctest && cd charter/app && ./charter"
+                          ))
 
-(ede-cpp-root-project "panthema"
-                      :file "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt"
-                      :compile-command "cd ../build && make"
-                      )
+(if (file-exists-p "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt")
+    (ede-cpp-root-project "panthema"
+                          :file "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt"
+                          :compile-command "cd ../build && make"
+                          ))
 
 (defun qt-cedet-setup ()
   "Set up c-mode and related modes. Includes support for Qt code (signal, slots and alikes)."
