@@ -89,7 +89,7 @@
  '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
- '(org-agenda-files (quote ("~/Dropbox/0-Work/TODO.org")))
+ '(org-agenda-files (quote ("~/synca/01-OrgTassen/TODO.org")))
  '(org-clock-mode-line-total (quote today))
  '(org-clock-persist t)
  '(org-confirm-shell-link-function nil)
@@ -376,7 +376,7 @@
                            (local-set-key [(control shift down)] 'org-move-subtree-down)
                            ))
 
-(setq org-default-notes-file "~/Dropbox/0-Work/TODO.org")
+(setq org-default-notes-file "~/synca/01-OrgTassen/TODO.org")
 
 (global-set-key (kbd "<f1>") 'org-todo-list)
 (global-set-key (kbd "\C-cc") 'org-capture)
