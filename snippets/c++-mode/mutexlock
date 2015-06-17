@@ -1,0 +1,7 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: mutexlock
+# key: mutexlock
+# binding: direct-keybinding
+# --
+static std::mutex mutex$1;
+std::unique_lock<std::mutex> lock$1(mutex$1);
