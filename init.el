@@ -32,6 +32,10 @@
  '(TeX-fold-math-spec-list nil)
  '(TeX-save-query nil)
  '(TeX-source-correlate-mode t)
+ '(ag-highlight-search t)
+ '(ag-ignore-list (quote ("build" "b" "bo")))
+ '(ag-reuse-buffers t)
+ '(ag-reuse-window t)
  '(auth-sources
    (quote
     ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
@@ -206,6 +210,7 @@
 (push 'yasnippet my-el-get-packages )
 (push 'multiple-cursors my-el-get-packages)
 (push 'flymake my-el-get-packages)
+(push 'ag my-el-get-packages)
 (push 'grandshell my-el-get-packages)
 
 (push 'auto-complete my-el-get-packages)
@@ -625,6 +630,9 @@
         try-expand-list
         try-expand-line))
 
+; ag-based project-wide search
+(global-set-key (kbd "C-c C-s") 'ag)
+
 ; special bindings for latex quickies
 
 (defun my-latex-key-bindings ()
@@ -1007,7 +1015,7 @@
 (if (file-exists-p "~/0/boerse/tbtrader/charter/CMakeLists.txt")
     (ede-cpp-root-project "charter"
                           :file "~/0/boerse/tbtrader/charter/CMakeLists.txt"
-                          :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
+                          :include-path '("../" "/qcustomplot/src/")
                           :compile-command "cd ../b && make -j4 && ctest && cd charter/app && ./charter"
                           ))
 
