@@ -85,12 +85,9 @@
  '(jde-jdk (quote ("1.7.0.51")))
  '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
  '(lua-indent-level 4)
- '(magit-item-highlight-face nil)
- '(magit-save-some-buffers (quote dontask))
- '(magit-stage-all-confirm nil)
+ '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
+ '(magit-refs-show-commit-count (quote all))
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
- '(magit-status-verbose-untracked nil)
- '(magit-unstage-all-confirm nil)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
  '(org-agenda-files (quote ("~/synca/01-OrgTassen/TODO.org")))
@@ -249,7 +246,7 @@
 ;; version control
 (push 'dsvn my-el-get-packages)
 (push 'magit my-el-get-packages)
-(push 'magit-svn my-el-get-packages)
+;(push 'magit-svn my-el-get-packages)
 
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
@@ -282,7 +279,11 @@
  '(diff-added ((t (:inherit diff-changed :foreground "#33ff33"))))
  '(diff-changed-face ((t nil)) t)
  '(diff-removed ((t (:inherit diff-changed :foreground "#ff3333"))))
- '(diff-removed-face ((t (:inherit diff-changed :background "#553333"))) t))
+ '(diff-removed-face ((t (:inherit diff-changed :background "#553333"))) t)
+ '(magit-diff-added ((t (:foreground "#33ff33"))))
+ '(magit-diff-added-highlight ((t (:inherit magit-diff-added :weight normal))))
+ '(magit-diff-removed-highlight ((t (:inherit magit-diff-removed :weight normal))))
+ '(magit-section-highlight ((t (:foreground "pale goldenrod")))))
 
 (load-theme 'grandshell t)
 (load-theme 'mytheme t)
@@ -569,14 +570,9 @@
 ; auto-load magit-svn-mode if git-svn repo is detected.
 (add-hook 'magit-mode-hook
           (lambda()
-            (require 'magit-svn)
-            (if (magit-svn-get-ref-info)
-                (magit-svn-mode))
-            ;; F4 -> launch terminal
-            (local-set-key [f4] 'my-dired-terminal)
+            ;(require 'magit-svn)
+            ;(if (magit-svn-get-ref-info) (magit-svn-mode))
             ))
-
-(setq magit-last-seen-setup-instructions "1.4.0")
 
 ; svn integration
 
