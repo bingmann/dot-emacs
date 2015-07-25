@@ -199,7 +199,7 @@
 (push 'column-marker my-el-get-packages)
 (push 'folding my-el-get-packages)
 (push 'goto-last-change my-el-get-packages)
-(push 'gtags my-el-get-packages)
+;(push 'gtags my-el-get-packages)
 (push 'rainbow-delimiters my-el-get-packages)
 (push 'rebox2 my-el-get-packages)
 (push 'smex my-el-get-packages)
@@ -926,8 +926,8 @@
   ;; show emacs code browser
   (local-set-key "\C-cb" 'ecb-activate)
 
-  (gtags-mode t)
-  (local-set-key "\C-cf" 'gtags-find-tag)
+  ;(gtags-mode t)
+  ;(local-set-key "\C-cf" 'gtags-find-tag)
 
   ;; auto-complete integration
   ;(add-to-list 'ac-sources 'ac-source-gtags)
