@@ -33,7 +33,7 @@
  '(TeX-save-query nil)
  '(TeX-source-correlate-mode t)
  '(ag-highlight-search t)
- '(ag-ignore-list (quote ("build" "b" "bo")))
+ '(ag-ignore-list (quote ("build" "b" "bo" "extlib")))
  '(ag-reuse-buffers t)
  '(ag-reuse-window t)
  '(auth-sources
@@ -76,6 +76,9 @@
  '(git-commit-fill-column 100000)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
+ '(grep-find-ignored-directories
+   (quote
+    (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
  '(ido-auto-merge-delay-time 0.4)
  '(ido-save-directory-list-file "~/.emacs.d/ido.last")
  '(ido-show-dot-for-dired t)
@@ -426,13 +429,6 @@
       (select-window window)
       (find-file (file-name-sans-versions file t)))))
 
-(defun my-dired-terminal (&optional arg)
-  "Launch terminal in current directory."
-  (interactive)
-  ;(start-process "terminal" "*scratch*" "/usr/bin/urxvt")
-  (start-process "terminal" nil "/usr/bin/urxvt")
-)
-
 (defun set-my-dired-keys-hook ()
   "My favorite dired keys."
   ; for some reason mouse-2 = left click (mouse-1)
@@ -440,8 +436,6 @@
   (define-key dired-mode-map [M-mouse-2] 'diredp-mouse-find-file-other-frame)
   ; backspace
   (define-key dired-mode-map [backspace] 'dired-up-directory)
-  ; F4 -> launch terminal
-  (define-key dired-mode-map [f4] 'my-dired-terminal)
 )
 
 (add-hook 'dired-mode-hook 'set-my-dired-keys-hook)
@@ -531,17 +525,6 @@
 
 (global-set-key "\M-g" 'goto-line)
 
-(global-set-key [C-x C-b] 'buffer-menu)
-(global-set-key [M-S-up] 'buffer-menu)
-
-(global-set-key [M-S-left] 'previous-buffer)
-(global-set-key [M-S-right] 'next-buffer)
-
-; window handling
-(global-set-key "\M-`" 'delete-other-windows)
-(global-set-key "\M-2" 'new-frame)
-(global-set-key "\M-3" 'delete-frame)
-
 ; quick comment and uncommenting
 (global-set-key (kbd "C-c SPC") 'comment-or-uncomment-region)
 
@@ -625,9 +608,6 @@
         try-expand-all-abbrevs
         try-expand-list
         try-expand-line))
-
-; ag-based project-wide search
-(global-set-key (kbd "C-c C-s") 'ag)
 
 ; special bindings for latex quickies
 
@@ -1178,6 +1158,13 @@
             (define-key mc/keymap (kbd "<return>") nil)
             ))
 
+;; --------------------------
+;; --- Make eshell Usable ---
+;; --------------------------
+
+(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+
 ;; ------------------------------------------------
 ;; --- Increment and Decrement Numbers at Point ---
 ;; ------------------------------------------------
@@ -1226,3 +1213,88 @@
 (defun decrement-number-hexadecimal (&optional arg)
   (interactive "p*")
   (increment-number-hexadecimal (if arg (- arg) -1)))
+
+;; -------------------------------------------
+;; --- Custom Minor Mode for Global Keymap ---
+;; -------------------------------------------
+
+;; http://emacs.stackexchange.com/questions/352/how-to-override-major-mode-bindings
+
+(defvar my-keymap-mode-map (make-sparse-keymap)
+  "Keymap while my-keymap-mode is active.")
+
+(define-minor-mode my-keymap-mode
+  "A minor mode so that my key settings override annoying major modes."
+  nil
+  :lighter ""
+  my-keymap-mode-map)
+
+(defadvice load (after give-my-keybindings-priority)
+  "Try to ensure that my keybindings always have priority."
+  (if (not (eq (car (car minor-mode-map-alist)) 'my-keymap-mode))
+      (let ((mykeys (assq 'my-keymap-mode minor-mode-map-alist)))
+        (assq-delete-all 'my-keymap-mode minor-mode-map-alist)
+        (add-to-list 'minor-mode-map-alist mykeys))))
+(ad-activate 'load)
+
+(defun turn-on-my-keymap-mode ()
+  "Turns on my-keymap-mode."
+  (interactive) (my-keymap-mode t))
+
+(defun turn-off-my-keymap-mode ()
+  "Turns off my-keymap-mode."
+  (interactive) (my-keymap-mode -1))
+
+;; ---- list of global key bindings ----
+
+;; ag- or rgrep-based project-wide search
+(defun my-ag-grep ()
+  "Launch ag or grep in current directory."
+  (interactive)
+  (if
+      ;; if buffer is under tramp
+      (file-remote-p default-directory)
+      ;; call rgrep for remote buffers
+      (call-interactively 'rgrep)
+    ;; call ag for local buffers
+    (call-interactively 'ag)
+    )
+  )
+(define-key my-keymap-mode-map (kbd "C-c C-s") 'my-ag-grep)
+
+;; window handling
+(define-key my-keymap-mode-map "\M-`" 'delete-other-windows)
+(define-key my-keymap-mode-map "\M-2" 'new-frame)
+(define-key my-keymap-mode-map "\M-3" 'delete-frame)
+
+;; loading the buffer list
+(define-key my-keymap-mode-map [C-x C-b] 'buffer-menu)
+(define-key my-keymap-mode-map [M-S-up] 'ibuffer)
+
+;; fast nagivation in buffer stack
+(define-key my-keymap-mode-map [M-S-left] 'previous-buffer)
+(define-key my-keymap-mode-map [M-S-right] 'next-buffer)
+
+;; F4 -> launch a terminal (just about anywhere)
+(defun my-terminal (&optional arg)
+  "Launch terminal in current directory."
+  (interactive)
+  ;(start-process "terminal" "*scratch*" "/usr/bin/urxvt")
+  (if
+      ;; if buffer is under tramp
+      (file-remote-p default-directory)
+      (shell)
+    (start-process "terminal" nil "/usr/bin/urxvt")
+    )
+)
+(define-key my-keymap-mode-map [f4] 'my-terminal)
+
+;; globally activate keymap
+(define-globalized-minor-mode
+  global-my-keymap-mode my-keymap-mode turn-on-my-keymap-mode)
+
+(global-my-keymap-mode)
+
+;; Turn off the minor mode in the minibuffer
+(add-hook 'minibuffer-setup-hook 'turn-off-my-keymap-mode)
+
