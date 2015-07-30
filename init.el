@@ -873,7 +873,7 @@
   (local-set-key "\C-c=" 'semantic-decoration-include-visit)
 
   ;; switch between files
-  (local-set-key [f4] 'ff-find-other-file)
+  (local-set-key [f3] 'ff-find-other-file)
 
   ;;
   ;; load eassist contrib library
@@ -981,16 +981,16 @@
                           :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
                           ))
 
-(if (file-exists-p "~/0/boerse/tbtrader/CMakeLists.txt")
+(if (file-exists-p "~/tbtrader/CMakeLists.txt")
     (ede-cpp-root-project "tbtrader"
-                          :file "~/0/boerse/tbtrader/CMakeLists.txt"
+                          :file "~/tbtrader/CMakeLists.txt"
                           :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
                           :compile-command "cd b && make -j4 && ctest && cd .. && doxygen"
                           ))
 
-(if (file-exists-p "~/0/boerse/tbtrader/charter/CMakeLists.txt")
+(if (file-exists-p "~/tbtrader/charter/CMakeLists.txt")
     (ede-cpp-root-project "charter"
-                          :file "~/0/boerse/tbtrader/charter/CMakeLists.txt"
+                          :file "~/tbtrader/charter/CMakeLists.txt"
                           :include-path '("../" "/qcustomplot/src/")
                           :compile-command "cd ../b && make -j4 && ctest && cd charter/app && ./charter"
                           ))
