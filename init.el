@@ -557,6 +557,9 @@
             ;(if (magit-svn-get-ref-info) (magit-svn-mode))
             ))
 
+;; Git-Commit-Mode: flyspell
+(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+
 ; svn integration
 
 (autoload 'svn-status "dsvn" "Run `svn status'." t)
