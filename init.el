@@ -1301,3 +1301,10 @@
 ;; Turn off the minor mode in the minibuffer
 (add-hook 'minibuffer-setup-hook 'turn-off-my-keymap-mode)
 
+;; modify ibuffer keymap: mouse click opens a file
+(defun my-ibuffer-keys ()
+  "Modify keymaps used by `ibuffer'."
+  (local-set-key (kbd "<down-mouse-1>") 'ibuffer-visit-buffer)
+  )
+
+(add-hook 'ibuffer-hook 'my-ibuffer-keys)
