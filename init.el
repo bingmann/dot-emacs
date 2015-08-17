@@ -978,9 +978,10 @@
                           :compile-command "cd b && make -j4 && cd .."
                           ))
 
-(if (file-exists-p "~/c7a/CMakeLists.txt")
-    (ede-cpp-root-project "c7a"
-                          :file "~/c7a/CMakeLists.txt"
+(if (file-exists-p "~/thrill/CMakeLists.txt")
+    (ede-cpp-root-project "thrill"
+                          :file "~/thrill/CMakeLists.txt"
+                          :include-path '("/extlib/gtest/")
                           :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
                           ))
 
