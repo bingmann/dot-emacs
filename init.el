@@ -1162,6 +1162,8 @@
 ;; ------------------------
 
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+(global-set-key (kbd "C-c !") 'mc/mark-all-dwim)
+
 (add-hook 'multiple-cursors-mode-hook
           (lambda ()
             (define-key mc/keymap (kbd "<return>") nil)
