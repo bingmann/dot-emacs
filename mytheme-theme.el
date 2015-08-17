@@ -72,6 +72,10 @@
  '(show-paren-match-face ((t (:foreground "#0090FF" :background "black"))) t)
  '(show-paren-mismatch-face ((t (:foreground "white" :background "purple"))) t)
  '(trailing-whitespace ((t (:background "red1")))))
+ '(magit-diff-added ((t (:foreground "#33ff33"))))
+ '(magit-diff-added-highlight ((t (:inherit magit-diff-added :weight normal))))
+ '(magit-diff-removed-highlight ((t (:inherit magit-diff-removed :weight normal))))
+ '(magit-section-highlight ((t (:foreground "pale goldenrod"))))
 
 ;;  '(bold ((t (:bold t))))
 ;;  '(bold-sitalic ((t (:italic t :bold t))))
