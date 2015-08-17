@@ -98,6 +98,8 @@
  '(org-clock-mode-line-total (quote today))
  '(org-clock-persist t)
  '(org-confirm-shell-link-function nil)
+ '(org-export-allow-bind-keywords t)
+ '(org-export-backends (quote (ascii html latex md)))
  '(org-link-frame-setup
    (quote
     ((vm . vm-visit-folder-other-frame)
@@ -122,7 +124,7 @@
       -2)
      ("definition" 100 "def:" nil t
       ("definition" "def")
-      -2))) t)
+      -2))))
  '(safe-local-variable-values
    (quote
     ((c-tab-always-indent . t)
