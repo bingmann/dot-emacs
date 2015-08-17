@@ -134,9 +134,12 @@
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
  '(tramp-default-method "ssh")
+ '(tramp-remote-path
+   (quote
+    ("~/.bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin")))
  '(tramp-remote-process-environment
    (quote
-    ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "INSIDE_EMACS='24.3.1,tramp:2.2.6-24.3'" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
+    ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
  '(vc-handled-backends (quote (svn))))
 
 ;; ---------------------------
