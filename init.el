@@ -215,6 +215,7 @@
 (push 'flymake my-el-get-packages)
 (push 'ag my-el-get-packages)
 (push 'grandshell my-el-get-packages)
+(push 'leuven-theme my-el-get-packages)
 
 (push 'auto-complete my-el-get-packages)
 (push 'auto-complete-auctex my-el-get-packages)
@@ -305,7 +306,7 @@
   (set-face-font 'default "-*-terminus-medium-r-*-*-28-*-*-*-*-*-*-*")
   (disable-theme 'mytheme)
   (disable-theme 'grandshell)
-  (load-theme 'adwaita t))
+  (load-theme 'leuven t))
 
 ;; -----------------------------------
 ;; --- Load some custom extensions ---
