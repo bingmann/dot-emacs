@@ -15,7 +15,7 @@
  '(LaTeX-fold-math-spec-list nil)
  '(TeX-command-list
    (quote
-    (("LaTeX" "%`flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil
+    (("LaTeX" "%`~/.emacs.d/flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil
       (latex-mode doctex-mode)
       :help "Run LaTeX")
      ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
@@ -683,7 +683,7 @@
   '(progn
      ;; compile tex using pdflatex
      (defun flymake-get-tex-args (file-name)
-       (list "flymake-pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
+       (list "~/.emacs.d/flymake-pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
 
      ;; severe logging
      ;(setq flymake-log-level 9)

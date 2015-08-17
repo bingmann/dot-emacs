@@ -1,0 +1,40 @@
+#!/bin/bash
+
+set -e
+
+export max_print_line=500
+export error_line=254
+export half_error_line=238
+
+pdflatex -interaction=nonstopmode "$@"
+
+# check all argument and run bibtex is appropriate
+for f in $@; do
+
+    [[ "$f" == *.tex ]] || continue
+
+    AUX=${f%%.tex}.aux
+
+    # check for citations
+    grep -q '\\citation' "$AUX" || continue
+
+    # strip off directory and .tex
+    BASE=${f%%.tex}
+    DIR=`dirname "$BASE"`
+    BASE=`basename "$BASE"`
+
+    pushd $DIR
+    bibtex $BASE
+    popd
+
+    # check for index file and run texindy
+
+    IDX=${f%%.tex}.idx
+
+    [ -e "$IDX" ] && texindy "$IDX"
+
+    # make glossaries
+
+    makeglossaries ${f%%.tex} || true
+
+done
