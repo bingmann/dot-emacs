@@ -89,7 +89,6 @@
  '(lua-indent-level 4)
  '(magit-diff-arguments (quote ("-M" "-C")))
  '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
- '(magit-pull-arguments (quote ("--rebase")))
  '(magit-refs-show-commit-count (quote all))
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(make-backup-files nil)
@@ -124,7 +123,7 @@
       -2)
      ("definition" 100 "def:" nil t
       ("definition" "def")
-      -2))))
+      -2))) t)
  '(safe-local-variable-values
    (quote
     ((c-tab-always-indent . t)
