@@ -73,6 +73,7 @@
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(gdb-many-windows t)
+ '(ggtags-highlight-tag-delay 1.0)
  '(git-commit-fill-column 1000)
  '(git-commit-summary-max-length 1000)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
@@ -207,7 +208,6 @@
 (push 'column-marker my-el-get-packages)
 (push 'folding my-el-get-packages)
 (push 'goto-last-change my-el-get-packages)
-;(push 'gtags my-el-get-packages)
 (push 'rainbow-delimiters my-el-get-packages)
 (push 'rebox2 my-el-get-packages)
 (push 'smex my-el-get-packages)
@@ -218,6 +218,8 @@
 (push 'ag my-el-get-packages)
 (push 'grandshell my-el-get-packages)
 (push 'leuven-theme my-el-get-packages)
+(push 'ggtags my-el-get-packages)
+;(push 'helm-gtags my-el-get-packages)
 
 (push 'auto-complete my-el-get-packages)
 (push 'auto-complete-auctex my-el-get-packages)
@@ -915,8 +917,7 @@
   ;; show emacs code browser
   (local-set-key "\C-cb" 'ecb-activate)
 
-  ;(gtags-mode t)
-  ;(local-set-key "\C-cf" 'gtags-find-tag)
+  (ggtags-mode 1)
 
   ;; auto-complete integration
   ;(add-to-list 'ac-sources 'ac-source-gtags)
