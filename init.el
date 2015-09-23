@@ -219,6 +219,7 @@
 (push 'multiple-cursors my-el-get-packages)
 (push 'flymake my-el-get-packages)
 (push 'ag my-el-get-packages)
+(push 'ws-butler my-el-get-packages)
 (push 'grandshell my-el-get-packages)
 (push 'leuven-theme my-el-get-packages)
 (push 'ggtags my-el-get-packages)
@@ -450,6 +451,9 @@
 )
 
 (add-hook 'dired-mode-hook 'set-my-dired-keys-hook)
+
+;; whitespace cleaning butler mode
+(ws-butler-global-mode 1)
 
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
