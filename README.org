@@ -161,10 +161,10 @@ Further simple commands are:
 | Yank (Paste) Area (inserts space)   | =C-x r y=                            |
 
 ** Keyboard Macros
-| Record Macro       | =C-x (=         |
-| End Recording      | =C-x )=         |
-| Execute Macro      | =C-e=           |
-| Repeated Execution | =ESC <num> C-e= |
+| Record Macro       | =C-x (=                            |
+| End Recording      | =C-x )=                            |
+| Execute Macro      | =C-x e= (then repeat =e= for more) |
+| Repeated Execution | =ESC <num> C-x e=                  |
 
 ** Run Shell Commands
 | Run Single Command          | =M-S-!=      |

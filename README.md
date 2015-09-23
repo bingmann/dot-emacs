@@ -600,13 +600,13 @@ Further simple commands are:
 
 <tr>
 <td class="org-left">Execute Macro</td>
-<td class="org-left">`C-e`</td>
+<td class="org-left">`C-x e` (then repeat `e` for more)</td>
 </tr>
 
 
 <tr>
 <td class="org-left">Repeated Execution</td>
-<td class="org-left">`ESC <num> C-e`</td>
+<td class="org-left">`ESC <num> C-x e`</td>
 </tr>
 </tbody>
 </table>
