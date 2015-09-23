@@ -143,6 +143,9 @@
  '(tramp-remote-process-environment
    (quote
     ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
+ '(undo-limit 8000000)
+ '(undo-outer-limit 120000000)
+ '(undo-strong-limit 120000000)
  '(vc-handled-backends (quote (svn))))
 
 ;; ---------------------------
