@@ -30,11 +30,15 @@ for f in $@; do
     # check for index file and run texindy
 
     IDX=${f%%.tex}.idx
-
     [ -e "$IDX" ] && texindy "$IDX"
 
     # make glossaries
 
     makeglossaries ${f%%.tex} || true
+
+    # check for tikz external/mode={list and make}
+
+    MAKEFILE=${f%%.tex}.makefile
+    [ -e "$MAKEFILE" ] && make -f "$MAKEFILE"
 
 done
