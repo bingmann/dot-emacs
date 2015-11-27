@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: noncopyablemove
-# key: noncopyablemove
+# name: noncopymove
+# key: noncopymove
 # binding: direct-keybinding
 # expand-env: ((yas-indent-line 'fixed))
 # --
