@@ -455,6 +455,12 @@
 ;; whitespace cleaning butler mode
 (ws-butler-global-mode 1)
 
+;; cap'n'proto
+
+(autoload 'capnp-mode "capnp-mode" "Capnp Mode" t)
+
+(add-to-list 'auto-mode-alist '("\\.capnp$" . capnp-mode))
+
 ;; -------------------------------
 ;; --- Automatic Mode Triggers ---
 ;; -------------------------------
