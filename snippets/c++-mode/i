@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: debug
-# key: debug
+# name: i
+# key: i
 # binding: direct-keybinding
 # --
-static constexpr bool debug = true;
+`(if (char-equal ?) (preceding-char)) "," "")` ${1:var}_($1)

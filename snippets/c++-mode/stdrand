@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: debug
-# key: debug
+# name: stdrand
+# key: stdrand
 # binding: direct-keybinding
 # --
-static constexpr bool debug = true;
+std::default_random_engine(std::random_device { } ())

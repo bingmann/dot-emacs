@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: debug
-# key: debug
+# name: A
+# key: A
 # binding: direct-keybinding
 # --
-static constexpr bool debug = true;
+ASSERT_EQ($0)

@@ -1,0 +1,12 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: dog
+# key: dog
+# binding: direct-keybinding
+# expand-env: ((yas-indent-line 'fixed))
+# --
+//! \name $1
+//! \{
+
+$0
+
+//! \}

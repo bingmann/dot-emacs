@@ -2,6 +2,6 @@
 # name: fori
 # key: fori
 # --
-for (${1:iter}=${2:var}.begin(); $1!=$2.end(); ++$1) {
+for (${1:type} ${2:i} = ${3:0}; $2 ${4:!= size()}; ++$2) {
     $0
 }

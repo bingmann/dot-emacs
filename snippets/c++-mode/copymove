@@ -1,0 +1,14 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: copymove
+# key: copymove
+# binding: direct-keybinding
+# expand-env: ((yas-indent-line 'fixed))
+# --
+//! default copy-constructor
+${1:class}(const $1 &) = default;
+//! default assignment operator
+$1 & operator = (const $1 &) = default;
+//! move-constructor: default
+$1($1 &&) = default;
+//! move-assignment operator: default
+$1 & operator = ($1 &&) = default;

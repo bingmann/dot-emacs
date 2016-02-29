@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: debug
-# key: debug
+# name: debugf
+# key: debugf
 # binding: direct-keybinding
 # --
-static constexpr bool debug = true;
+static constexpr bool debug = false;

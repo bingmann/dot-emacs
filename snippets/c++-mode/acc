@@ -1,6 +1,7 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: debug
-# key: debug
+# name: acc
+# key: acc
 # binding: direct-keybinding
 # --
-static constexpr bool debug = true;
+//! Returns ${1:name}_
+${2:type} $1() const { return $1_; }

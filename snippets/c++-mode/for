@@ -1,7 +1,8 @@
-# -*- mode: snippet -*-
+# -*- mode: snippet; require-final-newline: nil -*-
 # name: for
 # key: for
+# binding: direct-keybinding
 # --
-for (${1:type} ${2:i} = ${3:0}; $2 ${4:!= size()}; ++$2) {
+for ($1) {
     $0
 }

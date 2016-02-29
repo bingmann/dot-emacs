@@ -1,6 +1,10 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: debug
-# key: debug
+# name: perl
+# key: perl
 # binding: direct-keybinding
 # --
-static constexpr bool debug = true;
+/*[[[perl
+$0
+  ]]]*/
+
+//[[[end]]]
