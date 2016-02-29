@@ -88,7 +88,11 @@
  '(jde-jdk (quote ("1.7.0.51")))
  '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
  '(lua-indent-level 4)
- '(magit-diff-arguments (quote ("-M" "-C")))
+ '(magit-diff-arguments (quote ("--ignore-all-space")))
+ '(magit-git-global-arguments
+   (quote
+    ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Timo Bingmann" "-c" "user.email=tbgit@panthema.net")))
+ '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
  '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
  '(magit-refs-show-commit-count (quote all))
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
@@ -139,7 +143,7 @@
  '(tramp-default-method "ssh")
  '(tramp-remote-path
    (quote
-    ("~/.bin/" tramp-default-remote-path "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin" "/local/bin" "/opt/bin" "/opt/sbin" "/opt/local/bin")))
+    ("~/.bin" "~/bin" "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin")))
  '(tramp-remote-process-environment
    (quote
     ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
