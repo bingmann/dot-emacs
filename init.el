@@ -224,6 +224,9 @@
 (push 'leuven-theme my-el-get-packages)
 (push 'ggtags my-el-get-packages)
 ;(push 'helm-gtags my-el-get-packages)
+(push 'google-this my-el-get-packages)
+(push 'diminish my-el-get-packages)
+(push 'tramp my-el-get-packages)
 
 (push 'auto-complete my-el-get-packages)
 (push 'auto-complete-auctex my-el-get-packages)
@@ -672,12 +675,17 @@
 
 (add-to-list 'auto-mode-alist '("\\.tikz$" . latex-mode))
 
-; doxymacs: automatically activate font-lock overlay mode for C/C++ files
+;; enable google-this mode
 
-;(defun my-doxymacs-font-lock-hook ()
-;  (if (or (eq major-mode 'c-mode) (eq major-mode 'c++-mode))
-;      (doxymacs-font-lock)))
-;(add-hook 'font-lock-mode-hook 'my-doxymacs-font-lock-hook)
+;; google this word
+;; default keymap: C-c / [key], where key is
+;; RET -> interactive query
+;; w -> google word under cursor
+;; s -> google symbol under cursor
+
+(google-this-mode 1)
+;; hide "Google" minor mode
+(diminish 'google-this-mode)
 
 ;; -----------------------------
 ;; --- reftex customizations ---
