@@ -3,4 +3,4 @@
 # key: stdrand
 # binding: direct-keybinding
 # --
-std::default_random_engine(std::random_device { } ())
+std::default_random_engine ${1:name}(std::random_device { } ())

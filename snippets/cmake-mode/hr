@@ -3,4 +3,4 @@
 # key: hr
 # binding: direct-keybinding
 # --
-################################################################################
+`(make-string (- 80 (current-column)) ?#)`
