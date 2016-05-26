@@ -39,6 +39,8 @@
  '(auth-sources
    (quote
     ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
+ '(auto-save-interval 3000)
+ '(auto-save-timeout 60)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style
@@ -95,6 +97,7 @@
     ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Timo Bingmann" "-c" "user.email=tbgit@panthema.net")))
  '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
  '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
+ '(magit-pull-arguments nil)
  '(magit-refs-show-commit-count (quote all))
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(make-backup-files nil)
@@ -116,7 +119,7 @@
  '(org-time-clocksum-format
    (quote
     (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
- '(processing-location "~/.bin-sync/processing-java")
+ '(processing-location "~/.bin-local/processing-java")
  '(processing-sketchbook-dir "~/Dropbox/sketchbook")
  '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
  '(reftex-label-alist
@@ -161,6 +164,7 @@
 
 ;(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
 (set-face-font 'default "-*-terminus-medium-r-*-*-18-*-*-*-*-*-*-*")
+;(set-face-font 'default "-*-Helvetica-medium-r-normal-*-14-*-*-*-m-*-fontset-Helvetica")
 
 ;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
 
@@ -406,6 +410,8 @@
                            (local-unset-key [(meta shift down)])
                            (local-set-key [(control shift up)] 'org-move-subtree-up)
                            (local-set-key [(control shift down)] 'org-move-subtree-down)
+                           (local-set-key [(control shift left)] 'org-promote-subtree)
+                           (local-set-key [(control shift right)] 'org-demote-subtree)
                            ))
 
 (setq org-default-notes-file "~/synca/01-OrgTassen/TODO.org")
