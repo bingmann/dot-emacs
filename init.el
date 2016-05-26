@@ -73,7 +73,8 @@
  '(font-latex-fontify-sectioning 1.0)
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(gdb-many-windows t)
- '(ggtags-highlight-tag-delay 1.0)
+ '(ggtags-highlight-tag 10000.0)
+ '(ggtags-highlight-tag-delay 10000.0)
  '(git-commit-fill-column 1000)
  '(git-commit-summary-max-length 1000)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
@@ -643,7 +644,7 @@
         try-expand-list
         try-expand-line))
 
-; special bindings for latex quickies
+;; special bindings for latex quickies
 
 (defun my-latex-key-bindings ()
   "Add some latex macro keys"
@@ -827,27 +828,27 @@
 ; activates CEDET's context menu that is bound to right mouse button;
 ;(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
 ; activates use of separate styles for tags decoration
-(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 ; activates highlighting of first line for current tag (function, class, etc.);
-(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
 ; activates displaying of possible name completions in the idle time
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
 ; activates highlighting of local names that are the same as name of tag under cursor
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
 ; activates automatic parsing of source code in the idle time
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
 ; enables automatic bookmarking of tags that you edited
-(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
 ; shows which elements weren't processed by current parser's rules;
-(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
 ; activates mode when name of current tag will be shown in top line of buffer;
-(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 ; enables global support for Semanticdb
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
+;(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
 ; activates displaying of information about current tag in the idle time.
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+;(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 ; shows changes in the text that weren't processed by incremental parser yet.
 ;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
 
@@ -867,25 +868,20 @@
 (require 'semantic/bovine/gcc) ; or depending on you compiler
 
 ;; if you want to enable support for gnu global
-(semanticdb-enable-gnu-global-databases 'c-mode)
-(semanticdb-enable-gnu-global-databases 'c++-mode)
+;(semanticdb-enable-gnu-global-databases 'c-mode)
+;(semanticdb-enable-gnu-global-databases 'c++-mode)
 
 ; load eassist
 (add-to-list 'load-path "~/.emacs.d/el-get/cedet/contrib")
-(require 'eassist)
+;(require 'eassist)
 
 ;; enable ctags for some languages:
 ;;  Unix Shell, Perl, Pascal, Tcl, Fortran, Asm
 ;(when (cedet-ectag-version-check)
 ;  (semantic-load-enable-primary-exuberent-ctags-support))
 
-(setq-mode-local c-mode semanticdb-find-default-throttle
-                 '(project unloaded system recursive))
-
-;; Integration with imenu
-(defun semantic-imenu-hook ()
-  (imenu-add-to-menubar "TAGS"))
-(add-hook 'semantic-init-hooks 'semantic-imenu-hook)
+;; (setq-mode-local c-mode semanticdb-find-default-throttle
+;;                  '(project unloaded system recursive))
 
 ;; customisation of modes
 (defun my-cedet-hook ()
@@ -916,41 +912,41 @@
 
   ;;
   ;; load eassist contrib library
-  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-  (local-set-key "\C-ce" 'eassist-list-methods)
+  ;(local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  ;(local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  ;(local-set-key "\C-ce" 'eassist-list-methods)
   ;;
   (local-set-key "\C-cr" 'semantic-symref)
   ;; rename local variable under cursor
   (local-set-key "\C-c\C-r" 'semantic-symref-rename-local-variable)
 
   ;; jump to the definition of the symbol under cursor
-  (local-set-key "\C-c<" 'semantic-ia-fast-jump)
+  ;(local-set-key "\C-c<" 'semantic-ia-fast-jump)
   ;;  show the document of the symbol under cursor
-  (local-set-key "\C-cq" 'semantic-ia-show-doc)
+  ;(local-set-key "\C-cq" 'semantic-ia-show-doc)
   ;; show a summary about the symbol under cursor
-  (local-set-key "\C-cs" 'semantic-ia-show-summary)
+  ;(local-set-key "\C-cs" 'semantic-ia-show-summary)
   ;; toggle between the implementation and a prototype of symbol under cursor
-  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+  ;(local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
 
   ;; unfold the block under cursor
-  (local-set-key "\C-c+" 'semantic-tag-folding-show-block)
+  ;(local-set-key "\C-c+" 'semantic-tag-folding-show-block)
   ;; fold the block under cursor
-  (local-set-key "\C-c-" 'semantic-tag-folding-fold-block)
+  ;(local-set-key "\C-c-" 'semantic-tag-folding-fold-block)
   ;; unfold all
-  (local-set-key "\C-c\C-c+" 'semantic-tag-folding-show-all)
+  ;(local-set-key "\C-c\C-c+" 'semantic-tag-folding-show-all)
   ;; fold all
-  (local-set-key "\C-c\C-c-" 'semantic-tag-folding-fold-all)
+  ;(local-set-key "\C-c\C-c-" 'semantic-tag-folding-fold-all)
 
   ;; show emacs code browser
-  (local-set-key "\C-cb" 'ecb-activate)
+  ;(local-set-key "\C-cb" 'ecb-activate)
 
   (ggtags-mode 1)
 
   ;; auto-complete integration
   ;(add-to-list 'ac-sources 'ac-source-gtags)
-  (add-to-list 'ac-sources 'ac-source-semantic)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
+  ;(add-to-list 'ac-sources 'ac-source-semantic)
+  ;(add-to-list 'ac-sources 'ac-source-c-headers)
 
   ;; use rebox2 mode
   (local-set-key [(shift meta q)] 'rebox-cycle)
@@ -1093,13 +1089,13 @@
 ;; --- auto-complete ---
 ;; ---------------------
 
-(require 'auto-complete-config)
-(ac-config-default)
+;(require 'auto-complete-config)
+;(ac-config-default)
 
 ;; never start automatically
-(setq ac-auto-start nil)
+;(setq ac-auto-start nil)
 ;; trigger auto-complete on TAB
-(ac-set-trigger-key "TAB")
+;(ac-set-trigger-key "TAB")
 
 ;; -----------------
 ;; --- yasnippet ---
