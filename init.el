@@ -234,8 +234,8 @@
 
 (push 'auto-complete my-el-get-packages)
 (push 'auto-complete-auctex my-el-get-packages)
-(push 'auto-complete-css my-el-get-packages)
-(push 'auto-complete-yasnippet my-el-get-packages)
+;(push 'auto-complete-css my-el-get-packages)
+;(push 'auto-complete-yasnippet my-el-get-packages)
 (push 'auto-complete-c-headers my-el-get-packages)
 
 ;; system naviation modes
@@ -252,7 +252,7 @@
 (push 'apache-mode my-el-get-packages)
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
-(push 'csharp-mode my-el-get-packages)
+;(push 'csharp-mode my-el-get-packages)
 (push 'css-mode my-el-get-packages)
 (push 'cedet my-el-get-packages)
 (push 'ecb my-el-get-packages)
@@ -260,15 +260,18 @@
 (push 'php-mode my-el-get-packages)
 (push 'protobuf-mode my-el-get-packages)
 (push 'python-mode my-el-get-packages)
+(push 'cython-mode my-el-get-packages)
 (push 'tt-mode my-el-get-packages)
 (push 'thrift-mode my-el-get-packages)
 (push 'processing-mode my-el-get-packages)
 (push 'scala-mode2 my-el-get-packages)
+(push 'mmm-mode my-el-get-packages)
+(push 'ess my-el-get-packages) ; for R
 
 ;; version control
 (push 'dsvn my-el-get-packages)
 (push 'magit my-el-get-packages)
-;(push 'magit-svn my-el-get-packages)
+(push 'magit-svn my-el-get-packages)
 
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
