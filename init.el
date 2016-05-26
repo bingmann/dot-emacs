@@ -997,16 +997,6 @@
                           :compile-command "cd b && make -j4 && ctest && cd .."
                           ))
 
-(if (file-exists-p "~/Dropbox/bispanning/CMakeLists.txt")
-    (ede-cpp-root-project "bispanning"
-                          :file "~/Dropbox/bispanning/CMakeLists.txt"
-                          ))
-
-(if (file-exists-p "~/Dropbox/dsort/CMakeLists.txt")
-    (ede-cpp-root-project "dsort"
-                          :file "~/Dropbox/dsort/CMakeLists.txt"
-                          ))
-
 (if (file-exists-p "~/Dropbox/divsufsort-lcp-pss/CMakeLists.txt")
     (ede-cpp-root-project "divsufsort-lcp-pss"
                           :file "~/Dropbox/divsufsort-lcp-pss/CMakeLists.txt"
@@ -1016,22 +1006,29 @@
 (if (file-exists-p "~/thrill/CMakeLists.txt")
     (ede-cpp-root-project "thrill"
                           :file "~/thrill/CMakeLists.txt"
-                          :include-path '("/extlib/gtest/")
-                          :compile-command "cd b && make -j4 && ctest -V && cd .. && doxygen"
+                          :include-path '("/extlib/gtest/" "/extlib/cereal/")
+                          :compile-command "cd build && make -j4 && ctest -V"
                           ))
 
-(if (file-exists-p "~/tbtrader/CMakeLists.txt")
-    (ede-cpp-root-project "tbtrader"
-                          :file "~/tbtrader/CMakeLists.txt"
-                          :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/cpp.react/include/")
+(if (file-exists-p "~/tbt/CMakeLists.txt")
+    (ede-cpp-root-project "tbt"
+                          :file "~/tbt/CMakeLists.txt"
+                          :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/soci/src/core/" "/extlib/capnproto/c++/src/" "/b/")
                           :compile-command "cd b && make -j4 && ctest && cd .. && doxygen"
                           ))
 
-(if (file-exists-p "~/tbtrader/charter/CMakeLists.txt")
+(if (file-exists-p "~/tbt/charter/CMakeLists.txt")
     (ede-cpp-root-project "charter"
-                          :file "~/tbtrader/charter/CMakeLists.txt"
+                          :file "~/tbt/charter/CMakeLists.txt"
                           :include-path '("../" "/qcustomplot/src/")
-                          :compile-command "cd ../b && make -j4 && ctest && cd charter/app && ./charter"
+                          :compile-command "cd ../b && make -j4 && ctest && charter/app/charter"
+                          ))
+
+(if (file-exists-p "~/tbt/viz/CMakeLists.txt")
+    (ede-cpp-root-project "viz"
+                          :file "~/tbt/viz/CMakeLists.txt"
+                          :include-path '("../" "/qcustomplot/src/")
+                          :compile-command "cd ../b && make -j4 && cd viz && ctest && app/viz"
                           ))
 
 (if (file-exists-p "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt")
