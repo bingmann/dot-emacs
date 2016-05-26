@@ -306,14 +306,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(diff-added ((t (:inherit diff-changed :foreground "#33ff33"))))
- '(diff-changed-face ((t nil)) t)
- '(diff-removed ((t (:inherit diff-changed :foreground "#ff3333"))))
- '(diff-removed-face ((t (:inherit diff-changed :background "#553333"))) t)
- '(magit-diff-added ((t (:foreground "#33ff33"))))
- '(magit-diff-added-highlight ((t (:inherit magit-diff-added :weight normal))))
- '(magit-diff-removed-highlight ((t (:inherit magit-diff-removed :weight normal))))
- '(magit-section-highlight ((t (:foreground "pale goldenrod")))))
+ )
 
 (load-theme 'grandshell t)
 (load-theme 'mytheme t)
