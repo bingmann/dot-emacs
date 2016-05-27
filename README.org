@@ -14,8 +14,7 @@
 #+LaTeX_HEADER: \setlength{\cftbeforesecskip}{0pt}
 
 * Overview
-
-This is a quick and dirty emacs tutorial. It does not feature the most flashy
+This is a quick and dirty emacs tutorial. It does not advertise the most flashy
 features or goodies. Instead, it focuses on solid day-to-day efficiency
 features. It is probably best to print out this tutorial, grab a version of
 emacs, and start reading and trying out each command in this manual from top to
@@ -30,19 +29,19 @@ in your home directory. Then start emacs, which will download lots of additional
 packages. If that fails, check that you have at least emacs 24.5 by running =emacs
 --version=, and download a packaged tarball snapshot of the repository from
 
-https://github.com/bingmann/dot-emacs/releases/download/20150818/dot-emacs-snapshot-20150818.tar.bz2
+https://github.com/bingmann/dot-emacs/releases/download/20160527/dot-emacs-snapshot-20160527.tar.bz2
 
-Emacs commands are *sequences of key strokes* also called *key chords*. You must
-get every stroke right, otherwise a different command is called. Key modifiers
-are are written as
+Emacs commands are *sequences of key strokes*, also called *key chords*. You
+must get every stroke right, otherwise a different command is called. Key
+modifiers are written as
 
 | =S-= | for Shift and/or implicitly notated by a capital or symbol, |
 | =C-= | for Control, and                                            |
 | =M-= | for Alt, called Meta in the emacs world.                    |
 
-I disable the menubar in emacs since it takes up screen space and distracts from
-the text. But for learning emacs it is a *good idea to enable it*: edit
-=.emacs.d/init.el=, find =(menu-bar-mode -1)=, and replace it with
+I prefer to disable the menubar in emacs, since it takes up screen space and
+distracts from the text. But for learning emacs it is a *good idea to enable
+it*: edit =.emacs.d/init.el=, find =(menu-bar-mode -1)=, and replace it with
 =(menu-bar-mode 1)= to enable the menubar after the next restart.
 
 emacs has an *invisible interface*; even with the menu bar, you get no buttons
@@ -53,13 +52,13 @@ the *mini-buffer* at the bottom.
 * Most Important Key Chords
 
 ** When Things Go Wrong
-These are maybe the *most important* key strokes: canceling when things go
-wrong. If some command does not work as expected: press these and try again;
+These are maybe the *most important* key strokes: *cancel and undo* when things
+go wrong. If some command does not work as expected: press these and try again;
 emacs may have been in some state you did not know about.
 
 | Cancel Command    | =C-g=                             |
 | Cancel Minibuffer | =C-]= (try if =C-g= did not work) |
-| Undo typing       | =C-/= or =C-S-_= (underscore)     |
+| Undo Typing       | =C-/= or =C-S-_= (underscore)     |
 
 Some buffers can be closed with =q=, usually those which are interactive buffers
 and not plain text editing ones.
@@ -83,18 +82,18 @@ See this xkcd comic for on what =M-x= is for: https://xkcd.com/378/. Then try
 | Goto Line                | =M-g=                            |
 
 ** Mark, Copy, and Paste Text
-Copy and Paste is *totally different* from the usual =C-c=, =C-v= sequences. Get
-used to it. =C-c= and =C-x= are much more powerful in emacs than mere
-copying/cutting.
+Copy and Paste are *totally different* from the usual =C-c=, =C-x=, and =C-v=
+sequences. *Get used to it.* =C-c= and =C-x= are used for more powerful things in
+emacs than mere copying/cutting.
 
-| Start Marking Region       | =C-space=                  |
-| Copy                       | =M-w=                      |
-| Cut (called Kill)          | =C-w=                      |
-| Paste (called Yank)        | =C-y=                      |
-| Yank previous Kill         | =M-y= again                |
-| Kill Line                  | =C-k= (repeatable)         |
-| Kill Word Forward/Backward | =C-Delete= / =C-Backspace= |
-| Cut Word Forward/Backward  | =M-Delete= / =M-Backspace= |
+| Start Marking Region           | =C-space=                  |
+| Copy                           | =M-w=                      |
+| Cut (called Kill)              | =C-w=                      |
+| Paste (called Yank)            | =C-y=                      |
+| Yank Previous Kill             | =M-y= (repeatable)         |
+| Kill Line                      | =C-k= (repeatable)         |
+| Delete Word Forward/Backward   | =C-Delete= / =C-Backspace= |
+| Cut/Kill Word Forward/Backward | =M-Delete= / =M-Backspace= |
 
 ** Open File into Buffers
 | Open File           | =C-x C-f=           |
@@ -107,10 +106,10 @@ copying/cutting.
 You don't need to enter the full path. Just open a directory and use the
 directory listing to navigate.
 
-In my config there is a special mode activated which makes opening existing
+In my config there is a special mode activated which makes opening *existing*
 files faster (you see the available completions), but creating new ones from
-scratch difficult. To create a new file press =C-z= while in =C-x C-f= mode. It
-stops the automatic fuzzy searches for existing files.
+scratch more difficult. To create/write a *new file* press =C-z= while in =C-x
+C-f= mode. It stops the automatic fuzzy searches for existing files.
 
 ** Switching Buffers (Open Files)
 | Cycle Buffer | =M-S-left= / =M-S-right=      |
@@ -126,8 +125,8 @@ edit files at multiple places.
 | Split Frame           | =M-2= or =C-x 5=                                           |
 | Kill Frame            | =M-3=                                                      |
 | Split Window          | =C-x 2= horizontally, =C-x 3= vertically                   |
-| Movement among frames | =M-left= / =M-right=                                       |
-| Switch to other frame | =C-x o=                                                    |
+| Movement among Frames | =M-left= / =M-right=                                       |
+| Switch to other Frame | =C-x o=                                                    |
 
 ** Search and Replace
 | Incremental Search   | =C-s <text>=                                      |
@@ -142,40 +141,43 @@ edit files at multiple places.
 
 * Advanced Text Editing
 
-Undo, redo, search and replace can be constrained using the mark region. Undo
+Undo, redo, search, and replace can be constrained using the mark region. Undo
 only within a marked region is very powerful for coding!
 
 Further simple commands are:
 
 | Comment or Uncomment Region | (mark region) =C-space=   |
 | Wrap (Fill) Paragraph       | =M-q=                     |
-| Fix indentation of region   | =M-C-q= (depends on mode) |
+| Fix Indentation of Region   | =M-C-q= (depends on mode) |
 | Upper/Lowercase Words       | =M-u= / =M-l=             |
 
 ** Rectangle Copy/Paste
-| Mark Rectangle Region               | =C-space= (ignore blue marking area) |
-| Insert Text in each line            | =C-x r t=                            |
-| Open Area (insert with spaces)      | =C-x r o=                            |
-| Cancel Area (overwrite with spaces) | =C-x r c=                            |
-| Kill (Cut) Area                     | =C-x r k=                            |
-| Yank (Paste) Area (inserts space)   | =C-x r y=                            |
+| Mark Rectangle Region               | =C-space= (same as usual mark region, ignore blue area) |
+| Insert Text in Each Line            | =C-x r t=                                               |
+| Open Area (insert with spaces)      | =C-x r o=                                               |
+| Cancel Area (overwrite with spaces) | =C-x r c=                                               |
+| Kill (Cut) Area                     | =C-x r k=                                               |
+| Yank (Paste) Area (inserts space)   | =C-x r y=                                               |
 
 ** Keyboard Macros
-| Record Macro       | =C-x (=                            |
-| End Recording      | =C-x )=                            |
-| Execute Macro      | =C-x e= (then repeat =e= for more) |
-| Repeated Execution | =ESC <num> C-x e=                  |
+| Record Macro                       | =C-x (=                            |
+| End Recording                      | =C-x )=                            |
+| Execute Macro                      | =C-x e= (then repeat =e= for more) |
+| Repeated Execution                 | =ESC <num> C-x e=                  |
+| Execute Macro and Append More Keys | =C-u C-x (=                        |
+| Append More Keys (without execute) | =C-u C-u C-x (=                    |
 
 ** Run Shell Commands
 | Run Single Command          | =M-S-!=      |
 | Pipe Marked Area to Command | =M-S-(pipe)= |
 
 ** Multiple Cursors
-| Make more Cursors               | =C-S-click= |
-| Exit Multi-Cursors              | =C-g=       |
-| Mark all like this with cursors | =C-c !=     |
+| Make More Cursors             | =C-S-click= |
+| Exit Multi-Cursors            | =C-g=       |
+| Mark All Matches with Cursors | =C-c !=     |
 
-Multi cursors is a hack, but works reasonably well for simple things.
+Multi cursors is a hack, but works reasonably well for simple things. Keyboard
+macros are more powerful.
 
 * Directory Listings (dired)
 
@@ -190,7 +192,7 @@ perform copy/move operations, and more.
 | Unmark all                         | =S-U=         |
 | Delete File or Marked Files        | =D=           |
 | Copy File or Marked Files          | =C=           |
-| Rename File or Marked Files        | =C=           |
+| Rename File or Marked Files        | =R=           |
 | Chmod a File                       | =M=           |
 | Copy Marked Filelist to Clipboard  | =M-w= (Copy)  |
 | Cut Marked Filelist to Clipboard   | =C-w= (Cut)   |
@@ -213,12 +215,13 @@ are editing a file.
 ** Tramp Mode
 
 Emacs can also edit files on a remote system, controlling it via ssh. For this
-"open" a remote directory using =/[user@]ssh-host:path=. You can also just as
-=/ssh-host:= if you ssh shortcuts are configured.
+"open" a remote directory using =/[user@]ssh-host:path=. You can also just use
+=/ssh-host:= if you configure ssh host aliases.
 
 Most (really: almost all) operations are fully transparent, e.g., dired works on
 the remote system just as well. Yes, copy and paste works across machines. Yes,
-open a terminal if you need it. Yes, magit works (see below).
+open a terminal if you need it. Yes, remote compilation works! Yes, magit works
+(see below).
 
 * Customization
 
@@ -226,13 +229,13 @@ Emacs has a myriad of customizable configuration variables, and every package
 can add its own set. But customizing all this complexity is actually easy,
 because the configuration browser is very good.
 
-| Launch customization browser           | =M-x customize=      |
-| Search variables, funtions, etc        | =M-x apropos=        |
-| Change face (e.g., color) under cursor | =M-x customize-face= |
+| Launch Customization Browser                   | =M-x customize=      |
+| Search Variables, Funtions, etc                | =M-x apropos=        |
+| Change Face (i.e. Color and Font) under Cursor | =M-x customize-face= |
 
 Note that you must load the package you want to customize before calling
 customize, otherwise the options may not appear. (Kind of obvious, otherwise
-options of all possible packages would need to be in the menu).
+the options of all possible packages would need to be in the menu).
 
 * Source code editing
 
@@ -258,9 +261,9 @@ wants and it is slow. There are some newer alternatives that use clang, but I
 have not been happy with them. Everything breaks down once there are few
 dependent or complicated templates around.
 
-Hence, I only use a dumb, very fast expander: you write a prefix and it will
-look backwards in the text for a word that starts with it. This often turns out
-to be more powerful, since it also expands words from strings, and from
+Hence, I only use a dumb, very fast word expander: you write a prefix and it
+will look backwards in the text for words that starts with it. This often turns
+out to be more powerful, since it also expands words from strings, and from
 comments, from other open buffers, and then looks into the current directory for
 matching file names.
 
@@ -271,30 +274,46 @@ I use yasnippets to expand some very frequently used code blocks. There are not
 that many, otherwise you should use the language and write a function for
 it. Expansion is trigged by snippet =keyword + TAB=.
 
-| =main=            | =int main(int argc...) ...=                                 |
-| =for=             | a for loop with index                                       |
-| =fori=            | a for loop with iterators                                   |
-| =inc=             | =#include <...>=                                            |
-| =noncopyable=     | copy-construct + operator= set to "delete"                  |
-| =noncopyablemove= | noncopyable + move constructor / operator= set to "default" |
-| =op<<=            | =friend std::ostream operator << (...)=                     |
-| =copy=            | =Copyright (C) <year> Timo Bingmann <tb...=                 |
-| =cout=            | =std::cout << ... << std::endl;=                            |
-| =hr=              | =/***************/= (80 cols) horizontal rule               |
-| =lock=            | =std::unique_lock<std::mutex> lock(mutex_);=                |
-| =debug=           | =static const bool debug = true;=                           |
-| =doc=             | =/*! doxygen block=                                         |
-| =try=             | =try { ... } catch (...) { ... }=                           |
+| =main=        | =int main(int argc...) ...=                             |
+| =for=         | a for loop with iterators/ranges                        |
+| =fori=        | a for loop with index                                   |
+| =inc=         | =#include <...>=                                        |
+| =noncopy=     | copy-construct + operator= set to "delete"              |
+| =noncopymove= | noncopy + move constructor / operator= set to "default" |
+| =op<<=        | =friend std::ostream operator << (...)=                 |
+| =copy=        | =Copyright (C) <year> Timo Bingmann <tb...=             |
+| =cout=        | =std::cout << ... << std::endl;=                        |
+| =hr=          | =/***************/= (80 cols) horizontal rule           |
+| =lock=        | =std::unique_lock<std::mutex> lock(mutex_);=            |
+| =debug=       | =static const bool debug = true;=                       |
+| =doc=         | =/*!= doxygen block                                     |
+| =dog=         | =//! \name ... \{= (doxygen group block)                |
+| =try=         | =try { ... } catch (...) { ... }=                       |
 
-** Semantics Jumps
-Cedet parses the C/C++ files in a project and creates an index of symbols. If I
-want to jump to a symbol, I give cedet a try. It works sometimes, usually if the
-programs is small. It does not work with templates. Then I use grep. Renaming
-variable within the function scope also works sometimes (but not always).
+** Tag/Symbol and Semantic Jumps
+Instead of complicated code parsing, I use =ggtags= and the GNU "=global="
+source code indexer for function lookups and jumps. The problem is that it is
+made for plain C, and has only limited support for C++. This means it will
+lookup functions and symbols without the class context.
 
-| Cedet jump to symbol  | =C-c <=   |
-| Cedet rename variable | =C-c C-r= |
-| Switch hpp/cpp files  | =F3=      |
+To lookup and jump to a symbol, position the cursor on it and press:
+
+| Jump to Symbol          | =M-.= |
+| Jump to Next Occurrence | =M-,= |
+
+When run the first time, ggtags asks where to find or create the =GTAGS=
+index. This is usually the root of your source tree. Press 'n' when it asks
+whether to use "ctags", it then uses GNU global.
+
+emacs more advanced IDE-like features for C/C++ are provided by the =cedet=
+package. It is far from perfect, but does provide nice highlighting and useful
+basic features: switching between headers and source code Renaming variable
+within the function scope works sometimes (but not always).
+
+| Switch hpp/cpp Files  | =F3=      |
+| Cedet Rename Variable | =C-c C-r= |
+
+Pressing =F3= on a =#include= line will try to open the header.
 
 ** Ede (Cedet) Projects
 Emacs is not very intelligent in detecting the root of a C/C++ project. It must
@@ -328,9 +347,9 @@ FAST).
 | Search for Words (ag or grep) | =C-c C-s= |
 
 ** Bookmarks
-| Set/unset bookmark on line   | =M-F2= |
-| Jump to next bookmarked line | =F2=   |
-| Jump to previous bookmark    | =S-F2= |
+| Set/Unset Bookmark on Line   | =M-F2= |
+| Jump to Next Bookmarked Line | =F2=   |
+| Jump to Previous Bookmark    | =S-F2= |
 
 ** ecb - Emacs Code Browser
 
@@ -338,11 +357,6 @@ Some people like it. It gives you a directory listing, and a class and method
 listing for navigation.
 
 | Start ECB | =M-x ecb-activate= |
-
-** TODO Tag Browsing
-
-This is something I do not know how to use. Apparently, emacs has good support
-for =ctags= and =global= tag files, but I never got it to work right for me.
 
 ** gdb inside emacs.
 
@@ -361,24 +375,24 @@ Keystrokes most often operate on the thing the *usual cursor* is on, beware
 where the cursor is!
 
 | Help!                             | =?=                                    |
-| Visit thing under cursor          | =Enter=                                |
-| Expand under cursor               | =TAB=                                  |
+| Visit Thing under Cursor          | =Enter=                                |
+| Expand Thing under Cursor         | =TAB=                                  |
 | Refresh (use often)               | =g= (same as in dired)                 |
-| Stage file or diff part           | =s=                                    |
-| Unstage a staged file or diff     | =u=                                    |
-| Kill changes in file or diff part | =k=                                    |
+| Stage File or Diff Part           | =s=                                    |
+| Unstage a Staged File or Diff     | =u=                                    |
+| Kill Changes in File or Diff Part | =k=                                    |
 | Start Commit                      | =c c=                                  |
-| Amend last commit                 | =c a=                                  |
-| (in commit) Stop commit           | =C-c C-k= (almost usual "kill buffer") |
-| (in commit) Save commit           | =C-c C-c=                              |
-| Push commits                      | =P= (read message) =P=                 |
-| Pull commits                      | =F F= or =F -r F= for =--rebase=       |
-| Show branches                     | =y=                                    |
-| Checkout branch                   | =b b=                                  |
-| Merge branch                      | =m m=                                  |
-| Show log                          | =l= (read 100 options) =l=             |
+| Amend Last Commit                 | =c a=                                  |
+| (in commit) Stop Commit           | =C-c C-k= (almost usual "kill buffer") |
+| (in commit) Save Commit           | =C-c C-c=                              |
+| Push Commits                      | =P= (read message) =u=                 |
+| Pull Commits                      | =F u= or =F -r u= for =--rebase=       |
+| Show Branches                     | =y=                                    |
+| Checkout Branch                   | =b b=                                  |
+| Merge Branch                      | =m m=                                  |
+| Show Log                          | =l= (read 100 options) =l=             |
 | Stash                             | =z= (options) =z=                      |
-| add to .gitignore                 | =i=                                    |
+| Add to .gitignore                 | =i=                                    |
 
 Magit lets you do things like:
 - kill only partial changes (use region marking too)
@@ -391,7 +405,7 @@ Magit lets you do things like:
 
 * Editing LaTeX
 
-LaTeX editing with emacs works for me as follows. The AUCTeX package have alot
+LaTeX editing with emacs works for me as follows. The AUCTeX package has a lot
 more commands than I use, but the following is all I need. It is activated
 automatically when opening a =.tex= file.
 
@@ -412,7 +426,7 @@ pasting.
 When editing LaTeX these are the most important key chords:
 
 | Compile with pdflatex         | =C-c C-c= |
-| View PDF file (once compiled) | =C-c C-v= |
+| View PDF File (once compiled) | =C-c C-v= |
 
 In my config the compile command runs a script =flymake-pdflatex=, which tries
 to be smart about when to run =bibtex= for bibliography and =makeindex= for
@@ -426,10 +440,10 @@ emacs: just read the PDF, and click for editing!
 Further key chords:
 
 | Show TOC for navigation          | =M-S-down= (opposite to buffer menu) |
-| Insert =\ref= from list          | =M-C-r=                              |
-| Insert =\cite= from bibliography | =M-C-c=                              |
-| Close environment                | =C-]=                                |
-| Align =&= columns in a tabular   | =M-x align-current=                  |
+| Insert =\ref= from List          | =M-C-r=                              |
+| Insert =\cite= from Bibliography | =M-C-c=                              |
+| Close Environment                | =C-]=                                |
+| Align =&= Columns in a Tabular   | =M-x align-current=                  |
 
 Snippets while editing LaTeX files:
 

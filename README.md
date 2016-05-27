@@ -2,61 +2,60 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgheadline1">1. Overview</a></li>
-<li><a href="#orgheadline11">2. Most Important Key Chords</a>
+<li><a href="#org9395a00">1. Overview</a></li>
+<li><a href="#orgbf03353">2. Most Important Key Chords</a>
 <ul>
-<li><a href="#orgheadline2">2.1. When Things Go Wrong</a></li>
-<li><a href="#orgheadline3">2.2. Meta-X</a></li>
-<li><a href="#orgheadline4">2.3. Move Around in Text</a></li>
-<li><a href="#orgheadline5">2.4. Mark, Copy, and Paste Text</a></li>
-<li><a href="#orgheadline6">2.5. Open File into Buffers</a></li>
-<li><a href="#orgheadline7">2.6. Switching Buffers (Open Files)</a></li>
-<li><a href="#orgheadline8">2.7. Organizing Buffers into Frames and Windows</a></li>
-<li><a href="#orgheadline9">2.8. Search and Replace</a></li>
-<li><a href="#orgheadline10">2.9. Change Font Size</a></li>
+<li><a href="#org6d19915">2.1. When Things Go Wrong</a></li>
+<li><a href="#org5e8cfc4">2.2. Meta-X</a></li>
+<li><a href="#org03f69b3">2.3. Move Around in Text</a></li>
+<li><a href="#org4c54cd2">2.4. Mark, Copy, and Paste Text</a></li>
+<li><a href="#orgabe1193">2.5. Open File into Buffers</a></li>
+<li><a href="#org4a2d6b0">2.6. Switching Buffers (Open Files)</a></li>
+<li><a href="#org3614607">2.7. Organizing Buffers into Frames and Windows</a></li>
+<li><a href="#orgddc2237">2.8. Search and Replace</a></li>
+<li><a href="#org287c4b6">2.9. Change Font Size</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline16">3. Advanced Text Editing</a>
+<li><a href="#org75e0349">3. Advanced Text Editing</a>
 <ul>
-<li><a href="#orgheadline12">3.1. Rectangle Copy/Paste</a></li>
-<li><a href="#orgheadline13">3.2. Keyboard Macros</a></li>
-<li><a href="#orgheadline14">3.3. Run Shell Commands</a></li>
-<li><a href="#orgheadline15">3.4. Multiple Cursors</a></li>
+<li><a href="#org4540a72">3.1. Rectangle Copy/Paste</a></li>
+<li><a href="#orgdbb754a">3.2. Keyboard Macros</a></li>
+<li><a href="#orgd6a8db7">3.3. Run Shell Commands</a></li>
+<li><a href="#orgc23b0e9">3.4. Multiple Cursors</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline19">4. Directory Listings (dired)</a>
+<li><a href="#orgca4bc42">4. Directory Listings (dired)</a>
 <ul>
-<li><a href="#orgheadline17">4.1. Give Me a Terminal, NOW!</a></li>
-<li><a href="#orgheadline18">4.2. Tramp Mode</a></li>
+<li><a href="#org86b7418">4.1. Give Me a Terminal, NOW!</a></li>
+<li><a href="#orgb460744">4.2. Tramp Mode</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline20">5. Customization</a></li>
-<li><a href="#orgheadline21">6. Source code editing</a></li>
-<li><a href="#orgheadline31">7. C/C++ Projects</a>
+<li><a href="#org5edc8ec">5. Customization</a></li>
+<li><a href="#org0d991fb">6. Source code editing</a></li>
+<li><a href="#orgd4b1d03">7. C/C++ Projects</a>
 <ul>
-<li><a href="#orgheadline22">7.1. Identifier Expansion</a></li>
-<li><a href="#orgheadline23">7.2. Snippets</a></li>
-<li><a href="#orgheadline24">7.3. Semantics Jumps</a></li>
-<li><a href="#orgheadline25">7.4. Ede (Cedet) Projects</a></li>
-<li><a href="#orgheadline26">7.5. Grep and Ag</a></li>
-<li><a href="#orgheadline27">7.6. Bookmarks</a></li>
-<li><a href="#orgheadline28">7.7. ecb - Emacs Code Browser</a></li>
-<li><a href="#orgheadline29">7.8. <span class="todo nilTODO">TODO</span> Tag Browsing</a></li>
-<li><a href="#orgheadline30">7.9. gdb inside emacs.</a></li>
+<li><a href="#orgcba62cd">7.1. Identifier Expansion</a></li>
+<li><a href="#org36b7758">7.2. Snippets</a></li>
+<li><a href="#org5961b38">7.3. Tag/Symbol and Semantic Jumps</a></li>
+<li><a href="#org58c8944">7.4. Ede (Cedet) Projects</a></li>
+<li><a href="#orge749d41">7.5. Grep and Ag</a></li>
+<li><a href="#org968a7e7">7.6. Bookmarks</a></li>
+<li><a href="#orga630428">7.7. ecb - Emacs Code Browser</a></li>
+<li><a href="#orge2a03b4">7.8. gdb inside emacs.</a></li>
 </ul>
 </li>
-<li><a href="#orgheadline32">8. Magit - Git Magic!</a></li>
-<li><a href="#orgheadline33">9. Editing LaTeX</a></li>
-<li><a href="#orgheadline34">10. org-mode</a></li>
-<li><a href="#orgheadline35">11. evil-mode</a></li>
+<li><a href="#org84cf521">8. Magit - Git Magic!</a></li>
+<li><a href="#org9338a22">9. Editing LaTeX</a></li>
+<li><a href="#org663aaad">10. org-mode</a></li>
+<li><a href="#org666e81e">11. evil-mode</a></li>
 </ul>
 </div>
 </div>
 
 
-# Overview<a id="orgheadline1"></a>
+# Overview<a id="org9395a00"></a>
 
-This is a quick and dirty emacs tutorial. It does not feature the most flashy
+This is a quick and dirty emacs tutorial. It does not advertise the most flashy
 features or goodies. Instead, it focuses on solid day-to-day efficiency
 features. It is probably best to print out this tutorial, grab a version of
 emacs, and start reading and trying out each command in this manual from top to
@@ -71,11 +70,11 @@ in your home directory. Then start emacs, which will download lots of additional
 packages. If that fails, check that you have at least emacs 24.5 by running `emacs
 --version`, and download a packaged tarball snapshot of the repository from
 
-<https://github.com/bingmann/dot-emacs/releases/download/20150818/dot-emacs-snapshot-20150818.tar.bz2>
+<https://github.com/bingmann/dot-emacs/releases/download/20160527/dot-emacs-snapshot-20160527.tar.bz2>
 
-Emacs commands are **sequences of key strokes** also called **key chords**. You must
-get every stroke right, otherwise a different command is called. Key modifiers
-are are written as
+Emacs commands are **sequences of key strokes**, also called **key chords**. You
+must get every stroke right, otherwise a different command is called. Key
+modifiers are written as
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -105,9 +104,9 @@ are are written as
 </tbody>
 </table>
 
-I disable the menubar in emacs since it takes up screen space and distracts from
-the text. But for learning emacs it is a **good idea to enable it**: edit
-`.emacs.d/init.el`, find `(menu-bar-mode -1)`, and replace it with
+I prefer to disable the menubar in emacs, since it takes up screen space and
+distracts from the text. But for learning emacs it is a **good idea to enable
+it**: edit `.emacs.d/init.el`, find `(menu-bar-mode -1)`, and replace it with
 `(menu-bar-mode 1)` to enable the menubar after the next restart.
 
 emacs has an **invisible interface**; even with the menu bar, you get no buttons
@@ -115,12 +114,12 @@ to click on, and only the most necessary output about what it
 happening. Interaction and status information is shown in the **mode line** and
 the **mini-buffer** at the bottom.
 
-# Most Important Key Chords<a id="orgheadline11"></a>
+# Most Important Key Chords<a id="orgbf03353"></a>
 
-## When Things Go Wrong<a id="orgheadline2"></a>
+## When Things Go Wrong<a id="org6d19915"></a>
 
-These are maybe the **most important** key strokes: canceling when things go
-wrong. If some command does not work as expected: press these and try again;
+These are maybe the **most important** key strokes: **cancel and undo** when things
+go wrong. If some command does not work as expected: press these and try again;
 emacs may have been in some state you did not know about.
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -145,7 +144,7 @@ emacs may have been in some state you did not know about.
 
 
 <tr>
-<td class="org-left">Undo typing</td>
+<td class="org-left">Undo Typing</td>
 <td class="org-left">`C-/` or `C-S-_` (underscore)</td>
 </tr>
 </tbody>
@@ -154,7 +153,7 @@ emacs may have been in some state you did not know about.
 Some buffers can be closed with `q`, usually those which are interactive buffers
 and not plain text editing ones.
 
-## Meta-X<a id="orgheadline3"></a>
+## Meta-X<a id="org5e8cfc4"></a>
 
 Nearly any Emacs command can be called using `M-x +` long function
 description. All key chords are bindings to these long functions, and yes, you
@@ -163,7 +162,7 @@ can change the key bindings some day.
 See this xkcd comic for on what `M-x` is for: <https://xkcd.com/378/>. Then try
 `M-x butterfly`.
 
-## Move Around in Text<a id="orgheadline4"></a>
+## Move Around in Text<a id="org03f69b3"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -223,11 +222,11 @@ See this xkcd comic for on what `M-x` is for: <https://xkcd.com/378/>. Then try
 </tbody>
 </table>
 
-## Mark, Copy, and Paste Text<a id="orgheadline5"></a>
+## Mark, Copy, and Paste Text<a id="org4c54cd2"></a>
 
-Copy and Paste is **totally different** from the usual `C-c`, `C-v` sequences. Get
-used to it. `C-c` and `C-x` are much more powerful in emacs than mere
-copying/cutting.
+Copy and Paste are **totally different** from the usual `C-c`, `C-x`, and `C-v`
+sequences. **Get used to it.** `C-c` and `C-x` are used for more powerful things in
+emacs than mere copying/cutting.
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -263,8 +262,8 @@ copying/cutting.
 
 
 <tr>
-<td class="org-left">Yank previous Kill</td>
-<td class="org-left">`M-y` again</td>
+<td class="org-left">Yank Previous Kill</td>
+<td class="org-left">`M-y` (repeatable)</td>
 </tr>
 
 
@@ -275,19 +274,19 @@ copying/cutting.
 
 
 <tr>
-<td class="org-left">Kill Word Forward/Backward</td>
+<td class="org-left">Delete Word Forward/Backward</td>
 <td class="org-left">`C-Delete` / `C-Backspace`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Cut Word Forward/Backward</td>
+<td class="org-left">Cut/Kill Word Forward/Backward</td>
 <td class="org-left">`M-Delete` / `M-Backspace`</td>
 </tr>
 </tbody>
 </table>
 
-## Open File into Buffers<a id="orgheadline6"></a>
+## Open File into Buffers<a id="orgabe1193"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -338,12 +337,12 @@ copying/cutting.
 You don't need to enter the full path. Just open a directory and use the
 directory listing to navigate.
 
-In my config there is a special mode activated which makes opening existing
+In my config there is a special mode activated which makes opening **existing**
 files faster (you see the available completions), but creating new ones from
-scratch difficult. To create a new file press `C-z` while in `C-x C-f` mode. It
-stops the automatic fuzzy searches for existing files.
+scratch more difficult. To create/write a **new file** press `C-z` while in `C-x
+C-f` mode. It stops the automatic fuzzy searches for existing files.
 
-## Switching Buffers (Open Files)<a id="orgheadline7"></a>
+## Switching Buffers (Open Files)<a id="org4a2d6b0"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -367,7 +366,7 @@ stops the automatic fuzzy searches for existing files.
 </tbody>
 </table>
 
-## Organizing Buffers into Frames and Windows<a id="orgheadline8"></a>
+## Organizing Buffers into Frames and Windows<a id="org3614607"></a>
 
 There are frames and windows in emacs: frames are independent windows as seen by
 their border. Frames can internally be split into windows (horizontally or
@@ -408,19 +407,19 @@ edit files at multiple places.
 
 
 <tr>
-<td class="org-left">Movement among frames</td>
+<td class="org-left">Movement among Frames</td>
 <td class="org-left">`M-left` / `M-right`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Switch to other frame</td>
+<td class="org-left">Switch to other Frame</td>
 <td class="org-left">`C-x o`</td>
 </tr>
 </tbody>
 </table>
 
-## Search and Replace<a id="orgheadline9"></a>
+## Search and Replace<a id="orgddc2237"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -456,7 +455,7 @@ edit files at multiple places.
 </tbody>
 </table>
 
-## Change Font Size<a id="orgheadline10"></a>
+## Change Font Size<a id="org287c4b6"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -486,9 +485,9 @@ edit files at multiple places.
 </tbody>
 </table>
 
-# Advanced Text Editing<a id="orgheadline16"></a>
+# Advanced Text Editing<a id="org75e0349"></a>
 
-Undo, redo, search and replace can be constrained using the mark region. Undo
+Undo, redo, search, and replace can be constrained using the mark region. Undo
 only within a marked region is very powerful for coding!
 
 Further simple commands are:
@@ -515,7 +514,7 @@ Further simple commands are:
 
 
 <tr>
-<td class="org-left">Fix indentation of region</td>
+<td class="org-left">Fix Indentation of Region</td>
 <td class="org-left">`M-C-q` (depends on mode)</td>
 </tr>
 
@@ -527,7 +526,7 @@ Further simple commands are:
 </tbody>
 </table>
 
-## Rectangle Copy/Paste<a id="orgheadline12"></a>
+## Rectangle Copy/Paste<a id="org4540a72"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -540,12 +539,12 @@ Further simple commands are:
 <tbody>
 <tr>
 <td class="org-left">Mark Rectangle Region</td>
-<td class="org-left">`C-space` (ignore blue marking area)</td>
+<td class="org-left">`C-space` (same as usual mark region, ignore blue area)</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Insert Text in each line</td>
+<td class="org-left">Insert Text in Each Line</td>
 <td class="org-left">`C-x r t`</td>
 </tr>
 
@@ -575,7 +574,7 @@ Further simple commands are:
 </tbody>
 </table>
 
-## Keyboard Macros<a id="orgheadline13"></a>
+## Keyboard Macros<a id="orgdbb754a"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -608,10 +607,22 @@ Further simple commands are:
 <td class="org-left">Repeated Execution</td>
 <td class="org-left">`ESC <num> C-x e`</td>
 </tr>
+
+
+<tr>
+<td class="org-left">Execute Macro and Append More Keys</td>
+<td class="org-left">`C-u C-x (`</td>
+</tr>
+
+
+<tr>
+<td class="org-left">Append More Keys (without execute)</td>
+<td class="org-left">`C-u C-u C-x (`</td>
+</tr>
 </tbody>
 </table>
 
-## Run Shell Commands<a id="orgheadline14"></a>
+## Run Shell Commands<a id="orgd6a8db7"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -635,7 +646,7 @@ Further simple commands are:
 </tbody>
 </table>
 
-## Multiple Cursors<a id="orgheadline15"></a>
+## Multiple Cursors<a id="orgc23b0e9"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -647,7 +658,7 @@ Further simple commands are:
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">Make more Cursors</td>
+<td class="org-left">Make More Cursors</td>
 <td class="org-left">`C-S-click`</td>
 </tr>
 
@@ -659,15 +670,16 @@ Further simple commands are:
 
 
 <tr>
-<td class="org-left">Mark all like this with cursors</td>
+<td class="org-left">Mark All Matches with Cursors</td>
 <td class="org-left">`C-c !`</td>
 </tr>
 </tbody>
 </table>
 
-Multi cursors is a hack, but works reasonably well for simple things.
+Multi cursors is a hack, but works reasonably well for simple things. Keyboard
+macros are more powerful.
 
-# Directory Listings (dired)<a id="orgheadline19"></a>
+# Directory Listings (dired)<a id="orgca4bc42"></a>
 
 The directory listing, called dired, can be used to navigate the file system,
 perform copy/move operations, and more.
@@ -731,7 +743,7 @@ perform copy/move operations, and more.
 
 <tr>
 <td class="org-left">Rename File or Marked Files</td>
-<td class="org-left">`C`</td>
+<td class="org-left">`R`</td>
 </tr>
 
 
@@ -786,7 +798,7 @@ perform copy/move operations, and more.
 
 Note: with my config, PDFs open with evince.
 
-## Give Me a Terminal, NOW!<a id="orgheadline17"></a>
+## Give Me a Terminal, NOW!<a id="org86b7418"></a>
 
 If dired is not good enough, and you need a terminal. The `F4` key opens an
 (external) terminal in the current directory. It works *everywhere*, also if you
@@ -808,17 +820,18 @@ are editing a file.
 </tbody>
 </table>
 
-## Tramp Mode<a id="orgheadline18"></a>
+## Tramp Mode<a id="orgb460744"></a>
 
 Emacs can also edit files on a remote system, controlling it via ssh. For this
-"open" a remote directory using `/[user@]ssh-host:path`. You can also just as
-`/ssh-host:` if you ssh shortcuts are configured.
+"open" a remote directory using `/[user@]ssh-host:path`. You can also just use
+`/ssh-host:` if you configure ssh host aliases.
 
 Most (really: almost all) operations are fully transparent, e.g., dired works on
 the remote system just as well. Yes, copy and paste works across machines. Yes,
-open a terminal if you need it. Yes, magit works (see below).
+open a terminal if you need it. Yes, remote compilation works! Yes, magit works
+(see below).
 
-# Customization<a id="orgheadline20"></a>
+# Customization<a id="org5edc8ec"></a>
 
 Emacs has a myriad of customizable configuration variables, and every package
 can add its own set. But customizing all this complexity is actually easy,
@@ -834,19 +847,19 @@ because the configuration browser is very good.
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">Launch customization browser</td>
+<td class="org-left">Launch Customization Browser</td>
 <td class="org-left">`M-x customize`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Search variables, funtions, etc</td>
+<td class="org-left">Search Variables, Funtions, etc</td>
 <td class="org-left">`M-x apropos`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Change face (e.g., color) under cursor</td>
+<td class="org-left">Change Face (i.e. Color and Font) under Cursor</td>
 <td class="org-left">`M-x customize-face`</td>
 </tr>
 </tbody>
@@ -854,9 +867,9 @@ because the configuration browser is very good.
 
 Note that you must load the package you want to customize before calling
 customize, otherwise the options may not appear. (Kind of obvious, otherwise
-options of all possible packages would need to be in the menu).
+the options of all possible packages would need to be in the menu).
 
-# Source code editing<a id="orgheadline21"></a>
+# Source code editing<a id="org0d991fb"></a>
 
 Buffers in emacs have so called "modes" active, which enable various features
 for the particular buffer. E.g., modes add color highlighting, keybindings,
@@ -872,18 +885,18 @@ TAB and **automatic indentation** is highly sophisticated in emacs. Do not fight
 it, emacs will win. Instead either customized it (to the peril that others will
 use the defaults), or adapt to it.
 
-# C/C++ Projects<a id="orgheadline31"></a>
+# C/C++ Projects<a id="orgd4b1d03"></a>
 
-## Identifier Expansion<a id="orgheadline22"></a>
+## Identifier Expansion<a id="orgcba62cd"></a>
 
 emacs has the cedet package for parsing C/C++ files. It is not as good as one
 wants and it is slow. There are some newer alternatives that use clang, but I
 have not been happy with them. Everything breaks down once there are few
 dependent or complicated templates around.
 
-Hence, I only use a dumb, very fast expander: you write a prefix and it will
-look backwards in the text for a word that starts with it. This often turns out
-to be more powerful, since it also expands words from strings, and from
+Hence, I only use a dumb, very fast word expander: you write a prefix and it
+will look backwards in the text for words that starts with it. This often turns
+out to be more powerful, since it also expands words from strings, and from
 comments, from other open buffers, and then looks into the current directory for
 matching file names.
 
@@ -903,7 +916,7 @@ matching file names.
 </tbody>
 </table>
 
-## Snippets<a id="orgheadline23"></a>
+## Snippets<a id="org36b7758"></a>
 
 I use yasnippets to expand some very frequently used code blocks. There are not
 that many, otherwise you should use the language and write a function for
@@ -926,13 +939,13 @@ it. Expansion is trigged by snippet `keyword + TAB`.
 
 <tr>
 <td class="org-left">`for`</td>
-<td class="org-left">a for loop with index</td>
+<td class="org-left">a for loop with iterators/ranges</td>
 </tr>
 
 
 <tr>
 <td class="org-left">`fori`</td>
-<td class="org-left">a for loop with iterators</td>
+<td class="org-left">a for loop with index</td>
 </tr>
 
 
@@ -943,14 +956,14 @@ it. Expansion is trigged by snippet `keyword + TAB`.
 
 
 <tr>
-<td class="org-left">`noncopyable`</td>
+<td class="org-left">`noncopy`</td>
 <td class="org-left">copy-construct + operator= set to "delete"</td>
 </tr>
 
 
 <tr>
-<td class="org-left">`noncopyablemove`</td>
-<td class="org-left">noncopyable + move constructor / operator= set to "default"</td>
+<td class="org-left">`noncopymove`</td>
+<td class="org-left">noncopy + move constructor / operator= set to "default"</td>
 </tr>
 
 
@@ -992,7 +1005,13 @@ it. Expansion is trigged by snippet `keyword + TAB`.
 
 <tr>
 <td class="org-left">`doc`</td>
-<td class="org-left">`/*! doxygen block`</td>
+<td class="org-left">`/*!` doxygen block</td>
+</tr>
+
+
+<tr>
+<td class="org-left">`dog`</td>
+<td class="org-left">`//! \name ... \{` (doxygen group block)</td>
 </tr>
 
 
@@ -1003,12 +1022,14 @@ it. Expansion is trigged by snippet `keyword + TAB`.
 </tbody>
 </table>
 
-## Semantics Jumps<a id="orgheadline24"></a>
+## Tag/Symbol and Semantic Jumps<a id="org5961b38"></a>
 
-Cedet parses the C/C++ files in a project and creates an index of symbols. If I
-want to jump to a symbol, I give cedet a try. It works sometimes, usually if the
-programs is small. It does not work with templates. Then I use grep. Renaming
-variable within the function scope also works sometimes (but not always).
+Instead of complicated code parsing, I use `ggtags` and the GNU "`global`"
+source code indexer for function lookups and jumps. The problem is that it is
+made for plain C, and has only limited support for C++. This means it will
+lookup functions and symbols without the class context.
+
+To lookup and jump to a symbol, position the cursor on it and press:
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1020,25 +1041,52 @@ variable within the function scope also works sometimes (but not always).
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">Cedet jump to symbol</td>
-<td class="org-left">`C-c <`</td>
+<td class="org-left">Jump to Symbol</td>
+<td class="org-left">`M-.`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Cedet rename variable</td>
-<td class="org-left">`C-c C-r`</td>
-</tr>
-
-
-<tr>
-<td class="org-left">Switch hpp/cpp files</td>
-<td class="org-left">`F3`</td>
+<td class="org-left">Jump to Next Occurrence</td>
+<td class="org-left">`M-,`</td>
 </tr>
 </tbody>
 </table>
 
-## Ede (Cedet) Projects<a id="orgheadline25"></a>
+When run the first time, ggtags asks where to find or create the `GTAGS`
+index. This is usually the root of your source tree. Press 'n' when it asks
+whether to use "ctags", it then uses GNU global.
+
+emacs more advanced IDE-like features for C/C++ are provided by the `cedet`
+package. It is far from perfect, but does provide nice highlighting and useful
+basic features: switching between headers and source code Renaming variable
+within the function scope works sometimes (but not always).
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Switch hpp/cpp Files</td>
+<td class="org-left">`F3`</td>
+</tr>
+
+
+<tr>
+<td class="org-left">Cedet Rename Variable</td>
+<td class="org-left">`C-c C-r`</td>
+</tr>
+</tbody>
+</table>
+
+Pressing `F3` on a `#include` line will try to open the header.
+
+## Ede (Cedet) Projects<a id="org58c8944"></a>
 
 Emacs is not very intelligent in detecting the root of a C/C++ project. It must
 be told where projects start. This also makes cedet work better.
@@ -1080,7 +1128,7 @@ messages. It also saves all buffers for you.
 </tbody>
 </table>
 
-## Grep and Ag<a id="orgheadline26"></a>
+## Grep and Ag<a id="orge749d41"></a>
 
 For searching a source tree I currently use `ag`, which is a `grep` replacement
 for source files (construct matching automaton, mmap files, etc goodies, read:
@@ -1102,7 +1150,7 @@ FAST).
 </tbody>
 </table>
 
-## Bookmarks<a id="orgheadline27"></a>
+## Bookmarks<a id="org968a7e7"></a>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1114,25 +1162,25 @@ FAST).
 </colgroup>
 <tbody>
 <tr>
-<td class="org-left">Set/unset bookmark on line</td>
+<td class="org-left">Set/Unset Bookmark on Line</td>
 <td class="org-left">`M-F2`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Jump to next bookmarked line</td>
+<td class="org-left">Jump to Next Bookmarked Line</td>
 <td class="org-left">`F2`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Jump to previous bookmark</td>
+<td class="org-left">Jump to Previous Bookmark</td>
 <td class="org-left">`S-F2`</td>
 </tr>
 </tbody>
 </table>
 
-## ecb - Emacs Code Browser<a id="orgheadline28"></a>
+## ecb - Emacs Code Browser<a id="orga630428"></a>
 
 Some people like it. It gives you a directory listing, and a class and method
 listing for navigation.
@@ -1153,16 +1201,11 @@ listing for navigation.
 </tbody>
 </table>
 
-## TODO Tag Browsing<a id="orgheadline29"></a>
-
-This is something I do not know how to use. Apparently, emacs has good support
-for `ctags` and `global` tag files, but I never got it to work right for me.
-
-## gdb inside emacs.<a id="orgheadline30"></a>
+## gdb inside emacs.<a id="orge2a03b4"></a>
 
 Possible, but wicked complex. I have not mastered it.
 
-# Magit - Git Magic!<a id="orgheadline32"></a>
+# Magit - Git Magic!<a id="org84cf521"></a>
 
 **Magit is awesome.** It is version controlling at a new level. It is
 also **dangerously magical.**
@@ -1204,13 +1247,13 @@ where the cursor is!
 
 
 <tr>
-<td class="org-left">Visit thing under cursor</td>
+<td class="org-left">Visit Thing under Cursor</td>
 <td class="org-left">`Enter`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Expand under cursor</td>
+<td class="org-left">Expand Thing under Cursor</td>
 <td class="org-left">`TAB`</td>
 </tr>
 
@@ -1222,19 +1265,19 @@ where the cursor is!
 
 
 <tr>
-<td class="org-left">Stage file or diff part</td>
+<td class="org-left">Stage File or Diff Part</td>
 <td class="org-left">`s`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Unstage a staged file or diff</td>
+<td class="org-left">Unstage a Staged File or Diff</td>
 <td class="org-left">`u`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Kill changes in file or diff part</td>
+<td class="org-left">Kill Changes in File or Diff Part</td>
 <td class="org-left">`k`</td>
 </tr>
 
@@ -1246,55 +1289,55 @@ where the cursor is!
 
 
 <tr>
-<td class="org-left">Amend last commit</td>
+<td class="org-left">Amend Last Commit</td>
 <td class="org-left">`c a`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">(in commit) Stop commit</td>
+<td class="org-left">(in commit) Stop Commit</td>
 <td class="org-left">`C-c C-k` (almost usual "kill buffer")</td>
 </tr>
 
 
 <tr>
-<td class="org-left">(in commit) Save commit</td>
+<td class="org-left">(in commit) Save Commit</td>
 <td class="org-left">`C-c C-c`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Push commits</td>
-<td class="org-left">`P` (read message) `P`</td>
+<td class="org-left">Push Commits</td>
+<td class="org-left">`P` (read message) `u`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Pull commits</td>
-<td class="org-left">`F F` or `F -r F` for `--rebase`</td>
+<td class="org-left">Pull Commits</td>
+<td class="org-left">`F u` or `F -r u` for `--rebase`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Show branches</td>
+<td class="org-left">Show Branches</td>
 <td class="org-left">`y`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Checkout branch</td>
+<td class="org-left">Checkout Branch</td>
 <td class="org-left">`b b`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Merge branch</td>
+<td class="org-left">Merge Branch</td>
 <td class="org-left">`m m`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Show log</td>
+<td class="org-left">Show Log</td>
 <td class="org-left">`l` (read 100 options) `l`</td>
 </tr>
 
@@ -1306,7 +1349,7 @@ where the cursor is!
 
 
 <tr>
-<td class="org-left">add to .gitignore</td>
+<td class="org-left">Add to .gitignore</td>
 <td class="org-left">`i`</td>
 </tr>
 </tbody>
@@ -1322,9 +1365,9 @@ Magit lets you do things like:
 -   kill local or remote branches: `k` in branch list.
 -   spell checking in commit messages.
 
-# Editing LaTeX<a id="orgheadline33"></a>
+# Editing LaTeX<a id="org9338a22"></a>
 
-LaTeX editing with emacs works for me as follows. The AUCTeX package have alot
+LaTeX editing with emacs works for me as follows. The AUCTeX package has a lot
 more commands than I use, but the following is all I need. It is activated
 automatically when opening a `.tex` file.
 
@@ -1358,7 +1401,7 @@ When editing LaTeX these are the most important key chords:
 
 
 <tr>
-<td class="org-left">View PDF file (once compiled)</td>
+<td class="org-left">View PDF File (once compiled)</td>
 <td class="org-left">`C-c C-v`</td>
 </tr>
 </tbody>
@@ -1391,25 +1434,25 @@ Further key chords:
 
 
 <tr>
-<td class="org-left">Insert `\ref` from list</td>
+<td class="org-left">Insert `\ref` from List</td>
 <td class="org-left">`M-C-r`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Insert `\cite` from bibliography</td>
+<td class="org-left">Insert `\cite` from Bibliography</td>
 <td class="org-left">`M-C-c`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Close environment</td>
+<td class="org-left">Close Environment</td>
 <td class="org-left">`C-]`</td>
 </tr>
 
 
 <tr>
-<td class="org-left">Align `&` columns in a tabular</td>
+<td class="org-left">Align `&` Columns in a Tabular</td>
 <td class="org-left">`M-x align-current`</td>
 </tr>
 </tbody>
@@ -1463,7 +1506,7 @@ Snippets while editing LaTeX files:
 </tbody>
 </table>
 
-# org-mode<a id="orgheadline34"></a>
+# org-mode<a id="org663aaad"></a>
 
 Org mode is the ultimate text-based tool for organizing things. The great thing
 about org-mode files is, you can send them to people with no comment or
@@ -1483,7 +1526,7 @@ probably a thousand other formats.
 org-mode has automatic text-based tables, which can calculate and sort by
 columns.
 
-# evil-mode<a id="orgheadline35"></a>
+# evil-mode<a id="org666e81e"></a>
 
 There is evil in the world. If you want to turn from evil to good, emacs may
 help you change from your evil way **gradually**. For this there is `evil-mode`,
