@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: oso
+# key: oso
+# --
+if (${2:t}.${1:var})
+    os << " $1=" << $2.$1;
