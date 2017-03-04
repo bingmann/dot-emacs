@@ -239,12 +239,14 @@
 (push 'google-this my-el-get-packages)
 (push 'diminish my-el-get-packages)
 (push 'tramp my-el-get-packages)
+(push 'iedit my-el-get-packages)
+(push 'clang-format my-el-get-packages)
 
-(push 'auto-complete my-el-get-packages)
-(push 'auto-complete-auctex my-el-get-packages)
+;(push 'auto-complete my-el-get-packages)
+;(push 'auto-complete-auctex my-el-get-packages)
 ;(push 'auto-complete-css my-el-get-packages)
 ;(push 'auto-complete-yasnippet my-el-get-packages)
-(push 'auto-complete-c-headers my-el-get-packages)
+;(push 'auto-complete-c-headers my-el-get-packages)
 
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
@@ -258,23 +260,24 @@
 
 ;; programming modes
 (push 'apache-mode my-el-get-packages)
+;(push 'cedet my-el-get-packages)
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
-;(push 'csharp-mode my-el-get-packages)
-(push 'css-mode my-el-get-packages)
-(push 'cedet my-el-get-packages)
-(push 'ecb my-el-get-packages)
+;(push 'css-mode my-el-get-packages)
+(push 'cython-mode my-el-get-packages)
+;(push 'ecb my-el-get-packages)
+(push 'ess my-el-get-packages) ; for R
 (push 'lua-mode my-el-get-packages)
+(push 'mmm-mode my-el-get-packages)
 (push 'php-mode my-el-get-packages)
+(push 'processing-mode my-el-get-packages)
 (push 'protobuf-mode my-el-get-packages)
 (push 'python-mode my-el-get-packages)
-(push 'cython-mode my-el-get-packages)
-(push 'tt-mode my-el-get-packages)
+(push 'qml-mode my-el-get-packages)
+(push 'scala-mode my-el-get-packages)
 (push 'thrift-mode my-el-get-packages)
-(push 'processing-mode my-el-get-packages)
-(push 'scala-mode2 my-el-get-packages)
-(push 'mmm-mode my-el-get-packages)
-(push 'ess my-el-get-packages) ; for R
+(push 'tt-mode my-el-get-packages)
+;(push 'csharp-mode my-el-get-packages)
 
 ;; version control
 (push 'dsvn my-el-get-packages)
@@ -312,6 +315,7 @@
  )
 
 (load-theme 'grandshell t)
+;;(load-theme 'green-phosphor t)
 (load-theme 'mytheme t)
 
 (defun my-presentation-font ()
@@ -332,6 +336,8 @@
 ;; -----------------------------------
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
+
+(add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
 
 ;; --- autoload lilypond major mode ---
 
@@ -970,6 +976,9 @@
    'c++-mode '(
                ("\\<\\(alignof\\|alignas\\|constexpr\\|decltype\\|noexcept\\|nullptr\\|static_assert\\|thread_local\\|override\\|final\\)\\>" . 'font-lock-keyword-face)
                ("\\<\\(char[0-9]+_t\\)\\>" . 'font-lock-keyword-face)))
+
+  ;; iedit mode
+  (local-set-key (kbd "C-\\") 'iedit-mode)
 
   (qt-cedet-setup)
   )
