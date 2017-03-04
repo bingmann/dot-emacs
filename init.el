@@ -76,6 +76,15 @@
  '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
+ '(font-latex-match-reference-keywords
+   (quote
+    (("printbibliography" "[{")
+     ("addbibresource" "[{")
+     ("autoref" "[{")
+     ("cref" "[{")
+     ("Cref" "[{")
+     ("crefrange" "[{")
+     ("Crefrange" "[{"))))
  '(fringe-mode (quote (nil . 0)) nil (fringe))
  '(gdb-many-windows t)
  '(ggtags-highlight-tag 10000.0)
@@ -136,9 +145,16 @@
      ("definition" 100 "def:" nil t
       ("definition" "def")
       -2))) t)
+ '(reftex-ref-style-default-list (quote ("Hyperref")))
  '(safe-local-variable-values
    (quote
-    ((c-tab-always-indent . t)
+    ((eval add-to-list
+           (make-variable-buffer-local
+            (quote LaTeX-fold-math-spec-list))
+           (quote
+            ("[tabular]"
+             ("tabular"))))
+     (c-tab-always-indent . t)
      (nxml-child-indent . 4)
      (rebox-min-fill-column . 100)
      (rebox-min-fill-column . 110)

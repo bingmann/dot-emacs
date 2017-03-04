@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+#set -e
 
 export max_print_line=500
 export error_line=254
@@ -39,6 +39,6 @@ for f in $@; do
     # check for tikz external/mode={list and make}
 
     MAKEFILE=${f%%.tex}.makefile
-    [ -e "$MAKEFILE" ] && make -f "$MAKEFILE"
+    [ -e "$MAKEFILE" ] && make -j4 -f "$MAKEFILE"
 
 done
