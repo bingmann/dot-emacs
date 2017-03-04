@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: be
+# key: be
+# --
+$1.begin(), $1.end()

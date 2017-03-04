@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: cmd
+# key: cmd
+# --
+static void ${1:cmd}(base::Cmd& cmd)
+{
+    $0
+}
+
+CMD($1, "$1");

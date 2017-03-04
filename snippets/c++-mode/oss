@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: oss
+# key: oss
+# --
+std::ostringstream oss;
+oss << $0

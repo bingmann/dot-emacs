@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: inca
+# key: inca
+# --
+#include <algorithm>

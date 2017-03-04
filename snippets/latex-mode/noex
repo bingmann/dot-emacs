@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: noex
+# key: noex
+# --
+\tikzset{external/export=false}

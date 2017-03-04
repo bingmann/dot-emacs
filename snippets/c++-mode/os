@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: os
+# key: os
+# --
+<< " $1=" << $2.$1
