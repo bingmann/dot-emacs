@@ -60,6 +60,9 @@
  '(cperl-indent-parens-as-block t)
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
+ '(custom-safe-themes
+   (quote
+    ("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
  '(dired-dwim-target t)
  '(diredp-hide-details-initially-flag nil)
  '(diredp-image-preview-in-tooltip nil)
