@@ -401,14 +401,16 @@
 
 ;; --- org-mode customizations ---
 
-(add-hook 'org-mode-hook (lambda ()
-                           (local-unset-key [(meta shift up)])
-                           (local-unset-key [(meta shift down)])
-                           (local-set-key [(control shift up)] 'org-move-subtree-up)
-                           (local-set-key [(control shift down)] 'org-move-subtree-down)
-                           (local-set-key [(control shift left)] 'org-promote-subtree)
-                           (local-set-key [(control shift right)] 'org-demote-subtree)
-                           ))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-unset-key [(meta shift up)])
+            (local-unset-key [(meta shift down)])
+            (local-set-key [(control shift up)] 'org-move-subtree-up)
+            (local-set-key [(control shift down)] 'org-move-subtree-down)
+            (local-set-key [(control shift left)] 'org-promote-subtree)
+            (local-set-key [(control shift right)] 'org-demote-subtree)
+            (local-set-key [(control return)] 'org-insert-subheading)
+            ))
 
 (setq org-default-notes-file "~/synca/01-OrgTassen/TODO.org")
 
@@ -418,7 +420,7 @@
 ;; active Babel languages
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((sql . t) (sh . t)))
+ '((sql . t) (shell . t)))
 
 ;; save the clock history across Emacs sessions
 (org-clock-persistence-insinuate)
