@@ -160,6 +160,7 @@
      (rebox-min-fill-column . 110)
      (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
+ '(sieve-manage-default-port "4190")
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
