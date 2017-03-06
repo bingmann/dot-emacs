@@ -146,7 +146,7 @@
  `(cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
 
 
-   `(highlight ((,class (:inverse-video nil :background ,alt-background))))
+   `(highlight ((,class (:inverse-video nil :background "#222299"))))
    `(match ((,class (:foreground ,blue :background ,background :inverse-video t))))
    `(lazy-highlight ((,class (:foreground ,cyan :background ,background :inverse-video t))))
    `(trailing-whitespace ((,class (:background ,red :underline nil))))
