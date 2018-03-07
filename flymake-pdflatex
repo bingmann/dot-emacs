@@ -24,7 +24,7 @@ for f in $@; do
     BASE=`basename "$BASE"`
 
     pushd $DIR
-    bibtex $BASE
+    bibtex -min-crossrefs=20 $BASE
     popd
 
     # check for index file and run texindy
@@ -40,5 +40,7 @@ for f in $@; do
 
     MAKEFILE=${f%%.tex}.makefile
     [ -e "$MAKEFILE" ] && make -j4 -f "$MAKEFILE"
+
+    #pdflatex -interaction=nonstopmode "$@"
 
 done
