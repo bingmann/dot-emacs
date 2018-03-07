@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: timestamp
+# key: timestamp
+# --
+//! Time is measured using chrono::steady_clock
+static double timestamp() {
+    return std::chrono::duration_cast<std::chrono::duration<double> >(
+        std::chrono::steady_clock::now().time_since_epoch()).count();
+}

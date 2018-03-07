@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: functor
+# key: functor
+# --
+class ${1:Functor}
+{
+public:
+    $1($2) { }
+
+    void operator () () const {
+    }
+
+private:
+};

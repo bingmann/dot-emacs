@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pe
+# key: pe
+# --
+v.$1 += p.$1;
