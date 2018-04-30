@@ -140,6 +140,8 @@
  '(processing-sketchbook-dir "~/Dropbox/sketchbook")
  '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
  '(reftex-ref-style-default-list (quote ("Cleveref")))
+ '(replace-lax-whitespace t)
+ '(replace-regexp-lax-whitespace t)
  '(safe-local-variable-values
    (quote
     ((eval add-to-list
@@ -154,6 +156,7 @@
      (rebox-min-fill-column . 110)
      (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
+ '(search-whitespace-regexp "[ \t\r\n]+")
  '(sieve-manage-default-port "4190")
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
