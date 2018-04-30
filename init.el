@@ -843,9 +843,6 @@
   ;; org-table mode support for comments
   (orgtbl-mode)
 
-  ;; iedit mode
-  (local-set-key (kbd "C-\\") 'iedit-mode)
-
   ;; add C++11 keywords to font-lock
   (require 'modern-cpp-font-lock)
   (modern-c++-font-lock-mode)
@@ -1303,6 +1300,9 @@
     )
 )
 (define-key my-keymap-mode-map [f4] 'my-terminal)
+
+;; C-\\ -> iedit mode
+(define-key my-keymap-mode-map (kbd "C-\\") 'iedit-mode)
 
 ;; globally activate keymap
 (define-globalized-minor-mode
