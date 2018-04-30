@@ -639,6 +639,8 @@
 (global-set-key [(meta delete)] 'kill-word)
 (global-set-key [(control delete)] 'dove-forward-kill-word)
 
+(global-set-key "\C-e" 'delete-region)
+
 ;; hippie-expand is dabbrev expand on steroids
 
 (global-set-key "\M-/" 'hippie-expand)
