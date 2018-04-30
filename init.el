@@ -472,6 +472,8 @@
 
 ;; whitespace cleaning butler mode
 (ws-butler-global-mode 1)
+;; hide "wb" minor mode
+(diminish 'ws-butler-mode)
 
 ;; cap'n'proto
 
@@ -845,6 +847,9 @@
   ;; add C++11 keywords to font-lock
   (require 'modern-cpp-font-lock)
   (modern-c++-font-lock-mode)
+
+  ;; hide "mc++fl" minor mode
+  (diminish 'modern-c++-font-lock-mode)
 
   ;; ------------------------------------------------------------
   ;; add keywords for Qt code (signals, slots, and some Q_ macros
