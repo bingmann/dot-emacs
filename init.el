@@ -158,15 +158,6 @@
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
- '(tramp-default-method "scp")
- '(tramp-remote-path
-   (quote
-    ("~/.bin" "~/bin" "/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin")))
- '(tramp-remote-process-environment
-   (quote
-    ("HISTFILE=/dev/null" "HISTSIZE=1" "LC_ALL=C" "TERM=dumb" "EMACS=t" "CDPATH=" "HISTORY=" "MAIL=" "MAILCHECK=" "MAILPATH=" "PAGER=\"\"" "autocorrect=" "correct=")))
- '(tramp-ssh-controlmaster-options "")
- '(tramp-use-ssh-controlmaster-options t)
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
@@ -241,7 +232,7 @@
 (push 'rebox2 my-el-get-packages)
 (push 'smex my-el-get-packages)
 (push 'smooth-scrolling my-el-get-packages)
-(push 'tramp my-el-get-packages)
+;(push 'tramp my-el-get-packages)
 (push 'ws-butler my-el-get-packages)
 (push 'yasnippet my-el-get-packages )
 ;(push 'helm-gtags my-el-get-packages)
@@ -1371,27 +1362,34 @@
 
 (defvar disable-tramp-backups '(all))
 
-(eval-after-load "tramp"
-  '(progn
-     ;; Modified from https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-and-Backup.html
-     (setq backup-enable-predicate
-           (lambda (name)
-             (and (normal-backup-enable-predicate name)
-                  ;; Disable all tramp backups
-                  (and disable-tramp-backups
-                       (member 'all disable-tramp-backups)
-                       (not (file-remote-p name 'method)))
-                  (not ;; disable backup for tramp with the listed methods
-                   (let ((method (file-remote-p name 'method)))
-                     (when (stringp method)
-                       (member method disable-tramp-backups)))))))
+;; (eval-after-load "tramp"
+;;   '(progn
+;;      (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+;;      ;; Modified from https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-and-Backup.html
+;;      (setq backup-enable-predicate
+;;            (lambda (name)
+;;              (and (normal-backup-enable-predicate name)
+;;                   ;; Disable all tramp backups
+;;                   (and disable-tramp-backups
+;;                        (member 'all disable-tramp-backups)
+;;                        (not (file-remote-p name 'method)))
+;;                   (not ;; disable backup for tramp with the listed methods
+;;                    (let ((method (file-remote-p name 'method)))
+;;                      (when (stringp method)
+;;                        (member method disable-tramp-backups)))))))
 
-     (defun tramp-set-auto-save--check (original)
-       (if (funcall backup-enable-predicate (buffer-file-name))
-           (funcall original)
-         (auto-save-mode -1)))
+;;      (defun tramp-set-auto-save--check (original)
+;;        (if (funcall backup-enable-predicate (buffer-file-name))
+;;            (funcall original)
+;;          (auto-save-mode -1)))
 
-     (advice-add 'tramp-set-auto-save :around #'tramp-set-auto-save--check)
+;;      (advice-add 'tramp-set-auto-save :around #'tramp-set-auto-save--check)
 
-     ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
-     (setq tramp-ssh-controlmaster-options "")))
+;;      ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
+;;      (setq tramp-ssh-controlmaster-options "")))
+
+(setq remote-file-name-inhibit-cache nil)
+(setq vc-ignore-dir-regexp
+      (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp))
+
+(require 'org-s5)
