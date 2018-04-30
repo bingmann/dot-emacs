@@ -828,7 +828,7 @@
   (local-set-key [f3] 'ff-find-other-file)
 
   ;; gnu global tag lookup
-  (ggtags-mode 1)
+  ;(ggtags-mode 1)
 
   ;; use rebox2 mode
   (local-set-key [(shift meta q)] 'rebox-cycle)
@@ -1012,51 +1012,6 @@
 (add-hook 'scheme-mode-hook 'my-cedet-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
 (add-hook 'erlang-mode-hook 'my-cedet-hook)
-
-;; EDE
-(global-ede-mode 1)
-(ede-enable-generic-projects)
-
-;; CMake Projects
-(if (file-exists-p "~/Dropbox/stxxl/CMakeLists.txt")
-    (ede-cpp-root-project "stxxl"
-                          :file "~/Dropbox/stxxl/CMakeLists.txt"
-                          :include-path '("/include/")
-                          ))
-
-(if (file-exists-p "~/thrill/CMakeLists.txt")
-    (ede-cpp-root-project "thrill"
-                          :file "~/thrill/CMakeLists.txt"
-                          :include-path '("/extlib/gtest/" "/extlib/cereal/")
-                          :compile-command "cd build && make -j4 && ctest -V"
-                          ))
-
-(if (file-exists-p "~/tbt/CMakeLists.txt")
-    (ede-cpp-root-project "tbt"
-                          :file "~/tbt/CMakeLists.txt"
-                          :include-path '("/extlib/cereal/include/" "/extlib/websocketpp/" "/extlib/capnproto/c++/src/" "/b/")
-                          :compile-command "cd b && make -j4 && ctest"
-                          ))
-
-(if (file-exists-p "~/tbt/viztest/CMakeLists.txt")
-    (ede-cpp-root-project "viztest"
-                          :file "~/tbt/viztest/CMakeLists.txt"
-                          :include-path '("../" "/qcustomplot/src/")
-                          :compile-command "cd ../b && make -j4 && ctest && viztest/viztest"
-                          ))
-
-(if (file-exists-p "~/tbt/andi/CMakeLists.txt")
-    (ede-cpp-root-project "andi"
-                          :file "~/tbt/andi/CMakeLists.txt"
-                          :include-path '("../")
-                          :compile-command "cd ../b && make -j4 && andi/andi"
-                          ))
-
-(if (file-exists-p "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt")
-    (ede-cpp-root-project "panthema"
-                          :file "~/synca/Web/panthema.net/panthema/src/CMakeLists.txt"
-                          :compile-command "cd ../build && make"
-                          ))
 
 ;; --------------------------------
 ;; --- ECB - Emacs Code Browser ---
