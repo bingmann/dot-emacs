@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: col2
+# key: col2
+# --
+\begin{columns}
+  \begin{column}{${1:.5}\linewidth}
+    column 1
+  \end{column}
+  \begin{column}{${2:.5}\linewidth}
+    column 2
+  \end{column}
+\end{columns}
