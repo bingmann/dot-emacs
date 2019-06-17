@@ -68,7 +68,7 @@
  `(minibuffer-prompt ((t (:foreground "cyan"))))
 
  ;; mode line style
- `(mode-line ((t (:foreground "white" :background "gray10"))))
+ `(mode-line ((t (:foreground "white" :background "gray10" :height 135))))
  `(mode-line-buffer-id ((t (:foreground "white" :background "gray10"))))
  `(mode-line-inactive ((t (:foreground "white" :background "gray10"))))
  `(mode-line-mousable ((t (:foreground "white" :background "gray10"))))
@@ -134,7 +134,7 @@
 
  ;; isearch
  `(isearch ((t (:foreground "brown4" :background "palevioletred2"))))
- `(isearch-fail ((,class (:background ,background :inherit font-lock-warning-face :inverse-video t))))
+ `(isearch-fail ((t (:background ,background :inherit font-lock-warning-face :inverse-video t))))
 
  ;; ido
  `(ido-first-match ((t (:foreground "gold" :weight bold))))
@@ -146,45 +146,45 @@
  `(cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
 
 
-   `(highlight ((,class (:inverse-video nil :background "#222299"))))
-   `(match ((,class (:foreground ,blue :background ,background :inverse-video t))))
-   `(lazy-highlight ((,class (:foreground ,cyan :background ,background :inverse-video t))))
-   `(trailing-whitespace ((,class (:background ,red :underline nil))))
+   `(highlight ((t (:inverse-video nil :background "#222299"))))
+   `(match ((t (:foreground ,blue :background ,background :inverse-video t))))
+   `(lazy-highlight ((t (:foreground ,cyan :background ,background :inverse-video t))))
+   `(trailing-whitespace ((t (:background ,red :underline nil))))
 
-   `(which-func ((,class (:foreground ,blue :background nil :weight bold))))
+   `(which-func ((t (:foreground ,blue :background nil :weight bold))))
 
-   `(header-line ((,class (:inherit mode-line :foreground ,magenta :background nil))))
-   `(widget-button ((,class (:underline t))))
-   `(widget-field ((,class (:background ,alt-background :box (:line-width 1 :color ,normal)))))
+   `(header-line ((t (:inherit mode-line :foreground ,magenta :background nil))))
+   `(widget-button ((t (:underline t))))
+   `(widget-field ((t (:background ,alt-background :box (:line-width 1 :color ,normal)))))
 
-   `(success ((,class (:foreground ,green))))
-   `(warning ((,class (:foreground ,orange))))
-   `(error ((,class (:foreground ,red))))
+   `(success ((t (:foreground ,green))))
+   `(warning ((t (:foreground ,orange))))
+   `(error ((t (:foreground ,red))))
 
-   `(show-paren-match ((,class (:foreground "#FFE200" :background nil :slant italic :weight bold))))
-   `(show-paren-mismatch ((,class (:background ,background :inherit font-lock-warning-face :inverse-video t))))
+   `(show-paren-match ((t (:foreground "#FFE200" :background nil :slant italic :weight bold))))
+   `(show-paren-mismatch ((t (:background ,background :inherit font-lock-warning-face :inverse-video t))))
 
-   `(custom-variable-tag ((,class (:foreground ,blue))))
-   `(custom-group-tag ((,class (:foreground ,blue))))
-   `(custom-state-tag ((,class (:foreground ,green))))
+   `(custom-variable-tag ((t (:foreground ,blue))))
+   `(custom-group-tag ((t (:foreground ,blue))))
+   `(custom-state-tag ((t (:foreground ,green))))
 
    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
    ;; mode specific faces
 
    ;; diff
-   `(diff-added ((,class (:foreground ,green))))
-   `(diff-changed ((,class (:foreground ,violet))))
-   `(diff-removed ((,class (:foreground ,orange))))
-   `(diff-header ((,class (:foreground ,cyan :background nil))))
-   `(diff-file-header ((,class (:foreground ,blue :background nil))))
-   `(diff-hunk-header ((,class (:foreground ,magenta))))
-   `(diff-refine-removed ((,class (:inherit magit-diff-removed-highlight :foreground ,red-brightest))))
-   `(diff-refine-added ((,class (:inherit magit-diff-added-highlight :foreground ,blue-bright))))
+   `(diff-added ((t (:foreground ,green))))
+   `(diff-changed ((t (:foreground ,violet))))
+   `(diff-removed ((t (:foreground ,orange))))
+   `(diff-header ((t (:foreground ,cyan :background nil))))
+   `(diff-file-header ((t (:foreground ,blue :background nil))))
+   `(diff-hunk-header ((t (:foreground ,magenta))))
+   `(diff-refine-removed ((t (:inherit magit-diff-removed-highlight :foreground ,red-brightest))))
+   `(diff-refine-added ((t (:inherit magit-diff-added-highlight :foreground ,blue-bright))))
 
    ;; diff-hl
-   `(diff-hl-change ((,class (:foreground ,blue :background ,blue-darker))))
-   `(diff-hl-delete ((,class (:foreground ,pink :background ,pink-darker))))
-   `(diff-hl-insert ((,class (:foreground ,green :background ,green-darker))))
+   `(diff-hl-change ((t (:foreground ,blue :background ,blue-darker))))
+   `(diff-hl-delete ((t (:foreground ,pink :background ,pink-darker))))
+   `(diff-hl-insert ((t (:foreground ,green :background ,green-darker))))
 
    ))
 

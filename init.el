@@ -33,12 +33,13 @@
  '(TeX-save-query nil)
  '(TeX-source-correlate-mode t)
  '(ag-highlight-search t)
- '(ag-ignore-list (quote ("build" "b" "bo" "extlib")))
+ '(ag-ignore-list (quote ("build" "b" "bo" "extlib" "doxygen-html")))
  '(ag-reuse-buffers t)
  '(ag-reuse-window t)
  '(auth-sources
    (quote
     ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
+ '(auto-save-default nil)
  '(auto-save-interval 3000)
  '(auto-save-timeout 60)
  '(bibtex-comma-after-last-field t)
@@ -78,6 +79,7 @@
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(ess-ask-for-ess-directory nil)
  '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
@@ -94,8 +96,8 @@
  '(gdb-many-windows t)
  '(ggtags-highlight-tag 10000.0)
  '(ggtags-highlight-tag-delay 10000.0)
+ '(ggtags-update-on-save nil)
  '(git-commit-fill-column 1000)
- '(git-commit-summary-max-length 1000)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
  '(grep-find-ignored-directories (quote (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
@@ -105,8 +107,6 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(ispell-highlight-face (quote flyspell-incorrect))
- '(jde-jdk (quote ("1.7.0.51")))
- '(jde-jdk-registry (quote (("1.7.0.51" . "/opt/oracle-jdk-bin-1.7.0.51/"))))
  '(lua-indent-level 4)
  '(magit-diff-arguments (quote ("--ignore-all-space")))
  '(magit-git-global-arguments
@@ -125,6 +125,7 @@
  '(org-confirm-shell-link-function nil)
  '(org-export-allow-bind-keywords t)
  '(org-export-backends (quote (ascii html latex md)))
+ '(org-html-validation-link "")
  '(org-link-frame-setup
    (quote
     ((vm . vm-visit-folder-other-frame)
@@ -132,12 +133,11 @@
      (gnus . org-gnus-no-new-news)
      (file . find-file)
      (wl . wl-other-frame))))
+ '(org-link-shell-confirm-function nil)
  '(org-tab-follows-link t)
  '(org-time-clocksum-format
    (quote
     (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
- '(processing-location "~/.bin-local/processing-java")
- '(processing-sketchbook-dir "~/Dropbox/sketchbook")
  '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
  '(reftex-ref-style-default-list (quote ("Cleveref")))
  '(replace-lax-whitespace t)
@@ -166,9 +166,9 @@
  '(undo-strong-limit 120000000)
  '(vc-handled-backends (quote (svn))))
 
-;; ---------------------------
-;; --- change default font ---
-;; ---------------------------
+;; -----------------------------------------------------------------------------
+;; --- change default font
+;; -----------------------------------------------------------------------------
 
 ;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
 
@@ -189,21 +189,12 @@
 (global-set-key (kbd "<mouse-6>") (lambda (event) (interactive "e")))
 (global-set-key (kbd "<mouse-7>") (lambda (event) (interactive "e")))
 
-;; ---------------------------------
-;; --- el-get package management ---
-;; ---------------------------------
-
-;; overlay newer gnus packages over emacs defaults
-(push "~/.emacs.d/el-get/gnus/lisp/" load-path)
+;; -----------------------------------------------------------------------------
+;; --- el-get package management
+;; -----------------------------------------------------------------------------
 
 ;; load el-get
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-;; configure el-get
-(setq el-get-install-branch "master"
-      el-get-install-skip-emacswiki-recipes t
-      el-get-git-shallow-clone t
-      )
 
 (unless (require 'el-get nil t)
   (with-current-buffer
@@ -248,38 +239,46 @@
 
 ;; system naviation modes
 (push 'dired+ my-el-get-packages)
-(push 'openwith my-el-get-packages)
+;(push 'openwith my-el-get-packages)
 
 ;; text modes
 (push 'auctex my-el-get-packages)
+(push 'dockerfile-mode my-el-get-packages)
 (push 'markdown-mode my-el-get-packages)
+(push 'nginx-mode my-el-get-packages)
 (push 'org-mode my-el-get-packages)
+(push 'pandoc-mode my-el-get-packages)
 (push 'yaml-mode my-el-get-packages)
 
-;; programming modes
+; ;; programming modes
 (push 'apache-mode my-el-get-packages)
+(push 'arduino-mode my-el-get-packages)
 ;(push 'cedet my-el-get-packages)
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
+(push 'csharp-mode my-el-get-packages)
 (push 'cython-mode my-el-get-packages)
 ;(push 'ecb my-el-get-packages)
-(push 'ess my-el-get-packages) ; for R
+(push 'ess my-el-get-packages)
 (push 'lua-mode my-el-get-packages)
 (push 'mmm-mode my-el-get-packages)
 (push 'php-mode my-el-get-packages)
-(push 'processing-mode my-el-get-packages)
+;(push 'processing-mode my-el-get-packages)
+(push 'projectile my-el-get-packages)
 (push 'protobuf-mode my-el-get-packages)
 (push 'python-mode my-el-get-packages)
 (push 'qml-mode my-el-get-packages)
 (push 'scala-mode my-el-get-packages)
-(push 'thrift-mode my-el-get-packages)
-(push 'tt-mode my-el-get-packages)
-;(push 'csharp-mode my-el-get-packages)
+;(push 'thrift-mode my-el-get-packages)
+;(push 'tt-mode my-el-get-packages)
 
 ;; version control
 (push 'dsvn my-el-get-packages)
 (push 'magit my-el-get-packages)
 (push 'magit-svn my-el-get-packages)
+
+;; utility packages
+(push 'htmlize my-el-get-packages)
 
 ;; email and news reader
 ;(push 'gnus my-el-get-packages)
@@ -294,25 +293,37 @@
 ;; remove everything not in the list above
 (el-get-cleanup my-el-get-packages)
 
-;; --------------------------
-;; --- Start emacs server ---
-;; --------------------------
+;; -----------------------------------------------------------------------------
+;; --- Start emacs server
+;; -----------------------------------------------------------------------------
 
 (server-start)
 
-;; ---------------------------------------------------
-;; --- Load theme and override faces via customize ---
-;; ---------------------------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Load theme and override faces via customize
+;; -----------------------------------------------------------------------------
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(TeX-fold-unfolded-face ((t (:background "#151823"))))
+ '(font-lock-function-name-face ((t (:foreground "turquoise"))))
+ '(font-lock-keyword-face ((t (:foreground "SteelBlue1"))))
+ '(font-lock-type-face ((t (:foreground "SeaGreen1"))))
+ '(markdown-header-face-1 ((t (:inherit org-level-1))))
+ '(markdown-header-face-2 ((t (:inherit org-level-2))))
+ '(markdown-header-face-3 ((t (:inherit org-level-3))))
+ '(markdown-header-face-4 ((t (:inherit org-level-4))))
+ '(org-checkbox ((t (:inherit bold :background "DarkGoldenrod4"))))
+ '(org-date ((t (:inherit nil :foreground "#d5b3f6"))))
+ '(org-level-1 ((t (:foreground "navajo white" :box (:line-width 6 :color "black")))))
+ '(org-todo ((t (:inherit nil :foreground "#f25a5a"))))
+ '(underline ((t (:underline "dark gray")))))
 
 (load-theme 'grandshell t)
-;;(load-theme 'green-phosphor t)
+;(load-theme 'green-phosphor t)
 (load-theme 'mytheme t)
 
 (defun my-presentation-font ()
@@ -328,19 +339,20 @@
   (disable-theme 'grandshell)
   (load-theme 'leuven t))
 
-;; -----------------------------------
-;; --- Load some custom extensions ---
-;; -----------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Load some custom extensions
+;; -----------------------------------------------------------------------------
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
 (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
+(add-to-list 'auto-mode-alist '("\\.tpp$" . c++-mode))
 
 ;; --- autoload lilypond major mode ---
 
 (add-to-list 'load-path "~/.emacs.d/lilypond-2.12.1/")
 (autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
-
+;
 (add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
 (add-to-list 'auto-mode-alist '("\\.ily$" . LilyPond-mode))
 (add-to-list 'auto-mode-alist '("\\.lytex$" . latex-mode))
@@ -363,44 +375,24 @@
         )
       )
 
-;; --- pmwiki mode ---
-
-(setq pmwiki-main-wiki-base-uri
-      "http://taekwondo-wiki.de/")
-(setq pmwiki-main-homepage-uri
-      (concat pmwiki-main-wiki-base-uri "Main/HomePage"))
-
-;; --- simple generic-mode for structures wiki notes ---
-
-(require 'generic-x)
-
-(defface my-title-text-face
-  '((t (:foreground "Cyan1" :weight bold)))
-  "My custom face for wiki note titles")
-
-(define-generic-mode 'notes-mode
-  '("#")                            ; comments start with '#'
-  '()                               ; keywords
-  '(("^\\(Titel\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'my-title-text-face))
-    ("^\\(.*\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'font-lock-variable-name-face))
-    )
-  '("\\.txw$")                        ;; files for which to activate this mode
-  ()                                 ;; other functions to call
-  "A mode for structured wiki-like notes"
-)
-
-;; --- autoload dokuwiki editing mode ---
-
-(global-unset-key [(control v)])
-
-(autoload 'dokuwiki-mode "dokuwiki" "DokuWiki Mode" t)
-(autoload 'dokuwiki-get-page "dokuwiki" "DokuWiki Mode" t)
-
-(global-set-key [(control v)(control d)] 'dokuwiki-get-page)
-
-(setq dokuwiki-username "Timo"
-      dokuwiki-password "test"
-      dokuwiki-base-url "idlebox.net/dw")
+; ;; --- simple generic-mode for structures wiki notes ---
+;
+; (require 'generic-x)
+;
+; (defface my-title-text-face
+;   '((t (:foreground "Cyan1" :weight bold)))
+;   "My custom face for wiki note titles")
+;
+; (define-generic-mode 'notes-mode
+;   '("#")                            ; comments start with '#'
+;   '()                               ; keywords
+;   '(("^\\(Titel\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'my-title-text-face))
+;     ("^\\(.*\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'font-lock-variable-name-face))
+;     )
+;   '("\\.txw$")                        ;; files for which to activate this mode
+;   ()                                 ;; other functions to call
+;   "A mode for structured wiki-like notes"
+; )
 
 ;; --- org-mode customizations ---
 
@@ -413,6 +405,9 @@
             (local-set-key [(control shift left)] 'org-promote-subtree)
             (local-set-key [(control shift right)] 'org-demote-subtree)
             (local-set-key [(control return)] 'org-insert-subheading)
+            (local-set-key [(meta control return)] 'org-time-stamp)
+            (local-set-key [f5] 'org-html-export-to-html)
+            (local-set-key [f6] 'org-latex-export-to-pdf)
             ))
 
 (setq org-default-notes-file "~/synca/01-OrgTassen/TODO.org")
@@ -425,8 +420,11 @@
  'org-babel-load-languages
  '((sql . t) (shell . t)))
 
-;; save the clock history across Emacs sessions
-(org-clock-persistence-insinuate)
+(setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
+                           (?B . (:foreground "yellow"))
+                           (?C . (:foreground "green"))
+                           (?D . (:foreground "deep sky blue"))
+                           (?E . (:foreground "salmon"))))
 
 ;; -- load Dired+ when dired is loaded
 
@@ -475,32 +473,26 @@
 ;; hide "wb" minor mode
 (diminish 'ws-butler-mode)
 
-;; cap'n'proto
+;; -----------------------------------------------------------------------------
+;; --- Automatic Mode Triggers
+;; -----------------------------------------------------------------------------
 
-(autoload 'capnp-mode "capnp-mode" "Capnp Mode" t)
-
-(add-to-list 'auto-mode-alist '("\\.capnp$" . capnp-mode))
-
-;; -------------------------------
-;; --- Automatic Mode Triggers ---
-;; -------------------------------
-
-; cperl-mode is preferred to perl-mode
+;; cperl-mode is preferred to perl-mode
 (defalias 'perl-mode 'cperl-mode)
 
-; special web site scripts
+;; special web site scripts
 (add-to-list 'auto-mode-alist '("\\.htt\\'" . html-mode))
 (add-to-list 'auto-mode-alist '("\\.blog\\'" . html-mode))
 
-; perl XS extensions recognition
+;; perl XS extensions recognition
 (add-to-list 'auto-mode-alist '("\\.xs\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.pc\\'" . c++-mode))
 
-; some more c++ files
+;; some more c++ files
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.tcc\\'" . c++-mode))
 
-; doxygen mode
+;; doxygen mode
 (defun my-dox-mode ()
   "Add some latex macro keys"
   (interactive)
@@ -508,25 +500,25 @@
   (visual-line-mode 1)
   (flyspell-mode)
   (set-variable 'fill-column 100000)
-)
+  )
 (add-to-list 'auto-mode-alist '("\\.dox\\'" . my-dox-mode))
 
-; customize markdown mode
-; doxygen mode
+;; customize markdown mode
+;; doxygen mode
 (defun my-markdown-mode ()
   "Customize markdown mode"
   (interactive)
   (visual-line-mode 1)
   (flyspell-mode)
   (set-variable 'fill-column 100000)
-)
+  )
 (add-hook 'markdown-mode-hook 'my-markdown-mode)
 
 (folding-add-to-marks-list 'lua-mode "-- {{{" "-- }}}" nil t)
 
-;; -----------------------------
-;; --- General Customization ---
-;; -----------------------------
+;; -----------------------------------------------------------------------------
+;; --- General Customization
+;; -----------------------------------------------------------------------------
 
 ;; put all temporary files into /tmp
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
@@ -560,9 +552,9 @@
 ;; enable inline images:
 ;(iimage-mode)
 
-;; --------------------------------
-;; --- Some custom key bindings ---
-;; --------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Some custom key bindings
+;; -----------------------------------------------------------------------------
 
 (global-set-key "\M-g" 'goto-line)
 
@@ -698,9 +690,9 @@
 ;; hide "Google" minor mode
 (diminish 'google-this-mode)
 
-;; -----------------------------
-;; --- reftex customizations ---
-;; -----------------------------
+;; -----------------------------------------------------------------------------
+;; --- reftex customizations
+;; -----------------------------------------------------------------------------
 
 ;; disable query for \ref or \pageref style
 (setq reftex-ref-macro-prompt nil)
@@ -713,9 +705,9 @@
         ("algorithm" ?a "alg:" "~\\ref{%s}" t   ("algorithm" "alg") -2)
         ))
 
-;; --------------------
-;; --- flymake mode ---
-;; --------------------
+;; -----------------------------------------------------------------------------
+;; --- flymake mode
+;; -----------------------------------------------------------------------------
 
 (eval-after-load "flymake"
   '(progn
@@ -755,17 +747,17 @@
                   '("\\.tikz\\'" flymake-master-tex-init flymake-master-cleanup))
      ))
 
-;; -----------------------------
-;; --- bm line bookmark mode ---
-;; -----------------------------
+;; -----------------------------------------------------------------------------
+;; --- bm line bookmark mode
+;; -----------------------------------------------------------------------------
 
 (global-set-key (kbd "<M-f2>") 'bm-toggle)
 (global-set-key (kbd "<f2>")   'bm-next)
 (global-set-key (kbd "<S-f2>") 'bm-previous)
 
-;; ------------------------
-;; --- Smooth Scrolling ---
-;; ------------------------
+;; -----------------------------------------------------------------------------
+;; --- Smooth Scrolling
+;; -----------------------------------------------------------------------------
 
 ;; Scroll line by line
 (setq redisplay-dont-pause t)
@@ -787,9 +779,9 @@
 (setq smooth-scroll-margin 3)
 (setq smooth-scroll-strict-margins 't)
 
-;; ---------------------------------
-;; --- Window Movement Shortcuts ---
-;; ---------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Window Movement Shortcuts
+;; -----------------------------------------------------------------------------
 
 (require 'windmove)
 (windmove-default-keybindings)
@@ -804,9 +796,9 @@
 (global-set-key (kbd "S-C-<down>") 'shrink-window)
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
-;; -------------------
-;; --- rebox2 mode ---
-;; -------------------
+;; -----------------------------------------------------------------------------
+;; --- rebox2 mode
+;; -----------------------------------------------------------------------------
 
 (require 'rebox2)
 
@@ -823,16 +815,16 @@
 ;; set styles
 (setq rebox-style-loop '(71 272))
 
-;; --------------------------------
-;; --- C/C++ Mode Configuration ---
-;; --------------------------------
+;; -----------------------------------------------------------------------------
+;; --- C/C++ Mode Configuration
+;; -----------------------------------------------------------------------------
 
 (defun tb-c-common-hook ()
   ;; switch between .cpp/.hpp files
   (local-set-key [f3] 'ff-find-other-file)
 
   ;; gnu global tag lookup
-  ;(ggtags-mode 1)
+  (ggtags-mode 1)
 
   ;; use rebox2 mode
   (local-set-key [(shift meta q)] 'rebox-cycle)
@@ -841,7 +833,7 @@
   (flyspell-prog-mode)
 
   ;; org-table mode support for comments
-  (orgtbl-mode)
+  ;(orgtbl-mode)
 
   ;; add C++11 keywords to font-lock
   (require 'modern-cpp-font-lock)
@@ -882,9 +874,9 @@
 (add-hook 'c-mode-common-hook (lambda () (column-marker-1 80)))
 (add-hook 'cmake-mode-hook (lambda () (column-marker-1 80)))
 
-;; ---------------------------
-;; --- CEDET Configuration ---
-;; ---------------------------
+;; -----------------------------------------------------------------------------
+;; --- CEDET Configuration
+;; -----------------------------------------------------------------------------
 
 ;; select which submodes we want to activate
 
@@ -1017,16 +1009,16 @@
 (add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
 (add-hook 'erlang-mode-hook 'my-cedet-hook)
 
-;; --------------------------------
-;; --- ECB - Emacs Code Browser ---
-;; --------------------------------
+;; -----------------------------------------------------------------------------
+;; --- ECB - Emacs Code Browser
+;; -----------------------------------------------------------------------------
 
 ;; (setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
 ;; (setq stack-trace-on-error t)
 
-;; --------------------
-;; --- ido and smex ---
-;; --------------------
+;; -----------------------------------------------------------------------------
+;; --- ido and smex
+;; -----------------------------------------------------------------------------
 
 (require 'ido)
 (ido-mode t)
@@ -1035,9 +1027,9 @@
 
 (global-set-key (kbd "M-x") 'smex)
 
-;; ---------------------
-;; --- auto-complete ---
-;; ---------------------
+;; -----------------------------------------------------------------------------
+;; --- auto-complete
+;; -----------------------------------------------------------------------------
 
 ;(require 'auto-complete-config)
 ;(ac-config-default)
@@ -1047,9 +1039,9 @@
 ;; trigger auto-complete on TAB
 ;(ac-set-trigger-key "TAB")
 
-;; -----------------
-;; --- yasnippet ---
-;; -----------------
+;; -----------------------------------------------------------------------------
+;; --- yasnippet
+;; -----------------------------------------------------------------------------
 
 (setq yas-snippet-dirs
       '("~/.emacs.d/snippets/"              ;; personal snippets
@@ -1059,28 +1051,28 @@
 (yas-reload-all)
 (yas-global-mode 1)
 
-;; --------------------
-;; --- Java support ---
-;; --------------------
+;; -----------------------------------------------------------------------------
+;; --- Java support
+;; -----------------------------------------------------------------------------
 
 (add-hook 'java-mode-hook '(lambda () (setq tab-width 4)))
 
-;; -------------------------------------
-;; --- OpenWith program associations ---
-;; -------------------------------------
+;; -----------------------------------------------------------------------------
+;; --- OpenWith program associations
+;; -----------------------------------------------------------------------------
 
-(setq openwith-associations '())
+;; (setq openwith-associations '())
 
-(add-to-list 'openwith-associations '("\\.pdf\\'" "evince" (file)))
-(add-to-list 'openwith-associations '("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)))
-(add-to-list 'openwith-associations '("\\.ods\\'" "libreoffice" (file)))
-(add-to-list 'openwith-associations '("\\.xls\\'" "libreoffice" (file)))
-(add-to-list 'openwith-associations '("\\.odt\\'" "libreoffice" (file)))
-(add-to-list 'openwith-associations '("\\.doc\\'" "libreoffice" (file)))
+;; (add-to-list 'openwith-associations '("\\.pdf\\'" "evince" (file)))
+;; (add-to-list 'openwith-associations '("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)))
+;; (add-to-list 'openwith-associations '("\\.ods\\'" "libreoffice" (file)))
+;; (add-to-list 'openwith-associations '("\\.xls\\'" "libreoffice" (file)))
+;; (add-to-list 'openwith-associations '("\\.odt\\'" "libreoffice" (file)))
+;; (add-to-list 'openwith-associations '("\\.doc\\'" "libreoffice" (file)))
 
-;; ------------------------------
-;; --- Compile CMake Projects ---
-;; ------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Compile CMake Projects
+;; -----------------------------------------------------------------------------
 
 (require 'compile)
 (setq compilation-disable-input nil)
@@ -1107,9 +1099,9 @@
 
 (global-set-key [f5] 'my-compile)
 
-;; -----------------------------------
-;; --- Grand Unified Debugger mode ---
-;; -----------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Grand Unified Debugger mode
+;; -----------------------------------------------------------------------------
 
 (add-hook 'gud-mode-hook
           (lambda ()
@@ -1120,9 +1112,9 @@
             (define-key gud-mode-map [f8] 'gud-finish)
             ))
 
-;; --------------------------
-;; --- Processing Hotkeys ---
-;; --------------------------
+;; -----------------------------------------------------------------------------
+;; --- Processing Hotkeys
+;; -----------------------------------------------------------------------------
 
 (defun processing-mode-init ()
   (local-set-key [f5] 'processing-sketch-run)
@@ -1130,9 +1122,9 @@
 
 (add-hook 'processing-mode-hook 'processing-mode-init)
 
-;; ------------------------
-;; --- Multiple Cursors ---
-;; ------------------------
+;; -----------------------------------------------------------------------------
+;; --- Multiple Cursors
+;; -----------------------------------------------------------------------------
 
 (global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
 (global-set-key (kbd "C-c !") 'mc/mark-all-dwim)
@@ -1142,16 +1134,16 @@
             (define-key mc/keymap (kbd "<return>") nil)
             ))
 
-;; --------------------------
-;; --- Make eshell Usable ---
-;; --------------------------
+;; -----------------------------------------------------------------------------
+;; --- Make eshell Usable
+;; -----------------------------------------------------------------------------
 
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 
-;; ----------------------------------------
-;; --- CamelCase to snake_case and back ---
-;; ----------------------------------------
+;; -----------------------------------------------------------------------------
+;; --- CamelCase to snake_case and back
+;; -----------------------------------------------------------------------------
 
 (defun split-name (s)
   (split-string
@@ -1165,7 +1157,7 @@
 
 (defun camelscore (s)
   (cond ((string-match-p "-" s)         (colonize s))
-        ((string-match-p "_" s)	        (dasherize s))
+        ((string-match-p "_" s)         (dasherize s))
         (t                              (underscore s))))
 
 (defun camelscore-word-at-point ()
@@ -1177,9 +1169,9 @@
          (cml (camelscore txt)) )
     (if cml (progn (delete-region beg end) (insert cml))) ))
 
-;; ------------------------------------------------
-;; --- Increment and Decrement Numbers at Point ---
-;; ------------------------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Increment and Decrement Numbers at Point
+;; -----------------------------------------------------------------------------
 ;; from http://www.emacswiki.org/emacs/IncrementNumber
 
 (defun increment-number-decimal (&optional arg)
@@ -1226,9 +1218,9 @@
   (interactive "p*")
   (increment-number-hexadecimal (if arg (- arg) -1)))
 
-;; -------------------------------------------
-;; --- Custom Minor Mode for Global Keymap ---
-;; -------------------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Custom Minor Mode for Global Keymap
+;; -----------------------------------------------------------------------------
 
 ;; http://emacs.stackexchange.com/questions/352/how-to-override-major-mode-bindings
 
@@ -1321,9 +1313,9 @@
 
 (add-hook 'ibuffer-hook 'my-ibuffer-keys)
 
-;; -------------------------------
-;; --- Less Latency with Tramp ---
-;; -------------------------------
+;; -----------------------------------------------------------------------------
+;; --- Less Latency with Tramp
+;; -----------------------------------------------------------------------------
 
 (defvar disable-tramp-backups '(all))
 
@@ -1357,4 +1349,4 @@
 (setq vc-ignore-dir-regexp
       (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp))
 
-(require 'org-s5)
+;; -----------------------------------------------------------------------------

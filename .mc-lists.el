@@ -7,6 +7,7 @@
         LaTeX-insert-left-brace
         TeX-insert-backslash
         TeX-insert-dollar
+        TeX-insert-sub-or-superscript
         TeX-newline
         beginning-of-visual-line
         c-electric-brace
@@ -33,5 +34,6 @@
 (setq mc/cmds-to-run-once
       '(
         c-electric-lt-gt
+        mouse-drag-secondary
         org-self-insert-command
         ))

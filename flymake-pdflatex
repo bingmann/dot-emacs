@@ -16,7 +16,7 @@ for f in $@; do
     AUX=${f%%.tex}.aux
 
     # check for citations
-    grep -q '\\citation' "$AUX" || continue
+    grep -q '\\citation' "$AUX"
 
     # strip off directory and .tex
     BASE=${f%%.tex}
@@ -39,7 +39,7 @@ for f in $@; do
     # check for tikz external/mode={list and make}
 
     MAKEFILE=${f%%.tex}.makefile
-    [ -e "$MAKEFILE" ] && make -j4 -f "$MAKEFILE"
+    [ -e "$MAKEFILE" ] && make -j1 -f "$MAKEFILE"
 
     #pdflatex -interaction=nonstopmode "$@"
 
