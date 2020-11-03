@@ -1,0 +1,23 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: MIT
+# key: MIT
+# binding: direct-keybinding
+# --
+/*******************************************************************************
+ * `(file-name-nondirectory (buffer-file-name))`
+ *
+ * $1
+ *
+ * Copyright (C) `(format-time-string "%Y" (current-time))` Timo Bingmann <tb@panthema.net>
+ *
+ * All rights reserved. Published under the MIT License in the LICENSE file.
+ ******************************************************************************/
+
+#ifndef `(upcase (file-name-base (buffer-file-name)))`_NEW_HEADER
+#define `(upcase (file-name-base (buffer-file-name)))`_NEW_HEADER
+
+$0
+
+#endif // !`(upcase (file-name-base (buffer-file-name)))`_NEW_HEADER
+
+/******************************************************************************/
