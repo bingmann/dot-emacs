@@ -135,10 +135,13 @@
      (wl . wl-other-frame))))
  '(org-link-shell-confirm-function nil)
  '(org-tab-follows-link t)
+ '(org-table-number-regexp
+   "^\\([<>]?[-+^.,0-9]*[0-9][-+^.,0-9eEdDx()%:]*\\|[<>]?[-+]?0[xX][[:xdigit:].]+\\|[<>]?[-+]?[0-9]+#[0-9a-zA-Z.,]+\\|nan\\|[-+u]?inf\\)$")
  '(org-time-clocksum-format
    (quote
     (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
- '(reftex-default-bibliography (quote ("~/btsync/0-Work/library.bib")))
+ '(reftex-default-bibliography (quote ("bibliography/references.bib")))
+ '(reftex-ref-macro-prompt nil)
  '(reftex-ref-style-default-list (quote ("Cleveref")))
  '(replace-lax-whitespace t)
  '(replace-regexp-lax-whitespace t)
@@ -157,6 +160,7 @@
      (rebox-min-fill-column . 120))))
  '(scroll-bar-mode (quote right))
  '(search-whitespace-regexp "[ \t\r\n]+")
+ '(sieve-buffer "*sieve-man*")
  '(sieve-manage-default-port "4190")
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
@@ -172,16 +176,17 @@
 
 ;(set-face-font 'default "-misc-fixed-medium-r-normal--15-*-*-*-c-90-iso8859-1")
 
-;(set-frame-font "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*")
-(set-face-font 'default "-*-terminus-medium-r-*-*-18-*-*-*-*-*-*-*")
+;(set-face-font 'default "-*-FiraCode-medium-r-*-*-16-*-*-*-*-*-*-*")
+
+(set-face-font 'default "-*-Terminus-medium-r-*-*-17-*-*-*-*-*-*-*")
 ;(set-face-font 'default "-*-Helvetica-medium-r-normal-*-14-*-*-*-m-*-fontset-Helvetica")
 
 ;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
 
-(create-fontset-from-fontset-spec "-misc-fixed-medium-r-normal--15-*-*-*-c-90-fontset-Fixed")
-(create-fontset-from-fontset-spec "-*-Droid Sans Mono-medium-r-normal-*-14-*-*-*-m-*-fontset-Droid")
-(create-fontset-from-fontset-spec "-*-Terminus-medium-r-normal-*-16-*-*-*-m-*-fontset-Terminus")
-(create-fontset-from-fontset-spec "-zevv-peep-medium-r-normal--16-*-*-*-c-*-fontset-Zevv")
+;(create-fontset-from-fontset-spec "-misc-fixed-medium-r-normal--15-*-*-*-c-90-fontset-Fixed")
+;(create-fontset-from-fontset-spec "-*-Droid Sans Mono-medium-r-normal-*-14-*-*-*-m-*-fontset-Droid")
+;(create-fontset-from-fontset-spec "-*-Terminus-medium-r-normal-*-16-*-*-*-m-*-fontset-Terminus")
+;(create-fontset-from-fontset-spec "-zevv-peep-medium-r-normal--16-*-*-*-c-*-fontset-Zevv")
 
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
 (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
@@ -262,6 +267,7 @@
 (push 'ess my-el-get-packages)
 (push 'lua-mode my-el-get-packages)
 (push 'mmm-mode my-el-get-packages)
+(push 'modern-cpp-font-lock my-el-get-packages)
 (push 'php-mode my-el-get-packages)
 ;(push 'processing-mode my-el-get-packages)
 (push 'projectile my-el-get-packages)
@@ -281,10 +287,8 @@
 (push 'htmlize my-el-get-packages)
 
 ;; email and news reader
-;(push 'gnus my-el-get-packages)
-;(push 'bbdb my-el-get-packages)
-;(push 'tc my-el-get-packages ) ;; trivial cite
-;(push 'gnus-notify my-el-get-packages)
+;(push 'mu4e my-el-get-packages)
+;(push 'wanderlust my-el-get-packages)
 
 ;; END PACKAGE LIST for el-get
 
@@ -309,6 +313,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(TeX-fold-unfolded-face ((t (:background "#151823"))))
+ '(diredp-omit-file-name ((t (:inherit diredp-ignored-file-name :strike-through nil))))
  '(font-lock-function-name-face ((t (:foreground "turquoise"))))
  '(font-lock-keyword-face ((t (:foreground "SteelBlue1"))))
  '(font-lock-type-face ((t (:foreground "SeaGreen1"))))
@@ -557,6 +562,9 @@
 ;; -----------------------------------------------------------------------------
 
 (global-set-key "\M-g" 'goto-line)
+
+; open files from current text
+(global-set-key (kbd "C-x f") 'find-file-at-point)
 
 ; quick comment and uncommenting
 (global-set-key (kbd "C-c SPC") 'comment-or-uncomment-region)
@@ -1348,5 +1356,10 @@
 (setq remote-file-name-inhibit-cache nil)
 (setq vc-ignore-dir-regexp
       (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp))
+
+;; -----------------------------------------------------------------------------
+
+(defun replace-in-string (what with in)
+  (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
 
 ;; -----------------------------------------------------------------------------

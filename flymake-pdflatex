@@ -6,10 +6,23 @@ export max_print_line=500
 export error_line=254
 export half_error_line=238
 
-pdflatex -interaction=nonstopmode "$@"
+TEX_ARGS="-interaction=nonstopmode"
 
 # check all argument and run bibtex is appropriate
-for f in $@; do
+for f in "$@"; do
+
+    if [[ "$f" == -* ]]; then
+        TEX_ARGS="$TEX_ARGS $f"
+        continue
+    fi
+
+    TEX=pdflatex
+    HEAD=$(head -n 1 "$f")
+    if [[ "$HEAD" == *xelatex* ]]; then
+        TEX=xelatex
+    fi
+
+    $TEX $TEX_ARGS "$f"
 
     [[ "$f" == *.tex ]] || continue
 
@@ -44,3 +57,5 @@ for f in $@; do
     #pdflatex -interaction=nonstopmode "$@"
 
 done
+
+exit 0

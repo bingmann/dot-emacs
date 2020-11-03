@@ -83,7 +83,7 @@
 
  ;; org mode
  `(org-link ((t (:inherit link :foreground "cyan1" :underline t))))
- `(org-table ((t (:foreground "deep sky blue"))))
+ `(org-table ((t (:foreground "light sky blue"))))
 
  ;; dired+ mode
  `(diredp-dir-priv ((t (:foreground "#74FFFF"))))
@@ -97,7 +97,7 @@
  `(magit-diff-added-highlight ((t (:inherit magit-diff-added :weight normal))))
  `(magit-diff-removed ((t (:inherit diff-changed :foreground "red"))))
  `(magit-diff-removed-highlight ((t (:inherit magit-diff-removed :weight normal))))
- `(magit-section-highlight ((t (:foreground "pale goldenrod"))))
+ `(magit-section-highlight ((t (:foreground "goldenrod"))))
 
  ;; cedet
  `(semantic-complete-inline-face ((t (:underline "yellow"))))
