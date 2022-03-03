@@ -4,18 +4,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(LaTeX-fold-env-spec-list
-   (quote
-    (("[tikzpicture]"
+   '(("[tikzpicture]"
       ("tikzpicture"))
      ("[algorithm]"
       ("algorithm"))
      ("[algorithm2e]"
-      ("algorithm2e")))))
+      ("algorithm2e"))))
  '(LaTeX-fold-macro-spec-list nil)
  '(LaTeX-fold-math-spec-list nil)
  '(TeX-command-list
-   (quote
-    (("LaTeX" "%`~/.emacs.d/flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil
+   '(("LaTeX" "%`~/.emacs.d/flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil
       (latex-mode doctex-mode)
       :help "Run LaTeX")
      ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
@@ -26,35 +24,28 @@
      ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer")
      ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
      ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
-     ("Other" "" TeX-run-command t t :help "Run an arbitrary command"))))
+     ("Other" "" TeX-run-command t t :help "Run an arbitrary command")))
  '(TeX-fold-env-spec-list nil)
  '(TeX-fold-macro-spec-list nil)
  '(TeX-fold-math-spec-list nil)
  '(TeX-save-query nil)
  '(TeX-source-correlate-mode t)
  '(ag-highlight-search t)
- '(ag-ignore-list (quote ("build" "b" "bo" "extlib" "doxygen-html")))
+ '(ag-ignore-list '("build" "b" "bo" "extlib" "doxygen-html"))
  '(ag-reuse-buffers t)
  '(ag-reuse-window t)
- '(auth-sources
-   (quote
-    ("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc")))
+ '(auth-sources '("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc"))
  '(auto-save-default nil)
  '(auto-save-interval 3000)
  '(auto-save-timeout 60)
  '(bibtex-comma-after-last-field t)
  '(bibtex-entry-format
-   (quote
-    (opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields)))
- '(bibtex-maintain-sorted-entries (quote crossref))
+   '(opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields))
+ '(bibtex-maintain-sorted-entries 'crossref)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
- '(c-default-style
-   (quote
-    ((java-mode . "java")
-     (awk-mode . "awk")
-     (other . "k&r"))))
- '(c-offsets-alist (quote ((inline-open . 0) (innamespace . 0))))
+ '(c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "k&r")))
+ '(c-offsets-alist '((inline-open . +) (innamespace . +)))
  '(c-tab-always-indent nil)
  '(column-number-mode t)
  '(compilation-always-kill t)
@@ -67,32 +58,30 @@
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
  '(custom-safe-themes
-   (quote
-    ("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default)))
+   '("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default))
  '(dired-dwim-target t)
  '(diredp-hide-details-initially-flag nil)
  '(diredp-image-preview-in-tooltip nil)
  '(doc-view-continuous t)
  '(ecb-options-version "2.40")
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
+ '(ecb-primary-secondary-mouse-buttons 'mouse-1--mouse-2)
  '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
  '(ede-simple-save-directory "~/.emacs.d/ede-simple")
  '(ediff-autostore-merges t)
- '(ediff-window-setup-function (quote ediff-setup-windows-plain))
+ '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(ess-ask-for-ess-directory nil)
  '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
  '(font-latex-fontify-sectioning 1.0)
  '(font-latex-match-reference-keywords
-   (quote
-    (("printbibliography" "[{")
+   '(("printbibliography" "[{")
      ("addbibresource" "[{")
      ("autoref" "[{")
      ("cref" "[{")
      ("Cref" "[{")
      ("crefrange" "[{")
-     ("Crefrange" "[{"))))
- '(fringe-mode (quote (nil . 0)) nil (fringe))
+     ("Crefrange" "[{")))
+ '(fringe-mode '(nil . 0) nil (fringe))
  '(gdb-many-windows t)
  '(ggtags-highlight-tag 10000.0)
  '(ggtags-highlight-tag-delay 10000.0)
@@ -100,75 +89,79 @@
  '(git-commit-fill-column 1000)
  '(gnus-init-file "~/.emacs.d/gnus-init.el")
  '(grep-command "grep -nH ")
- '(grep-find-ignored-directories (quote (".svn" ".git" ".hg" ".bzr" "extlib" "b" "build")))
+ '(grep-find-ignored-directories '(".svn" ".git" ".hg" ".bzr" "extlib" "b" "build"))
  '(ido-auto-merge-delay-time 0.4)
+ '(ido-default-file-method 'selected-window)
  '(ido-save-directory-list-file "~/.emacs.d/ido.last")
  '(ido-show-dot-for-dired t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(ispell-highlight-face (quote flyspell-incorrect))
+ '(ispell-highlight-face 'flyspell-incorrect)
+ '(lsp-diagnostics-provider :none)
+ '(lsp-enable-symbol-highlighting t)
+ '(lsp-headerline-breadcrumb-enable nil)
+ '(lsp-java-jdt-download-url
+   "https://download.eclipse.org/jdtls/milestones/1.7.0/jdt-language-server-1.7.0-202112161541.tar.gz")
+ '(lsp-java-server-install-dir "/home/tb/.emacs.d/eclipse.jdt.ls/server/")
+ '(lsp-java-workspace-cache-dir "/home/tb/.emacs.d/eclipse.jdt.ls/workspace-cache/")
+ '(lsp-java-workspace-dir "/home/tb/.emacs.d/eclipse.jdt.ls/workspace/")
  '(lua-indent-level 4)
- '(magit-diff-arguments (quote ("--ignore-all-space")))
+ '(magit-diff-arguments '("--ignore-all-space"))
  '(magit-git-global-arguments
-   (quote
-    ("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Timo Bingmann" "-c" "user.email=tbgit@panthema.net")))
- '(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n100")))
- '(magit-no-confirm (quote (stage-all-changes unstage-all-changes)))
+   '("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Timo Bingmann" "-c" "user.email=tbingmann@ebay.com"))
+ '(magit-log-arguments '("--graph" "--color" "--decorate" "-n100"))
+ '(magit-no-confirm '(stage-all-changes unstage-all-changes))
  '(magit-pull-arguments nil)
- '(magit-refs-show-commit-count (quote all))
- '(magit-status-buffer-switch-function (quote switch-to-buffer))
+ '(magit-refs-show-commit-count 'all)
+ '(magit-status-buffer-switch-function 'switch-to-buffer)
  '(make-backup-files nil)
  '(nntp-authinfo-file "~/.emacs.d/authinfo")
- '(org-agenda-files (quote ("~/synca/01-OrgTassen/TODO.org")))
- '(org-clock-mode-line-total (quote today))
+ '(org-clock-mode-line-total 'today)
  '(org-clock-persist t)
  '(org-confirm-shell-link-function nil)
  '(org-export-allow-bind-keywords t)
- '(org-export-backends (quote (ascii html latex md)))
+ '(org-export-backends '(ascii html latex md))
  '(org-html-validation-link "")
  '(org-link-frame-setup
-   (quote
-    ((vm . vm-visit-folder-other-frame)
+   '((vm . vm-visit-folder-other-frame)
      (vm-imap . vm-visit-imap-folder-other-frame)
      (gnus . org-gnus-no-new-news)
      (file . find-file)
-     (wl . wl-other-frame))))
+     (wl . wl-other-frame)))
  '(org-link-shell-confirm-function nil)
  '(org-tab-follows-link t)
  '(org-table-number-regexp
    "^\\([<>]?[-+^.,0-9]*[0-9][-+^.,0-9eEdDx()%:]*\\|[<>]?[-+]?0[xX][[:xdigit:].]+\\|[<>]?[-+]?[0-9]+#[0-9a-zA-Z.,]+\\|nan\\|[-+u]?inf\\)$")
  '(org-time-clocksum-format
-   (quote
-    (:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t)))
- '(reftex-default-bibliography (quote ("bibliography/references.bib")))
- '(reftex-ref-macro-prompt nil)
- '(reftex-ref-style-default-list (quote ("Cleveref")))
+   '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+ '(reftex-default-bibliography '("bibliography/references.bib"))
+ '(reftex-ref-macro-prompt nil t)
+ '(reftex-ref-style-default-list '("Cleveref"))
  '(replace-lax-whitespace t)
  '(replace-regexp-lax-whitespace t)
+ '(rtags-jump-to-first-match nil)
  '(safe-local-variable-values
-   (quote
-    ((eval add-to-list
-           (make-variable-buffer-local
-            (quote LaTeX-fold-math-spec-list))
-           (quote
-            ("[tabular]"
-             ("tabular"))))
+   '((eval add-to-list
+           (make-variable-buffer-local 'LaTeX-fold-math-spec-list)
+           '("[tabular]"
+             ("tabular")))
      (c-tab-always-indent . t)
      (nxml-child-indent . 4)
      (rebox-min-fill-column . 100)
      (rebox-min-fill-column . 110)
-     (rebox-min-fill-column . 120))))
- '(scroll-bar-mode (quote right))
- '(search-whitespace-regexp "[ \t\r\n]+")
+     (rebox-min-fill-column . 120)))
+ '(scroll-bar-mode 'right)
  '(sieve-buffer "*sieve-man*")
  '(sieve-manage-default-port "4190")
  '(size-indication-mode t)
  '(smex-save-file "~/.emacs.d/smex-items")
  '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
+ '(tramp-use-ssh-controlmaster-options nil)
+ '(truncate-lines t)
  '(undo-limit 8000000)
  '(undo-outer-limit 120000000)
  '(undo-strong-limit 120000000)
- '(vc-handled-backends (quote (svn))))
+ '(vc-handled-backends '(svn)))
 
 ;; -----------------------------------------------------------------------------
 ;; --- change default font
@@ -178,7 +171,7 @@
 
 ;(set-face-font 'default "-*-FiraCode-medium-r-*-*-16-*-*-*-*-*-*-*")
 
-(set-face-font 'default "-*-Terminus-medium-r-*-*-17-*-*-*-*-*-*-*")
+(set-face-font 'default "-*-Terminus-medium-r-*-*-18-*-*-*-*-*-*-*")
 ;(set-face-font 'default "-*-Helvetica-medium-r-normal-*-14-*-*-*-m-*-fontset-Helvetica")
 
 ;(set-frame-font "-zevv-peep-medium-r-normal--16-*-*-*-c-*-*")
@@ -215,7 +208,7 @@
 ;; general emacs behaviour extensions
 (push 'ag my-el-get-packages)
 (push 'bm my-el-get-packages)
-(push 'clang-format my-el-get-packages)
+;(push 'clang-format my-el-get-packages)
 (push 'column-marker my-el-get-packages)
 (push 'diminish my-el-get-packages)
 (push 'flymake my-el-get-packages)
@@ -262,10 +255,9 @@
 (push 'cmake-mode my-el-get-packages)
 (push 'cperl-mode my-el-get-packages)
 (push 'csharp-mode my-el-get-packages)
-(push 'cython-mode my-el-get-packages)
-;(push 'ecb my-el-get-packages)
 (push 'ess my-el-get-packages)
 (push 'lua-mode my-el-get-packages)
+(push 'json-mode my-el-get-packages)
 (push 'mmm-mode my-el-get-packages)
 (push 'modern-cpp-font-lock my-el-get-packages)
 (push 'php-mode my-el-get-packages)
@@ -275,8 +267,13 @@
 (push 'python-mode my-el-get-packages)
 (push 'qml-mode my-el-get-packages)
 (push 'scala-mode my-el-get-packages)
-;(push 'thrift-mode my-el-get-packages)
 ;(push 'tt-mode my-el-get-packages)
+(push 'groovy-emacs-mode my-el-get-packages)
+;(push 'rtags my-el-get-packages)
+(push 'lsp-mode my-el-get-packages)
+(push 'lsp-java my-el-get-packages)
+(push 'lsp-ui my-el-get-packages)
+(push 'company-lsp my-el-get-packages)
 
 ;; version control
 (push 'dsvn my-el-get-packages)
@@ -285,6 +282,7 @@
 
 ;; utility packages
 (push 'htmlize my-el-get-packages)
+(push 'clang-format my-el-get-packages)
 
 ;; email and news reader
 ;(push 'mu4e my-el-get-packages)
@@ -353,6 +351,9 @@
 (add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
 (add-to-list 'auto-mode-alist '("\\.tpp$" . c++-mode))
 
+;; change whitespace
+(setq search-whitespace-regexp "[ \t\r\n]+")
+
 ;; --- autoload lilypond major mode ---
 
 (add-to-list 'load-path "~/.emacs.d/lilypond-2.12.1/")
@@ -414,8 +415,6 @@
             (local-set-key [f5] 'org-html-export-to-html)
             (local-set-key [f6] 'org-latex-export-to-pdf)
             ))
-
-(setq org-default-notes-file "~/synca/01-OrgTassen/TODO.org")
 
 (global-set-key (kbd "<f1>") 'org-todo-list)
 (global-set-key (kbd "\C-cc") 'org-capture)
@@ -590,6 +589,8 @@
 ; magit status
 
 (global-set-key (kbd "<C-f12>") 'magit-status)
+(global-set-key (kbd "<S-f12>") 'magit-blame-addition)
+(global-set-key (kbd "<M-f12>") 'magit-log-buffer-file)
 
 ; auto-load magit-svn-mode if git-svn repo is detected.
 (add-hook 'magit-mode-hook
@@ -832,7 +833,17 @@
   (local-set-key [f3] 'ff-find-other-file)
 
   ;; gnu global tag lookup
-  (ggtags-mode 1)
+  ;;(ggtags-mode 1)
+
+  ;;(rtags-start-process-unless-running)
+  ;;(rtags-enable-standard-keybindings c-mode-base-map "\C-cr")
+  (lsp)
+
+  ;(local-set-key "\M-," 'rtags-find-references-at-point)
+  ;(local-set-key "\M-." 'rtags-find-symbol-at-point)
+
+  (setq tb/doxygen-fix
+        [?\C-s ?@ ?a left left delete delete delete ?` ?\M-x return left ?`])
 
   ;; use rebox2 mode
   (local-set-key [(shift meta q)] 'rebox-cycle)
@@ -879,8 +890,8 @@
 
 ;; mark 80th column on some modes
 
-(add-hook 'c-mode-common-hook (lambda () (column-marker-1 80)))
-(add-hook 'cmake-mode-hook (lambda () (column-marker-1 80)))
+(add-hook 'c-mode-common-hook (lambda () (column-marker-1 90)))
+(add-hook 'cmake-mode-hook (lambda () (column-marker-1 90)))
 
 ;; -----------------------------------------------------------------------------
 ;; --- CEDET Configuration
@@ -1064,6 +1075,11 @@
 ;; -----------------------------------------------------------------------------
 
 (add-hook 'java-mode-hook '(lambda () (setq tab-width 4)))
+
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
 
 ;; -----------------------------------------------------------------------------
 ;; --- OpenWith program associations

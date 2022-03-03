@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ator
+# key: ator
+# --
+const auto ator = xplat::new_allocator::get_current_allocator();

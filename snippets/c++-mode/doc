@@ -2,6 +2,5 @@
 # name: doc
 # key: doc
 # --
-/*!
- * $0
+/** @brief $1
  */

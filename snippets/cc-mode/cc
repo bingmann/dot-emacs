@@ -1,6 +1,6 @@
 # -*- mode: snippet; require-final-newline: nil -*-
-# name: inc
-# key: inc
+# name: cc
+# key: cc
 # binding: direct-keybinding
 # --
-#include "$0"
+/** @brief $1 */
