@@ -1,5 +1,0 @@
-(:name grandshell
-       :type github
-       :pkgname "emacsmirror/grandshell-theme"
-       :minimum-emacs-version 24
-       :post-init (add-to-list 'custom-theme-load-path default-directory))

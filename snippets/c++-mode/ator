@@ -2,4 +2,4 @@
 # name: ator
 # key: ator
 # --
-const auto ator = xplat::new_allocator::get_current_allocator();
+const auto ator = xplat::get_default_allocator();

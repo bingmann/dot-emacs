@@ -3,121 +3,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(LaTeX-fold-env-spec-list
-   '(("[tikzpicture]"
-      ("tikzpicture"))
-     ("[algorithm]"
-      ("algorithm"))
-     ("[algorithm2e]"
-      ("algorithm2e"))))
- '(LaTeX-fold-macro-spec-list nil)
- '(LaTeX-fold-math-spec-list nil)
- '(TeX-command-list
-   '(("LaTeX" "%`~/.emacs.d/flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil
-      (latex-mode doctex-mode)
-      :help "Run LaTeX")
-     ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
-      (texinfo-mode)
-      :help "Run Makeinfo with Info output")
-     ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX")
-     ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber")
-     ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer")
-     ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
-     ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
-     ("Other" "" TeX-run-command t t :help "Run an arbitrary command")))
- '(TeX-fold-env-spec-list nil)
- '(TeX-fold-macro-spec-list nil)
- '(TeX-fold-math-spec-list nil)
- '(TeX-save-query nil)
- '(TeX-source-correlate-mode t)
- '(ag-highlight-search t)
- '(ag-ignore-list '("build" "b" "bo" "extlib" "doxygen-html"))
- '(ag-reuse-buffers t)
- '(ag-reuse-window t)
- '(auth-sources '("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc"))
- '(auto-save-default nil)
- '(auto-save-interval 3000)
- '(auto-save-timeout 60)
  '(bibtex-comma-after-last-field t)
- '(bibtex-entry-format
-   '(opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields))
  '(bibtex-maintain-sorted-entries 'crossref)
- '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "k&r")))
- '(c-offsets-alist '((inline-open . +) (innamespace . +)))
+ '(c-offsets-alist '((inline-open . 0) (innamespace . +)))
  '(c-tab-always-indent nil)
- '(column-number-mode t)
- '(compilation-always-kill t)
- '(cperl-continued-brace-offset -4)
- '(cperl-continued-statement-offset 4)
- '(cperl-extra-newline-before-brace t)
- '(cperl-extra-newline-before-brace-multiline nil)
- '(cperl-indent-level 4)
- '(cperl-indent-parens-as-block t)
- '(cperl-label-offset -4)
- '(cperl-merge-trailing-else nil)
  '(custom-safe-themes
-   '("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default))
- '(dired-dwim-target t)
- '(diredp-hide-details-initially-flag nil)
- '(diredp-image-preview-in-tooltip nil)
- '(doc-view-continuous t)
- '(ecb-options-version "2.40")
- '(ecb-primary-secondary-mouse-buttons 'mouse-1--mouse-2)
- '(ede-project-placeholder-cache-file "~/.emacs.d/projects.ede")
- '(ede-simple-save-directory "~/.emacs.d/ede-simple")
+   '("115d42fa02a5ce6a759e38b27304e833d57a48422c2408d5455f14450eb96554" default))
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
- '(ess-ask-for-ess-directory nil)
- '(fill-column 80)
  '(flyspell-issue-welcome-flag nil)
- '(font-latex-fontify-sectioning 1.0)
- '(font-latex-match-reference-keywords
-   '(("printbibliography" "[{")
-     ("addbibresource" "[{")
-     ("autoref" "[{")
-     ("cref" "[{")
-     ("Cref" "[{")
-     ("crefrange" "[{")
-     ("Crefrange" "[{")))
- '(fringe-mode '(nil . 0) nil (fringe))
- '(gdb-many-windows t)
- '(ggtags-highlight-tag 10000.0)
- '(ggtags-highlight-tag-delay 10000.0)
- '(ggtags-update-on-save nil)
- '(git-commit-fill-column 1000)
- '(gnus-init-file "~/.emacs.d/gnus-init.el")
- '(grep-command "grep -nH ")
- '(grep-find-ignored-directories '(".svn" ".git" ".hg" ".bzr" "extlib" "b" "build"))
- '(ido-auto-merge-delay-time 0.4)
- '(ido-default-file-method 'selected-window)
- '(ido-save-directory-list-file "~/.emacs.d/ido.last")
- '(ido-show-dot-for-dired t)
- '(indent-tabs-mode nil)
- '(inhibit-startup-screen t)
- '(ispell-highlight-face 'flyspell-incorrect)
- '(lsp-diagnostics-provider :none)
- '(lsp-enable-symbol-highlighting t)
- '(lsp-headerline-breadcrumb-enable nil)
- '(lsp-java-jdt-download-url
-   "https://download.eclipse.org/jdtls/milestones/1.7.0/jdt-language-server-1.7.0-202112161541.tar.gz")
- '(lsp-java-server-install-dir "/home/tb/.emacs.d/eclipse.jdt.ls/server/")
- '(lsp-java-workspace-cache-dir "/home/tb/.emacs.d/eclipse.jdt.ls/workspace-cache/")
- '(lsp-java-workspace-dir "/home/tb/.emacs.d/eclipse.jdt.ls/workspace/")
- '(lua-indent-level 4)
- '(magit-diff-arguments '("--ignore-all-space"))
- '(magit-git-global-arguments
-   '("--no-pager" "--literal-pathspecs" "-c" "core.preloadindex=true" "-c" "user.name=Timo Bingmann" "-c" "user.email=tbingmann@ebay.com"))
- '(magit-log-arguments '("--graph" "--color" "--decorate" "-n100"))
- '(magit-no-confirm '(stage-all-changes unstage-all-changes))
- '(magit-pull-arguments nil)
- '(magit-refs-show-commit-count 'all)
- '(magit-status-buffer-switch-function 'switch-to-buffer)
- '(make-backup-files nil)
- '(nntp-authinfo-file "~/.emacs.d/authinfo")
- '(org-clock-mode-line-total 'today)
- '(org-clock-persist t)
+ '(js-indent-level 2)
  '(org-confirm-shell-link-function nil)
  '(org-export-allow-bind-keywords t)
  '(org-export-backends '(ascii html latex md))
@@ -134,34 +31,49 @@
    "^\\([<>]?[-+^.,0-9]*[0-9][-+^.,0-9eEdDx()%:]*\\|[<>]?[-+]?0[xX][[:xdigit:].]+\\|[<>]?[-+]?[0-9]+#[0-9a-zA-Z.,]+\\|nan\\|[-+u]?inf\\)$")
  '(org-time-clocksum-format
    '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
- '(reftex-default-bibliography '("bibliography/references.bib"))
- '(reftex-ref-macro-prompt nil t)
- '(reftex-ref-style-default-list '("Cleveref"))
- '(replace-lax-whitespace t)
- '(replace-regexp-lax-whitespace t)
- '(rtags-jump-to-first-match nil)
+ '(package-selected-packages
+   '(org auto-package-update bnf-mode latex latex-mode html-mode lsp-java projectile haskell-mode coffee-mode basic-mode csv-mode auctex lsp-ui lsp-mode magit scala-mode qml-mode python-mode protobuf-mode php-mode lua-mode groovy-mode csharp-mode cmake-mode bison-mode arduino-mode apache-mode yaml-mode pandoc-mode nginx-mode markdown-mode dockerfile-mode dired-copy-paste dired+ yasnippet ws-butler smooth-scrolling smex rainbow-delimiters iedit goto-last-change diminish bm ag leuven-theme grandshell-theme quelpa-use-package))
  '(safe-local-variable-values
-   '((eval add-to-list
-           (make-variable-buffer-local 'LaTeX-fold-math-spec-list)
-           '("[tabular]"
-             ("tabular")))
-     (c-tab-always-indent . t)
-     (nxml-child-indent . 4)
-     (rebox-min-fill-column . 100)
-     (rebox-min-fill-column . 110)
-     (rebox-min-fill-column . 120)))
- '(scroll-bar-mode 'right)
- '(sieve-buffer "*sieve-man*")
- '(sieve-manage-default-port "4190")
- '(size-indication-mode t)
- '(smex-save-file "~/.emacs.d/smex-items")
- '(srecode-map-save-file "~/.emacs.d/srecode/srecode-map")
- '(tramp-use-ssh-controlmaster-options nil)
- '(truncate-lines t)
- '(undo-limit 8000000)
- '(undo-outer-limit 120000000)
- '(undo-strong-limit 120000000)
- '(vc-handled-backends '(svn)))
+   '((magit-commit-arguments "--author" "John SJ Anderson <john@working.works>")
+     (magit-commit-arguments "--author=John SJ Anderson <john@working.works>"))))
+
+;; -----------------------------------------------------------------------------
+;; --- Start emacs server
+;; -----------------------------------------------------------------------------
+
+(server-start)
+
+;; -----------------------------------------------------------------------------
+;; MELPA Package Management
+;; -----------------------------------------------------------------------------
+
+(require 'package)
+
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
+
+;(package-refresh-contents)
+;(package-autoremove)
+
+;; Install `use-package`.
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+;; Always automatically install packages.
+(setq use-package-always-ensure t
+      use-package-expand-minimally t
+      use-package-compute-statistics t)
+
+;; Emacs Lisp packages built directly from source.
+(use-package quelpa
+  :init
+  (setq quelpa-update-melpa-p nil)
+  )
+
+;; quelpa handler for use-package.
+(use-package quelpa-use-package)
 
 ;; -----------------------------------------------------------------------------
 ;; --- change default font
@@ -188,120 +100,6 @@
 (global-set-key (kbd "<mouse-7>") (lambda (event) (interactive "e")))
 
 ;; -----------------------------------------------------------------------------
-;; --- el-get package management
-;; -----------------------------------------------------------------------------
-
-;; load el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil t)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max)) (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-recipes")
-
-;; BEGIN PACKAGE LIST to el-get
-(setq my-el-get-packages '(el-get))
-
-;; general emacs behaviour extensions
-(push 'ag my-el-get-packages)
-(push 'bm my-el-get-packages)
-;(push 'clang-format my-el-get-packages)
-(push 'column-marker my-el-get-packages)
-(push 'diminish my-el-get-packages)
-(push 'flymake my-el-get-packages)
-(push 'folding my-el-get-packages)
-(push 'ggtags my-el-get-packages)
-(push 'google-this my-el-get-packages)
-(push 'goto-last-change my-el-get-packages)
-(push 'grandshell my-el-get-packages)
-(push 'iedit my-el-get-packages)
-(push 'leuven-theme my-el-get-packages)
-(push 'multiple-cursors my-el-get-packages)
-(push 'rainbow-delimiters my-el-get-packages)
-(push 'rebox2 my-el-get-packages)
-(push 'smex my-el-get-packages)
-(push 'smooth-scrolling my-el-get-packages)
-;(push 'tramp my-el-get-packages)
-(push 'ws-butler my-el-get-packages)
-(push 'yasnippet my-el-get-packages )
-;(push 'helm-gtags my-el-get-packages)
-
-;(push 'auto-complete my-el-get-packages)
-;(push 'auto-complete-auctex my-el-get-packages)
-;(push 'auto-complete-css my-el-get-packages)
-;(push 'auto-complete-yasnippet my-el-get-packages)
-;(push 'auto-complete-c-headers my-el-get-packages)
-
-;; system naviation modes
-(push 'dired+ my-el-get-packages)
-;(push 'openwith my-el-get-packages)
-
-;; text modes
-(push 'auctex my-el-get-packages)
-(push 'dockerfile-mode my-el-get-packages)
-(push 'markdown-mode my-el-get-packages)
-(push 'nginx-mode my-el-get-packages)
-(push 'org-mode my-el-get-packages)
-(push 'pandoc-mode my-el-get-packages)
-(push 'yaml-mode my-el-get-packages)
-
-; ;; programming modes
-(push 'apache-mode my-el-get-packages)
-(push 'arduino-mode my-el-get-packages)
-;(push 'cedet my-el-get-packages)
-(push 'cmake-mode my-el-get-packages)
-(push 'cperl-mode my-el-get-packages)
-(push 'csharp-mode my-el-get-packages)
-(push 'ess my-el-get-packages)
-(push 'lua-mode my-el-get-packages)
-(push 'json-mode my-el-get-packages)
-(push 'mmm-mode my-el-get-packages)
-(push 'modern-cpp-font-lock my-el-get-packages)
-(push 'php-mode my-el-get-packages)
-;(push 'processing-mode my-el-get-packages)
-(push 'projectile my-el-get-packages)
-(push 'protobuf-mode my-el-get-packages)
-(push 'python-mode my-el-get-packages)
-(push 'qml-mode my-el-get-packages)
-(push 'scala-mode my-el-get-packages)
-;(push 'tt-mode my-el-get-packages)
-(push 'groovy-emacs-mode my-el-get-packages)
-;(push 'rtags my-el-get-packages)
-(push 'lsp-mode my-el-get-packages)
-(push 'lsp-java my-el-get-packages)
-(push 'lsp-ui my-el-get-packages)
-(push 'company-lsp my-el-get-packages)
-
-;; version control
-(push 'dsvn my-el-get-packages)
-(push 'magit my-el-get-packages)
-(push 'magit-svn my-el-get-packages)
-
-;; utility packages
-(push 'htmlize my-el-get-packages)
-(push 'clang-format my-el-get-packages)
-
-;; email and news reader
-;(push 'mu4e my-el-get-packages)
-;(push 'wanderlust my-el-get-packages)
-
-;; END PACKAGE LIST for el-get
-
-;; install missing packages from list above
-(el-get 'sync my-el-get-packages)
-;; remove everything not in the list above
-(el-get-cleanup my-el-get-packages)
-
-;; -----------------------------------------------------------------------------
-;; --- Start emacs server
-;; -----------------------------------------------------------------------------
-
-(server-start)
-
-;; -----------------------------------------------------------------------------
 ;; --- Load theme and override faces via customize
 ;; -----------------------------------------------------------------------------
 
@@ -325,6 +123,10 @@
  '(org-todo ((t (:inherit nil :foreground "#f25a5a"))))
  '(underline ((t (:underline "dark gray")))))
 
+(use-package grandshell-theme)
+(use-package leuven-theme
+  :defer t)
+
 (load-theme 'grandshell t)
 ;(load-theme 'green-phosphor t)
 (load-theme 'mytheme t)
@@ -343,426 +145,91 @@
   (load-theme 'leuven t))
 
 ;; -----------------------------------------------------------------------------
-;; --- Load some custom extensions
-;; -----------------------------------------------------------------------------
-
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-
-(add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
-(add-to-list 'auto-mode-alist '("\\.tpp$" . c++-mode))
-
-;; change whitespace
-(setq search-whitespace-regexp "[ \t\r\n]+")
-
-;; --- autoload lilypond major mode ---
-
-(add-to-list 'load-path "~/.emacs.d/lilypond-2.12.1/")
-(autoload 'LilyPond-mode "lilypond-mode" "LilyPond Editing Mode" t)
-;
-(add-to-list 'auto-mode-alist '("\\.ly$" . LilyPond-mode))
-(add-to-list 'auto-mode-alist '("\\.ily$" . LilyPond-mode))
-(add-to-list 'auto-mode-alist '("\\.lytex$" . latex-mode))
-(add-hook 'LilyPond-mode-hook (lambda () (turn-on-font-lock)))
-
-;; --- set up hunspell for flyspell-mode ---
-
-(setq ispell-program-name "/usr/bin/hunspell")
-
-(setq ispell-local-dictionary "en_US")
-(setq ispell-local-dictionary-alist
-      '((nil     ; default
-         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
-        ("en_US" ; Yankee English
-         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
-        ("en_GB" ; British English
-         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
-        ("de_DE"
-         "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "['-]" t ("-d" "de_DE") nil utf-8)
-        )
-      )
-
-; ;; --- simple generic-mode for structures wiki notes ---
-;
-; (require 'generic-x)
-;
-; (defface my-title-text-face
-;   '((t (:foreground "Cyan1" :weight bold)))
-;   "My custom face for wiki note titles")
-;
-; (define-generic-mode 'notes-mode
-;   '("#")                            ; comments start with '#'
-;   '()                               ; keywords
-;   '(("^\\(Titel\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'my-title-text-face))
-;     ("^\\(.*\\)=\\(.*\\)" (1 'font-lock-type-face) (2 'font-lock-variable-name-face))
-;     )
-;   '("\\.txw$")                        ;; files for which to activate this mode
-;   ()                                 ;; other functions to call
-;   "A mode for structured wiki-like notes"
-; )
-
-;; --- org-mode customizations ---
-
-(add-hook 'org-mode-hook
-          (lambda ()
-            (local-unset-key [(meta shift up)])
-            (local-unset-key [(meta shift down)])
-            (local-set-key [(control shift up)] 'org-move-subtree-up)
-            (local-set-key [(control shift down)] 'org-move-subtree-down)
-            (local-set-key [(control shift left)] 'org-promote-subtree)
-            (local-set-key [(control shift right)] 'org-demote-subtree)
-            (local-set-key [(control return)] 'org-insert-subheading)
-            (local-set-key [(meta control return)] 'org-time-stamp)
-            (local-set-key [f5] 'org-html-export-to-html)
-            (local-set-key [f6] 'org-latex-export-to-pdf)
-            ))
-
-(global-set-key (kbd "<f1>") 'org-todo-list)
-(global-set-key (kbd "\C-cc") 'org-capture)
-
-;; active Babel languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sql . t) (shell . t)))
-
-(setq org-priority-faces '((?A . (:foreground "red" :weight 'bold))
-                           (?B . (:foreground "yellow"))
-                           (?C . (:foreground "green"))
-                           (?D . (:foreground "deep sky blue"))
-                           (?E . (:foreground "salmon"))))
-
-;; -- load Dired+ when dired is loaded
-
-(require 'dired-copy-paste)
-
-(define-key dired-mode-map "\C-w" 'dired-copy-paste-do-cut)
-(define-key dired-mode-map "\M-w" 'dired-copy-paste-do-copy)
-(define-key dired-mode-map "\C-y" 'dired-copy-paste-do-paste)
-
-(require 'dired-fixups)
-
-(defun my-dired-mouse-find-file (event)
-  "In dired, visit the file or directory name you click on."
-  (interactive "e")
-  (let (window pos file)
-    (save-excursion
-      (setq window (posn-window (event-end event))
-            pos (posn-point (event-end event)))
-      (if (not (windowp window))
-          (error "No file chosen"))
-      (set-buffer (window-buffer window))
-      (goto-char pos)
-      (setq file (dired-get-file-for-visit)))
-    (if (file-directory-p file)
-        (or (and (cdr dired-subdir-alist)
-                 (dired-goto-subdir file))
-            (progn
-              (select-window window)
-              (dired file)))
-      (select-window window)
-      (find-file (file-name-sans-versions file t)))))
-
-(defun set-my-dired-keys-hook ()
-  "My favorite dired keys."
-  ; for some reason mouse-2 = left click (mouse-1)
-  (define-key dired-mode-map [mouse-2] 'my-dired-mouse-find-file)
-  (define-key dired-mode-map [M-mouse-2] 'diredp-mouse-find-file-other-frame)
-  ; backspace
-  (define-key dired-mode-map [backspace] 'dired-up-directory)
-)
-
-(add-hook 'dired-mode-hook 'set-my-dired-keys-hook)
-
-;; whitespace cleaning butler mode
-(ws-butler-global-mode 1)
-;; hide "wb" minor mode
-(diminish 'ws-butler-mode)
-
-;; -----------------------------------------------------------------------------
-;; --- Automatic Mode Triggers
-;; -----------------------------------------------------------------------------
-
-;; cperl-mode is preferred to perl-mode
-(defalias 'perl-mode 'cperl-mode)
-
-;; special web site scripts
-(add-to-list 'auto-mode-alist '("\\.htt\\'" . html-mode))
-(add-to-list 'auto-mode-alist '("\\.blog\\'" . html-mode))
-
-;; perl XS extensions recognition
-(add-to-list 'auto-mode-alist '("\\.xs\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.pc\\'" . c++-mode))
-
-;; some more c++ files
-(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.tcc\\'" . c++-mode))
-
-;; doxygen mode
-(defun my-dox-mode ()
-  "Add some latex macro keys"
-  (interactive)
-  (c++-mode)
-  (visual-line-mode 1)
-  (flyspell-mode)
-  (set-variable 'fill-column 100000)
-  )
-(add-to-list 'auto-mode-alist '("\\.dox\\'" . my-dox-mode))
-
-;; customize markdown mode
-;; doxygen mode
-(defun my-markdown-mode ()
-  "Customize markdown mode"
-  (interactive)
-  (visual-line-mode 1)
-  (flyspell-mode)
-  (set-variable 'fill-column 100000)
-  )
-(add-hook 'markdown-mode-hook 'my-markdown-mode)
-
-(folding-add-to-marks-list 'lua-mode "-- {{{" "-- }}}" nil t)
-
-;; -----------------------------------------------------------------------------
 ;; --- General Customization
 ;; -----------------------------------------------------------------------------
 
-;; put all temporary files into /tmp
+(add-to-list 'load-path "~/.emacs.d/lisp")
+
+;; Put all temporary files into /tmp.
 (defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
 (setq backup-directory-alist `((".*" . ,emacs-tmp-dir)))
 (setq auto-save-file-name-transforms `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix emacs-tmp-dir)
-(setq tramp-auto-save-directory emacs-tmp-dir)
-(setq tramp-persistency-file-name (format "%s/tramp" emacs-tmp-dir))
 (setq image-dired-dir (format "%s/image-dired" emacs-tmp-dir))
 
-;; turn on paren matching
+;; Disable welcome startup screen.
+(setq inhibit-startup-screen t)
+
+;; Change fill column.
+(setq fill-column 80)
+
+;; Enable truncate lines mode.
+(setq truncate-lines t)
+
+;; Use spaces instead of tabs.
+(setq indent-tabs-mode nil)
+
+;; Disable blinking cursor.
+(setq blink-cursor-mode nil)
+
+;; Show column and line numbers in mode bar.
+(setq column-number-mode t)
+
+;; Enable file size indication mode.
+(setq size-indication-mode t)
+
+;; Disable annoying backup files.
+(setq make-backup-files nil)
+
+;; Disable auto-save which is annoying for remote files.
+(setq auto-save-default nil
+      auto-save-interval 3000
+      auto-save-timeout 60)
+
+;; Turn on paren matching.
 (show-paren-mode t)
 (setq show-paren-style 'mixed)
 
-;; disable toolbar
+;; Disable toolbar, menubar, and scrollbars.
 (tool-bar-mode -1)
+;(menu-bar-mode -1)
 (scroll-bar-mode -1)
-(menu-bar-mode -1)
 
-;; make all "yes or no" prompts show "y or n" instead
+;; Make all "yes or no" prompts show "y or n" instead.
 (fset 'yes-or-no-p 'y-or-n-p)
-
-;; hook for cperl-mode to automatically set my favorite style
-;;(add-hook 'cperl-mode-hook (lambda () (cperl-set-style "C++")))
 
 ;; "filename [mode]" in title bar
 (setq frame-title-format '("%f [mode: %m]"))
 
-;; in every buffer, the line which contains the cursor will be fully highlighted
-;(global-hl-line-mode 1)
-;; enable inline images:
-;(iimage-mode)
+;; Change whitespace which makes searching much better in texts with newlines.
+(setq search-whitespace-regexp "[ \t\r\n]+"
+      replace-lax-whitespace t
+      replace-regexp-lax-whitespace t)
 
-;; -----------------------------------------------------------------------------
-;; --- Some custom key bindings
-;; -----------------------------------------------------------------------------
+;; Change default grep command.
+(setq grep-command "grep -nH "
+      grep-find-ignored-directories '(".svn" ".git" ".hg" ".bzr" "extlib" "b" "build"))
 
-(global-set-key "\M-g" 'goto-line)
+;; Increase undo limit.
+(setq undo-limit 8000000
+      undo-outer-limit 120000000
+      undo-strong-limit 120000000)
 
-; open files from current text
-(global-set-key (kbd "C-x f") 'find-file-at-point)
+;; cperl-mode is preferred to perl-mode
+(defalias 'perl-mode 'cperl-mode)
 
-; quick comment and uncommenting
-(global-set-key (kbd "C-c SPC") 'comment-or-uncomment-region)
+;; Reduce latency with Tramp mode.
+(setq tramp-auto-save-directory emacs-tmp-dir)
+(setq tramp-persistency-file-name (format "%s/tramp" emacs-tmp-dir))
+(setq tramp-use-ssh-controlmaster-options nil)
+(setq remote-file-name-inhibit-cache nil)
+;(setq tramp-verbose 6)
 
-; kills all them buffers except scratch.
-(defun nuke-all-buffers ()
-  "kill all buffers, leaving *scratch* only"
-  (interactive)
-  (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
-  (delete-other-windows))
-
-(global-set-key (kbd "C-x K") 'nuke-all-buffers)
-
-; set keys f9-f12 to insert German umlauts and sz
-(global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
-(global-set-key (kbd "<S-f9>") (lambda() (interactive) (insert ?\Ä)))
-(global-set-key (kbd "<f10>") (lambda() (interactive) (insert ?\ö)))
-(global-set-key (kbd "<S-f10>") (lambda() (interactive) (insert ?\Ö)))
-(global-set-key (kbd "<f11>") (lambda() (interactive) (insert ?\ü)))
-(global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
-(global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
-
-; magit status
-
-(global-set-key (kbd "<C-f12>") 'magit-status)
-(global-set-key (kbd "<S-f12>") 'magit-blame-addition)
-(global-set-key (kbd "<M-f12>") 'magit-log-buffer-file)
-
-; auto-load magit-svn-mode if git-svn repo is detected.
-(add-hook 'magit-mode-hook
-          (lambda()
-            ;(require 'magit-svn)
-            ;(if (magit-svn-get-ref-info) (magit-svn-mode))
-            ))
-
-;; Git-Commit-Mode: flyspell
-(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
-
-; svn integration
-
-(autoload 'svn-status "dsvn" "Run `svn status'." t)
-(autoload 'svn-update "dsvn" "Run `svn update'." t)
-
-(global-set-key (kbd "<C-f11>") 'svn-status)
-
-; go to last edit point
-
-(global-set-key [(ctrl meta l)] 'goto-last-change);
-
-; bind Backspace and Delete keys with M- and C- to special kill functions
-
-(defun dove-backward-kill-word (&optional arg)
-  "Backward kill word, but do not insert it into kill-ring"
-  (interactive "P")
-  (let (( end (point) )
-        ( beg (progn (backward-word arg) (point)))
-        )
-    (delete-region beg end)
-    )
-  )
-
-(defun dove-forward-kill-word (&optional arg)
-  "Backward kill word, but do not insert it into kill-ring"
-  (interactive "P")
-  (let (( beg (point) )
-        ( end (progn (forward-word arg) (point)))
-        )
-    (delete-region beg end)
-    )
-  )
-
-(global-set-key [(meta backspace)] 'backward-kill-word)
-(global-set-key [(control backspace)] 'dove-backward-kill-word)
-(global-set-key [(meta delete)] 'kill-word)
-(global-set-key [(control delete)] 'dove-forward-kill-word)
-
-(global-set-key "\C-e" 'delete-region)
-
-;; hippie-expand is dabbrev expand on steroids
-
-(global-set-key "\M-/" 'hippie-expand)
-
-(setq hippie-expand-try-functions-list
-      '(try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill
-        try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-all-abbrevs
-        try-expand-list
-        try-expand-line))
-
-;; special bindings for latex quickies
-
-(defun my-latex-key-bindings ()
-  "Add some latex macro keys"
-  (interactive)
-  (turn-on-reftex)
-  (visual-line-mode 1)
-  (local-set-key "\C-\M-o" (lambda () (interactive) (insert "\\operatorname{")))
-  (local-set-key [M-S-down] (lambda () (interactive) (reftex-toc)))
-  (local-set-key "\C-\M-r" (lambda () (interactive) (reftex-reference)))
-  (local-set-key "\C-\M-c" (lambda () (interactive) (reftex-citation)))
-  ;; show frames in section list -> very useful for beamer presentations
-  (setq reftex-section-levels
-        (cons '("begin{frame}" . 3) reftex-section-levels))
-  ;; The following makes \C-c\C-c not ask, just do the default action. Adds C-c-a for asking
-  (setq TeX-command-force "LaTeX")
-  ;; 'a' for ask, change to anything you want
-  (local-set-key "\C-c\C-a" (lambda (arg) (interactive "P")
-                            (let ((TeX-command-force nil)) (TeX-command-master arg))))
-  ;; auto folding of tikzpicture and algorithm environments in tex files
-  (TeX-fold-mode 0)
-  (add-hook 'find-file-hook 'TeX-fold-buffer t)
-)
-
-(add-hook 'tex-mode-hook 'my-latex-key-bindings)
-(add-hook 'latex-mode-hook 'my-latex-key-bindings)
-(add-hook 'TeX-mode-hook 'my-latex-key-bindings)
-(add-hook 'LaTeX-mode-hook 'my-latex-key-bindings)
-
-(add-to-list 'auto-mode-alist '("\\.tikz$" . latex-mode))
-
-;; enable google-this mode
-
-;; google this word
-;; default keymap: C-c / [key], where key is
-;; RET -> interactive query
-;; w -> google word under cursor
-;; s -> google symbol under cursor
-
-(google-this-mode 1)
-;; hide "Google" minor mode
-(diminish 'google-this-mode)
-
-;; -----------------------------------------------------------------------------
-;; --- reftex customizations
-;; -----------------------------------------------------------------------------
-
-;; disable query for \ref or \pageref style
-(setq reftex-ref-macro-prompt nil)
-
-;; additional label styles
-(setq reftex-label-alist
-      '(
-        ("theorem"   ?t "thm:" "~\\ref{%s}" t   ("theorem"   "th.") -2)
-        ("lemma"     ?t "lem:" "~\\ref{%s}" t   ("lemma"     "lem") -2)
-        ("algorithm" ?a "alg:" "~\\ref{%s}" t   ("algorithm" "alg") -2)
-        ))
-
-;; -----------------------------------------------------------------------------
-;; --- flymake mode
-;; -----------------------------------------------------------------------------
-
-(eval-after-load "flymake"
-  '(progn
-     ;; compile tex using pdflatex
-     (defun flymake-get-tex-args (file-name)
-       (list "~/.emacs.d/flymake-pdflatex" (list "-file-line-error" "-interaction=nonstopmode" "-shell-escape" file-name)))
-
-     ;; severe logging
-     ;(setq flymake-log-level 9)
-
-     ;; changes timeout
-     (setq flymake-no-changes-timeout 5)
-
-     ;; dont run on enters
-     (setq flymake-start-syntax-check-on-newline nil)
-
-     ;; scan complete files for matching include lines
-     (setq flymake-check-file-limit nil)
-
-     ;; fixes unbalanced braces in LaTeX files
-     (push '("^\\(.*?\.tex\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
-     (push '("^\\(.*?\.tikz\\):\\([0-9]*?\\):\\(.*?\\):\\(.*?\\)" nil 2 3 4) flymake-err-line-patterns)
-     (push '("Runaway argument?" nil nil nil) flymake-err-line-patterns)
-     (push '("Emergency stop." nil nil nil) flymake-err-line-patterns)
-     (push '("Package tikz Error:" nil nil nil) flymake-err-line-patterns)
-
-     ;; disable master search for numeric endings
-     (setq flymake-allowed-file-name-masks
-           (delete '("[0-9]+\\.tex\\'" flymake-master-tex-init flymake-master-cleanup)
-                   flymake-allowed-file-name-masks)) ; don't use multipart tex files
-
-     ;; enable master search for -fig.tex endings
-     (add-to-list 'flymake-allowed-file-name-masks
-                  '("fig\\.tex\\'" flymake-master-tex-init flymake-master-cleanup))
-
-     (add-to-list 'flymake-allowed-file-name-masks
-                  '("\\.tikz\\'" flymake-master-tex-init flymake-master-cleanup))
-     ))
-
-;; -----------------------------------------------------------------------------
-;; --- bm line bookmark mode
-;; -----------------------------------------------------------------------------
-
-(global-set-key (kbd "<M-f2>") 'bm-toggle)
-(global-set-key (kbd "<f2>")   'bm-next)
-(global-set-key (kbd "<S-f2>") 'bm-previous)
+;; Disable built-in version control when using Tramp.
+(setq vc-ignore-dir-regexp
+      (format "\\(%s\\)\\|\\(%s\\)"
+              vc-ignore-dir-regexp
+              tramp-file-name-regexp))
 
 ;; -----------------------------------------------------------------------------
 ;; --- Smooth Scrolling
@@ -775,7 +242,6 @@
 ;; Controls if scroll commands move point to keep its screen position unchanged.
 (setq scroll-preserve-screen-position nil)
 
-(require 'smooth-scrolling)
  ;; four line at a time
 (setq mouse-wheel-scroll-amount '(4 ((shift) . 4)))
  ;; accelerate scrolling
@@ -787,6 +253,92 @@
 ;; number of lines at the top and bottom of a window.
 (setq smooth-scroll-margin 3)
 (setq smooth-scroll-strict-margins 't)
+
+;; -----------------------------------------------------------------------------
+;; --- Some custom key bindings
+;; -----------------------------------------------------------------------------
+
+;; Open files from current text.
+(global-set-key (kbd "C-x f") 'find-file-at-point)
+
+;; Goto line.
+(global-set-key "\M-g" 'goto-line)
+
+;; window handling
+(global-set-key "\M-`" 'delete-other-windows)
+(global-set-key "\M-2" 'make-frame)
+(global-set-key "\M-3" 'delete-frame)
+
+;; loading the buffer list
+(global-set-key [C-x C-b] 'buffer-menu)
+(global-set-key [M-S-up] 'ibuffer)
+
+;; fast nagivation in buffer stack
+(global-set-key [M-S-left] 'previous-buffer)
+(global-set-key [M-S-right] 'next-buffer)
+
+;; quick comment and uncommenting
+(global-set-key (kbd "C-c SPC") 'comment-or-uncomment-region)
+
+;; kills all them buffers except scratch.
+(defun nuke-all-buffers ()
+  "kill all buffers, leaving *scratch* only"
+  (interactive)
+  (mapcar (lambda (x) (kill-buffer x)) (buffer-list))
+  (delete-other-windows))
+
+(global-set-key (kbd "C-x K") 'nuke-all-buffers)
+
+;; F3 -> find other file: switch between .cpp/.hpp files
+(global-set-key [f3] 'ff-find-other-file)
+
+;; F4 -> launch a terminal (just about anywhere)
+(defun my-terminal (&optional arg)
+  "Launch terminal in current directory."
+  (interactive)
+  (if
+      ;; if buffer is under tramp
+      (file-remote-p default-directory)
+      (shell)
+    (start-process "terminal" nil "/usr/bin/urxvt")
+    )
+)
+(global-set-key [f4] 'my-terminal)
+
+;; set keys f9-f12 to insert German umlauts and sz
+(global-set-key (kbd "<f9>") (lambda() (interactive) (insert ?\ä)))
+(global-set-key (kbd "<S-f9>") (lambda() (interactive) (insert ?\Ä)))
+(global-set-key (kbd "<f10>") (lambda() (interactive) (insert ?\ö)))
+(global-set-key (kbd "<S-f10>") (lambda() (interactive) (insert ?\Ö)))
+(global-set-key (kbd "<f11>") (lambda() (interactive) (insert ?\ü)))
+(global-set-key (kbd "<S-f11>") (lambda() (interactive) (insert ?\Ü)))
+(global-set-key (kbd "<f12>") (lambda() (interactive) (insert ?\ß)))
+
+;; bind Backspace and Delete keys with M- and C- to special kill functions
+(defun dove-backward-kill-word (&optional arg)
+  "Backward kill word, but do not insert it into kill-ring"
+  (interactive "P")
+  (let (( end (point) )
+	( beg (progn (backward-word arg) (point)))
+	)
+    (delete-region beg end)
+    )
+  )
+
+(defun dove-forward-kill-word (&optional arg)
+  "Backward kill word, but do not insert it into kill-ring"
+  (interactive "P")
+  (let (( beg (point) )
+	( end (progn (forward-word arg) (point)))
+	)
+    (delete-region beg end)
+    )
+  )
+
+(global-set-key [(meta backspace)] 'backward-kill-word)
+(global-set-key [(control backspace)] 'dove-backward-kill-word)
+(global-set-key [(meta delete)] 'kill-word)
+(global-set-key [(control delete)] 'dove-forward-kill-word)
 
 ;; -----------------------------------------------------------------------------
 ;; --- Window Movement Shortcuts
@@ -806,303 +358,34 @@
 (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
 ;; -----------------------------------------------------------------------------
-;; --- rebox2 mode
+;; --- set up hunspell for flyspell-mode ---
 ;; -----------------------------------------------------------------------------
 
-(require 'rebox2)
+(setq ispell-program-name "/usr/bin/hunspell")
 
-;; customisation of rebox
-(rebox-register-template
- 71 999 '("??! box123456"))
-
-(rebox-register-template
- 272 999
- '("/*!"
-   " * box123456"
-   " */"))
-
-;; set styles
-(setq rebox-style-loop '(71 272))
-
-;; -----------------------------------------------------------------------------
-;; --- C/C++ Mode Configuration
-;; -----------------------------------------------------------------------------
-
-(defun tb-c-common-hook ()
-  ;; switch between .cpp/.hpp files
-  (local-set-key [f3] 'ff-find-other-file)
-
-  ;; gnu global tag lookup
-  ;;(ggtags-mode 1)
-
-  ;;(rtags-start-process-unless-running)
-  ;;(rtags-enable-standard-keybindings c-mode-base-map "\C-cr")
-  (lsp)
-
-  ;(local-set-key "\M-," 'rtags-find-references-at-point)
-  ;(local-set-key "\M-." 'rtags-find-symbol-at-point)
-
-  (setq tb/doxygen-fix
-        [?\C-s ?@ ?a left left delete delete delete ?` ?\M-x return left ?`])
-
-  ;; use rebox2 mode
-  (local-set-key [(shift meta q)] 'rebox-cycle)
-
-  ;; flyspell mode for comments
-  (flyspell-prog-mode)
-
-  ;; org-table mode support for comments
-  ;(orgtbl-mode)
-
-  ;; add C++11 keywords to font-lock
-  (require 'modern-cpp-font-lock)
-  (modern-c++-font-lock-mode)
-
-  ;; hide "mc++fl" minor mode
-  (diminish 'modern-c++-font-lock-mode)
-
-  ;; ------------------------------------------------------------
-  ;; add keywords for Qt code (signals, slots, and some Q_ macros
-
-  (setq c-protection-key
-        (concat "\\<\\(public\\|public slot\\|protected"
-                "\\|protected slot\\|private\\|private slot"
-                "\\)\\>")
-        c-C++-access-key
-        (concat "\\<\\(signals\\|public\\|protected\\|private"
-                "\\|public slots\\|protected slots\\|private slots"
-                "\\)\\>[ \t]*:"))
-
-  ;; modify the colour of slots to match public, private, etc ...
-  (font-lock-add-keywords
-   'c++-mode '(("\\<\\(slots\\|signals\\)\\>" . font-lock-type-face)))
-  ;; make new font for rest of qt keywords
-  (make-face 'qt-keywords-face)
-  (set-face-foreground 'qt-keywords-face "MediumPurple")
-  ;; qt keywords
-  (font-lock-add-keywords 'c++-mode '(("\\<Q_[A-Z]*\\>" . 'qt-keywords-face)))
-  (font-lock-add-keywords 'c++-mode '(("\\<SIGNAL\\|SLOT\\>" . 'qt-keywords-face)))
-
-  ;; ---[ end Qt code ]------------------------------------------
-)
-
-(add-hook 'c-mode-common-hook 'tb-c-common-hook)
-
-;; mark 80th column on some modes
-
-(add-hook 'c-mode-common-hook (lambda () (column-marker-1 90)))
-(add-hook 'cmake-mode-hook (lambda () (column-marker-1 90)))
-
-;; -----------------------------------------------------------------------------
-;; --- CEDET Configuration
-;; -----------------------------------------------------------------------------
-
-;; select which submodes we want to activate
-
-; activates CEDET's context menu that is bound to right mouse button;
-;(add-to-list 'semantic-default-submodes 'global-cedet-m3-minor-mode)
-; activates use of separate styles for tags decoration
-;(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
-; activates highlighting of first line for current tag (function, class, etc.);
-;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
-; activates displaying of possible name completions in the idle time
-;(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
-; activates highlighting of local names that are the same as name of tag under cursor
-; (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
-; activates automatic parsing of source code in the idle time
-;(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
-; enables automatic bookmarking of tags that you edited
-;(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-;(add-to-list 'semantic-default-submodes 'global-semantic-show-parser-state-mode)
-; shows which elements weren't processed by current parser's rules;
-;(add-to-list 'semantic-default-submodes 'global-semantic-show-unmatched-syntax-mode)
-; activates mode when name of current tag will be shown in top line of buffer;
-;(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-; enables global support for Semanticdb
-;(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-;(add-to-list 'semantic-default-submodes 'global-semantic-idle-breadcrumbs-mode)
-; activates displaying of information about current tag in the idle time.
-;(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-; shows changes in the text that weren't processed by incremental parser yet.
-;(add-to-list 'semantic-default-submodes 'global-semantic-highlight-edits-mode)
-
-;; (setq qt4-base-dir "/usr/include/qt4")
-
-;; (defvar semantic-lex-c-preprocessor-symbol-file '())
-;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig.h"))
-;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qconfig-large.h"))
-;; (add-to-list 'semantic-lex-c-preprocessor-symbol-file (concat qt4-base-dir "/Qt/qglobal.h"))
-
-;; ;; Activate semantic
-;; (setq semanticdb-default-save-directory "~/.cache/emacs/semanticdb/")
-;; (semantic-mode 1)
-
-; load semantic databases
-;; (require 'semantic/ia)
-;; (require 'semantic/bovine/gcc) ; or depending on you compiler
-
-;; if you want to enable support for gnu global
-;(semanticdb-enable-gnu-global-databases 'c-mode)
-;(semanticdb-enable-gnu-global-databases 'c++-mode)
-
-; load eassist
-;(add-to-list 'load-path "~/.emacs.d/el-get/cedet/contrib")
-;(require 'eassist)
-
-;; enable ctags for some languages:
-;;  Unix Shell, Perl, Pascal, Tcl, Fortran, Asm
-;(when (cedet-ectag-version-check)
-;  (semantic-load-enable-primary-exuberent-ctags-support))
-
-;; (setq-mode-local c-mode semanticdb-find-default-throttle
-;;                  '(project unloaded system recursive))
-
-;; customisation of modes
-(defun my-cedet-hook ()
-  ;; SRecode
-  ;(global-srecode-minor-mode 1)
-
-  ;; add knowledge of qt to emacs
-  ;; (semantic-add-system-include qt4-base-dir 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/Qt") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtGui") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtCore") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtTest") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtNetwork") 'c++-mode)
-  ;; (semantic-add-system-include (concat qt4-base-dir "/QtSvg") 'c++-mode)
-
-  ;; ;; whatever the symbol you are typing, this hot key automatically complete it for you.
-  ;; (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
-  ;; ;; another way to complete the symbol you are typing
-  ;; (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
-
-  ;; ;; when you typed . or -> after an object name, use this key to show possible public member functions or data members.
-  ;; (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-  ;; ;; visit the header file under cursor
-  ;; (local-set-key "\C-c=" 'semantic-decoration-include-visit)
-
-  ;;
-  ;; load eassist contrib library
-  ;(local-set-key "\C-ct" 'eassist-switch-h-cpp)
-  ;(local-set-key "\C-xt" 'eassist-switch-h-cpp)
-  ;(local-set-key "\C-ce" 'eassist-list-methods)
-  ;;
-  ;; (local-set-key "\C-cr" 'semantic-symref)
-  ;; ;; rename local variable under cursor
-  ;; (local-set-key "\C-c\C-r" 'semantic-symref-rename-local-variable)
-
-  ;; jump to the definition of the symbol under cursor
-  ;(local-set-key "\C-c<" 'semantic-ia-fast-jump)
-  ;;  show the document of the symbol under cursor
-  ;(local-set-key "\C-cq" 'semantic-ia-show-doc)
-  ;; show a summary about the symbol under cursor
-  ;(local-set-key "\C-cs" 'semantic-ia-show-summary)
-  ;; toggle between the implementation and a prototype of symbol under cursor
-  ;(local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
-
-  ;; unfold the block under cursor
-  ;(local-set-key "\C-c+" 'semantic-tag-folding-show-block)
-  ;; fold the block under cursor
-  ;(local-set-key "\C-c-" 'semantic-tag-folding-fold-block)
-  ;; unfold all
-  ;(local-set-key "\C-c\C-c+" 'semantic-tag-folding-show-all)
-  ;; fold all
-  ;(local-set-key "\C-c\C-c-" 'semantic-tag-folding-fold-all)
-
-  ;; show emacs code browser
-  ;(local-set-key "\C-cb" 'ecb-activate)
-
-  ;; auto-complete integration
-  ;(add-to-list 'ac-sources 'ac-source-gtags)
-  ;(add-to-list 'ac-sources 'ac-source-semantic)
-  ;(add-to-list 'ac-sources 'ac-source-c-headers)
-
-  ;; change paragraph definition to correctly wrap doxygen \param and \tparam
-  ;; lines.
-  (setq paragraph-start "\\(//+[!]?\\|\\**\\)[ ]*\\([ ]*$\\|[@\\\\]\\(param\\|tparam\\|return\\|pre\\)\\)\\|\f")
-  )
-
-; (add-hook 'c-mode-common-hook 'my-cedet-hook)
-(add-hook 'lisp-mode-hook 'my-cedet-hook)
-(add-hook 'scheme-mode-hook 'my-cedet-hook)
-(add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
-(add-hook 'erlang-mode-hook 'my-cedet-hook)
-
-;; -----------------------------------------------------------------------------
-;; --- ECB - Emacs Code Browser
-;; -----------------------------------------------------------------------------
-
-;; (setq ecb-tip-of-the-day nil) ;; no ecb tip of the day
-;; (setq stack-trace-on-error t)
-
-;; -----------------------------------------------------------------------------
-;; --- ido and smex
-;; -----------------------------------------------------------------------------
-
-(require 'ido)
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-
-(global-set-key (kbd "M-x") 'smex)
-
-;; -----------------------------------------------------------------------------
-;; --- auto-complete
-;; -----------------------------------------------------------------------------
-
-;(require 'auto-complete-config)
-;(ac-config-default)
-
-;; never start automatically
-;(setq ac-auto-start nil)
-;; trigger auto-complete on TAB
-;(ac-set-trigger-key "TAB")
-
-;; -----------------------------------------------------------------------------
-;; --- yasnippet
-;; -----------------------------------------------------------------------------
-
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets/"              ;; personal snippets
-        ))
-
-(require 'yasnippet)
-(yas-reload-all)
-(yas-global-mode 1)
-
-;; -----------------------------------------------------------------------------
-;; --- Java support
-;; -----------------------------------------------------------------------------
-
-(add-hook 'java-mode-hook '(lambda () (setq tab-width 4)))
-
-(add-hook 'json-mode-hook
-          (lambda ()
-            (make-local-variable 'js-indent-level)
-            (setq js-indent-level 2)))
-
-;; -----------------------------------------------------------------------------
-;; --- OpenWith program associations
-;; -----------------------------------------------------------------------------
-
-;; (setq openwith-associations '())
-
-;; (add-to-list 'openwith-associations '("\\.pdf\\'" "evince" (file)))
-;; (add-to-list 'openwith-associations '("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file)))
-;; (add-to-list 'openwith-associations '("\\.ods\\'" "libreoffice" (file)))
-;; (add-to-list 'openwith-associations '("\\.xls\\'" "libreoffice" (file)))
-;; (add-to-list 'openwith-associations '("\\.odt\\'" "libreoffice" (file)))
-;; (add-to-list 'openwith-associations '("\\.doc\\'" "libreoffice" (file)))
+(setq ispell-local-dictionary "en_US")
+(setq ispell-local-dictionary-alist
+      '((nil     ; default
+         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
+        ("en_US" ; Yankee English
+         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_US") nil utf-8)
+        ("en_GB" ; British English
+         "[A-Za-z]" "[^A-Za-z]" "[']" t ("-d" "en_GB") nil utf-8)
+        ("de_DE"
+         "[a-zäöüßA-ZÄÖÜ]" "[^a-zäöüßA-ZÄÖÜ]" "['-]" t ("-d" "de_DE") nil utf-8)
+        )
+      )
 
 ;; -----------------------------------------------------------------------------
 ;; --- Compile CMake Projects
 ;; -----------------------------------------------------------------------------
 
 (require 'compile)
-(setq compilation-disable-input nil)
-(setq compilation-last-buffer nil)
-(setq compilation-scroll-output t)
-(setq mode-compile-always-save-buffer-p t)
+(setq compilation-disable-input nil
+      compilation-last-buffer nil
+      compilation-scroll-output t
+      compilation-always-kill t
+      mode-compile-always-save-buffer-p t)
 
 (defun my-compile (pfx)
   "Saves all unsaved buffers, and runs 'compile' with optional ede project customization."
@@ -1122,76 +405,6 @@
     ))
 
 (global-set-key [f5] 'my-compile)
-
-;; -----------------------------------------------------------------------------
-;; --- Grand Unified Debugger mode
-;; -----------------------------------------------------------------------------
-
-(add-hook 'gud-mode-hook
-          (lambda ()
-            (define-key gud-mode-map [f4] 'gud-run)
-            (define-key gud-mode-map [f5] 'gud-step)
-            (define-key gud-mode-map [f6] 'gud-next)
-            (define-key gud-mode-map [f7] 'gud-until)
-            (define-key gud-mode-map [f8] 'gud-finish)
-            ))
-
-;; -----------------------------------------------------------------------------
-;; --- Processing Hotkeys
-;; -----------------------------------------------------------------------------
-
-(defun processing-mode-init ()
-  (local-set-key [f5] 'processing-sketch-run)
-  )
-
-(add-hook 'processing-mode-hook 'processing-mode-init)
-
-;; -----------------------------------------------------------------------------
-;; --- Multiple Cursors
-;; -----------------------------------------------------------------------------
-
-(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
-(global-set-key (kbd "C-c !") 'mc/mark-all-dwim)
-
-(add-hook 'multiple-cursors-mode-hook
-          (lambda ()
-            (define-key mc/keymap (kbd "<return>") nil)
-            ))
-
-;; -----------------------------------------------------------------------------
-;; --- Make eshell Usable
-;; -----------------------------------------------------------------------------
-
-(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
-(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
-
-;; -----------------------------------------------------------------------------
-;; --- CamelCase to snake_case and back
-;; -----------------------------------------------------------------------------
-
-(defun split-name (s)
-  (split-string
-   (let ((case-fold-search nil))
-     (downcase
-      (replace-regexp-in-string "\\([a-z]\\)\\([A-Z]\\)" "\\1 \\2" s)))
-   "[^A-Za-z0-9]+"))
-
-(defun camelcase  (s) (mapconcat 'capitalize (split-name s) ""))
-(defun underscore (s) (mapconcat 'downcase   (split-name s) "_"))
-
-(defun camelscore (s)
-  (cond ((string-match-p "-" s)         (colonize s))
-        ((string-match-p "_" s)         (dasherize s))
-        (t                              (underscore s))))
-
-(defun camelscore-word-at-point ()
-  (interactive)
-  (let* ((case-fold-search nil)
-         (beg (and (skip-chars-backward "[:alnum:]_") (point)))
-         (end (and (skip-chars-forward  "[:alnum:]_") (point)))
-         (txt (buffer-substring beg end))
-         (cml (camelscore txt)) )
-    (if cml (progn (delete-region beg end) (insert cml))) ))
 
 ;; -----------------------------------------------------------------------------
 ;; --- Increment and Decrement Numbers at Point
@@ -1243,39 +456,38 @@
   (increment-number-hexadecimal (if arg (- arg) -1)))
 
 ;; -----------------------------------------------------------------------------
-;; --- Custom Minor Mode for Global Keymap
+;; --- CamelCase to snake_case and back
 ;; -----------------------------------------------------------------------------
 
-;; http://emacs.stackexchange.com/questions/352/how-to-override-major-mode-bindings
+(defun split-name (s)
+  (split-string
+   (let ((case-fold-search nil))
+     (downcase
+      (replace-regexp-in-string "\\([a-z]\\)\\([A-Z]\\)" "\\1 \\2" s)))
+   "[^A-Za-z0-9]+"))
 
-(defvar my-keymap-mode-map (make-sparse-keymap)
-  "Keymap while my-keymap-mode is active.")
+(defun camelcase  (s) (mapconcat 'capitalize (split-name s) ""))
+(defun underscore (s) (mapconcat 'downcase   (split-name s) "_"))
 
-(define-minor-mode my-keymap-mode
-  "A minor mode so that my key settings override annoying major modes."
-  nil
-  :lighter ""
-  my-keymap-mode-map)
+(defun camelscore (s)
+  (cond ((string-match-p "-" s)         (colonize s))
+        ((string-match-p "_" s)         (dasherize s))
+        (t                              (underscore s))))
 
-(defadvice load (after give-my-keybindings-priority)
-  "Try to ensure that my keybindings always have priority."
-  (if (not (eq (car (car minor-mode-map-alist)) 'my-keymap-mode))
-      (let ((mykeys (assq 'my-keymap-mode minor-mode-map-alist)))
-        (assq-delete-all 'my-keymap-mode minor-mode-map-alist)
-        (add-to-list 'minor-mode-map-alist mykeys))))
-(ad-activate 'load)
+(defun camelscore-word-at-point ()
+  (interactive)
+  (let* ((case-fold-search nil)
+         (beg (and (skip-chars-backward "[:alnum:]_") (point)))
+         (end (and (skip-chars-forward  "[:alnum:]_") (point)))
+         (txt (buffer-substring beg end))
+         (cml (camelscore txt)) )
+    (if cml (progn (delete-region beg end) (insert cml))) ))
 
-(defun turn-on-my-keymap-mode ()
-  "Turns on my-keymap-mode."
-  (interactive) (my-keymap-mode t))
+;; -----------------------------------------------------------------------------
+;; --- General Emacs Behaviour Extensions
+;; -----------------------------------------------------------------------------
 
-(defun turn-off-my-keymap-mode ()
-  "Turns off my-keymap-mode."
-  (interactive) (my-keymap-mode -1))
-
-;; ---- list of global key bindings ----
-
-;; ag- or rgrep-based project-wide search
+;; A front-end for ag ("the silver searcher"), the C ack replacement.
 (defun my-ag-grep ()
   "Launch ag or grep in current directory."
   (interactive)
@@ -1288,46 +500,342 @@
     (call-interactively 'ag)
     )
   )
-(define-key my-keymap-mode-map (kbd "C-c C-s") 'my-ag-grep)
+(use-package ag
+  :init
+  (setq ag-highlight-search t
+	ag-reuse-buffers t
+	ag-reuse-window t
+	ag-ignore-list '("build" "b" "bo" "extlib" "doxygen-html"))
+  :bind (("C-c C-s" . my-ag-grep)))
 
-;; window handling
-(define-key my-keymap-mode-map "\M-`" 'delete-other-windows)
-(define-key my-keymap-mode-map "\M-2" 'make-frame)
-(define-key my-keymap-mode-map "\M-3" 'delete-frame)
+;; Visible bookmarks mode.
+(use-package bm
+  :bind (("<f2>" . bm-next)
+	 ("<S-f2>" . bm-previous)
+	 ("<M-f2>" . bm-toggle))
+  )
 
-;; loading the buffer list
-(define-key my-keymap-mode-map [C-x C-b] 'buffer-menu)
-(define-key my-keymap-mode-map [M-S-up] 'ibuffer)
+;; Diminished modes are minor modes with no modeline display.
+(use-package diminish)
 
-;; fast nagivation in buffer stack
-(define-key my-keymap-mode-map [M-S-left] 'previous-buffer)
-(define-key my-keymap-mode-map [M-S-right] 'next-buffer)
+;; Move point through buffer-undo-list positions.
+(use-package goto-last-change
+  :bind (("C-M-l" . goto-last-change)))
 
-;; F4 -> launch a terminal (just about anywhere)
-(defun my-terminal (&optional arg)
-  "Launch terminal in current directory."
+;; HippieExpand looks at the word before point and tries to expand it in various ways.
+(use-package hippie-exp
+  :bind (("M-/" . hippie-expand))
+  :config
+  (setq hippie-expand-try-functions-list
+	'(try-expand-dabbrev
+	  try-expand-dabbrev-all-buffers
+	  try-expand-dabbrev-from-kill
+	  try-complete-file-name-partially
+	  try-complete-file-name
+	  try-expand-all-abbrevs
+	  try-expand-list
+	  try-expand-line)))
+
+;; Nicer file search.
+(use-package ido
+  :init
+  (setq ido-everywhere t
+	ido-enable-flex-matching t
+	ido-virtual-buffers t
+	ido-use-faces t
+	ido-show-dot-for-dired t
+	ido-default-file-method 'selected-window
+	ido-default-buffer-method 'selected-window
+	ido-auto-merge-delay-time 0.5
+	ido-auto-merge-work-directories-length -1)
+  :config
+  (ido-mode)
+  )
+
+;; Edit multiple regions in the same way simultaneously.
+(use-package iedit
+  :bind (("C-\\" . iedit-mode)))
+
+;; Highlight brackets according to their depth.
+(use-package rainbow-delimiters)
+
+;; M-x interface with Ido-style fuzzy matching.
+(use-package smex
+  :bind (("M-x" . smex))
+  :init
+  (setq smex-save-file "~/.emacs.d/smex-items")
+  :config
+  (smex-initialize)
+  )
+
+;; Make emacs scroll smoothly.
+(use-package smooth-scrolling)
+
+;; Unobtrusively remove trailing whitespace.
+(use-package ws-butler
+  :diminish
+  :config
+  (ws-butler-global-mode 1)
+  )
+
+;; Yet another snippet extension for Emacs.
+(use-package yasnippet
+  :init
+  (setq yas-snippet-dirs '("~/.emacs.d/snippets/"))
+  :config
+  (yas-reload-all)
+  (yas-global-mode 1)
+  )
+
+;; -----------------------------------------------------------------------------
+;; --- System Navigation Modes
+;; -----------------------------------------------------------------------------
+
+(defun my-dired-mouse-find-file (event)
+  "In dired, visit the file or directory name you click on."
+  (interactive "e")
+  (let (window pos file)
+    (save-excursion
+      (setq window (posn-window (event-end event))
+	    pos (posn-point (event-end event)))
+      (if (not (windowp window))
+	  (error "No file chosen"))
+      (set-buffer (window-buffer window))
+      (goto-char pos)
+      (setq file (dired-get-file-for-visit)))
+    (if (file-directory-p file)
+	(or (and (cdr dired-subdir-alist)
+		 (dired-goto-subdir file))
+	    (progn
+	      (select-window window)
+	      (dired file)))
+      (select-window window)
+      (find-file (file-name-sans-versions file t)))))
+
+(use-package dired
+  :ensure nil
+  :init
+  (setq dired-dwim-target t)
+  :bind (:map dired-mode-map
+	      ;; backspace
+	      ([backspace] . dired-up-directory)
+	      ;; for some reason mouse-2 = left click (mouse-1)
+	      ([mouse-2] . 'my-dired-mouse-find-file)
+	      ([M-mouse-2] . 'diredp-mouse-find-file-other-frame)
+	      ))
+
+;; Extensions to Dired.
+(use-package dired+
+  :quelpa (dired+ :fetcher github :repo "emacsmirror/dired-plus")
+  :init
+  (setq diredp-hide-details-initially-flag nil
+	diredp-image-preview-in-tooltip nil)
+  :config
+  (diredp-toggle-find-file-reuse-dir 1)
+  :bind (:map dired-mode-map
+	      ;; for some reason mouse-2 = left click (mouse-1)
+	      ([mouse-2] . 'my-dired-mouse-find-file)
+	      ([M-mouse-2] . 'diredp-mouse-find-file-other-frame)
+	      ))
+
+;; Cut/copy/paste files and directories in dired mode.
+(use-package dired-copy-paste
+  :quelpa (dired-copy-paste :fetcher github :repo "jsilve24/dired-copy-paste")
+  :bind (:map dired-mode-map
+	      ("C-w" . dired-copy-paste-do-cut)
+	      ("M-w" . dired-copy-paste-do-copy)
+	      ("C-y" . dired-copy-paste-do-paste))
+  )
+
+;; -----------------------------------------------------------------------------
+;; --- Text Modes
+;; -----------------------------------------------------------------------------
+
+;; Major mode for editing Apache httpd configuration files.
+(use-package apache-mode :defer t)
+
+(use-package latex
+  :defer t
+  :ensure auctex
+  :config
+  ;; Makes \C-c\C-c not ask, just do the default action.
+  (setq TeX-command-force "LaTeX")
+  ;; Determine compile and other execution commands.
+  (setq TeX-command-list
+	'(("LaTeX" "%`~/.emacs.d/flymake-pdflatex -shell-escape --synctex=1 %(mode)%' %t" TeX-run-TeX nil
+	   (latex-mode doctex-mode)
+	   :help "Run LaTeX")
+	  ("Makeinfo" "makeinfo %(extraopts) %t" TeX-run-compile nil
+	   (texinfo-mode)
+	   :help "Run Makeinfo with Info output")
+	  ("BibTeX" "bibtex %s" TeX-run-BibTeX nil t :help "Run BibTeX")
+	  ("Biber" "biber %s" TeX-run-Biber nil t :help "Run Biber")
+	  ("View" "%V" TeX-run-discard-or-function t t :help "Run Viewer")
+	  ("Clean" "TeX-clean" TeX-run-function nil t :help "Delete generated intermediate files")
+	  ("Clean All" "(TeX-clean t)" TeX-run-function nil t :help "Delete generated intermediate and output files")
+	  ("Other" "" TeX-run-command t t :help "Run an arbitrary command")))
+
+  :bind (:map LaTeX-mode-map
+	      ;; Compile -> 'a' for ask, change to anything you want.
+	      ("C-c C-a" . (lambda (arg) (interactive "P")
+			     (let ((TeX-command-force nil)) (TeX-command-master arg))))
+	      ;; Shortcuts for reftex
+	      ("C-M-r" . reftex-reference)
+	      ("C-M-c" . reftex-citation)
+	      ("M-S-<down>" . reftex-toc)
+	      )
+  )
+
+(defun tb-latex-common-hook ()
+  "Add some latex macro keys"
   (interactive)
-  ;(start-process "terminal" "*scratch*" "/usr/bin/urxvt")
-  (if
-      ;; if buffer is under tramp
-      (file-remote-p default-directory)
-      (shell)
-    (start-process "terminal" nil "/usr/bin/urxvt")
-    )
+  (turn-on-reftex)
+  (visual-line-mode 1)
+  ;; show frames in section list -> very useful for beamer presentations
+  (setq reftex-section-levels
+        (cons '("begin{frame}" . 3) reftex-section-levels))
+
+  ;; auto folding of tikzpicture and algorithm environments in tex files
+  (TeX-fold-mode 0)
+  (add-hook 'find-file-hook 'TeX-fold-buffer t)
 )
-(define-key my-keymap-mode-map [f4] 'my-terminal)
 
-;; C-\\ -> iedit mode
-(define-key my-keymap-mode-map (kbd "C-\\") 'iedit-mode)
+(add-hook 'TeX-mode-hook 'tb-latex-common-hook)
+(add-hook 'LaTeX-mode-hook 'tb-latex-common-hook)
 
-;; globally activate keymap
-(define-globalized-minor-mode
-  global-my-keymap-mode my-keymap-mode turn-on-my-keymap-mode)
+;; Major mode for editing comma/char separated values.
+(use-package csv-mode
+  :defer t)
 
-(global-my-keymap-mode)
+;; Major mode for editing Docker's Dockerfiles.
+(use-package dockerfile-mode
+   :defer t)
 
-;; Turn off the minor mode in the minibuffer
-(add-hook 'minibuffer-setup-hook 'turn-off-my-keymap-mode)
+;; Major mode for Markdown-formatted text.
+(use-package markdown-mode
+  :mode ("\\.md\\'" . markdown-mode)
+  :hook (markdown-mode . (lambda ()
+			   (visual-line-mode 1)
+			   (flyspell-mode)
+			   (set-variable 'fill-column 100000)
+			   ))
+  )
+
+;; major mode for editing nginx config files.
+(use-package nginx-mode
+   :defer t)
+
+;; Outline-based notes management and organizer.
+(use-package org)
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-unset-key [(meta shift up)])
+            (local-unset-key [(meta shift down)])
+            (local-set-key [(control shift up)] 'org-move-subtree-up)
+            (local-set-key [(control shift down)] 'org-move-subtree-down)
+            (local-set-key [(control shift left)] 'org-promote-subtree)
+            (local-set-key [(control shift right)] 'org-demote-subtree)
+            (local-set-key [(control return)] 'org-insert-subheading)
+            (local-set-key [(meta control return)] 'org-time-stamp)
+            (local-set-key [f5] 'org-html-export-to-html)
+            (local-set-key [f6] 'org-latex-export-to-pdf)
+            ))
+
+;; Minor mode for interacting with Pandoc
+(use-package pandoc-mode :defer t)
+
+;; Major mode for editing YAML files.
+(use-package yaml-mode)
+
+;; -----------------------------------------------------------------------------
+;; --- Programming Modes
+;; -----------------------------------------------------------------------------
+
+(use-package arduino-mode :defer t)
+(use-package basic-mode :defer t)
+(use-package bison-mode :defer t)
+(use-package cmake-mode :defer t)
+(use-package coffee-mode :defer t)
+(use-package csharp-mode :defer t)
+(use-package groovy-mode
+  :defer t
+  :bind (:map groovy-mode-map
+	      ("C-c C-s" . my-ag-grep)))
+(use-package haskell-mode :defer t)
+(use-package lua-mode :defer t)
+(use-package php-mode :defer t)
+(use-package protobuf-mode :defer t)
+(use-package python-mode :defer t)
+(use-package qml-mode :defer t)
+(use-package scala-mode :defer t)
+
+;; Hook for all c-like programming modes.
+(defun tb-c-common-hook ()
+
+  ;; flyspell mode for comments
+  (flyspell-prog-mode)
+
+  ;; org-table mode support for comments
+  ;(orgtbl-mode)
+
+  ;; Enable language server ui.
+  (lsp)
+
+  ;; Enable Projectile.
+  (projectile-mode)
+
+  )
+
+(add-hook 'c-mode-common-hook 'tb-c-common-hook)
+
+(use-package cc-mode
+  :bind (:map c++-mode-map
+	      ("C-c C-s" . my-ag-grep)
+	      ("<f3>" . projectile-find-other-file))
+  )
+
+;; special web site scripts
+(add-to-list 'auto-mode-alist '("\\.htt\\'" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.blog\\'" . html-mode))
+
+;; -----------------------------------------------------------------------------
+;; --- Utility Packages
+;; -----------------------------------------------------------------------------
+
+;; Magit Git frontend.
+(use-package magit
+  :init
+  (setq magit-diff-arguments '("--ignore-all-space")
+	magit-log-arguments '("--graph" "--color" "--decorate" "-n100")
+	magit-no-confirm '(stage-all-changes unstage-all-changes amend-published)
+	magit-pull-arguments nil
+	magit-refs-show-commit-count 'all
+	magit-status-buffer-switch-function 'switch-to-buffer
+   )
+  :bind (("<C-f12>" . magit-status)
+	 ("<S-f12>" . magit-blame-addition)
+	 ("<M-f12>" . magit-log-buffer-file)))
+
+;; Git-Commit-Mode: flyspell
+(add-hook 'git-commit-mode-hook 'turn-on-flyspell)
+
+(use-package lsp-mode
+  :init
+  (setq lsp-enable-symbol-highlighting t
+	lsp-headerline-breadcrumb-enable nil
+	lsp-diagnostics-provider :none
+   )
+  )
+
+(use-package lsp-ui
+  )
+
+(use-package lsp-java
+  )
+
+(use-package projectile
+  )
 
 ;; modify ibuffer keymap: mouse click opens a file
 (defun my-ibuffer-keys ()
@@ -1337,45 +845,30 @@
 
 (add-hook 'ibuffer-hook 'my-ibuffer-keys)
 
-;; -----------------------------------------------------------------------------
-;; --- Less Latency with Tramp
-;; -----------------------------------------------------------------------------
-
-(defvar disable-tramp-backups '(all))
-
-;; (eval-after-load "tramp"
-;;   '(progn
-;;      (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
-;;      ;; Modified from https://www.gnu.org/software/emacs/manual/html_node/tramp/Auto_002dsave-and-Backup.html
-;;      (setq backup-enable-predicate
-;;            (lambda (name)
-;;              (and (normal-backup-enable-predicate name)
-;;                   ;; Disable all tramp backups
-;;                   (and disable-tramp-backups
-;;                        (member 'all disable-tramp-backups)
-;;                        (not (file-remote-p name 'method)))
-;;                   (not ;; disable backup for tramp with the listed methods
-;;                    (let ((method (file-remote-p name 'method)))
-;;                      (when (stringp method)
-;;                        (member method disable-tramp-backups)))))))
-
-;;      (defun tramp-set-auto-save--check (original)
-;;        (if (funcall backup-enable-predicate (buffer-file-name))
-;;            (funcall original)
-;;          (auto-save-mode -1)))
-
-;;      (advice-add 'tramp-set-auto-save :around #'tramp-set-auto-save--check)
-
-;;      ;; Use my ~/.ssh/config control master settings according to https://puppet.com/blog/speed-up-ssh-by-reusing-connections
-;;      (setq tramp-ssh-controlmaster-options "")))
-
-(setq remote-file-name-inhibit-cache nil)
-(setq vc-ignore-dir-regexp
-      (format "%s\\|%s" vc-ignore-dir-regexp tramp-file-name-regexp))
+;(package-autoremove)
 
 ;; -----------------------------------------------------------------------------
+;; --- reftex customizations
+;; -----------------------------------------------------------------------------
 
-(defun replace-in-string (what with in)
-  (replace-regexp-in-string (regexp-quote what) with in nil 'literal))
+;; disable query for \ref or \pageref style
+(setq reftex-ref-macro-prompt nil)
 
+;; additional label styles
+(setq reftex-label-alist
+      '(
+        ("theorem"   ?t "thm:" "~\\ref{%s}" t   ("theorem"   "th.") -2)
+        ("lemma"     ?t "lem:" "~\\ref{%s}" t   ("lemma"     "lem") -2)
+        ("algorithm" ?a "alg:" "~\\ref{%s}" t   ("algorithm" "alg") -2)
+        ))
+
+;; -----------------------------------------------------------------------------
+;; --- Make eshell Usable
+;; -----------------------------------------------------------------------------
+
+(define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
+(define-key comint-mode-map (kbd "<down>") 'comint-next-input)
+
+;; -----------------------------------------------------------------------------
+;; --- The end.
 ;; -----------------------------------------------------------------------------

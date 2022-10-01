@@ -1,3 +1,0 @@
-(:name processing-mode
-       :type github
-       :pkgname "ptrv/processing2-emacs")
