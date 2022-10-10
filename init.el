@@ -7,8 +7,9 @@
  '(bibtex-maintain-sorted-entries 'crossref)
  '(c-basic-offset 4)
  '(c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "k&r")))
- '(c-offsets-alist '((inline-open . 0) (innamespace . +)))
+ '(c-offsets-alist '((inline-open . +) (innamespace . +)))
  '(c-tab-always-indent nil)
+ '(css-indent-offset 2)
  '(custom-safe-themes
    '("115d42fa02a5ce6a759e38b27304e833d57a48422c2408d5455f14450eb96554" default))
  '(ediff-autostore-merges t)
@@ -32,10 +33,8 @@
  '(org-time-clocksum-format
    '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
  '(package-selected-packages
-   '(org auto-package-update bnf-mode latex latex-mode html-mode lsp-java projectile haskell-mode coffee-mode basic-mode csv-mode auctex lsp-ui lsp-mode magit scala-mode qml-mode python-mode protobuf-mode php-mode lua-mode groovy-mode csharp-mode cmake-mode bison-mode arduino-mode apache-mode yaml-mode pandoc-mode nginx-mode markdown-mode dockerfile-mode dired-copy-paste dired+ yasnippet ws-butler smooth-scrolling smex rainbow-delimiters iedit goto-last-change diminish bm ag leuven-theme grandshell-theme quelpa-use-package))
- '(safe-local-variable-values
-   '((magit-commit-arguments "--author" "John SJ Anderson <john@working.works>")
-     (magit-commit-arguments "--author=John SJ Anderson <john@working.works>"))))
+   '(web-beautify org auto-package-update bnf-mode latex latex-mode html-mode lsp-java projectile haskell-mode coffee-mode basic-mode csv-mode auctex lsp-ui lsp-mode magit scala-mode qml-mode python-mode protobuf-mode php-mode lua-mode groovy-mode csharp-mode cmake-mode bison-mode arduino-mode apache-mode yaml-mode pandoc-mode nginx-mode markdown-mode dockerfile-mode dired-copy-paste dired+ yasnippet ws-butler smooth-scrolling smex rainbow-delimiters iedit goto-last-change diminish bm ag leuven-theme grandshell-theme quelpa-use-package))
+ )
 
 ;; -----------------------------------------------------------------------------
 ;; --- Start emacs server
@@ -815,7 +814,13 @@
    )
   :bind (("<C-f12>" . magit-status)
 	 ("<S-f12>" . magit-blame-addition)
-	 ("<M-f12>" . magit-log-buffer-file)))
+	 ("<M-f12>" . magit-log-buffer-file))
+  )
+
+(add-hook 'magit-status-mode-hook
+          (lambda () (define-key magit-status-mode-map "\M-2"
+		       (lambda() (interactive) (make-frame))))
+	  )
 
 ;; Git-Commit-Mode: flyspell
 (add-hook 'git-commit-mode-hook 'turn-on-flyspell)
