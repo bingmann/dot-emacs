@@ -20,14 +20,6 @@
  '(auth-sources '("~/.gnus.d/authinfo" "~/.gnus.d/authinfo.gpg" "~/.netrc"))
  '(bibtex-entry-format
    '(opts-or-alts required-fields numerical-fields whitespace realign last-comma delimiters sort-fields))
- '(cperl-continued-brace-offset -4)
- '(cperl-continued-statement-offset 4)
- '(cperl-extra-newline-before-brace nil)
- '(cperl-extra-newline-before-brace-multiline nil)
- '(cperl-indent-level 4)
- '(cperl-indent-parens-as-block t)
- '(cperl-label-offset -4)
- '(cperl-merge-trailing-else nil)
  '(custom-safe-themes
    '("4ba6aa8a2776688ef7fbf3eb2b5addfd86d6e8516a701e69720b705d0fbe7f08" default))
  '(doc-view-continuous t)

@@ -9,12 +9,21 @@
  '(c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "k&r")))
  '(c-offsets-alist '((inline-open . +) (innamespace . +)))
  '(c-tab-always-indent nil)
+ '(cperl-continued-brace-offset -4)
+ '(cperl-continued-statement-offset 4)
+ '(cperl-extra-newline-before-brace nil)
+ '(cperl-extra-newline-before-brace-multiline nil)
+ '(cperl-indent-level 4)
+ '(cperl-indent-parens-as-block t)
+ '(cperl-label-offset -4)
+ '(cperl-merge-trailing-else nil)
  '(css-indent-offset 2)
  '(custom-safe-themes
    '("115d42fa02a5ce6a759e38b27304e833d57a48422c2408d5455f14450eb96554" default))
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(flyspell-issue-welcome-flag nil)
+ '(indent-tabs-mode nil)
  '(js-indent-level 2)
  '(org-confirm-shell-link-function nil)
  '(org-export-allow-bind-keywords t)
@@ -33,8 +42,7 @@
  '(org-time-clocksum-format
    '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
  '(package-selected-packages
-   '(web-beautify org auto-package-update bnf-mode latex latex-mode html-mode lsp-java projectile haskell-mode coffee-mode basic-mode csv-mode auctex lsp-ui lsp-mode magit scala-mode qml-mode python-mode protobuf-mode php-mode lua-mode groovy-mode csharp-mode cmake-mode bison-mode arduino-mode apache-mode yaml-mode pandoc-mode nginx-mode markdown-mode dockerfile-mode dired-copy-paste dired+ yasnippet ws-butler smooth-scrolling smex rainbow-delimiters iedit goto-last-change diminish bm ag leuven-theme grandshell-theme quelpa-use-package))
- )
+   '(projectile lsp-java lsp-ui lsp-mode magit flycheck scala-mode qml-mode python-mode protobuf-mode php-mode lua-mode haskell-mode groovy-mode csharp-mode coffee-mode cmake-mode bison-mode basic-mode arduino-mode yaml-mode web-beautify pandoc-mode nginx-mode markdown-mode dockerfile-mode csv-mode auctex apache-mode dired-copy-paste dired+ yasnippet ws-butler smooth-scrolling smex rainbow-delimiters iedit goto-last-change diminish bm ag leuven-theme grandshell-theme quelpa-use-package quelpa use-package)))
 
 ;; -----------------------------------------------------------------------------
 ;; --- Start emacs server
@@ -166,7 +174,7 @@
 (setq truncate-lines t)
 
 ;; Use spaces instead of tabs.
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Disable blinking cursor.
 (setq blink-cursor-mode nil)
@@ -744,6 +752,9 @@
 ;; Minor mode for interacting with Pandoc
 (use-package pandoc-mode :defer t)
 
+;; Tool to beautify HTML, JS, and CSS files.
+(use-package web-beautify)
+
 ;; Major mode for editing YAML files.
 (use-package yaml-mode)
 
@@ -801,6 +812,9 @@
 ;; -----------------------------------------------------------------------------
 ;; --- Utility Packages
 ;; -----------------------------------------------------------------------------
+
+(use-package flycheck
+  )
 
 ;; Magit Git frontend.
 (use-package magit
