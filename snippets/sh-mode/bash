@@ -3,6 +3,6 @@
 # key: bash
 # binding: direct-keybinding
 # --
-#!/bin/bash -x
+#!/usr/bin/env bash
 
-set -e
+set -xe

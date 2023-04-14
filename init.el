@@ -5,6 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(bibtex-comma-after-last-field t)
  '(bibtex-maintain-sorted-entries 'crossref)
+ '(buffer-env-safe-files
+   '(("/home/tb/test/.envrc" . "5aa3cd865fb13cb88c1d749614b53120a92d16a922fe89a3009b0552097926a0")))
  '(c-basic-offset 4)
  '(c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "k&r")))
  '(c-offsets-alist '((inline-open . +) (innamespace . +)))
@@ -22,9 +24,11 @@
    '("115d42fa02a5ce6a759e38b27304e833d57a48422c2408d5455f14450eb96554" default))
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ '(fill-column 90)
  '(flyspell-issue-welcome-flag nil)
  '(indent-tabs-mode nil)
  '(js-indent-level 2)
+ '(magit-diff-refine-hunk 'all)
  '(org-confirm-shell-link-function nil)
  '(org-export-allow-bind-keywords t)
  '(org-export-backends '(ascii html latex md))
@@ -42,7 +46,8 @@
  '(org-time-clocksum-format
    '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
  '(package-selected-packages
-   '(projectile lsp-java lsp-ui lsp-mode magit flycheck scala-mode qml-mode python-mode protobuf-mode php-mode lua-mode haskell-mode groovy-mode csharp-mode coffee-mode cmake-mode bison-mode basic-mode arduino-mode yaml-mode web-beautify pandoc-mode nginx-mode markdown-mode dockerfile-mode csv-mode auctex apache-mode dired-copy-paste dired+ yasnippet ws-butler smooth-scrolling smex rainbow-delimiters iedit goto-last-change diminish bm ag leuven-theme grandshell-theme quelpa-use-package quelpa use-package)))
+   '(projectile smartparens company eglot swift-mode direnv forge magit flycheck scala-mode qml-mode python-mode protobuf-mode php-mode nix-mode lua-mode jinja2-mode haskell-mode groovy-mode csharp-mode coffee-mode cmake-mode bison-mode basic-mode arduino-mode yaml-mode web-beautify pandoc-mode nginx-mode markdown-mode dockerfile-mode csv-mode auctex apache-mode dired-copy-paste dired+ yasnippet ws-butler smooth-scrolling smex rainbow-delimiters iedit goto-last-change diminish bm ag leuven-theme grandshell-theme quelpa-use-package))
+ '(sh-indent-after-continuation 'always))
 
 ;; -----------------------------------------------------------------------------
 ;; --- Start emacs server
@@ -57,7 +62,7 @@
 (require 'package)
 
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
 ;(package-refresh-contents)
@@ -116,7 +121,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(TeX-fold-unfolded-face ((t (:background "#151823"))))
+ '(diff-refine-added ((t (:foreground "medium spring green" :background "#003300" :inherit magit-diff-added-highlight))))
+ '(diff-refine-removed ((t (:foreground "#ffbbbb" :background "#330000" :inherit magit-diff-removed-highlight))))
  '(diredp-omit-file-name ((t (:inherit diredp-ignored-file-name :strike-through nil))))
+ '(eglot-highlight-symbol-face ((t (:background "#502500" :inherit bold))))
  '(font-lock-function-name-face ((t (:foreground "turquoise"))))
  '(font-lock-keyword-face ((t (:foreground "SteelBlue1"))))
  '(font-lock-type-face ((t (:foreground "SeaGreen1"))))
@@ -168,7 +176,7 @@
 (setq inhibit-startup-screen t)
 
 ;; Change fill column.
-(setq fill-column 80)
+(setq fill-column 90)
 
 ;; Enable truncate lines mode.
 (setq truncate-lines t)
@@ -307,7 +315,7 @@
       ;; if buffer is under tramp
       (file-remote-p default-directory)
       (shell)
-    (start-process "terminal" nil "/usr/bin/urxvt")
+    (start-process "terminal" nil "urxvt")
     )
 )
 (global-set-key [f4] 'my-terminal)
@@ -368,7 +376,7 @@
 ;; --- set up hunspell for flyspell-mode ---
 ;; -----------------------------------------------------------------------------
 
-(setq ispell-program-name "/usr/bin/hunspell")
+(setq ispell-program-name "hunspell")
 
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist
@@ -773,7 +781,9 @@
   :bind (:map groovy-mode-map
 	      ("C-c C-s" . my-ag-grep)))
 (use-package haskell-mode :defer t)
+(use-package jinja2-mode :defer t)
 (use-package lua-mode :defer t)
+(use-package nix-mode :defer t)
 (use-package php-mode :defer t)
 (use-package protobuf-mode :defer t)
 (use-package python-mode :defer t)
@@ -782,6 +792,11 @@
 
 ;; Hook for all c-like programming modes.
 (defun tb-c-common-hook ()
+  ;; Enable Projectile.
+  (projectile-mode)
+
+  ;; Enable `direnv` environment switching.
+  (direnv-update-environment)
 
   ;; flyspell mode for comments
   (flyspell-prog-mode)
@@ -789,11 +804,10 @@
   ;; org-table mode support for comments
   ;(orgtbl-mode)
 
-  ;; Enable language server ui.
-  (lsp)
+  ;; Enable eglot.
+  (eglot-ensure)
 
-  ;; Enable Projectile.
-  (projectile-mode)
+
 
   )
 
@@ -836,22 +850,89 @@
 		       (lambda() (interactive) (make-frame))))
 	  )
 
+;; Magit Forge integration.
+(use-package forge
+  )
+
 ;; Git-Commit-Mode: flyspell
 (add-hook 'git-commit-mode-hook 'turn-on-flyspell)
 
-(use-package lsp-mode
-  :init
-  (setq lsp-enable-symbol-highlighting t
-	lsp-headerline-breadcrumb-enable nil
-	lsp-diagnostics-provider :none
-   )
+(use-package direnv
+  :config
+  (direnv-mode))
+
+(use-package company
+  :config
+  (global-company-mode)
   )
 
-(use-package lsp-ui
+; M-. or M-x xref-find-definitions finds the definition of the symbol at point and opens it in the current window
+; M-, or M-x xref-pop-marker-stack jumps back
+; M-? or M-x xref-find-references finds the references of the symbol at point
+
+(use-package eglot
+  :bind (:map eglot-mode-map
+              ("C-c e r" . eglot-rename)
+              ("S-<tab>" . company-complete))
   )
 
-(use-package lsp-java
-  )
+;; (use-package lsp-mode
+;;   :init
+;;   (setq lsp-enable-symbol-highlighting t
+;; 	lsp-headerline-breadcrumb-enable nil
+;; 	lsp-diagnostics-provider :none
+;;         )
+;;   :config
+;;   ;; Arguments given to clangd server. See https://emacs-lsp.github.io/lsp-mode/lsp-mode.html#lsp-clangd
+;;   (setq lsp-clients-clangd-args
+;;         '(
+;;           ;; If set to true, code completion will include index symbols that are not defined in the scopes
+;;           ;; (e.g. namespaces) visible from the code completion point. Such completions can insert scope qualifiers
+;;           "--all-scopes-completion"
+;;           ;; Index project code in the background and persist index on disk.
+;;           "--background-index"
+;;           ;; Enable clang-tidy diagnostics
+;;           "--clang-tidy"
+;;           ;; Whether the clang-parser is used for code-completion
+;;           ;;   Use text-based completion if the parser is not ready (auto)
+;;           "--completion-parse=auto"
+;;           ;; Granularity of code completion suggestions
+;;           ;;   One completion item for each semantically distinct completion, with full type information (detailed)
+;;           "--completion-style=detailed"
+;;           ;; clang-format style to apply by default when no .clang-format file is found
+;;           "--fallback-style=Chromium"
+;;           ;; When disabled, completions contain only parentheses for function calls.
+;;           ;; When enabled, completions also contain placeholders for method parameters
+;;           "--function-arg-placeholders"
+;;           ;; Add #include directives when accepting code completions
+;;           ;;   Include what you use. Insert the owning header for top-level symbols, unless the
+;;           ;;   header is already directly included or the symbol is forward-declared
+;;           "--header-insertion=iwyu"
+;;           ;; Prepend a circular dot or space before the completion label, depending on whether an include line will be inserted or not
+;;           "--header-insertion-decorators"
+;;           ;; Enable index-based features. By default, clangd maintains an index built from symbols in opened files.
+;;           ;; Global index support needs to enabled separatedly
+;;           "--index"
+;;           ;; Attempts to fix diagnostic errors caused by missing includes using index
+;;           "--suggest-missing-includes"
+;;           ;; Number of async workers used by clangd. Background index also uses this many workers.
+;;           "-j=4"
+;;           ))
+;;   :hook
+;;   (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+;;    (c++-mode . lsp)
+;;    (python-mode . lsp)
+;;    ;; if you want which-key integration
+;;    (lsp-mode . lsp-enable-which-key-integration)
+;;    )
+;;   :commands lsp
+;;   )
+
+;; (use-package lsp-ui
+;;   )
+
+;; (use-package lsp-java
+;;   )
 
 (use-package projectile
   )

@@ -3,4 +3,5 @@
 # key: cc
 # binding: direct-keybinding
 # --
-/** @brief $1 */
+/** $1
+ */
