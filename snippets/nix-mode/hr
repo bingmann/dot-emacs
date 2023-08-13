@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: hr
+# key: hr
+# --
+`(make-string (- 80 (current-column)) ?#)`

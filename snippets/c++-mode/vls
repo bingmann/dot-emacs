@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: vls
+# key: vls
+# --
+std::string_view Get$1() const
+{
+    return GetVLS($1, *this);
+}

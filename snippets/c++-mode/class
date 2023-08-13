@@ -9,5 +9,5 @@ public:
     $1()
         : { }
 
-protected:
+private:
 };

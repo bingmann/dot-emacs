@@ -4,4 +4,4 @@
 # binding: direct-keybinding
 # --
 //! Returns ${1:name}_
-${2:type} $1() const { return $1_; }
+${2:type} $1() const { return m_$1; }

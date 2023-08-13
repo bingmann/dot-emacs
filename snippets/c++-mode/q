@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: q
+# key: q
+# --
+db::Query q = cmd.db_.query << "SELECT $1"
+                            << into(...);
+
+while (q.next())
+{
+}
