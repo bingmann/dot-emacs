@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: operator==
+# key: op==
+# --
+friend bool operator == (const ${1:type}& a, const $1& b)
+{
+         return $0;
+}

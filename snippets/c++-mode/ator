@@ -2,4 +2,4 @@
 # name: ator
 # key: ator
 # --
-const auto ator = xplat::get_default_resource();
+const xplat::polymorphic_allocator<> alloc;
