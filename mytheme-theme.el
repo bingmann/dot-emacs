@@ -146,14 +146,14 @@
  `(cperl-hash-face ((t (:foreground "orange" :slant italic :weight bold))))
 
 
-   `(highlight ((t (:inverse-video nil :background "#222299"))))
+   `(highlight ((t (:inverse-video unspecified :background "#222299"))))
    `(match ((t (:foreground ,blue :background ,background :inverse-video t))))
    `(lazy-highlight ((t (:foreground ,cyan :background ,background :inverse-video t))))
-   `(trailing-whitespace ((t (:background ,red :underline nil))))
+   `(trailing-whitespace ((t (:background ,red :underline unspecified))))
 
-   `(which-func ((t (:foreground ,blue :background nil :weight bold))))
+   `(which-func ((t (:foreground ,blue :background unspecified :weight bold))))
 
-   `(header-line ((t (:inherit mode-line :foreground ,magenta :background nil))))
+   `(header-line ((t (:inherit mode-line :foreground ,magenta :background unspecified))))
    `(widget-button ((t (:underline t))))
    `(widget-field ((t (:background ,alt-background :box (:line-width 1 :color ,normal)))))
 
@@ -161,7 +161,7 @@
    `(warning ((t (:foreground ,orange))))
    `(error ((t (:foreground ,red))))
 
-   `(show-paren-match ((t (:foreground "#FFE200" :background nil :slant italic :weight bold))))
+   `(show-paren-match ((t (:foreground "#FFE200" :background unspecified :slant italic :weight bold))))
    `(show-paren-mismatch ((t (:background ,background :inherit font-lock-warning-face :inverse-video t))))
 
    `(custom-variable-tag ((t (:foreground ,blue))))
@@ -175,8 +175,8 @@
    `(diff-added ((t (:foreground ,green))))
    `(diff-changed ((t (:foreground ,violet))))
    `(diff-removed ((t (:foreground ,orange))))
-   `(diff-header ((t (:foreground ,cyan :background nil))))
-   `(diff-file-header ((t (:foreground ,blue :background nil))))
+   `(diff-header ((t (:foreground ,cyan :background unspecified))))
+   `(diff-file-header ((t (:foreground ,blue :background unspecified))))
    `(diff-hunk-header ((t (:foreground ,magenta))))
    `(diff-refine-removed ((t (:inherit magit-diff-removed-highlight :foreground ,red-brightest))))
    `(diff-refine-added ((t (:inherit magit-diff-added-highlight :foreground ,blue-bright))))
@@ -219,8 +219,8 @@
 ;;  '(trailing-whitespace ((t (:background "red1")))))
 
 ;;  '(diff-added ((t (:inherit diff-changed :foreground "#33ff33"))))
-;;  '(diff-changed ((t nil)) t)
-;;  '(diff-changed-face ((t nil)) t)
+;;  '(diff-changed ((t unspecified)) t)
+;;  '(diff-changed-face ((t unspecified)) t)
 ;;  '(diff-removed ((t (:inherit diff-changed :foreground "#ff3333"))))
 ;;  '(diff-removed-face ((t (:inherit diff-changed :background "#553333"))) t)
 
@@ -229,7 +229,7 @@
 
 
 ;;    ;; magit `next'
-;;    `(magit-section ((,class (:inherit nil :weight bold))))
+;;    `(magit-section ((,class (:inherit unspecified :weight bold))))
 ;;    `(magit-section-highlight ((,class (:foreground ,bright))))
 ;;    `(magit-section-heading ((,class (:foreground ,blue-bright))))
 ;;    `(magit-branch-local ((,class (:foreground ,turquoise))))
