@@ -44,7 +44,7 @@
   "Transaction indent."
   :type 'integer)
 
-(defcustom beancount-number-alignment-column 52
+(defcustom beancount-number-alignment-column 55
   "Column to which align numbers in posting definitions. Set to
 0 to automatically determine the minimum column that will allow
 to align all amounts."
@@ -87,7 +87,7 @@ from the open directive for the relevant account."
   "Face for Beancount account names.")
 
 (defface beancount-amount
-  '((t :inherit font-lock-default-face))
+  '((t :inherit font-lock-type-face))
   "Face for Beancount amounts.")
 
 (defface beancount-narrative
@@ -103,8 +103,12 @@ from the open directive for the relevant account."
   "Face for Beancount pending transactions narrative.")
 
 (defface beancount-metadata
-  '((t :inherit font-lock-type-face))
+  '((t :inherit font-lock-comment-face))
   "Face for Beancount metadata.")
+
+(defface beancount-memo
+  '((t :inherit font-lock-comment-face))
+  "Face for Beancount transaction memos.")
 
 (defface beancount-highlight
   '((t :inherit highlight))
@@ -173,11 +177,11 @@ from the open directive for the relevant account."
   "Directive names that can appear at the beginning of a line.")
 
 (defconst beancount-account-categories
-  '("Assets" "Liabilities" "Equity" "Income" "Expenses"))
+  '("Assets" "Liabilities" "Equity" "Income" "Expenses" "Transfer" "PTO"))
 
 (defconst beancount-tag-chars "[:alnum:]-_/.")
 
-(defconst beancount-account-chars "[:alnum:]-_:/")
+(defconst beancount-account-chars "[:alnum:]-_/\\.")
 
 (defconst beancount-option-names
   ;; This list is kept in sync with the options defined in
@@ -208,12 +212,12 @@ from the open directive for the relevant account."
     "render_commas"
     "title"))
 
-(defconst beancount-date-regexp "[0-9]\\{4\\}[-/][0-9]\\{2\\}[-/][0-9]\\{2\\}"
+(defconst beancount-date-regexp "[0-9]\\{4\\}[-][0-9]\\{2\\}[-][0-9]\\{2\\}\\(?: [0-9]\\{2\\}[:][0-9]\\{2\\}[:][0-9]\\{2\\} [A-Z]+\\)?"
   "A regular expression to match dates.")
 
 (defconst beancount-account-regexp
   (concat (regexp-opt beancount-account-categories)
-          "\\(?::[[:upper:]][[:alnum:]-_]+\\)+")
+          "\\(?:/[[:alnum:]][[:alnum:]-_\\.]*\\)*")
   "A regular expression to match account names.")
 
 (defconst beancount-number-regexp "[-+]?[0-9]+\\(?:,[0-9]\\{3\\}\\)*\\(?:\\.[0-9]*\\)?"
@@ -227,24 +231,36 @@ from the open directive for the relevant account."
   "[^ a-z]")
 
 (defconst beancount-transaction-regexp
-  (concat "^\\(" beancount-date-regexp "\\) +"
-          "\\(?:txn +\\)?"
-          "\\(" beancount-flag-regexp "\\) +"
-          "\\(\".*\"\\)"))
+  (concat "^\\(" beancount-date-regexp "\\)\n"))
+
+(defconst beancount-memo-regexp
+  (concat "\\(---\n\\)"))
+
+;; (defconst beancount-transaction-regexp
+;;   (concat "^\\(" beancount-date-regexp "\\) +"
+;;           "\\(?:txn +\\)?"
+;;           "\\(" beancount-flag-regexp "\\) +"
+;;           "\\(\".*\"\\)"))
 
 (defconst beancount-posting-regexp
   (concat "^\\s-+"
           "\\(" beancount-account-regexp "\\)"
-          "\\(?:\\s-+\\(\\(" beancount-number-regexp "\\)"
-          "\\s-+\\(" beancount-currency-regexp "\\)\\)\\)?"))
+          "\\(?:\\s-+"
+            "\\("
+              "\\(" beancount-number-regexp "\\|auto\\)"
+              "\\s-+\\(" beancount-currency-regexp "\\)"
+            "\\)"
+          "\\)?"))
 
 (defconst beancount-balance-regexp
   ;; The grouping in this regular expression matches the one in
   ;; `beancount-posting-regexp' to be used in amount align
   ;; machinery. See `beancount-align-number'.
-  (concat "^" beancount-date-regexp "\\s-+balance\\s-+"
+  (concat "^\\(" beancount-date-regexp "\\)\\s-+"
+          "\\(balance\\)\\s-+"
           "\\(" beancount-account-regexp "\\)\\s-+"
-          "\\(\\(" beancount-number-regexp "\\)\\s-+\\(" beancount-currency-regexp "\\)\\)"))
+          "\\(\\(" beancount-number-regexp "\\)\\s-+"
+          "\\(" beancount-currency-regexp "\\)\\)"))
 
 (defconst beancount-directive-regexp
   (concat "^\\(" (regexp-opt beancount-directive-names) "\\) +"))
@@ -253,8 +269,11 @@ from the open directive for the relevant account."
   (concat "^\\(" beancount-date-regexp "\\) +"
           "\\(" (regexp-opt beancount-timestamped-directive-names) "\\) +"))
 
+;; (defconst beancount-metadata-regexp
+;;   "^\\s-+\\([a-z][A-Za-z0-9_-]+:\\)\\s-+\\(.+\\)")
+
 (defconst beancount-metadata-regexp
-  "^\\s-+\\([a-z][A-Za-z0-9_-]+:\\)\\s-+\\(.+\\)")
+  "^\\(\\(id\\|item\\|match\\|isin\\):\\)\\s-+\\(.+\\)")
 
 ;; This is a grouping regular expression because the subexpression is
 ;; used in determining the outline level in `beancount-outline-level'.
@@ -286,25 +305,33 @@ from the open directive for the relevant account."
     nil))
 
 (defvar beancount-font-lock-keywords
-  `((,beancount-transaction-regexp (1 'beancount-date)
-                                   (2 (beancount-face-by-state (match-string 2)) t)
-                                   (3 (beancount-face-by-state (match-string 2)) t))
+  `(
+    (,beancount-balance-regexp (1 'beancount-date)
+                               (2 'beancount-directive)
+                               (3 'beancount-account)
+                               (4 'beancount-amount nil :lax)
+                               )
+    (,beancount-transaction-regexp (1 'beancount-date)
+                                   ;(2 (beancount-face-by-state (match-string 2)) t)
+                                   ;(3 (beancount-face-by-state (match-string 2)) t)
+                                   )
     (,beancount-posting-regexp (1 'beancount-account)
                                (2 'beancount-amount nil :lax))
     (,beancount-metadata-regexp (1 'beancount-metadata)
                                 (2 'beancount-metadata t))
-    (,beancount-directive-regexp (1 'beancount-directive))
-    (,beancount-timestamped-directive-regexp (1 'beancount-date)
-                                             (2 'beancount-directive))
+    ;(,beancount-directive-regexp (1 'beancount-directive))
+    ;(,beancount-timestamped-directive-regexp (1 'beancount-date)
+    ;                                         (2 'beancount-directive))
+    (,beancount-memo-regexp (1 'beancount-memo))
     ;; Fontify section headers when composed with outline-minor-mode.
-    (,(concat "^\\(" beancount-outline-regexp "\\).*") (0 (beancount-outline-face)))
+    ;(,(concat "^\\(" beancount-outline-regexp "\\).*") (0 (beancount-outline-face)))
     ;; Tags and links.
-    (,(concat "\\#[" beancount-tag-chars "]*") . 'beancount-tag)
-    (,(concat "\\^[" beancount-tag-chars "]*") . 'beancount-link)
+    ;(,(concat "\\#[" beancount-tag-chars "]*") . 'beancount-tag)
+    ;(,(concat "\\^[" beancount-tag-chars "]*") . 'beancount-link)
     ;; Accounts not covered by previous rules.
-    (,beancount-account-regexp . 'beancount-account)
+    ;(,beancount-account-regexp . 'beancount-account)
     ;; Number followed by currency not covered by previous rules.
-    (,(concat beancount-number-regexp "\\s-+" beancount-currency-regexp) . 'beancount-amount)
+    ;(,(concat beancount-number-regexp "\\s-+" beancount-currency-regexp) . 'beancount-amount)
     ))
 
 (defun beancount-tab-dwim (&optional arg)
@@ -394,6 +421,7 @@ are reserved for the mode anyway.)")
 
   (setq-local font-lock-defaults '(beancount-font-lock-keywords))
   (setq-local font-lock-syntax-table t)
+  (setq-local font-lock-multiline t)
 
   (setq-local outline-regexp beancount-outline-regexp)
   (setq-local outline-level #'beancount-outline-level)
