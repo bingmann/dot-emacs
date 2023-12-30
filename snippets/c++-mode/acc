@@ -1,7 +1,5 @@
-# -*- mode: snippet; require-final-newline: nil -*-
-# name: acc
-# key: acc
-# binding: direct-keybinding
+# -*- mode: snippet -*-
+# name: ac
+# key: ac
 # --
-//! Returns ${1:name}_
-${2:type} $1() const { return m_$1; }
+*  @param[in] alloc Memory allocator to use.

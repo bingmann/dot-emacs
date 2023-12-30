@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: using_ator
+# key: using
+# --
+using allocator_type = xplat::polymorphic_allocator<>;

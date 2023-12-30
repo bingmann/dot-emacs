@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: alloc
+# key: alloc
+# --
+const xplat::polymorphic_allocator<> alloc;

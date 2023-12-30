@@ -1,8 +1,5 @@
 # -*- mode: snippet -*-
-# name: vls
-# key: vls
+# name: ls
+# key: ls
 # --
-std::string_view Get$1() const
-{
-    return GetVLS($1, *this);
-}
+common::allocate_local_shared
