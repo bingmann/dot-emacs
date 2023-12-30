@@ -5,8 +5,6 @@
  ;; If there is more than one, they won't work right.
  '(bibtex-comma-after-last-field t)
  '(bibtex-maintain-sorted-entries 'crossref)
- '(buffer-env-safe-files
-   '(("/home/tb/test/.envrc" . "5aa3cd865fb13cb88c1d749614b53120a92d16a922fe89a3009b0552097926a0")))
  '(c-basic-offset 4)
  '(c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "k&r")))
  '(c-offsets-alist '((inline-open . +) (innamespace . +)))
@@ -20,12 +18,11 @@
  '(cperl-label-offset -4)
  '(cperl-merge-trailing-else nil)
  '(css-indent-offset 2)
- '(custom-safe-themes
-   '("115d42fa02a5ce6a759e38b27304e833d57a48422c2408d5455f14450eb96554" default))
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
  '(fill-column 90)
  '(flyspell-issue-welcome-flag nil)
+ '(git-link-use-commit t)
  '(indent-tabs-mode nil)
  '(js-indent-level 2)
  '(magit-diff-refine-hunk 'all)
@@ -45,9 +42,9 @@
    "^\\([<>]?[-+^.,0-9]*[0-9][-+^.,0-9eEdDx()%:]*\\|[<>]?[-+]?0[xX][[:xdigit:].]+\\|[<>]?[-+]?[0-9]+#[0-9a-zA-Z.,]+\\|nan\\|[-+u]?inf\\)$")
  '(org-time-clocksum-format
    '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
- '(package-selected-packages
-   '(projectile smartparens company eglot swift-mode direnv forge magit flycheck scala-mode qml-mode python-mode protobuf-mode php-mode nix-mode lua-mode jinja2-mode haskell-mode groovy-mode csharp-mode coffee-mode cmake-mode bison-mode basic-mode arduino-mode yaml-mode web-beautify pandoc-mode nginx-mode markdown-mode dockerfile-mode csv-mode auctex apache-mode dired-copy-paste dired+ yasnippet ws-butler smooth-scrolling smex rainbow-delimiters iedit goto-last-change diminish bm ag leuven-theme grandshell-theme quelpa-use-package))
- '(sh-indent-after-continuation 'always))
+ '(sentence-end-double-space nil)
+ '(sh-indent-after-continuation 'always)
+ '(treesit-max-buffer-size 4194304000))
 
 ;; -----------------------------------------------------------------------------
 ;; --- Start emacs server
@@ -61,8 +58,9 @@
 
 (require 'package)
 
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(setq package-enable-at-startup nil)
 (package-initialize)
 
 ;(package-refresh-contents)
@@ -105,8 +103,8 @@
 ;(create-fontset-from-fontset-spec "-*-Terminus-medium-r-normal-*-16-*-*-*-m-*-fontset-Terminus")
 ;(create-fontset-from-fontset-spec "-zevv-peep-medium-r-normal--16-*-*-*-c-*-fontset-Zevv")
 
-(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
-(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+;(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+;(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
 
 (global-set-key (kbd "<mouse-6>") (lambda (event) (interactive "e")))
 (global-set-key (kbd "<mouse-7>") (lambda (event) (interactive "e")))
@@ -121,12 +119,16 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(TeX-fold-unfolded-face ((t (:background "#151823"))))
+ '(beancount-account ((t (:foreground "DeepSkyBlue1" :inherit font-lock-builtin-face))))
+ '(beancount-directive ((t (:foreground "violet red" :inherit font-lock-keyword-face))))
  '(diff-refine-added ((t (:foreground "medium spring green" :background "#003300" :inherit magit-diff-added-highlight))))
  '(diff-refine-removed ((t (:foreground "#ffbbbb" :background "#330000" :inherit magit-diff-removed-highlight))))
  '(diredp-omit-file-name ((t (:inherit diredp-ignored-file-name :strike-through nil))))
  '(eglot-highlight-symbol-face ((t (:background "#502500" :inherit bold))))
+ '(eglot-inlay-hint-face ((t (:height 0.8 :foreground "IndianRed4" :inherit shadow))))
  '(font-lock-function-name-face ((t (:foreground "turquoise"))))
  '(font-lock-keyword-face ((t (:foreground "SteelBlue1"))))
+ '(font-lock-string-face ((t (:foreground "salmon"))))
  '(font-lock-type-face ((t (:foreground "SeaGreen1"))))
  '(markdown-header-face-1 ((t (:inherit org-level-1))))
  '(markdown-header-face-2 ((t (:inherit org-level-2))))
@@ -135,16 +137,16 @@
  '(org-checkbox ((t (:inherit bold :background "DarkGoldenrod4"))))
  '(org-date ((t (:inherit nil :foreground "#d5b3f6"))))
  '(org-level-1 ((t (:foreground "navajo white" :box (:line-width 6 :color "black")))))
+ '(org-level-2 ((t (:extend nil :foreground "deep sky blue"))))
+ '(org-level-3 ((t (:extend nil :foreground "red3"))))
  '(org-todo ((t (:inherit nil :foreground "#f25a5a"))))
  '(underline ((t (:underline "dark gray")))))
 
-(use-package grandshell-theme)
-(use-package leuven-theme
-  :defer t)
-
-(load-theme 'grandshell t)
-;(load-theme 'green-phosphor t)
-(load-theme 'mytheme t)
+(add-hook 'after-init-hook
+          (lambda ()
+            (load-theme 'grandshell t)
+            (load-theme 'mytheme t)
+            ))
 
 (defun my-presentation-font ()
   "Set the default font to be BIG (for presentations)."
@@ -662,6 +664,30 @@
 	      ("C-y" . dired-copy-paste-do-paste))
   )
 
+;; Resize the whole frame, and not only a window
+;; Adapted from https://stackoverflow.com/a/24714383/5103881
+(defun acg/zoom-frame (&optional amt frame)
+  "Increaze FRAME font size by amount AMT. Defaults to selected
+frame if FRAME is nil, and to 1 if AMT is nil."
+  (interactive "p")
+  (let* ((frame (or frame (selected-frame)))
+         (font (face-attribute 'default :font frame))
+         (size (font-get font :size))
+         (amt (or amt 1))
+         (new-size (+ size amt)))
+    (set-frame-font (font-spec :size new-size) t `(,frame))
+    (message "Frame's font new size: %d" new-size)))
+
+(defun acg/zoom-frame-out (&optional amt frame)
+  "Call `acg/zoom-frame' with negative argument."
+  (interactive "p")
+  (acg/zoom-frame (- (or amt 1)) frame))
+
+(global-set-key (kbd "C-x C-=") 'acg/zoom-frame)
+(global-set-key (kbd "C-x C--") 'acg/zoom-frame-out)
+(global-set-key (kbd "<C-down-mouse-4>") 'acg/zoom-frame)
+(global-set-key (kbd "<C-down-mouse-5>") 'acg/zoom-frame-out)
+
 ;; -----------------------------------------------------------------------------
 ;; --- Text Modes
 ;; -----------------------------------------------------------------------------
@@ -793,7 +819,7 @@
 ;; Hook for all c-like programming modes.
 (defun tb-c-common-hook ()
   ;; Enable Projectile.
-  (projectile-mode)
+  ;(projectile-mode)
 
   ;; Enable `direnv` environment switching.
   (direnv-update-environment)
@@ -808,6 +834,7 @@
   (eglot-ensure)
 
 
+  (setq paragraph-start "^[  ]*\\(//+\\|\\**\\)[  ]*\\([  ]*$\\|@\\(param\\|return\\|throw\\)\\)\\|^\f")
 
   )
 
@@ -816,7 +843,8 @@
 (use-package cc-mode
   :bind (:map c++-mode-map
 	      ("C-c C-s" . my-ag-grep)
-	      ("<f3>" . projectile-find-other-file))
+	      ;;("<f3>" . projectile-find-other-file)
+              )
   )
 
 ;; special web site scripts
@@ -852,7 +880,10 @@
 
 ;; Magit Forge integration.
 (use-package forge
-  )
+  :config
+  (push '("github.corp.ebay.com" "github.corp.ebay.com/api/v3"
+          "github.corp.ebay.com" forge-github-repository)
+        forge-alist))
 
 ;; Git-Commit-Mode: flyspell
 (add-hook 'git-commit-mode-hook 'turn-on-flyspell)
@@ -866,6 +897,19 @@
   (global-company-mode)
   )
 
+;; Add yasnippet support for all company backends
+;; https://github.com/syl20bnr/spacemacs/pull/179
+(defvar company-mode/enable-yas t
+  "Enable yasnippet for all backends.")
+
+(defun company-mode/backend-with-yas (backend)
+  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
+
+(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
 ; M-. or M-x xref-find-definitions finds the definition of the symbol at point and opens it in the current window
 ; M-, or M-x xref-pop-marker-stack jumps back
 ; M-? or M-x xref-find-references finds the references of the symbol at point
@@ -876,66 +920,97 @@
               ("S-<tab>" . company-complete))
   )
 
-;; (use-package lsp-mode
-;;   :init
-;;   (setq lsp-enable-symbol-highlighting t
-;; 	lsp-headerline-breadcrumb-enable nil
-;; 	lsp-diagnostics-provider :none
-;;         )
-;;   :config
-;;   ;; Arguments given to clangd server. See https://emacs-lsp.github.io/lsp-mode/lsp-mode.html#lsp-clangd
-;;   (setq lsp-clients-clangd-args
-;;         '(
-;;           ;; If set to true, code completion will include index symbols that are not defined in the scopes
-;;           ;; (e.g. namespaces) visible from the code completion point. Such completions can insert scope qualifiers
-;;           "--all-scopes-completion"
-;;           ;; Index project code in the background and persist index on disk.
-;;           "--background-index"
-;;           ;; Enable clang-tidy diagnostics
-;;           "--clang-tidy"
-;;           ;; Whether the clang-parser is used for code-completion
-;;           ;;   Use text-based completion if the parser is not ready (auto)
-;;           "--completion-parse=auto"
-;;           ;; Granularity of code completion suggestions
-;;           ;;   One completion item for each semantically distinct completion, with full type information (detailed)
-;;           "--completion-style=detailed"
-;;           ;; clang-format style to apply by default when no .clang-format file is found
-;;           "--fallback-style=Chromium"
-;;           ;; When disabled, completions contain only parentheses for function calls.
-;;           ;; When enabled, completions also contain placeholders for method parameters
-;;           "--function-arg-placeholders"
-;;           ;; Add #include directives when accepting code completions
-;;           ;;   Include what you use. Insert the owning header for top-level symbols, unless the
-;;           ;;   header is already directly included or the symbol is forward-declared
-;;           "--header-insertion=iwyu"
-;;           ;; Prepend a circular dot or space before the completion label, depending on whether an include line will be inserted or not
-;;           "--header-insertion-decorators"
-;;           ;; Enable index-based features. By default, clangd maintains an index built from symbols in opened files.
-;;           ;; Global index support needs to enabled separatedly
-;;           "--index"
-;;           ;; Attempts to fix diagnostic errors caused by missing includes using index
-;;           "--suggest-missing-includes"
-;;           ;; Number of async workers used by clangd. Background index also uses this many workers.
-;;           "-j=4"
-;;           ))
-;;   :hook
-;;   (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-;;    (c++-mode . lsp)
-;;    (python-mode . lsp)
-;;    ;; if you want which-key integration
-;;    (lsp-mode . lsp-enable-which-key-integration)
-;;    )
-;;   :commands lsp
-;;   )
+(add-hook 'eglot-managed-mode-hook
+          (lambda ()
+            (eglot-inlay-hints-mode -1)
+            ))
+
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '((c-mode c++-mode)
+                 . ("clangd"
+                    "-j=8"
+                    "--log=error"
+                    "--malloc-trim"
+                    "--background-index"
+                    "--clang-tidy"
+                    "--cross-file-rename"
+                    "--completion-style=detailed"
+                    "--pch-storage=memory"
+                    "--header-insertion-decorators=0"))))
+
+(use-package lsp-mode
+  :init
+  (setq lsp-enable-symbol-highlighting t
+	lsp-headerline-breadcrumb-enable nil
+	lsp-diagnostics-provider :none
+        )
+  :config
+  ;; Arguments given to clangd server. See https://emacs-lsp.github.io/lsp-mode/lsp-mode.html#lsp-clangd
+  (setq lsp-clients-clangd-args
+        '(
+          ;; If set to true, code completion will include index symbols that are not defined in the scopes
+          ;; (e.g. namespaces) visible from the code completion point. Such completions can insert scope qualifiers
+          "--all-scopes-completion"
+          ;; Index project code in the background and persist index on disk.
+          "--background-index"
+          ;; Enable clang-tidy diagnostics
+          "--clang-tidy"
+          ;; Whether the clang-parser is used for code-completion
+          ;;   Use text-based completion if the parser is not ready (auto)
+          "--completion-parse=auto"
+          ;; Granularity of code completion suggestions
+          ;;   One completion item for each semantically distinct completion, with full type information (detailed)
+          "--completion-style=detailed"
+          ;; clang-format style to apply by default when no .clang-format file is found
+          "--fallback-style=Chromium"
+          ;; When disabled, completions contain only parentheses for function calls.
+          ;; When enabled, completions also contain placeholders for method parameters
+          "--function-arg-placeholders"
+          ;; Add #include directives when accepting code completions
+          ;;   Include what you use. Insert the owning header for top-level symbols, unless the
+          ;;   header is already directly included or the symbol is forward-declared
+          "--header-insertion=iwyu"
+          ;; Prepend a circular dot or space before the completion label, depending on whether an include line will be inserted or not
+          "--header-insertion-decorators"
+          ;; Enable index-based features. By default, clangd maintains an index built from symbols in opened files.
+          ;; Global index support needs to enabled separatedly
+          "--index"
+          ;; Attempts to fix diagnostic errors caused by missing includes using index
+          "--suggest-missing-includes"
+          ;; Number of async workers used by clangd. Background index also uses this many workers.
+          "-j=4"
+          ))
+  :hook
+  (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+   ;;(c++-mode . lsp)
+   ;;(python-mode . lsp)
+   (java-mode . lsp)
+   ;; if you want which-key integration
+   (lsp-mode . lsp-enable-which-key-integration)
+   )
+  :commands lsp
+  )
 
 ;; (use-package lsp-ui
 ;;   )
 
-;; (use-package lsp-java
+(use-package lsp-java
+  )
+
+;; (use-package projectile
 ;;   )
 
-(use-package projectile
-  )
+(use-package sourcepair
+  :quelpa (sourcepair
+           :fetcher url
+           :url "https://www.emacswiki.org/emacs/download/sourcepair.el")
+  :init
+  ;; Modify these paths as per your project structure.
+  (setq sourcepair-source-path '("." "../src/" "../source/" "../source/*" "../../source/"))
+  (setq sourcepair-header-path '("." "../hdr/" "../include/" "../include/*" "../../include/"))
+  :bind ("<f3>" . sourcepair-load)
+)
 
 ;; modify ibuffer keymap: mouse click opens a file
 (defun my-ibuffer-keys ()
@@ -969,6 +1044,84 @@
 (define-key comint-mode-map (kbd "<up>") 'comint-previous-input)
 (define-key comint-mode-map (kbd "<down>") 'comint-next-input)
 
+(define-generic-mode
+    'cassini-text-mode
+  '("//" "#")
+  '("false" "true" "container" "query")
+  '(("+" . 'font-lock-operator)
+    ("-" . 'font-lock-operator)
+    ("*" . 'font-lock-operator)
+    ("/" . 'font-lock-operator)
+    ("==" . 'font-lock-operator)
+    ("!=" . 'font-lock-operator)
+    ("<" . 'font-lock-operator)
+    (">" . 'font-lock-operator)
+    ("<=" . 'font-lock-operator)
+    (">=" . 'font-lock-operator)
+    (";" . 'font-lock-builtin)
+    ("[+-]?\\([0-9]*\\.[0-9]+\\|[0-9]+\\.[0-9]*\\)\\([eE][+-]?[0-9]+\\)?" . 'font-lock-constant-face)
+    ("\\b0x[0-9a-fA-F]+\\b" . 'font-lock-constant-face)
+    ("\\b[0-9]+\\b" . 'font-lock-constant-face)
+    ("\\b[A-Za-z_][A-Za-z0-9_]*:" . 'font-lock-variable-name-face)
+    ("\\b\\([A-Za-z_][A-Za-z0-9_]*\\)[:space:]*[({]" 1 'font-lock-function-name-face)
+    )
+  '("\\.cql\\.txt$"
+    "\\.cql$")
+  nil
+  "A mode for Cassini Text files"
+  )
+
+(require 'cassini_text-ts-mode)
+
+(require 'beancount)
+(add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
+(add-to-list 'auto-mode-alist '("\\.beans\\'" . beancount-mode))
+
 ;; -----------------------------------------------------------------------------
 ;; --- The end.
 ;; -----------------------------------------------------------------------------
+
+(setq treesit-language-source-alist
+      '(
+        ;; (bash "https://github.com/tree-sitter/tree-sitter-bash")
+        (cmake "https://github.com/uyha/tree-sitter-cmake")
+        (css "https://github.com/tree-sitter/tree-sitter-css")
+        ;; (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+        ;; (go "https://github.com/tree-sitter/tree-sitter-go")
+        ;; (html "https://github.com/tree-sitter/tree-sitter-html")
+        ;; (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+        (json "https://github.com/tree-sitter/tree-sitter-json")
+        ;; (make "https://github.com/alemuller/tree-sitter-make")
+        ;; (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (toml "https://github.com/tree-sitter/tree-sitter-toml")
+        ;; (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+        ;; (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+        (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+        (cassini_text "file:///home/tb/ebay/org_tbingmann/tree-sitter-cassini_text")
+        ))
+
+(setq major-mode-remap-alist
+      '(
+        (cmake-mode . cmake-ts-mode)
+        (css-mode . css-ts-mode)
+        (json-mode . json-ts-mode)
+        (python-mode . python-ts-mode)
+        (toml-mode . toml-ts-mode)
+        (yaml-mode . yaml-ts-mode)
+        ))
+
+(dolist (lang treesit-language-source-alist)
+  (unless (treesit-language-available-p (car lang))
+    (treesit-install-language-grammar (car lang))))
+
+(defun mp-remove-treesit-sexp-changes ()
+  (when (eq forward-sexp-function #'treesit-forward-sexp)
+    (setq forward-sexp-function nil))
+  ;; (when (eq transpose-sexps-function #'treesit-transpose-sexps)
+  ;;   (setq transpose-sexps-function #'transpose-sexps-default-function))
+  ;; (when (eq forward-sentence-function #'treesit-forward-sentence)
+  ;;   (setq forward-sentence-function #'forward-sentence-default-function))
+  )
+
+(add-hook 'prog-mode-hook #'mp-remove-treesit-sexp-changes)
