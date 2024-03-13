@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: python
+# key: python
+# --
+#!/usr/bin/env python3
