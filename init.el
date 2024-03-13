@@ -42,6 +42,8 @@
    "^\\([<>]?[-+^.,0-9]*[0-9][-+^.,0-9eEdDx()%:]*\\|[<>]?[-+]?0[xX][[:xdigit:].]+\\|[<>]?[-+]?[0-9]+#[0-9a-zA-Z.,]+\\|nan\\|[-+u]?inf\\)$")
  '(org-time-clocksum-format
    '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+ '(package-selected-packages
+   '(clang-format clang-format+ yasnippet yaml-mode ws-butler web-beautify smooth-scrolling smex scala-mode rainbow-delimiters quelpa-use-package qml-mode python-mode protobuf-mode php-mode pandoc-mode nix-mode nginx-mode lua-mode lsp-java leuven-theme js2-mode jinja2-mode iedit haskell-mode groovy-mode grandshell-theme goto-last-change git-link flycheck ellama eglot dockerfile-mode direnv diminish csv-mode csharp-mode company coffee-mode code-review cmake-mode bm bison-mode basic-mode auctex arduino-mode apache-mode ag sourcepair dired-copy-paste dired+))
  '(sentence-end-double-space nil)
  '(sh-indent-after-continuation 'always)
  '(treesit-max-buffer-size 4194304000))
@@ -121,6 +123,7 @@
  '(TeX-fold-unfolded-face ((t (:background "#151823"))))
  '(beancount-account ((t (:foreground "DeepSkyBlue1" :inherit font-lock-builtin-face))))
  '(beancount-directive ((t (:foreground "violet red" :inherit font-lock-keyword-face))))
+ '(compilation-warning ((t (:foreground "magenta" :inherit warning))))
  '(diff-refine-added ((t (:foreground "medium spring green" :background "#003300" :inherit magit-diff-added-highlight))))
  '(diff-refine-removed ((t (:foreground "#ffbbbb" :background "#330000" :inherit magit-diff-removed-highlight))))
  '(diredp-omit-file-name ((t (:inherit diredp-ignored-file-name :strike-through nil))))
@@ -833,7 +836,6 @@ frame if FRAME is nil, and to 1 if AMT is nil."
   ;; Enable eglot.
   (eglot-ensure)
 
-
   (setq paragraph-start "^[  ]*\\(//+\\|\\**\\)[  ]*\\([  ]*$\\|@\\(param\\|return\\|throw\\)\\)\\|^\f")
 
   )
@@ -936,8 +938,8 @@ frame if FRAME is nil, and to 1 if AMT is nil."
                     "--clang-tidy"
                     "--cross-file-rename"
                     "--completion-style=detailed"
-                    "--pch-storage=memory"
-                    "--header-insertion-decorators=0"))))
+                    "--suggest-missing-includes"
+                    "--pch-storage=memory"))))
 
 (use-package lsp-mode
   :init
@@ -1022,6 +1024,9 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 
 ;(package-autoremove)
 
+(use-package clang-format+
+  )
+
 ;; -----------------------------------------------------------------------------
 ;; --- reftex customizations
 ;; -----------------------------------------------------------------------------
@@ -1071,8 +1076,6 @@ frame if FRAME is nil, and to 1 if AMT is nil."
   "A mode for Cassini Text files"
   )
 
-(require 'cassini_text-ts-mode)
-
 (require 'beancount)
 (add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
 (add-to-list 'auto-mode-alist '("\\.beans\\'" . beancount-mode))
@@ -1080,48 +1083,3 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 ;; -----------------------------------------------------------------------------
 ;; --- The end.
 ;; -----------------------------------------------------------------------------
-
-(setq treesit-language-source-alist
-      '(
-        ;; (bash "https://github.com/tree-sitter/tree-sitter-bash")
-        (cmake "https://github.com/uyha/tree-sitter-cmake")
-        (css "https://github.com/tree-sitter/tree-sitter-css")
-        ;; (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-        ;; (go "https://github.com/tree-sitter/tree-sitter-go")
-        ;; (html "https://github.com/tree-sitter/tree-sitter-html")
-        ;; (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-        (json "https://github.com/tree-sitter/tree-sitter-json")
-        ;; (make "https://github.com/alemuller/tree-sitter-make")
-        ;; (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-        (python "https://github.com/tree-sitter/tree-sitter-python")
-        (toml "https://github.com/tree-sitter/tree-sitter-toml")
-        ;; (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-        ;; (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-        (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-        (cassini_text "file:///home/tb/ebay/org_tbingmann/tree-sitter-cassini_text")
-        ))
-
-(setq major-mode-remap-alist
-      '(
-        (cmake-mode . cmake-ts-mode)
-        (css-mode . css-ts-mode)
-        (json-mode . json-ts-mode)
-        (python-mode . python-ts-mode)
-        (toml-mode . toml-ts-mode)
-        (yaml-mode . yaml-ts-mode)
-        ))
-
-(dolist (lang treesit-language-source-alist)
-  (unless (treesit-language-available-p (car lang))
-    (treesit-install-language-grammar (car lang))))
-
-(defun mp-remove-treesit-sexp-changes ()
-  (when (eq forward-sexp-function #'treesit-forward-sexp)
-    (setq forward-sexp-function nil))
-  ;; (when (eq transpose-sexps-function #'treesit-transpose-sexps)
-  ;;   (setq transpose-sexps-function #'transpose-sexps-default-function))
-  ;; (when (eq forward-sentence-function #'treesit-forward-sentence)
-  ;;   (setq forward-sentence-function #'forward-sentence-default-function))
-  )
-
-(add-hook 'prog-mode-hook #'mp-remove-treesit-sexp-changes)
