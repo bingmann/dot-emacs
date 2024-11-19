@@ -273,7 +273,7 @@ from the open directive for the relevant account."
 ;;   "^\\s-+\\([a-z][A-Za-z0-9_-]+:\\)\\s-+\\(.+\\)")
 
 (defconst beancount-metadata-regexp
-  "^\\(\\(id\\|item\\|match\\|isin\\):\\)\\s-+\\(.+\\)")
+  "^\\(\\(id\\|item\\|match\\|refund_match\\|isin\\|group\\):\\)\\s-+\\(.+\\)")
 
 ;; This is a grouping regular expression because the subexpression is
 ;; used in determining the outline level in `beancount-outline-level'.
