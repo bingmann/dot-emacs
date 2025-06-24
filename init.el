@@ -20,6 +20,7 @@
  '(css-indent-offset 2)
  '(ediff-autostore-merges t)
  '(ediff-window-setup-function 'ediff-setup-windows-plain)
+ '(eglot-ignored-server-capabilities '(:documentOnTypeFormattingProvider))
  '(fill-column 90)
  '(flyspell-issue-welcome-flag nil)
  '(git-link-use-commit t)
@@ -32,19 +33,15 @@
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-skip-timestamp-if-done t)
  '(org-capture-templates
-   '(("t" "TODO" entry
-      (file+headline "~/0/org-tassen/gtd.org" "Inbox")
-      "* TODO %?\12%T\12%i" :prepend t :jump-to-captured t :empty-lines-before 1 :empty-lines-after 1)))
+   '(("t" "TODO" entry (file+headline "~/0/org-tassen/gtd.org" "Inbox") "* TODO %?\12%T\12%i"
+      :prepend t :jump-to-captured t :empty-lines-before 1 :empty-lines-after 1)))
  '(org-confirm-shell-link-function nil)
  '(org-export-allow-bind-keywords t)
  '(org-export-backends '(ascii html latex md))
  '(org-html-validation-link "")
  '(org-link-frame-setup
-   '((vm . vm-visit-folder-other-frame)
-     (vm-imap . vm-visit-imap-folder-other-frame)
-     (gnus . org-gnus-no-new-news)
-     (file . find-file)
-     (wl . wl-other-frame)))
+   '((vm . vm-visit-folder-other-frame) (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news) (file . find-file) (wl . wl-other-frame)))
  '(org-link-shell-confirm-function nil)
  '(org-priority-faces '((65 . "red") (66 . "yellow") (67 . "chartreuse")))
  '(org-reverse-note-order t)
@@ -55,7 +52,14 @@
  '(org-time-clocksum-format
    '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
  '(package-selected-packages
-   '(clang-format clang-format+ yasnippet yaml-mode ws-butler web-beautify smooth-scrolling smex scala-mode rainbow-delimiters quelpa-use-package qml-mode python-mode protobuf-mode php-mode pandoc-mode nix-mode nginx-mode lua-mode lsp-java leuven-theme js2-mode jinja2-mode iedit haskell-mode groovy-mode grandshell-theme goto-last-change git-link flycheck ellama eglot dockerfile-mode direnv diminish csv-mode csharp-mode company coffee-mode code-review cmake-mode bm bison-mode basic-mode auctex arduino-mode apache-mode ag sourcepair dired-copy-paste dired+))
+   '(ag aidermacs apache-mode arduino-mode auctex basic-mode bison-mode bm clang-format
+        clang-format+ cmake-mode code-review coffee-mode company csharp-mode csv-mode
+        diminish dired+ dired-copy-paste direnv dockerfile-mode eglot ellama flycheck
+        git-link goto-last-change grandshell-theme groovy-mode haskell-mode iedit
+        jinja2-mode js2-mode leuven-theme lsp-java lua-mode nginx-mode nix-mode
+        pandoc-mode php-mode protobuf-mode python-mode qml-mode quelpa-use-package
+        rainbow-delimiters scala-mode smex smooth-scrolling sourcepair web-beautify
+        yaml-mode yasnippet))
  '(ring-bell-function 'ignore)
  '(sentence-end-double-space nil)
  '(sh-indent-after-continuation 'always)
@@ -217,6 +221,10 @@
 
 ;; Disable annoying backup files.
 (setq make-backup-files nil)
+
+;; Move lock files to /tmp/
+(setq lock-file-name-transforms
+      '(("\\`/.*/\\([^/]+\\)\\'" "/tmp/\\1" t)))
 
 ;; Disable auto-save which is annoying for remote files.
 (setq auto-save-default nil
@@ -443,6 +451,26 @@
 
 (global-set-key [f5] 'my-compile)
 
+(defun tb-save-stage-and-format ()
+  "Save all files, stage all changes with Magit, and run git-clang-format."
+  (interactive)
+  ;; Save all buffers
+  (save-some-buffers t)
+  ;; Stage all changes with Magit
+  (magit-stage-modified)
+  ;; Run git-clang-format on the source tree
+  (let ((default-directory (magit-toplevel)))
+    (if default-directory
+        (progn
+          (message "Running git-clang-format...")
+          (shell-command "git-clang-format"))
+      (message "Not inside a git repository.")))
+  ;; Refresh Magit view
+  (magit-refresh))
+
+;; Bind the function to F6
+(global-set-key [f6] 'tb-save-stage-and-format)
+
 ;; -----------------------------------------------------------------------------
 ;; --- Increment and Decrement Numbers at Point
 ;; -----------------------------------------------------------------------------
@@ -609,10 +637,16 @@
 (use-package smooth-scrolling)
 
 ;; Unobtrusively remove trailing whitespace.
-(use-package ws-butler
+;; (use-package ws-butler
+;;   :diminish
+;;   :config
+;;   (ws-butler-global-mode 1)
+;;   )
+
+(use-package whitespace-cleanup-mode
   :diminish
   :config
-  (ws-butler-global-mode 1)
+  (global-whitespace-cleanup-mode)
   )
 
 ;; Yet another snippet extension for Emacs.
@@ -832,9 +866,11 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 (use-package nix-mode :defer t)
 (use-package php-mode :defer t)
 (use-package protobuf-mode :defer t)
-(use-package python-mode :defer t)
+(use-package python-mode
+  :defer t
+  :bind (:map python-mode-map
+	      ("C-c C-s" . my-ag-grep)))
 (use-package qml-mode :defer t)
-(use-package scala-mode :defer t)
 
 ;; Hook for all c-like programming modes.
 (defun tb-c-common-hook ()
@@ -846,9 +882,6 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 
   ;; flyspell mode for comments
   (flyspell-prog-mode)
-
-  ;; org-table mode support for comments
-  ;(orgtbl-mode)
 
   ;; Enable eglot.
   (eglot-ensure)
@@ -874,9 +907,6 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 ;; --- Utility Packages
 ;; -----------------------------------------------------------------------------
 
-(use-package flycheck
-  )
-
 ;; Magit Git frontend.
 (use-package magit
   :init
@@ -898,140 +928,39 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 	  )
 
 ;; Magit Forge integration.
-(use-package forge
-  :config
-  (push '("github.corp.ebay.com" "github.corp.ebay.com/api/v3"
-          "github.corp.ebay.com" forge-github-repository)
-        forge-alist))
+;; (use-package forge
+;;   :config
+;;   (push '("github.corp.ebay.com" "github.corp.ebay.com/api/v3"
+;;           "github.corp.ebay.com" forge-github-repository)
+;;         forge-alist))
 
 ;; Git-Commit-Mode: flyspell
 (add-hook 'git-commit-mode-hook 'turn-on-flyspell)
 
+;; direnv Directory-Based Customizations
 (use-package direnv
   :config
   (direnv-mode))
 
+;; company mode completion
 (use-package company
   :config
   (global-company-mode)
   )
 
-;; Add yasnippet support for all company backends
-;; https://github.com/syl20bnr/spacemacs/pull/179
-(defvar company-mode/enable-yas t
-  "Enable yasnippet for all backends.")
-
-(defun company-mode/backend-with-yas (backend)
-  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-      backend
-    (append (if (consp backend) backend (list backend))
-            '(:with company-yasnippet))))
-
-(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
-
-; M-. or M-x xref-find-definitions finds the definition of the symbol at point and opens it in the current window
-; M-, or M-x xref-pop-marker-stack jumps back
-; M-? or M-x xref-find-references finds the references of the symbol at point
-
-(use-package eglot
-  :bind (:map eglot-mode-map
-              ("C-c e r" . eglot-rename)
-              ("S-<tab>" . company-complete))
-  )
-
-(add-hook 'eglot-managed-mode-hook
-          (lambda ()
-            (eglot-inlay-hints-mode -1)
-            ))
-
-(with-eval-after-load 'eglot
-  (add-to-list 'eglot-server-programs
-               '((c-mode c++-mode)
-                 . ("clangd"
-                    "-j=8"
-                    "--log=error"
-                    "--malloc-trim"
-                    "--background-index"
-                    "--clang-tidy"
-                    "--cross-file-rename"
-                    "--completion-style=detailed"
-                    "--suggest-missing-includes"
-                    "--pch-storage=memory"))))
-
-(use-package lsp-mode
-  :init
-  (setq lsp-enable-symbol-highlighting t
-	lsp-headerline-breadcrumb-enable nil
-	lsp-diagnostics-provider :none
-        )
-  :config
-  ;; Arguments given to clangd server. See https://emacs-lsp.github.io/lsp-mode/lsp-mode.html#lsp-clangd
-  (setq lsp-clients-clangd-args
-        '(
-          ;; If set to true, code completion will include index symbols that are not defined in the scopes
-          ;; (e.g. namespaces) visible from the code completion point. Such completions can insert scope qualifiers
-          "--all-scopes-completion"
-          ;; Index project code in the background and persist index on disk.
-          "--background-index"
-          ;; Enable clang-tidy diagnostics
-          "--clang-tidy"
-          ;; Whether the clang-parser is used for code-completion
-          ;;   Use text-based completion if the parser is not ready (auto)
-          "--completion-parse=auto"
-          ;; Granularity of code completion suggestions
-          ;;   One completion item for each semantically distinct completion, with full type information (detailed)
-          "--completion-style=detailed"
-          ;; clang-format style to apply by default when no .clang-format file is found
-          "--fallback-style=Chromium"
-          ;; When disabled, completions contain only parentheses for function calls.
-          ;; When enabled, completions also contain placeholders for method parameters
-          "--function-arg-placeholders"
-          ;; Add #include directives when accepting code completions
-          ;;   Include what you use. Insert the owning header for top-level symbols, unless the
-          ;;   header is already directly included or the symbol is forward-declared
-          "--header-insertion=iwyu"
-          ;; Prepend a circular dot or space before the completion label, depending on whether an include line will be inserted or not
-          "--header-insertion-decorators"
-          ;; Enable index-based features. By default, clangd maintains an index built from symbols in opened files.
-          ;; Global index support needs to enabled separatedly
-          "--index"
-          ;; Attempts to fix diagnostic errors caused by missing includes using index
-          "--suggest-missing-includes"
-          ;; Number of async workers used by clangd. Background index also uses this many workers.
-          "-j=4"
-          ))
-  :hook
-  (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-   ;;(c++-mode . lsp)
-   ;;(python-mode . lsp)
-   (java-mode . lsp)
-   ;; if you want which-key integration
-   (lsp-mode . lsp-enable-which-key-integration)
-   )
-  :commands lsp
-  )
-
-;; (use-package lsp-ui
-;;   )
-
-(use-package lsp-java
-  )
-
-;; (use-package projectile
-;;   )
-
+;; Include/Source File Swapping
 (use-package sourcepair
   :quelpa (sourcepair
            :fetcher url
            :url "https://www.emacswiki.org/emacs/download/sourcepair.el")
   :init
   ;; Modify these paths as per your project structure.
-  (setq sourcepair-source-path '("." "../src/" "../source/" "../source/*" "../../source/"))
-  (setq sourcepair-header-path '("." "../hdr/" "../include/" "../include/*" "../../include/"))
+  (setq sourcepair-source-path '("." "../src/" "../source/" "../source/*" "../../source/" "../../../source/"))
+  (setq sourcepair-header-path '("." "../hdr/" "../include/" "../include/*" "../../include/" "../../../include/"))
   :bind ("<f3>" . sourcepair-load)
 )
 
-;; modify ibuffer keymap: mouse click opens a file
+;; Modify ibuffer keymap: mouse click opens a file
 (defun my-ibuffer-keys ()
   "Modify keymaps used by `ibuffer'."
   (local-set-key (kbd "<down-mouse-1>") 'ibuffer-visit-buffer)
@@ -1039,10 +968,64 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 
 (add-hook 'ibuffer-hook 'my-ibuffer-keys)
 
-;(package-autoremove)
+;; Project Management
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("C-c p" . projectile-command-map))
+  :config
+  (setq projectile-project-search-path '("~/ebay/"))
+  (setq projectile-switch-project-action 'projectile-dired))
 
-(use-package clang-format+
+;; LSP
+(use-package eglot
+  :config
+  (add-to-list 'eglot-server-programs
+               `((scala-mode scala-ts-mode)
+                 . ,(alist-get 'scala-mode eglot-server-programs)))
+  :bind (:map eglot-mode-map
+              ("C-c e r" . eglot-rename)
+              ("S-<tab>" . company-complete))
+  :hook (
+         (python-mode . eglot-ensure)
+         (scala-mode . eglot-ensure)
+         (scala-ts-mode . eglot-ensure)
+         )
   )
+
+(add-hook 'eglot-managed-mode-hook
+          (lambda ()
+            (eglot-inlay-hints-mode -1)
+            ))
+
+
+(add-to-list 'major-mode-remap-alist '(scala-mode . scala-ts-mode))
+
+;; Hook for Scala programming modes.
+(defun tb-scala-common-hook ()
+  ;; Enable Projectile.
+  ;(projectile-mode)
+
+  ;; Enable `direnv` environment switching.
+  (direnv-update-environment)
+
+  ;; flyspell mode for comments
+  (flyspell-prog-mode)
+
+  ;; Enable eglot.
+  (eglot-ensure)
+
+  (setq paragraph-start "^[  ]*\\(//+\\|\\**\\)[  ]*\\([  ]*$\\|@\\(param\\|return\\|throw\\)\\)\\|^\f")
+
+  )
+
+(add-hook 'scala-mode-hook 'tb-scala-common-hook)
+(add-hook 'scala-ts-mode-hook 'tb-scala-common-hook)
+
+(use-package aidermacs
+  :bind (("C-c a" . aidermacs-transient-menu)))
 
 ;; -----------------------------------------------------------------------------
 ;; --- reftex customizations
@@ -1096,6 +1079,44 @@ frame if FRAME is nil, and to 1 if AMT is nil."
 (require 'beancount)
 (add-to-list 'auto-mode-alist '("\\.beancount\\'" . beancount-mode))
 (add-to-list 'auto-mode-alist '("\\.beans\\'" . beancount-mode))
+
+(defun beautify-json ()
+  (interactive)
+  (let ((b (if mark-active (min (point) (mark)) (point-min)))
+        (e (if mark-active (max (point) (mark)) (point-max))))
+    (shell-command-on-region b e
+                             "python -mjson.tool" (current-buffer) t)))
+
+;; -----------------------------------------------------------------------------
+;; --- Org-Mode Customizations
+;; -----------------------------------------------------------------------------
+
+; Insert current timestamp.
+(defun org-insert-now-timestamp()
+  "Insert org mode timestamp at point with current date and time."
+  (interactive)
+  (org-insert-time-stamp (current-time) t))
+
+;; -----------------------------------------------------------------------------
+;; --- Scala3 Extensions
+;; -----------------------------------------------------------------------------
+
+(add-to-list 'compilation-error-regexp-alist 'scala3-error)
+
+(add-to-list 'compilation-error-regexp-alist-alist
+             '(scala3-error
+               ;; Match any error line with file:line:column
+               ;; Example: [error] -- [EXXX] Any Error Message: /path/to/file.scala:25:17
+               "^\\[error\\].*?: \\(.*\\.scala\\):\\([0-9]+\\):\\([0-9]+\\)"
+               1 2 3))
+
+(add-to-list 'compilation-error-regexp-alist 'scala3-warn)
+
+(add-to-list 'compilation-error-regexp-alist-alist
+             '(scala3-warn
+               ;; Match: [warn] -- Warning: /path/to/File.scala:4:21
+               "^\\[warn\\] -- Warning: \\(.*\\.scala\\):\\([0-9]+\\):\\([0-9]+\\)"
+               1 2 3))
 
 ;; -----------------------------------------------------------------------------
 ;; --- The end.
